@@ -82,7 +82,7 @@ ws.onmessage = message => {
           //alert(d.textContent);
           divChatWindow.appendChild(d);
         } 
-
+ 
 
         if (response.method === "reportRoundResult")
         {
