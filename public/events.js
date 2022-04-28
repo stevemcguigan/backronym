@@ -26,6 +26,47 @@ function wireGameEvents()
 {
     btnMessage  = id("btnMessage");
     btnStart    = id("btnStart");
+    txtMessage  = id("txtMessage");
+    txtMessage.focus();
+
+    /*txtMessage.addEventListener("onchange", e => {
+        let candidate = txtMessage.value;
+        console.log(candidate);
+    })*/
+
+    $('#txtMessage').on("input change keyup paste", function () {
+        let candidate = txtMessage.value;
+        const checker = candidate.split(" ");
+
+        if (checker.length)
+        {
+            console.log(checker);
+            for (let x = 0; x < checker.length; x++)
+            {
+                //console.log(checker[x].charAt(x).toUpperCase());
+                if ((checker[x].charAt(0)).toUpperCase() == acronym.charAt(x))
+                {
+                    $(`#${x}`).addClass("highlightedTile");
+                }    
+                else
+                {
+                    $(`#${x}`).removeClass("highlightedTile");
+                }    
+            }   
+        }
+        else
+        {
+            if (candidate.charAt(0).toUpperCase() == acronym.charAt(x))
+            {
+                $(`#0`).addClass("highlightedTile");
+            }          
+        } 
+
+
+ 
+
+        //console.log(candidate);
+    });
 
     btnMessage.addEventListener("click", e => {
         if (acronym)
@@ -41,15 +82,21 @@ function wireGameEvents()
             }    
             id("txtMessage").value = "";               
         }  
-        else 
+        else if (id("txtMessage").value == "")
         {
+            // do nothing
+        } 
+        else {
             chat(id("txtMessage").value);
+            id("txtMessage").value = "";
         }  
  
     })
 
     btnStart.addEventListener("click", e => {
         start(gameId); 
+        txtMessage  = id("txtMessage");
+        txtMessage.focus();       
     })
 
 

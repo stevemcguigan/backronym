@@ -10,6 +10,32 @@ function generateLobby()
 	return markup;
 }
 
+function tile(letter, place)
+{
+	let markup = `
+		<span id="${place}" class="letterTile">
+			<div>${letter}</div>
+		</span>
+	`
+	return markup;
+}
+
+function generateAcronymContainer(acronym)
+{
+	let letters = ""
+
+	for (let x = 0; x < acronym.length; x++)
+	{
+		letters += tile(acronym.charAt(x), x)
+	}	
+
+	let markup = `<div class="acronymContainer">
+				  	${letters}
+				  </div>`
+	return markup;			  
+
+}
+
 function generateGame()
 {
 	let markup = `

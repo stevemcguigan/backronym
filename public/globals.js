@@ -18,6 +18,18 @@ let divPlayers     = null; //id("divPlayers");
 let divChatWindow  = null; //id("divChatWindow");
 let btnMessage	   = null;
 let btnStart 	   = null;
+let wordsTyped = 0;
+
+window.addEventListener("keydown", (evt) => {//when this happens
+	//console.log(evt.keyCode); //log keycode
+
+	switch (evt.keyCode)
+	{
+		case 13:
+			$("#btnMessage").click();
+		break;
+	}
+});
 
 
 window.onfocus = function () { 

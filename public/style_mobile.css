@@ -1,0 +1,84 @@
+body
+{
+	background: black;
+	color: white;
+	/*font-size: 26px;*/
+}
+
+.acronymContainer
+{
+	width:100%
+	height:110px;
+	display:flex;
+	padding: 10px;
+	justify-content: center;
+	align-items: middle;
+}
+
+.letterTile
+{
+	width:75px;
+	height:100px;
+	font-size: 50px;
+	font-family: sans-serif;
+	font-weight: bolder;
+	background: #777;
+	color:#fff;
+	border:1px solid #444;
+	display: flex;
+	justify-content:center;
+	align-items:center;
+	transition: 500ms all;
+	transition-timing-function: ease-in;
+}
+
+.highlightedTile 
+{
+	background: green;
+}
+
+#divChatWindow {
+	width:100%;
+	border: 1px solid #666;
+	overflow: scroll;
+	height: 30vh;
+	font-family: helvetica;
+	font-size: 36px;
+}
+
+#txtMessage
+{
+	width: 80%;
+    height: 66px;
+    font-size: 30px;
+}
+
+#btnJoin, #txtGameId
+{
+	display: none;
+}
+
+button
+{
+	width: 150px;
+	height: 75px;
+	font-size: 26px;
+}
+
+#btnMessage
+{
+	visibility: hidden;
+}
+
+#gameList {
+	width:100%;
+	border: 1px solid #666;
+	height:200px;
+}
+
+.gamePuck {
+	width: 75%;
+	font-size: 36px;
+	font-weight: bold;
+	font-family: helvetica;
+}

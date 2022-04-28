@@ -1,7 +1,8 @@
 // incoming responses from the server are parsed here
 
 let ws = new WebSocket("ws://192.168.99.41:9090")
-
+// 10.0.0.171
+// 192.168.99.41
 function send(payload)
 {
   ws.send(JSON.stringify(payload));
@@ -47,9 +48,13 @@ ws.onmessage = message => {
           const d = document.createElement("div");
           const round = response.round;
           acronym = response.acronym;
-          d.textContent = `Round ${round} has begun! The Acronym is ${acronym}. 60 seconds, go!`;
+          let acronymMarkup = generateAcronymContainer(acronym);
+
+          d.textContent = `Round ${round} has begun! 60 seconds, go!`;
           //alert(d.textContent);
-          divChatWindow.appendChild(d);       
+          divChatWindow.appendChild(d);   
+          id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+
         }
 
         if (response.method === "dm")
@@ -82,7 +87,7 @@ ws.onmessage = message => {
           //alert(d.textContent);
           divChatWindow.appendChild(d);
         } 
- 
+   
 
         if (response.method === "reportRoundResult")
         {
