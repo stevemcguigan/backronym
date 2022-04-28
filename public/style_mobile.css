@@ -1,8 +1,20 @@
+
 body
 {
 	background: black;
 	color: white;
+	margin: 2px !important;
 	/*font-size: 26px;*/
+}
+
+
+
+.disable-select {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .acronymContainer
@@ -28,10 +40,16 @@ body
 	display: flex;
 	justify-content:center;
 	align-items:center;
-	transition: 500ms all;
+	transition: 300ms background-color;
 	transition-timing-function: ease-in;
 }
 
+
+.kbcontainer
+{
+	position:fixed;
+	bottom:0;
+}
 .highlightedTile 
 {
 	background: green;
@@ -41,16 +59,137 @@ body
 	width:100%;
 	border: 1px solid #666;
 	overflow: scroll;
-	height: 30vh;
+	height: 20vh;
 	font-family: helvetica;
-	font-size: 36px;
+	font-size: 16px;
 }
+
+#keyboard
+{
+	position: relative;
+    user-select: none;
+}
+
+#keyboard_ghost
+{
+	position: absolute;
+    user-select: none;
+    pointer-events: none;
+    opacity: .5;
+    bottom: 0;
+    width: 100%;
+}
+
+.ghost {
+	visibility: hidden;
+}
+
+#game-keyboard
+{
+	width: 100% !important;
+	position: fixed;
+	bottom: 0px;
+}
+
+#keyboard .row, #keyboard_ghost .row
+{
+	display: flex;
+    width: 100%;
+    margin: 0 auto 0px;
+    touch-action: manipulation;
+    justify-content:center;
+    align-items:flex-end;
+}
+
+#row1 {
+	/*justify-content:space-between !important;*/
+}
+
+
+
+#key_shift, #key_backspace, #dead_shift, #dead_backspace
+{
+	max-width:50px !important;
+	font-size: 16px !important;
+}
+
+#key_symbols, #key_return, #dead_symbols, #dead_return  
+{
+	max-width: 80px !important;
+	font-size: 16px !important;
+}
+
+#key_space, #dead_space
+{
+	font-size: 16px !important;
+	max-width: 200px !important;
+}
+
+
+input[type="text"][disabled] {
+   opacity: 1;
+}
+
+
+.pressed
+{
+	opacity:50%;
+}
+
+.shifted
+{
+	height: 80px !important;
+	transform: scale(1.5);
+}
+
+#keyboard button, #keyboard_ghost button
+{
+	font-family: sans-serif;
+    font-weight: 300;
+    border: 0;
+    padding: 0;
+    line-height: 37px;
+    margin: 0 0 0 0;
+    font-size: 25px;
+    height: 41px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #555;
+    color: #ddd;
+    max-width: 30px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
+}
+
+.upper
+{
+	text-transform: uppercase;
+}
+
+
 
 #txtMessage
 {
-	width: 80%;
-    height: 66px;
-    font-size: 30px;
+	width:95%;
+    height: 26px;
+    font-size: 18px;
+    margin: 12px 0px !important;
+}
+
+
+#btnStart
+{
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    width: 50px;
+    height: 25px;
+    font-size: 12px;
+    transition: 100ms;
 }
 
 #btnJoin, #txtGameId
@@ -60,14 +199,14 @@ body
 
 button
 {
-	width: 150px;
+	/*width: 150px;
 	height: 75px;
-	font-size: 26px;
+	font-size: 26px;*/
 }
 
 #btnMessage
 {
-	visibility: hidden;
+	display: none;
 }
 
 #gameList {

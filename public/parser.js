@@ -44,6 +44,7 @@ ws.onmessage = message => {
         
         if (response.method === "startRound")
         {
+          $('.acronymContainer').remove();
           const divChatWindow = id("divChatWindow");
           const d = document.createElement("div");
           const round = response.round;

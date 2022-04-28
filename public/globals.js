@@ -19,6 +19,13 @@ let divChatWindow  = null; //id("divChatWindow");
 let btnMessage	   = null;
 let btnStart 	   = null;
 let wordsTyped = 0;
+let heldKeyInterval = null;
+
+
+
+document.addEventListener('touchmove', function (event) {
+  if (event.scale !== 1) { event.preventDefault(); }
+}, { passive: false });
 
 window.addEventListener("keydown", (evt) => {//when this happens
 	//console.log(evt.keyCode); //log keycode

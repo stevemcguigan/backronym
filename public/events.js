@@ -27,14 +27,34 @@ function wireGameEvents()
     btnMessage  = id("btnMessage");
     btnStart    = id("btnStart");
     txtMessage  = id("txtMessage");
-    txtMessage.focus();
+   // txtMessage.focus();
+    //$('#txtMessage').tap();
+
+    //focusAndOpenKeyboard(txtMessage);
+    disableInputStuff();
 
     /*txtMessage.addEventListener("onchange", e => {
         let candidate = txtMessage.value;
         console.log(candidate);
     })*/
 
-    $('#txtMessage').on("input change keyup paste", function () {
+    $("#keyboard button").on("touchstart", function() {
+        handleInput(this.id);
+    })
+
+    $("#keyboard button").on('taphold', function() {
+        heldKeyInterval = window.setInterval(() => handleInput(this.id), 50);
+    })
+
+    $("#keyboard button").on("touchend", function(){
+        clearInterval(heldKeyInterval);
+        $(this).removeClass("pressed").removeClass("shifted");
+        $(`#keyboard button`).removeClass("ghost");//addClass("hide");
+        $('#keyboard_ghost').addClass("ghost")
+    })
+
+
+    /*$('#txtMessage').on("input change keyup paste", function () {
         let candidate = txtMessage.value;
         const checker = candidate.split(" ");
 
@@ -66,7 +86,7 @@ function wireGameEvents()
  
 
         //console.log(candidate);
-    });
+    });*/
 
     btnMessage.addEventListener("click", e => {
         if (acronym)
@@ -96,7 +116,8 @@ function wireGameEvents()
     btnStart.addEventListener("click", e => {
         start(gameId); 
         txtMessage  = id("txtMessage");
-        txtMessage.focus();       
+//        txtMessage.focus(); 
+        $('#btnStart').hide();      
     })
 
 
@@ -134,6 +155,39 @@ function wireGameEvents()
         divChatWindow.scrollIntoView({ behavior: "smooth", block: "end" });
     });*/
     
+
+}
+
+function checker ()
+{
+    if (!acronym)
+        return;
+
+        let candidate = txtMessage.value;
+        const checker = candidate.split(" ");
+
+        if (checker.length)
+        {
+            for (let x = 0; x < checker.length; x++)
+            {
+                //console.log(checker[x].charAt(x).toUpperCase());
+                if ((checker[x].charAt(0)).toUpperCase() == acronym.charAt(x))
+                {
+                    $(`#${x}`).addClass("highlightedTile");
+                }    
+                else
+                {
+                    $(`#${x}`).removeClass("highlightedTile");
+                }    
+            }   
+        }
+        else
+        {
+            if (candidate.charAt(0).toUpperCase() == acronym.charAt(x))
+            {
+                $(`#0`).addClass("highlightedTile");
+            }          
+        } 
 
 }
   		
