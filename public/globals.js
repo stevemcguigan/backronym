@@ -20,6 +20,7 @@ let btnMessage	   = null;
 let btnStart 	   = null;
 let wordsTyped = 0;
 let heldKeyInterval = null;
+let lastKeyPress = null;
 
 
 

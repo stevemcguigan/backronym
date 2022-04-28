@@ -20,14 +20,15 @@ function handleInput(kid)
 	txtMessage  = id("txtMessage");
 	let key = $(`#${kid}`);
 	let keypress = key.attr("data-key");
-
-	
+	let shifted = $("#game-keyboard button").hasClass("upper");// ? function () {} : String.prototype.toUpperCase; 
+	if (shifted)
+		$("#game-keyboard button").removeClass("upper");
 
 	switch (keypress)
 	{
 		case "backspace":
 			$(key).addClass("pressed");
-			txtMessage.value = txtMessage.value.substr(0, txtMessage.value.length - 1);
+			txtMessage.value = shifted ? txtMessage.value.substr(0, txtMessage.value.length - 1).toUpperCase() : txtMessage.value.substr(0, txtMessage.value.length - 1);
 			checker();
 		break;
 
@@ -44,16 +45,24 @@ function handleInput(kid)
 
 		case "symbols":
 			$(key).addClass("pressed");
-			txtMessage.value += keypress
+			
+			//txtMessage.value += keypress
 		break;
 
 		case "shift":
+			if (lastKeyPress == "shift")
+			{
+				$("#game-keyboard button").removeClass("upper")
+			}	
+			else
+			{
+				$("#game-keyboard button").addClass("upper")
+			}	
 			$(key).addClass("pressed");
-			console.log("note to self: handle shift")
 		break;
 
 		default:
-			txtMessage.value += keypress
+			txtMessage.value += shifted ? keypress.toUpperCase() : keypress;
 			$(key).addClass("shifted");
 			$(`#keyboard button`).not(key).addClass("ghost");//addClass("hide");
 			$('#keyboard_ghost').removeClass("ghost")
@@ -64,9 +73,8 @@ function handleInput(kid)
 	{
 		checker();
 	}	
-
-
-
+	
+	lastKeyPress = keypress;
 }
 
 

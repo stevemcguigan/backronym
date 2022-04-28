@@ -75,7 +75,7 @@ body
 	position: absolute;
     user-select: none;
     pointer-events: none;
-    opacity: .5;
+    opacity: .75;
     bottom: 0;
     width: 100%;
 }
@@ -144,12 +144,14 @@ input[type="text"][disabled] {
 
 #keyboard button, #keyboard_ghost button
 {
+	position:relative;
 	font-family: sans-serif;
     font-weight: 300;
     border: 0;
     padding: 0;
     line-height: 37px;
-    margin: 0 0 0 0;
+    margin: 4px;
+
     font-size: 25px;
     height: 41px;
     border-radius: 4px;
@@ -165,9 +167,45 @@ input[type="text"][disabled] {
     -webkit-tap-highlight-color: rgba(0,0,0,0.3);
 }
 
+
+
+#keyboard button:after
+{
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: -3px;
+  width: 36px;
+  height: 47px;
+  background: #e83474;
+  border: 1px solid pink;
+  opacity:0;
+} 
+
+#key_shift:after, #key_backspace:after 
+{
+  width: 52px !important;
+  border: 1px solid pink !important;
+
+}
+
+#key_symbols:after, #key_return:after 
+{
+  width: 85px !important;
+  border: 1px solid pink !important;
+ 
+}
+
+#key_space:after
+{
+  width: 200px !important;
+  border: 1px solid pink !important;
+
+}
+
 .upper
 {
-	text-transform: uppercase;
+	text-transform: uppercase !important;
 }
 
 
