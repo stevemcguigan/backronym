@@ -46,32 +46,40 @@ ws.onmessage = message => {
         if (response.method === "startRound")
         {
           const element = document.querySelector('.acronymContainer');
-          element.classList.add('animate__animated', 'animate__bounceOutLeft');
+          element.classList.add('animate__animated', 'animate__zoomOut');
           element.addEventListener('animationend', () => {
                   $('.acronymContainer').remove();
-                  const divChatWindow = id("divChatWindow");
-                  const d = document.createElement("div");
                   const round = response.round;
                   acronym = response.acronym;
                   let acronymMarkup = generateAcronymContainer(acronym);
-
-                  d.textContent = `Round ${round} has begun! 60 seconds, go!`;
-                  //alert(d.textContent);
-                  divChatWindow.appendChild(d);   
+                  generateNotification({message: `Round ${round} has begun! 60 seconds, go!`})
                   id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
                   animateAcronym();   
           });
         }
 
+
+        if (response.method === "broadcast")
+        {
+          generateNotification({message: response.message,
+                                type: "dm",
+                                color: "green"})           
+        }         
+
+        if (response.method === "warning")
+        {
+          let warning = generateNotification({message: response.message,
+                                              type: "dm",
+                                              color: "green"});
+          countdown(warning);
+
+        }
+
         if (response.method === "dm")
         {
-          //alert(JSON.stringify(response));
-          const dm = response.message;
-          const divChatWindow = id("divChatWindow");
-          const d = document.createElement("div");
-          d.textContent = dm;
-          //alert(d.textContent);
-          divChatWindow.appendChild(d);              
+          generateNotification({message: response.message,
+                                type: "dm",
+                                color: "green"})           
         } 
 
   			if (response.method === "chatmsg")
@@ -87,11 +95,16 @@ ws.onmessage = message => {
         if (response.method === "reportScore")
         {
           //alert(); 
-          const divChatWindow = id("divChatWindow");
+          generateNotification({message: JSON.stringify(response.score),
+                                type: "dm",
+                                color: "green"})   
+
+          /*const divChatWindow = id("divChatWindow");
           const d = document.createElement("div");
           d.textContent = JSON.stringify(response.score);
           //alert(d.textContent);
-          divChatWindow.appendChild(d);
+          divChatWindow.appendChild(d);*/
+
         } 
    
 

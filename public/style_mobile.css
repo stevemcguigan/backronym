@@ -17,13 +17,37 @@ body
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+.pink
+{
+	color:pink;
+	background-color: blue;
+}
+
+#notifications
+{
+	height: 50px;
+	display:flex;
+	flex-direction:column;
+	overflow:hidden;
+	border: 1px solid #fff;
+	justify-content: center;
+}
+
+.note {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: sans-serif;
+}
+
 .acronymContainer
 {
 	width:100%
 	height: 110px;
 	min-height:110px;
 	display:flex;
-	padding: 10px;
+	padding: 0px 10px;
 	justify-content: center;
 	align-items: center;
 }
@@ -221,6 +245,7 @@ input[type="text"][disabled] {
     height: 26px;
     font-size: 18px;
     margin: 12px 0px !important;
+    pointer-events: none;
 }
 
 
@@ -277,3 +302,24 @@ button
 	font-weight: bold;
 	font-family: helvetica;
 }
+
+@media screen  and (min-device-width: 1200px)  and (max-device-width: 1600px)  and (-webkit-min-device-pixel-ratio: 1) { 
+
+body {
+	display:flex;
+	justify-content:center;
+
+}
+
+#main {
+	width: 500px !important;
+}
+  	#game-keyboard {
+  		display:none;
+  	}
+
+  	#txtMessage {
+  		pointer-events: auto;
+  	}
+}
+

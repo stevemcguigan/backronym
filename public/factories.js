@@ -2,6 +2,9 @@ function generateLobby()
 {
 	let markup = `
 	  <h1>ACRONYM</h1>
+	  	<div id="notifications">
+	
+		</div>
 	  <div id="gameList">
 	  </div>
 	  <button id = "btnCreate">New Game</button>
@@ -226,15 +229,18 @@ function generateGame()
 	<div class="acronymContainer">
 		<button id = "btnStart">Start</button>			  	
 	</div>
+	<div id="notifications">
+
+	</div>
 	  <div id="divChatWindow"></div>
 	  
-	   <input disabled type="text" id="txtMessage" placeholder="send a message">  <button id = "btnMessage">Send</button>
+	   <input type="text" id="txtMessage" placeholder="send a message">  <button id = "btnMessage">Send</button>
 				
 		 <div id="game-keyboard">
 		 	   ${generateKeyboard({live: false, layout: "qwerty"})}	
-			   ${generateKeyboard({live: true, layout: "qwerty"})}
+			   ${generateKeyboard({live: true, 	layout: "qwerty"})}
 		 	   ${generateKeyboard({live: false, layout: "symbols"})}	
-			   ${generateKeyboard({live: true, layout: "symbols"})}				   
+			   ${generateKeyboard({live: true, 	layout: "symbols"})}				   
 		</div>		  
 	`;
 	return markup;
@@ -244,7 +250,7 @@ function updateGameList(games)
 {
 	//alert(games);
   
-  	console.log(JSON.stringify(games));
+  	//console.log(JSON.stringify(games));
   	let players = 0;
  // let gamesObj = games.games;
  	clear("gameList");

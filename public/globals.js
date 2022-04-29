@@ -21,6 +21,10 @@ let btnStart 	   = null;
 let wordsTyped = 0;
 let heldKeyInterval = null;
 let lastKeyPress = null;
+let counter = 0;
+let counterInterval = null;
+let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll:
+current.notifications = []; 
 
 
 
@@ -36,6 +40,9 @@ window.addEventListener("keydown", (evt) => {//when this happens
 		case 13:
 			$("#btnMessage").click();
 		break;
+		default:
+			checker();
+		break;	
 	}
 });
 

@@ -220,29 +220,17 @@ function startRound(game)
 	}
 	sendAll(game, payload);
 	setTimeout(() => {
-	  chat(game, null, "", "20 SECONDS LEFT")
+	  broadcast(game, "30 SECONDS LEFT")
 		setTimeout(() => {
-		  chat(game, null, "", "10 SECONDS LEFT")
+		  broadcast(game, "10 SECONDS LEFT")
 			setTimeout(() => {
-			  chat(game, null, "", "5")
-				setTimeout(() => {
-				  chat(game, null, "", "4")	
-					setTimeout(() => {
-					  chat(game, null, "", "3")
-					  	setTimeout(() => {
-						  chat(game, null, "", "2")
-						  	setTimeout(() => {
-							  chat(game, null, "", "1")	  	
-								setTimeout(() => {
-								  cullAnswers(game);				  			  	
-								}, 1000);							  		  	
-							}, 1000);	  			  	
-						}, 1000);					  			  	
-					}, 1000);				  			  	
-				}, 1000);	 			  	
-			}, 1000);	 		  
-		}, 1000);	  
-	}, 15000);
+			  warning(game, "<span id='counter'>5</span>") 
+			  	setTimeout(() => {
+					  cullAnswers(game) 			  	
+				}, 5000);			  	
+			}, 5000);	 		  
+		}, 10000);	  
+	}, 10000);
 }
 
 function cullAnswers(game)
@@ -427,26 +415,11 @@ function getVotes(game)
 	}
 	sendAll(game, payload);
 	setTimeout(() => {
-		chat(game, null, "", "10 SECONDS LEFT")
+		warning(game, "5 SECONDS LEFT")
 		setTimeout(() => {
-			chat(game, null, "", "5")
-			setTimeout(() => {
-				chat(game, null, "", "4")	
-				setTimeout(() => {
-					chat(game, null, "", "3")	
-					setTimeout(() => {
-						chat(game, null, "", "2")
-						setTimeout(() => {
-							chat(game, null, "", "1")
-							setTimeout(() => {
-								cullVotes(game);	  			  	
-							}, 1000);		  			  	
-						}, 1000);		  			  	
-					}, 1000);						  			  	
-				}, 1000);	  			  	
-			}, 1000);		  			  	
-		}, 1000);			  			  	
-	}, 9000);	
+			cullVotes(game);	  			  		  			  	 			  		  			  	
+		}, 5500);			  			  	
+	}, 10000);	
 }
 
 
@@ -458,6 +431,24 @@ function chat(game, clientId, nick, message)
 		"method" : "chatmsg",
 		"clientId": clientId, 
 		"nick": nick,
+		"message": message
+	}
+	sendAll(game, payload)
+}
+
+function broadcast(game, message)
+{
+	const payload = {
+		"method" : "broadcast",
+		"message": message
+	}
+	sendAll(game, payload)
+}
+
+function warning(game, message)
+{
+	const payload = {
+		"method" : "warning",
 		"message": message
 	}
 	sendAll(game, payload)
