@@ -1,8 +1,9 @@
 // incoming responses from the server are parsed here
 
 let ws = new WebSocket("ws://192.168.99.41:9090")
-// 10.0.0.171
+// 
 // 192.168.99.41
+//10.54.127.171
 function send(payload)
 {
   ws.send(JSON.stringify(payload));
@@ -44,18 +45,22 @@ ws.onmessage = message => {
         
         if (response.method === "startRound")
         {
-          $('.acronymContainer').remove();
-          const divChatWindow = id("divChatWindow");
-          const d = document.createElement("div");
-          const round = response.round;
-          acronym = response.acronym;
-          let acronymMarkup = generateAcronymContainer(acronym);
+          const element = document.querySelector('.acronymContainer');
+          element.classList.add('animate__animated', 'animate__bounceOutLeft');
+          element.addEventListener('animationend', () => {
+                  $('.acronymContainer').remove();
+                  const divChatWindow = id("divChatWindow");
+                  const d = document.createElement("div");
+                  const round = response.round;
+                  acronym = response.acronym;
+                  let acronymMarkup = generateAcronymContainer(acronym);
 
-          d.textContent = `Round ${round} has begun! 60 seconds, go!`;
-          //alert(d.textContent);
-          divChatWindow.appendChild(d);   
-          id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
-
+                  d.textContent = `Round ${round} has begun! 60 seconds, go!`;
+                  //alert(d.textContent);
+                  divChatWindow.appendChild(d);   
+                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+                  animateAcronym();   
+          });
         }
 
         if (response.method === "dm")

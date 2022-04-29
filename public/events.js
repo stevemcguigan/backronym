@@ -38,15 +38,15 @@ function wireGameEvents()
         console.log(candidate);
     })*/
 
-    $("#keyboard button").on("touchstart", function() {
+    $("#game-keyboard button").on("touchstart", function() {
         handleInput(this.id);
     })
 
-    $("#keyboard button").on('taphold', function() {
+    $("#game-keyboard button").on('taphold', function() {
         heldKeyInterval = window.setInterval(() => handleInput(this.id), 50);
     })
 
-    $("#keyboard button").on("touchend", function(){
+    $("#game-keyboard button").on("touchend", function(){
         clearInterval(heldKeyInterval);
         $(this).removeClass("pressed").removeClass("shifted");
         $(`#keyboard button`).removeClass("ghost");//addClass("hide");

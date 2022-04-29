@@ -15,11 +15,26 @@ function randomInt(min, max) {
 }
 
 
+function b(x, min, max) {
+
+
+  return x >= min && x <= max;
+}
+
 function handleInput(kid)
 {
+	
 	txtMessage  = id("txtMessage");
 	let key = $(`#${kid}`);
 	let keypress = key.attr("data-key");
+	let code = parseInt(keypress.charCodeAt(0), 10);
+	//console.log(keypress)
+	//console.log((b(code, 57, 60)))
+	if (b(code, 0, 48) || b(code, 57, 65) || b(code, 90, 97) || b(code, 122, 165))
+	{
+		console.log(code)
+	}	
+
 	let shifted = $("#game-keyboard button").hasClass("upper");// ? function () {} : String.prototype.toUpperCase; 
 	if (shifted)
 		$("#game-keyboard button").removeClass("upper");
@@ -45,6 +60,18 @@ function handleInput(kid)
 
 		case "symbols":
 			$(key).addClass("pressed");
+			let kb = $("#keyboard");
+			let kb2 = $("#keyboard_2");
+			if ($("#keyboard").hasClass("hidden"))
+			{
+				$("#keyboard").removeClass("hidden");
+				$("#keyboard_2").addClass("hidden");		
+			}
+			else
+			{
+				$("#keyboard").addClass("hidden");
+				$("#keyboard_2").removeClass("hidden");			
+			}	
 			
 			//txtMessage.value += keypress
 		break;

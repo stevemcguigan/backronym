@@ -20,11 +20,12 @@ body
 .acronymContainer
 {
 	width:100%
-	height:110px;
+	height: 110px;
+	min-height:110px;
 	display:flex;
 	padding: 10px;
 	justify-content: center;
-	align-items: middle;
+	align-items: center;
 }
 
 .letterTile
@@ -40,7 +41,7 @@ body
 	display: flex;
 	justify-content:center;
 	align-items:center;
-	transition: 300ms background-color;
+	transition: 300ms all;
 	transition-timing-function: ease-in;
 }
 
@@ -64,13 +65,13 @@ body
 	font-size: 16px;
 }
 
-#keyboard
+#keyboard, #keyboard_2
 {
 	position: relative;
     user-select: none;
 }
 
-#keyboard_ghost
+#keyboard_ghost, #keyboard_2_ghost 
 {
 	position: absolute;
     user-select: none;
@@ -91,7 +92,7 @@ body
 	bottom: 0px;
 }
 
-#keyboard .row, #keyboard_ghost .row
+#keyboard .row, #keyboard_ghost .row, #keyboard_2 .row, #keyboard_2_ghost .row
 {
 	display: flex;
     width: 100%;
@@ -107,19 +108,19 @@ body
 
 
 
-#key_shift, #key_backspace, #dead_shift, #dead_backspace
+#key_shift, #key_backspace, #dead_shift, #dead_backspace, #key_2_shift, #key_2_backspace, #dead_2_shift, #dead_2_backspace
 {
 	max-width:50px !important;
 	font-size: 16px !important;
 }
 
-#key_symbols, #key_return, #dead_symbols, #dead_return  
+#key_symbols, #key_return, #dead_symbols, #dead_return,  #key_2_symbols, #key_2_return, #dead_2_symbols, #dead_2_return
 {
 	max-width: 80px !important;
 	font-size: 16px !important;
 }
 
-#key_space, #dead_space
+#key_space, #dead_space, #key_2_space, #dead_2_space
 {
 	font-size: 16px !important;
 	max-width: 200px !important;
@@ -142,7 +143,12 @@ input[type="text"][disabled] {
 	transform: scale(1.5);
 }
 
-#keyboard button, #keyboard_ghost button
+.hidden
+{
+	display: none !important;
+}
+
+#keyboard button, #keyboard_ghost button, #keyboard_2 button, #keyboard_2_ghost button
 {
 	position:relative;
 	font-family: sans-serif;
@@ -151,7 +157,6 @@ input[type="text"][disabled] {
     padding: 0;
     line-height: 37px;
     margin: 4px;
-
     font-size: 25px;
     height: 41px;
     border-radius: 4px;
@@ -169,7 +174,7 @@ input[type="text"][disabled] {
 
 
 
-#keyboard button:after
+#keyboard button:after, #keyboard2 button:after
 {
   content: "";
   position: absolute;
@@ -221,13 +226,26 @@ input[type="text"][disabled] {
 
 #btnStart
 {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    width: 50px;
-    height: 25px;
-    font-size: 12px;
-    transition: 100ms;
+	position:relative;
+	font-family: sans-serif;
+    font-weight: 300;
+    border: 0;
+    padding: 0;
+    line-height: 37px;
+    margin: 4px;
+    font-size: 25px;
+    height: 41px;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #555;
+    color: #ddd;
+    max-width: 100px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3);
 }
 
 #btnJoin, #txtGameId
