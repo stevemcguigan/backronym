@@ -227,14 +227,14 @@ function generateGame()
 {
 	let markup = `
 	<div class="acronymContainer">
-		<button id = "btnStart">Start</button>			  	
+		<button id = "btnStart" class="animate__animated animate__zoomIn">Start</button>			  	
 	</div>
 	<div id="notifications">
 
 	</div>
 	  <div id="divChatWindow"></div>
 	  
-	   <input type="text" id="txtMessage" placeholder="send a message">  <button id = "btnMessage">Send</button>
+	   <input type="text" id="txtMessage" placeholder="guess or chat">  <button id = "btnMessage">Send</button>
 				
 		 <div id="game-keyboard">
 		 	   ${generateKeyboard({live: false, layout: "qwerty"})}	

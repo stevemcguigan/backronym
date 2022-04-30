@@ -1,7 +1,9 @@
 const http = require("http");
 const express = require("express")
 const app = express();
-app.listen(9091, () => console.log("listening on 9091"));
+
+// vvv this one goes in ngrok
+app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
@@ -16,8 +18,6 @@ const wsServer = new websocketServer({
 
 const clients = {};
 const games = {};
-
-
 
 wsServer.on("request", request => {
 	// this is the connect!
@@ -103,11 +103,11 @@ wsServer.on("request", request => {
 				console.log(clients[clientId].currentGameInfo.play)			
 				clients[clientId].currentGameInfo.play = play;
 				console.log(clients[clientId].currentGameInfo.play)
-				dm(clientId, "ANSWER RECEIVED")
+				dm(clientId, "answer received.")
 			}
 			else
 			{
-				dm(clientId, "lol too late");
+				dm(clientId, "too late.");
 				//console.log("tried to submit an answer outside of time")
 			}	
 			//chat(game, clientId, nick, result.message)
@@ -220,17 +220,17 @@ function startRound(game)
 	}
 	sendAll(game, payload);
 	setTimeout(() => {
-	  broadcast(game, "30 SECONDS LEFT")
+	  broadcast(game, "30 seconds left.")
 		setTimeout(() => {
-		  broadcast(game, "10 SECONDS LEFT")
+		  broadcast(game, "15 seconds. better hurry.")
 			setTimeout(() => {
 			  warning(game, "<span id='counter'>5</span>") 
 			  	setTimeout(() => {
 					  cullAnswers(game) 			  	
 				}, 5000);			  	
-			}, 5000);	 		  
-		}, 10000);	  
-	}, 10000);
+			}, 10000);	 		  
+		}, 15000);	  
+	}, 30000);
 }
 
 function cullAnswers(game)
@@ -300,6 +300,7 @@ function reportRoundResult(game)
 		if (result.length == 0) // this is dumb af, refactor by pushing linearly and then sorting
 		{
 			result.push({
+				"nick":             player.currentGameInfo.nick,
 				"acronym": 			player.currentGameInfo.play,
 				"votesReceived" : 	player.currentGameInfo.votesReceived,
 				"didNotVote" : 		player.currentGameInfo.didNotVote,
@@ -347,10 +348,11 @@ function reportScore(game)
 		let player = clients[c.clientId];
 		score.push({
 			"clientId": c.clientId,
+			"nick" : clients[c.clientId].currentGameInfo.nick,
 			"score": clients[c.clientId].currentGameInfo.scoreTotal
 		})
 	});	
-	score.sort(compare);
+	//score.sort(compare);
 
 	const payload = {
 		"method" : "reportScore",
@@ -365,7 +367,11 @@ function reportScore(game)
 	}	
 	else
 	{
-		startRound(game);		
+		broadcast(game, "Next round starts in 30 seconds")
+		setTimeout(() => {
+			startRound(game);			  			  	
+		}, 30000);			
+			
 	}	
 
 
@@ -415,11 +421,11 @@ function getVotes(game)
 	}
 	sendAll(game, payload);
 	setTimeout(() => {
-		warning(game, "5 SECONDS LEFT")
+		warning(game, "<span id='counter'>5</span>") 
 		setTimeout(() => {
 			cullVotes(game);	  			  		  			  	 			  		  			  	
 		}, 5500);			  			  	
-	}, 10000);	
+	}, 25000);	
 }
 
 

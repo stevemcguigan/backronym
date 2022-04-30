@@ -25,6 +25,46 @@ let counter = 0;
 let counterInterval = null;
 let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll:
 current.notifications = []; 
+current.modal_queue = [];
+
+
+var actionItem = function(a) {
+	
+	this.name = a.name;
+	this.icon = a.icon;
+	this.label =  a.label;
+	this.label_class = a.label_class;
+	this.label2 =  a.label2;
+	this.label2_class = a.label2_class;
+	this.action =  a.action;
+	this.data1 = a.data1;
+	this.data2 = a.data2;
+	this.data3 = a.data3;
+	this.class = a.class ? a.class : "confirmation_button";
+	//this.active = a.active;
+	if (a.active === undefined || a.active === null || a.active === 0 || a.active === true)
+	{
+		this.active = true;
+	} else {
+		this.active = false;
+	}	
+
+
+	if (a.touchstartaction === undefined || a.touchstartaction === null || a.touchstartaction === 0)
+	{
+		this.touchstartaction = "";
+	} else {
+		this.touchstartaction = a.touchstartaction;
+	}
+
+	if (a.touchendaction === undefined || a.touchendaction === null || a.touchendaction === 0)
+	{
+		this.touchendaction = "";
+	} else {
+		this.touchendaction = a.touchendaction;
+	}
+
+}
 
 
 

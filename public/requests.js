@@ -50,6 +50,7 @@ function join(gameId)
 
 function castVote(ownerId)
 {
+	clear_modal_by_id("vote")
 	const payload = {
 		"method": "castVote",
 		"gameId": gameId,

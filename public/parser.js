@@ -33,7 +33,6 @@ ws.onmessage = message => {
           }  
         }         
         
-
         if (response.method === "create")
   			{
   				console.log(`game succesfully created with id  ${response.game.id}`);
@@ -45,6 +44,7 @@ ws.onmessage = message => {
         
         if (response.method === "startRound")
         {
+          clear_modal_by_id("scoreboard");
           const element = document.querySelector('.acronymContainer');
           element.classList.add('animate__animated', 'animate__zoomOut');
           element.addEventListener('animationend', () => {
@@ -94,16 +94,21 @@ ws.onmessage = message => {
 
         if (response.method === "reportScore")
         {
-          //alert(); 
-          generateNotification({message: JSON.stringify(response.score),
-                                type: "dm",
-                                color: "green"})   
 
-          /*const divChatWindow = id("divChatWindow");
-          const d = document.createElement("div");
-          d.textContent = JSON.stringify(response.score);
-          //alert(d.textContent);
-          divChatWindow.appendChild(d);*/
+          let score = JSON.parse(response.score);
+          console.log(score);
+          var markup = "";
+          for (let x = 0; x < score.length; x++)
+          {
+            markup += `<div>${score.nick}: ${score.score}</div>`
+          }  
+
+           /* create_new_modal({
+                modal_id:"scoreboard",
+                modal_type: "generic_confirm",
+                prompt: `SCOREBOARD`,
+                detail_text: markup,
+            });*/
 
         } 
    
@@ -119,45 +124,73 @@ ws.onmessage = message => {
 
           //alert(JSON.stringify(result));
 
-          var markup = "<div>Voting complete!</div>";
+          //var markup = "<div>Voting complete!</div>";
+          clear_modal_by_id("vote")
+          generateNotification({message: "Voting complete"}) 
           for (let x = 0; x < resultArray.length; x++)
           {  
-
             var result = resultArray[x];
             result.votesReceived = parseInt(result.votesReceived, 10);
             result.roundScore = parseInt(result.roundScore, 10);
             var caveat = false;
             if (result.selfVoted)
             {
-
-              caveat = result.votesReceived > 0 ? "but" : "AND";
-              caveat += " they voted for themselves, so they lost 6 points"
+              caveat = result.votesReceived > 0 ? "but" : "and";
+              caveat += " they <span id='caveat'>voted for themselves</span> (<b>-6pts</b>)"
             } else if (result.didNotVote)
             {
-              caveat = result.votesReceived > 0 ? "but" : "AND";
-              caveat += " they didn't vote, so they lost 6 points"
+              caveat = result.votesReceived > 0 ? "but" : "and";
+              caveat += " they <span id='caveat'>didn't vote</span> (<b>-6pts</b>)"
             }
+            var markup = ""; 
             markup += `<div>
-                            ${result.acronym} received ${result.votesReceived} vote ${ caveat ? caveat : ""}. Total score for this round is ${result.roundScore}
+                            <span id="nickScore">${result.nick}&lsquo;s</span> <span id="acronymReport">${result.acronym}</span> got <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"} (<b>${result.votesReceived * 5}pts</b>) ${ caveat ? caveat : ""}.
                       </div>`
           }  
-          divChatWindow.insertAdjacentHTML("beforeend", markup);
+             create_new_modal({
+                modal_id:"scoreboard",
+                modal_type: "generic_confirm",
+                prompt: `ROUND RESULT`,
+                detail_text: markup
+            });
+
+         // divChatWindow.insertAdjacentHTML("beforeend", markup);
         }
           
         if (response.method === "getVotes")
         {
-          const divChatWindow = id("divChatWindow");
-          var answers = JSON.parse(response.answers);
-          var markup = "<div>Round complete! Tap your favorite. Voting will be open for 30 seconds.</div>";
+
+            generateNotification({message: "Round complete.",
+                                type: "dm",
+                                color: "green"})          
+
+          //const divChatWindow = id("divChatWindow");
+          //var markup = "<div>Round complete! Tap your favorite. Voting will be open for 30 seconds.</div>";
+
+            var actionsArray = [];
+
+
+          var answers = JSON.parse(response.answers);          
           for (let x = 0; x < answers.length; x++)
           {  
-
             var answer = answers[x];
-            markup += `<div onclick="castVote('${answer.owner}')">
-                          ${answer.acronym}
-                      </div>`
-          }  
-          divChatWindow.insertAdjacentHTML("beforeend", markup);
+               actionsArray.push(new actionItem({
+                  label: answer.acronym,
+                  action:`castVote('${answer.owner}')`
+                 }));
+          } 
+
+            create_new_modal({
+                modal_id:"vote",
+                modal_type:"connect_attempt",
+                prompt: `VOTE`,
+                detail_text: "pick your favorite",
+                actionsArray: actionsArray,
+                force:true
+              });
+
+
+          //divChatWindow.insertAdjacentHTML("beforeend", markup);
         }        
 
   			if (response.method === "join")
