@@ -85,7 +85,7 @@ wsServer.on("request", request => {
 			const game = games[gameId];
 			console.log("**** cast vote");
 			console.log(result);
-			dm(clientId, "VOTE RECORDED");
+			dm(clientId, "vote received.");
 			clients[clientId].currentGameInfo.vote = ownerId;
 			//console.log(clients[clientId]);
 		}		
@@ -100,10 +100,17 @@ wsServer.on("request", request => {
 				const play = result.play;
 	 			console.log("Play received from " + result.clientId); 
 				//console.log(game);
-				console.log(clients[clientId].currentGameInfo.play)			
+				console.log(clients[clientId].currentGameInfo.play)
+
+				if (clients[clientId].currentGameInfo.play == null) {
+					broadcast(game, clients[clientId].currentGameInfo.nick + " answered.")
+				} else {
+					broadcast(game, clients[clientId].currentGameInfo.nick + " changed their answer.")
+				}
+
 				clients[clientId].currentGameInfo.play = play;
 				console.log(clients[clientId].currentGameInfo.play)
-				dm(clientId, "answer received.")
+
 			}
 			else
 			{
@@ -237,20 +244,22 @@ function cullAnswers(game)
 {
 	console.log("here's all the answers");
 	game.clients.forEach (c => {
-		var answer = {};
-		answer.owner = c.clientId;
-		answer.acronym = clients[c.clientId].currentGameInfo.play;
+		var answer = {
+			owner: c.clientId,
+			acronym: clients[c.clientId].currentGameInfo.play
+		};
 		game.answers.push(answer);
-		//console.log(clients[c.clientId].play);
+		
 	});
+	console.log(game.answers)
 	getVotes(game);
 }
 
 function cullVotes(game)
 {
-	console.log("here's all the votes");
-	console.log(game);
-	console.log(clients);
+	//console.log("here's all the votes before");
+	//console.log(game);
+	//console.log(clients);
 	game.clients.forEach (c => {
 			//console.log(c);
 			if (c.clientId === clients[c.clientId].currentGameInfo.vote)
@@ -275,6 +284,15 @@ function cullVotes(game)
 				votee.currentGameInfo.votesReceived += 1;
 			}	
 	});
+
+	console.log(`*****
+
+
+
+		`)
+	//console.log("here's all the votes after");
+	//console.log(game);
+	//console.log(clients);
 	calculateRoundResult(game);
 	reportRoundResult(game); 
 	endRound(game);
@@ -283,16 +301,77 @@ function cullVotes(game)
 
 function calculateRoundResult(game)
 {
-
+	console.log("calculating round result")
 	game.clients.forEach (c => {
 		let player = clients[c.clientId];
 		let adjuster = player.currentGameInfo.selfVoted || player.currentGameInfo.didNotVote ? 6 : 0;
 		player.currentGameInfo.roundScore = (player.currentGameInfo.votesReceived * 5) - adjuster;
+		console.log(player.currentGameInfo)
 	});
 
 }
 
 function reportRoundResult(game)
+{
+	let result = [];
+
+
+	game.clients.forEach (c => {
+		let player = clients[c.clientId];
+		result.push({
+			"nick":             player.currentGameInfo.nick,
+			"acronym": 			player.currentGameInfo.play,
+			"votesReceived" : 	player.currentGameInfo.votesReceived,
+			"didNotVote" : 		player.currentGameInfo.didNotVote,
+			"selfVoted" : 		player.currentGameInfo.selfVoted,
+			"roundScore" : 		player.currentGameInfo.roundScore
+		})
+	});	
+
+	/*game.clients.forEach (c => {
+		let player = clients[c.clientId];
+		if (result.length == 0) // this is dumb af, refactor by pushing linearly and then sorting
+		{
+			result.push({
+				"nick":             player.currentGameInfo.nick,
+				"acronym": 			player.currentGameInfo.play,
+				"votesReceived" : 	player.currentGameInfo.votesReceived,
+				"didNotVote" : 		player.currentGameInfo.didNotVote,
+				"selfVoted" : 		player.currentGameInfo.selfVoted,
+				"roundScore" : 		player.currentGameInfo.roundScore
+			})
+		}
+		else
+		{ 
+			if (player.currentGameInfo.votesReceived > result[0].votesReceived)
+			{
+				result.unshift({
+					"acronym": 			player.currentGameInfo.play,
+					"votesReceived" : 	player.currentGameInfo.votesReceived,
+					"didNotVote" : 		player.currentGameInfo.didNotVote,
+					"selfVoted" : 		player.currentGameInfo.selfVoted,
+					"roundScore" : 		player.currentGameInfo.roundScore
+				})
+			} else
+			{
+				result.push({
+					"acronym": 			player.currentGameInfo.play,
+					"votesReceived" : 	player.currentGameInfo.votesReceived,
+					"didNotVote" : 		player.currentGameInfo.didNotVote,
+					"selfVoted" : 		player.currentGameInfo.selfVoted,
+					"roundScore" : 		player.currentGameInfo.roundScore
+				})
+			}	
+		}	
+	});*/
+	const payload = {
+		"method" : "reportRoundResult",
+		"roundResult": result
+	}	
+	sendAll(game, payload);	
+}
+
+function reportRoundResult_old(game)
 {
 	let result = [];
 	game.clients.forEach (c => {

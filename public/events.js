@@ -53,41 +53,6 @@ function wireGameEvents()
         $('#keyboard_ghost').addClass("ghost")
     })
 
-
-    /*$('#txtMessage').on("input change keyup paste", function () {
-        let candidate = txtMessage.value;
-        const checker = candidate.split(" ");
-
-        if (checker.length)
-        {
-            console.log(checker);
-            for (let x = 0; x < checker.length; x++)
-            {
-                //console.log(checker[x].charAt(x).toUpperCase());
-                if ((checker[x].charAt(0)).toUpperCase() == acronym.charAt(x))
-                {
-                    $(`#${x}`).addClass("highlightedTile");
-                }    
-                else
-                {
-                    $(`#${x}`).removeClass("highlightedTile");
-                }    
-            }   
-        }
-        else
-        {
-            if (candidate.charAt(0).toUpperCase() == acronym.charAt(x))
-            {
-                $(`#0`).addClass("highlightedTile");
-            }          
-        } 
-
-
- 
-
-        //console.log(candidate);
-    });*/
-
     btnMessage.addEventListener("click", e => {
         if (acronym)
         {
@@ -95,9 +60,17 @@ function wireGameEvents()
             if (candidate === acronym)
             {
                 play(id("txtMessage").value);
+                $('.acronymContainer').addClass("animate__animated animate__tada");
+                //$('.acronymContainer span').addClass("completed");
+                $('.acronymContainer span').removeClass("highlightedTile");
+                setTimeout(function(){
+                     $('.acronymContainer').removeClass("animate__animated animate__tada");   
+                }, 1000)
+
             }
             else 
             {
+                $('.acronymContainer span').removeClass("highlightedTile");
                 chat(id("txtMessage").value);
             }    
             id("txtMessage").value = "";               
@@ -155,8 +128,17 @@ function wireGameEvents()
         const divChatWindow = id("divChatWindow");
         divChatWindow.scrollIntoView({ behavior: "smooth", block: "end" });
     });*/
+
+    cursorInterval = window.setInterval(() => toggleCursor(), 530);
     
 
+}
+
+function toggleCursor()
+{
+    let cursor = $('#txtMessage');
+    let placeholder = cursor
+    cursor.attr('placeholder',  cursor.attr('placeholder') == "|" ? "" : "|");
 }
 
 function checker ()
@@ -174,10 +156,12 @@ function checker ()
                 //console.log(checker[x].charAt(x).toUpperCase());
                 if ((checker[x].charAt(0)).toUpperCase() == acronym.charAt(x))
                 {
+                    //$(`#${x}`).removeClass("completed");
                     $(`#${x}`).addClass("highlightedTile");
                 }    
                 else
                 {
+
                     $(`#${x}`).removeClass("highlightedTile");
                 }    
             }   
@@ -186,6 +170,7 @@ function checker ()
         {
             if (candidate.charAt(0).toUpperCase() == acronym.charAt(x))
             {
+                 //$(`#0`).removeClass("completed");
                 $(`#0`).addClass("highlightedTile");
             }          
         } 

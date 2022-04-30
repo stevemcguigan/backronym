@@ -234,7 +234,7 @@ function generateGame()
 	</div>
 	  <div id="divChatWindow"></div>
 	  
-	   <input type="text" id="txtMessage" placeholder="guess or chat">  <button id = "btnMessage">Send</button>
+	   <input type="text" id="txtMessage" placeholder="|">  <button id = "btnMessage">Send</button>
 				
 		 <div id="game-keyboard">
 		 	   ${generateKeyboard({live: false, layout: "qwerty"})}	

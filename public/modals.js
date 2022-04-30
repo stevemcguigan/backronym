@@ -31,6 +31,11 @@ function create_new_modal(m)   //creates a new alert modal
 
 	switch (m.modal_type)
 	{
+
+		case "vote":
+			modal_content = generate_vote_markup(m);
+		break;
+
 		case "generic_confirm":
 			modal_content = generate_generic_confirm_markup(m);
 		break;
@@ -920,7 +925,25 @@ function generate_generic_confirm_markup(m)
 
 }
 
+function generate_vote_markup(m)
+{
 
+	let actionsArray = m.actionsArray ? m.actionsArray : [];
+	let actionsMarkup = generate_modal_action_buttons(actionsArray)
+
+	var modalBody = `
+			<div class = "stackablePrompt">
+				<div class = "blockingModalTitle">	
+				${m.prompt}
+				</div>
+			</div> 
+			${actionsMarkup}
+		`;
+
+	return modalBody;
+
+
+}
 
 
 function respin_file_modal ()
@@ -1530,6 +1553,7 @@ function generate_group_sync_markup(m)
 
 	return modalBody;
 }
+
 
 
 function generate_group_sync_tune_markup(m)
@@ -3695,25 +3719,18 @@ function fade_in_dimmer(fade_ms)
 
 
 
-function generate_modal_action_buttons(actionsArray, iconSize, labelSize)
+function generate_modal_action_buttons(actionsArray)
 {
 
-	actionMenu = `<div class="remote_lower_button_container">`;
+	actionMenu = ``;
 
 
 	for (var x = 0; x < actionsArray.length; x++)
 	{
-		actionMenu += `<div class="actionsArrayContainer" id = "fileModal${actionsArray[x].name}ButtonContainer"  onclick="${actionsArray[x].action}">					
-							<div  class="halfWhite_A" style="display:flex;flex-direction:column;align-items:center;"  ontouchstart="click_state_opacity(this, true); ${actionsArray[x].touchstartaction}" ontouchend="click_state_opacity(this, false); ${actionsArray[x].touchendaction}" >
-								<i style="font-size:${iconSize}px;" id="fileModal${actionsArray[x].name}Button" class="${actionsArray[x].icon} ${actionsArray[x].label_class}" aria-hidden="true"></i>
-								<div class="modal_text_label ${actionsArray[x].label_class}" style="font-size:${labelSize}px;">
+		actionMenu += `<div class="voteContainer_outer" id = ""  onclick="${actionsArray[x].action}">					
+								<div class="voteContainer" style="">
 									${actionsArray[x].label}
 								</div>
-								<div class="modal_text_label ${actionsArray[x].label2_class}" style="font-size:${labelSize-2}px;line-height:0px;">
-									${actionsArray[x].label2}
-								</div>
-
-							</div>
 						</div>`;	
 	}
 

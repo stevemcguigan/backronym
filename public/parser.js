@@ -120,13 +120,15 @@ ws.onmessage = message => {
           console.log(response); 
           const divChatWindow = id("divChatWindow");
 
-          var resultArray = JSON.parse(response.roundResult);
+          var resultArray = response.roundResult;
+          console.log(resultArray);
 
           //alert(JSON.stringify(result));
 
           //var markup = "<div>Voting complete!</div>";
           clear_modal_by_id("vote")
           generateNotification({message: "Voting complete"}) 
+          var markup = ""; 
           for (let x = 0; x < resultArray.length; x++)
           {  
             var result = resultArray[x];
@@ -142,24 +144,24 @@ ws.onmessage = message => {
               caveat = result.votesReceived > 0 ? "but" : "and";
               caveat += " they <span id='caveat'>didn't vote</span> (<b>-6pts</b>)"
             }
-            var markup = ""; 
+            
             markup += `<div>
-                            <span id="nickScore">${result.nick}&lsquo;s</span> <span id="acronymReport">${result.acronym}</span> got <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"} (<b>${result.votesReceived * 5}pts</b>) ${ caveat ? caveat : ""}.
+                            <span id="nickScore">${result.nick}&lsquo;s</span> <span id="acronymReport">${result.acronym}</span> got <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"} (<b>${result.votesReceived * 5}pts</b>) ${ caveat ? caveat : ""}
                       </div>`
           }  
              create_new_modal({
                 modal_id:"scoreboard",
                 modal_type: "generic_confirm",
-                prompt: `ROUND RESULT`,
+                prompt: `results`,
                 detail_text: markup
             });
 
          // divChatWindow.insertAdjacentHTML("beforeend", markup);
         }
-          
+           
         if (response.method === "getVotes")
         {
-
+            acronym = false;
             generateNotification({message: "Round complete.",
                                 type: "dm",
                                 color: "green"})          
@@ -167,10 +169,9 @@ ws.onmessage = message => {
           //const divChatWindow = id("divChatWindow");
           //var markup = "<div>Round complete! Tap your favorite. Voting will be open for 30 seconds.</div>";
 
-            var actionsArray = [];
-
-
-          var answers = JSON.parse(response.answers);          
+          var actionsArray = [];
+          var answers = JSON.parse(response.answers);    
+          console.log(answers)      
           for (let x = 0; x < answers.length; x++)
           {  
             var answer = answers[x];
@@ -179,12 +180,12 @@ ws.onmessage = message => {
                   action:`castVote('${answer.owner}')`
                  }));
           } 
-
+           console.log("full actions array")
+           console.log(actionsArray) 
             create_new_modal({
                 modal_id:"vote",
-                modal_type:"connect_attempt",
-                prompt: `VOTE`,
-                detail_text: "pick your favorite",
+                modal_type:"vote",
+                prompt: `which is the best?`,
                 actionsArray: actionsArray,
                 force:true
               });

@@ -168,13 +168,22 @@ color: white;
 border: none;
 }
 
+.voteContainer {
+font-size: 13px;
+}
+
+.voteContainer_outer {
+  margin: 13px 0px;
+    color: #666;
+}
+
 #divChatWindow {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
 width: 100%;
 overflow: scroll;
-height: 30vh;
+height: 27vh;
 font-family: courier;
 font-size: 14px;
 background-color: white;
@@ -278,17 +287,17 @@ position: relative;
 /* font-weight: 300; */
 border: 0;
 padding: 0;
-line-height: 39px;
-margin: 4px;
+line-height: 45px;
+margin: 4px 2px;
 font-size: 16px;
 border: 1px dotted #777 !important;
-height: 41px;
+height: 48px;
 border-radius: 16px;
 cursor: pointer;
 user-select: none;
 background-color: white;
 color: #888;
-max-width: 30px;
+max-width: 34px;
 flex: 1;
 display: flex;
 justify-content: center;
@@ -301,15 +310,15 @@ box-shadow: 1px 1px 0px 0px #aaa;
 
 #keyboard button:after, #keyboard2 button:after
 {
-  content: "";
-  position: absolute;
-  left: -3px;
-  top: -3px;
-  width: 36px;
-  height: 47px;
-  background: #e83474;
-  border: 1px solid pink;
-  opacity:0;
+content: "";
+position: absolute;
+left: -3px;
+top: -3px;
+width: 37px;
+height: 55px;
+background: #e83474;
+border: 1px solid pink;
+opacity: 0;
 } 
 
 #key_shift:after, #key_backspace:after 
@@ -355,6 +364,11 @@ color: #666;
 border-bottom: 1px dotted #333;
 }
 
+.completed
+{
+  color: white;
+  background: black;
+}
 
 #btnStart
 {
@@ -420,13 +434,13 @@ button
 }
 
 .blockingModalTitle {
-/* font-variant-caps: all-small-caps; */
-color: #666;
-font-size: 16px;
-/* font-weight: 500; */
-/* letter-spacing: 2px; */
-text-align: center;
-font-family: courier;
+    color: #666;
+    font-size: 16px;
+    /* font-weight: 500; */
+    /* letter-spacing: 2px; */
+    text-align: center;
+    font-family: courier;
+    /* border-bottom: 1px dotted #666;
 }
 
 .modal_detail_text {
@@ -449,6 +463,13 @@ width: 85%;
 }
 
 
+.modal_detail_text div {
+margin: 30px 10px;
+font-size: 13px;
+}
+
+
+  
 .blockingModalExtra
 {
     color:var(--offwhite);
@@ -460,12 +481,13 @@ width: 85%;
 }
 
 .stackablePrompt {
-  width:100% !important;
-  display:flex;
-  justify-content:center;
-  padding: 10px 0;
-  /*margin-bottom: 15px;
-  /*border-bottom: 1px solid var(--offblack);*/
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    /* background: #bbb; */
+    color: #666;
+    border-bottom: 1px dotted #666;
 }
 
 .stackableActions {
@@ -548,6 +570,7 @@ border: 1px dotted #666;
 z-index: 300;
 margin-bottom:70px;
 background-color: white;
+border-radius: 2px;
 }
 
 .modal_narrow {
@@ -605,6 +628,15 @@ background-color: white;
 
 
 @media screen  and (min-device-width: 1200px)  and (max-device-width: 1600px)  and (-webkit-min-device-pixel-ratio: 1) { 
+
+.modal_content {
+    width: 88%;
+}
+
+.modal_box {
+    max-width: 480px;
+}
+
 
 body {
 	display:flex;
