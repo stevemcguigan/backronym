@@ -237,7 +237,7 @@ function startRound(game)
 				}, 5000);			  	
 			}, 10000);	 		  
 		}, 15000);	  
-	}, 30000);
+	}, 1000);
 }
 
 function cullAnswers(game)
@@ -504,7 +504,7 @@ function getVotes(game)
 		setTimeout(() => {
 			cullVotes(game);	  			  		  			  	 			  		  			  	
 		}, 5500);			  			  	
-	}, 25000);	
+	}, 5000);	
 }
 
 

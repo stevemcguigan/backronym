@@ -657,7 +657,7 @@ function return_actions_array(m)
 			if (m.actionsArray[0].active)
 			{	
 							actionsMarkup +=   `<div class="centered_content" style="text-align:center;width:100%;">
-									<button class="${m.actionsArray[0].class}" style="width:75%;" 
+									<button class="${m.actionsArray[0].class}" 
 									
 									onclick="${m.actionsArray[0].action}">
 									${m.actionsArray[0].label}
@@ -666,7 +666,7 @@ function return_actions_array(m)
 			} 
 			else 
 			{
-				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="width:75%;" >${m.actionsArray[0].label}</button></div>`;
+				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="" >${m.actionsArray[0].label}</button></div>`;
 			}
 		}
 
@@ -678,7 +678,7 @@ function return_actions_array(m)
 			if (m.actionsArray[1].active)
 			{	
 				actionsMarkup +=   `<div class="centered_content" style="text-align:center;width:100%;">
-							<button class="${m.actionsArray[1].class}" style="width:75%;" 
+							<button class="${m.actionsArray[1].class}"  
 						
 							onclick="${m.actionsArray[1].action}">
 							${m.actionsArray[1].label}
@@ -687,7 +687,7 @@ function return_actions_array(m)
 			} 
 			else 
 			{
-				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="width:75%;" >${m.actionsArray[1].label}</button></div>`;
+				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="" >${m.actionsArray[1].label}</button></div>`;
 			}
 		}
 		actionsMarkup  += `</div>`
@@ -852,7 +852,7 @@ function generate_generic_confirm_markup(m)
 			if (m.actionsArray[0].active)
 			{	
 							actionsMarkup +=   `<div class="centered_content" style="text-align:center;width:100%;">
-									<button class="${m.actionsArray[0].class}" style="width:75%;" 
+									<button class="${m.actionsArray[0].class}" style="" 
 									
 									onclick="${m.actionsArray[0].action}">
 									${m.actionsArray[0].label}
@@ -861,7 +861,7 @@ function generate_generic_confirm_markup(m)
 			} 
 			else 
 			{
-				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="width:75%;" >${m.actionsArray[0].label}</button></div>`;
+				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="" >${m.actionsArray[0].label}</button></div>`;
 			}
 		}
 
@@ -873,7 +873,7 @@ function generate_generic_confirm_markup(m)
 			if (m.actionsArray[1].active)
 			{	
 				actionsMarkup +=   `<div class="centered_content" style="text-align:center;width:100%;">
-							<button class="${m.actionsArray[1].class}" style="width:75%;" 
+							<button class="${m.actionsArray[1].class}" style="" 
 						
 							onclick="${m.actionsArray[1].action}">
 							${m.actionsArray[1].label}
@@ -882,7 +882,7 @@ function generate_generic_confirm_markup(m)
 			} 
 			else 
 			{
-				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="width:75%;" >${m.actionsArray[1].label}</button></div>`;
+				actionsMarkup += `<div class="centered_content" style="text-align:center;width:100%;"><button class="${actionID} inactive_button" style="" >${m.actionsArray[1].label}</button></div>`;
 			}
 		}
 		actionsMarkup  += `</div>`

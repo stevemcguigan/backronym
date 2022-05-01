@@ -1,4 +1,4 @@
-let   name           = "Default Name";
+let	  user			 = null;	
 let   clientId       = null;
 let   gameId         = null;
 let	  game 			 = null;
@@ -27,6 +27,7 @@ let counterInterval = null;
 let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll:
 current.notifications = []; 
 current.modal_queue = [];
+current.score = "";
 
 
 var actionItem = function(a) {

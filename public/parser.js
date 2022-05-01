@@ -94,20 +94,18 @@ ws.onmessage = message => {
 
         if (response.method === "reportScore")
         {
-
           let score = JSON.parse(response.score);
-          console.log(score);
-          var markup = "";
-          for (let x = 0; x < score.length; x++)
-          {
-            markup += `<div>${score.nick}: ${score.score}</div>`
-          }  
+          current.score = "";
+          score.forEach(s => {
+            current.score += `<div>${s.nick}: ${s.score}</div>`
+          });  
 
-           /* create_new_modal({
-                modal_id:"scoreboard",
-                modal_type: "generic_confirm",
-                prompt: `SCOREBOARD`,
-                detail_text: markup,
+            /*clear_modal_by_id("scoreboard")
+            create_new_modal({
+                  modal_id:"scoreboard_total",
+                  modal_type: "generic_confirm",
+                  prompt: `scoreboard`,
+                  detail_text: current.score
             });*/
 
         } 
@@ -149,11 +147,19 @@ ws.onmessage = message => {
                             <span id="nickScore">${result.nick}&lsquo;s</span> <span id="acronymReport">${result.acronym}</span> got <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"} (<b>${result.votesReceived * 5}pts</b>) ${ caveat ? caveat : ""}
                       </div>`
           }  
-             create_new_modal({
+
+           let actionsArray = [];       
+           actionsArray.push(new actionItem({
+              label:`ok`,
+              action:`clear_modal_by_id('scoreboard'); showScore();`
+            }));
+           create_new_modal({
                 modal_id:"scoreboard",
                 modal_type: "generic_confirm",
                 prompt: `results`,
-                detail_text: markup
+                detail_text: markup,
+                actionsArray: actionsArray,
+                deactivate: function () { showScore(); }
             });
 
          // divChatWindow.insertAdjacentHTML("beforeend", markup);

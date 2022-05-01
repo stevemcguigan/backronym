@@ -137,6 +137,24 @@ function guid() { // Public Domain/MIT
     });
 }
 
+function showScore()
+{
+
+	  let actionsArray = [];       
+	   actionsArray.push(new actionItem({
+	      label:`ok`,
+	      action:`clear_modal_by_id('scoreboard_total');`
+	    }));
+      create_new_modal({
+        modal_id:"scoreboard_total",
+        modal_type: "generic_confirm",
+        prompt: `scoreboard`,
+        detail_text: current.score,
+        actionsArray: actionsArray
+  	  });
+}
+
+
 function phrase2acronym(str)
 {
 return str.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')
