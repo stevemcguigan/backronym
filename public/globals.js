@@ -29,6 +29,12 @@ current.notifications = [];
 current.modal_queue = [];
 current.score = "";
 
+let longpressKeySkips = {
+	 "key_shift" : true,
+	 "key_symbols" : true,	 
+}
+
+
 
 var actionItem = function(a) {
 	

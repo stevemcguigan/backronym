@@ -71,8 +71,9 @@ ws.onmessage = message => {
           let warning = generateNotification({message: response.message,
                                               type: "dm",
                                               color: "green"});
-          countdown(warning);
-
+          setTimeout(function(){
+            countdown(warning);
+          }, 500)
         }
 
         if (response.method === "dm")
@@ -107,9 +108,79 @@ ws.onmessage = message => {
                   prompt: `scoreboard`,
                   detail_text: current.score
             });*/
-
         } 
    
+
+
+
+
+
+
+        if (response.method === "endGame")
+        {
+          let winnerNick = response.nick;
+          let score = response.score;
+          let winnerClientId = response.clientId;
+          let winner = winnerClientId == clientId ? "you" : winnerNick;
+          let host = response.hostId == clientId ? true : false;
+
+          //n(winner + " won with " + score + " points!");
+
+           let actionsArray = [];     
+
+           if (host)  
+           {
+             actionsArray.push(new actionItem({
+                label:`play again`,
+                action:`clear_modal_by_id('winner');n("new game started!")start("${gameId}")`
+              }));
+              actionsArray.push(new actionItem({
+                label:`no thanks`,
+                action:`clear_modal_by_id('winner');`
+              }));             
+           } 
+           else
+          {
+             actionsArray.push(new actionItem({
+                label:`ok`,
+                action:`clear_modal_by_id('winner');`
+              }));            
+          }
+
+           create_new_modal({
+                modal_id:"winner",
+                modal_type: "generic_confirm",
+                prompt: "it's over!",
+                detail_text: `${winner} won with ${score} points!`,
+                actionsArray: actionsArray,
+                deactivate: function () { }
+            });
+
+
+           $('.letterTileLetter').addClass("animate__animated animate__zoomOut");
+
+          /*  
+          var element = document.querySelector('.acronymContainer');
+          element.classList.add('animate__animated', 'animate__zoomOut');
+          element.addEventListener('animationend', () => {
+                  $('.acronymContainer').remove();
+                  const round = response.round;
+                  acronym = response.acronym;
+                  let acronymMarkup = generateAcronymContainer(" ");
+                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+                  animateAcronym();  
+          })         */
+
+         // divChatWindow.insertAdjacentHTML("beforeend", markup);
+        }
+
+
+
+
+
+
+
+
 
         if (response.method === "reportRoundResult")
         {
@@ -161,6 +232,32 @@ ws.onmessage = message => {
                 actionsArray: actionsArray,
                 deactivate: function () { showScore(); }
             });
+
+          
+
+          var element = document.querySelector('.letterTile');
+
+          $('.letterTile').addClass("animate__animated animate__zoomOut")
+          //element.classList.add('animate__animated', 'animate__zoomOut');
+          element.addEventListener('animationend', () => {
+                  $('.acronymContainer').html(generateClock());
+          })           
+
+
+
+           //$('.letterTileLetter').addClass("animate__animated animate__zoomOut");
+
+          /*  
+          var element = document.querySelector('.acronymContainer');
+          element.classList.add('animate__animated', 'animate__zoomOut');
+          element.addEventListener('animationend', () => {
+                  $('.acronymContainer').remove();
+                  const round = response.round;
+                  acronym = response.acronym;
+                  let acronymMarkup = generateAcronymContainer(" ");
+                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+                  animateAcronym();  
+          })         */
 
          // divChatWindow.insertAdjacentHTML("beforeend", markup);
         }

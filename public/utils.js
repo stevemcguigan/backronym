@@ -22,21 +22,21 @@ function b(x, min, max) {
 }
 
 function handleInput(kid)
-{
-	
+{	
 	txtMessage  = id("txtMessage");
+	divChatWindow  = id("divChatWindow");
 	let key = $(`#${kid}`);
 	let keypress = key.attr("data-key");
 	let code = parseInt(keypress.charCodeAt(0), 10);
-	//console.log(keypress)
-	//console.log((b(code, 57, 60)))
-	if (b(code, 0, 48) || b(code, 57, 65) || b(code, 90, 97) || b(code, 122, 165))
-	{
-		console.log(code)
-	}	
 
+	if (txtMessage.value.length > 120 && keypress !== "return")
+	{
+		generateNotification({message: "no walls of text. sheesh."})
+		return;
+	}	
+	
 	let shifted = $("#game-keyboard button").hasClass("upper");// ? function () {} : String.prototype.toUpperCase; 
-	if (shifted)
+	if (shifted && !$('#key_shift').hasClass("pressed"))
 		$("#game-keyboard button").removeClass("upper");
 
 	switch (keypress)
@@ -54,14 +54,19 @@ function handleInput(kid)
 		break;
 
 		case "return":
+			//generateNotification({message: "fixing"})
 			$(key).addClass("pressed");
 			$("#btnMessage").click();
+			txtMessage.style.height = "27px"
+			divChatWindow.style.height = "198px"
 		break;
 
 		case "symbols":
+
 			$(key).addClass("pressed");
 			let kb = $("#keyboard");
 			let kb2 = $("#keyboard_2");
+
 			if ($("#keyboard").hasClass("hidden"))
 			{
 				$("#keyboard").removeClass("hidden");
@@ -77,6 +82,7 @@ function handleInput(kid)
 		break;
 
 		case "shift":
+			generateNotification({message: lastKeyPress})
 			if (lastKeyPress == "shift")
 			{
 				$("#game-keyboard button").removeClass("upper")
@@ -91,17 +97,52 @@ function handleInput(kid)
 		default:
 			txtMessage.value += shifted ? keypress.toUpperCase() : keypress;
 			$(key).addClass("shifted");
-			$(`#keyboard button`).not(key).addClass("ghost");//addClass("hide");
-			$('#keyboard_ghost').removeClass("ghost")
+			
+	        if ($('#keyboard').hasClass("hidden"))
+	        {
+				$(`#keyboard_2 button`).not(key).addClass("ghost");//addClass("hide");
+				$('#keyboard_2_ghost').removeClass("ghost hidden")  
+	        }
+	        else
+	        {
+				$(`#keyboard button`).not(key).addClass("ghost");//addClass("hide");
+				$('#keyboard_ghost').removeClass("ghost")         
+	        } 			
+
 		break;
 	}
+	//n(txtMessage.value.length)
+	if (txtMessage.value && txtMessage.value.length % 38 == 0)
+	{
+		let h = $('#txtMessage').height();
+		let j = $('#divChatWindow').height();
+		//generateNotification({message: h})
+		$('#txtMessage').height(h + 15)
+		$('#divChatWindow').height(j - 15)
+		setTimeout(function(){
+			scrollChat();
+		}, 250)
+
+		//txtMessage.value += '\r\n'*/
+	}	
 
 	if (txtMessage.value.length == 1 || txtMessage.value.charAt(txtMessage.value.length - 2) == " ")
 	{
 		checker();
 	}	
 	
-	lastKeyPress = keypress;
+	if (lastKeyPress == "shift" && kid == "key_shift")
+	{
+		lastKeyPress = "";
+	}
+	else
+	{
+		lastKeyPress = keypress;
+	}	
+
+	
+
+	
 }
 
 
@@ -160,29 +201,3 @@ function phrase2acronym(str)
 return str.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')
 }
 
-function focusAndOpenKeyboard(el, timeout) {
-  if(!timeout) {
-    timeout = 100;
-  }
-  if(el) {
-    // Align temp input element approximately where the input element is
-    // so the cursor doesn't jump around
-    var __tempEl__ = document.createElement('input');
-    __tempEl__.style.position = 'absolute';
-    __tempEl__.style.top = (el.offsetTop + 7) + 'px';
-    __tempEl__.style.left = el.offsetLeft + 'px';
-    __tempEl__.style.height = 0;
-    __tempEl__.style.opacity = 0;
-    // Put this temp element as a child of the page <body> and focus on it
-    document.body.appendChild(__tempEl__);
-    __tempEl__.focus();
-
-    // The keyboard is open. Now do a delayed focus on the target element
-    setTimeout(function() {
-      el.focus();
-      el.click();
-      // Remove the temp element
-      document.body.removeChild(__tempEl__);
-    }, timeout);
-  }
-}

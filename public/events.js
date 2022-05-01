@@ -43,14 +43,27 @@ function wireGameEvents()
     })
 
     $("#game-keyboard button").on('taphold', function() {
-        heldKeyInterval = window.setInterval(() => handleInput(this.id), 50);
+        if (!longpressKeySkips[this.id])
+        {
+            heldKeyInterval = window.setInterval(() => handleInput(this.id), 50);   
+        }      
     })
 
     $("#game-keyboard button").on("touchend", function(){
         clearInterval(heldKeyInterval);
-        $(this).removeClass("pressed").removeClass("shifted");
-        $(`#keyboard button`).removeClass("ghost");//addClass("hide");
-        $('#keyboard_ghost').addClass("ghost")
+        $(this).removeClass("pressed").removeClass("shifted");                           
+    
+        if ($('#keyboard').hasClass("hidden"))
+        {
+            $(`#keyboard_2 button`).removeClass("ghost");//addClass("hide");
+            $('#keyboard_2_ghost').addClass("ghost hidden")  
+        }
+        else
+        {
+            $(`#keyboard button`).removeClass("ghost");//addClass("hide");
+            $('#keyboard_ghost').addClass("ghost")            
+        }    
+
     })
 
     btnMessage.addEventListener("click", e => {
@@ -140,6 +153,13 @@ function toggleCursor()
     let placeholder = cursor
     cursor.attr('placeholder',  cursor.attr('placeholder') == "|" ? "" : "|");
 }
+
+function scrollChat()
+{
+    divChatWindow  = id("divChatWindow");
+    divChatWindow.lastChild.scrollIntoView({ behavior: "smooth", block: "end" });
+}
+
 
 function checker ()
 {

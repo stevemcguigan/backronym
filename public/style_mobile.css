@@ -1,6 +1,11 @@
 
 :root {
 
+  --width: 300px;
+  --x-speed: 1s;
+  --y-speed: 2s;
+  --transition-speed: 0.2s;
+
    --dropshadowblack: rgba(13,13,17, 0.3);
    --offblack_alpha: rgba(9,10,12,0.8);
 /*   --trueblack_alpha: rgba(0,0,0,0.75);*/
@@ -71,6 +76,42 @@
    --modal_bar_height: env(safe-area-inset-top) !important;;
 }
 
+
+
+
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #546E7A;
+}
+
+.x {
+  animation: x var(--x-speed) linear infinite alternate;
+}
+.x2 {
+  animation: x2 var(--x-speed) linear infinite alternate;
+}
+.y {
+  animation: y var(--y-speed) linear infinite alternate;
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(250px - var(--width)));
+  }
+}
+@keyframes x2 {
+  100% {
+    transform: translateX(calc(-250px + var(--width)));
+  }
+}
+
+@keyframes y {
+  100% {
+    transform: translateY(calc(40vh - var(--width)));
+  }
+}
 .textInput
 {
 width: 100%;
@@ -134,13 +175,14 @@ border-top: 1px dotted #333;
 .acronymContainer
 {
 width: 100%
-height: 110px;
+max-height: 110px;
 min-height: 110px;
 display: flex;
 padding: 0px 10px;
 justify-content: center;
 align-items: center;
 margin-bottom: 12px;
+overflow:hidden;
 
 }
 
@@ -185,24 +227,31 @@ font-size: 13px;
     color: #666;
 }
 
+
+.animate__animated.animate__fadeIn, .animate__animated.animate__fadeOut{
+  --animate-duration: 250ms;
+}
+
 #divChatWindow {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
 width: 100%;
 overflow: scroll;
-height: 27vh;
+height: 198px;
 font-family: courier;
 font-size: 14px;
 background-color: white;
 color: #666;
 padding: 9px;
 border-bottom: 1px dotted #333;
+transition: all 200ms ease-in-out;
 }
 
 #divChatWindow div
 {
   padding-bottom:5px;
+  word-wrap: break-word;
 }
 
 #keyboard, #keyboard_2
@@ -230,6 +279,7 @@ border-bottom: 1px dotted #333;
 	width: 100% !important;
 	position: fixed;
 	bottom: 0px;
+  left: 0px;
 }
 
 #keyboard .row, #keyboard_ghost .row, #keyboard_2 .row, #keyboard_2_ghost .row
@@ -271,16 +321,43 @@ input[type="text"][disabled] {
    opacity: 1;
 }
 
+.textarea-wrapper {
+  position: relative;
+}
+textarea::-webkit-input-placeholder {
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+input,
+.textarea-wrapper {
+  margin: 0px 0 0 0;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+ -webkit-transition: all 0.3s ease-in-out;
+ transition: all 0.3s ease-in-out;
+}
+
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder{ 
+ -webkit-transform: translateY(-20px);
+ transform: translateY(-20px);
+ visibility: visible !important;
+}
 
 .pressed
 {
-	opacity:50%;
+	opacity:70%;
 }
 
 .shifted
 {
-	height: 80px !important;
-	transform: scale(1.5);
+
+	transform: scale(1.75);
+  margin-bottom: 45px !important;
 }
 
 .hidden
@@ -360,16 +437,17 @@ opacity: 0;
 #txtMessage
 {
 width: 99%;
-height: 37px;
+height: 27px;
 font-size: 16px;
-padding: 0px 0px 0px 4px;
-margin: 0px 0px !important;
+padding: 6px 0px 0px 4px;
+margin: 0px 0px;
 pointer-events: none;
 border: none;
 border-radius: 0px;
 font-family: courier;
 color: #666;
 border-bottom: 1px dotted #333;
+transition: all 200ms ease-in-out;
 }
 
 .completed
@@ -567,6 +645,16 @@ font-size: 13px;
   color: #8e2383;
 }
 
+#clockContainer
+{
+
+}
+
+#clockContainer svg
+{
+  max-height: 104px;
+}
+
 .confirmation_button
 {
     width: 80px;
@@ -581,7 +669,10 @@ font-size: 13px;
 
 .confirmationActions
 {
-  width: 100%;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal_box {

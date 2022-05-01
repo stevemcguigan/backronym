@@ -14,6 +14,102 @@ function generateLobby()
 }
 
 
+function generateClock()
+{
+	let markup = `<div id="clockContainer" class="animate__animated animate__rubberBand">
+	<svg version="1.1" class="iconic-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="384px" height="384px" viewBox="0 0 384 384" enable-background="new 0 0 384 384" xml:space="preserve">
+ 
+ <line x1="200" y1="25" x2="200" y2="35" stroke-width="6" stroke="#777"></line> 
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(30, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(60, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(90, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(120, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(150, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(180, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(210, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(240, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(270, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(300, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(330, 200, 200)"></line>
+
+  <line class="iconic-clock-hour-hand" id="foo" fill="none" stroke="#777" stroke-width="10" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="87.5"/>
+  <line class="iconic-clock-minute-hand" id="iconic-anim-clock-minute-hand" fill="none" stroke="#777" stroke-width="4" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="54"/>
+  <circle class="iconic-clock-axis" cx="192" cy="192" r="9"/>
+  <g class="iconic-clock-second-hand" id="iconic-anim-clock-second-hand">
+      <line class="iconic-clock-second-hand-arm" fill="none" stroke="olivedrab" stroke-width="2" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="28.5"/>
+      <circle class="iconic-clock-second-hand-axis" fill="#olivedrab" cx="192" cy="192" r="4.5"/>
+  </g>
+  <defs>
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-hour-hand"
+          repeatCount="indefinite"
+          dur="43200s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-minute-hand"
+          repeatCount="indefinite"
+          dur="3600s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-second-hand"
+          repeatCount="indefinite"
+          dur="60s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+  </defs>
+  <script  type="text/javascript">
+  <![CDATA[
+      var date = new Date;
+      var seconds = date.getSeconds();
+      var minutes = date.getMinutes();
+      var hours = date.getHours();
+      hours = (hours > 12) ? hours - 12 : hours;
+
+      minutes = (minutes * 60) + seconds;
+      hours = (hours * 3600) + minutes;
+
+      document.querySelector('.iconic-clock-second-hand').setAttribute('transform', 'rotate('+360*(seconds/60)+',192,192)');
+      document.querySelector('.iconic-clock-minute-hand').setAttribute('transform', 'rotate('+360*(minutes/3600)+',192,192)');
+      document.querySelector('.iconic-clock-hour-hand').setAttribute('transform', 'rotate('+360*(hours/43200)+',192,192)');
+  ]]>
+  </script>
+</svg>
+				  </div>`
+return markup;
+}
+
+
 function removeAcronym()
 {
 
@@ -46,7 +142,7 @@ function tile(letter, place)
 {
 	let markup = `
 		<span id="${place}" class="letterTile animate__animated animate__rubberBand hidden">
-			<div>${letter}</div>
+			<div class="letterTileLetter">${letter}</div>
 		</span>
 	`
 	return markup;
@@ -77,9 +173,14 @@ function key(symbol, live, layout)
 		"$" : {"id" : "dollar",		"label" : "$"},
 		"&" : {"id" : "amp",		"label" : "&"},	
 		"@" : {"id" : "at",			"label" : "@"},
-		")" : {"id" : "rp",			"label" : ")"},	
 		'"' : {"id" : "doublequote","label" : '"'},
-		")" : {"id" : "rp",			"label" : ")"},																	
+		"." : {"id" : "period",		"label" : "."},
+		"," : {"id" : "comma",		"label" : ","},	
+		"?" : {"id" : "question",	"label" : "?"},
+		"!" : {"id" : "exclamation","label" : "!"},
+		"'" : {"id" : "apostrophe",	"label" : "'"},	
+		"*" : {"id" : "period2",	"label" : "."},
+		"." : {"id" : "period",		"label" : "."},		
 	}
 
 	if (map[symbol] !== undefined)
@@ -92,6 +193,12 @@ function key(symbol, live, layout)
 	}	
 
 	let data = layout == "qwerty" ? mappedSymbol.id : mappedSymbol.label
+
+	if (layout == "qwerty" && (mappedSymbol.id == "period"))
+		data = mappedSymbol.label;
+
+	if (layout == "symbols" && (mappedSymbol.id == "symbols" || mappedSymbol.id == "shift"))
+		data = mappedSymbol.id;
 
 	let markup = `
 		<button id="${live ? "key" : "dead"}${suffix}_${mappedSymbol.id}" data-key="${live ? data : ''}">
@@ -129,7 +236,7 @@ function generateKeyboard(m)
 		 layout1 = "1234567890"
 		 layout2 = `-/:;()$&@"`
 		 layout3 = `↑.,?!'←`
-		 layout4 = "%_.✓"	
+		 layout4 = "%_*✓"	
 	
 	}
 
@@ -233,9 +340,9 @@ function generateGame()
 
 	</div>
 	  <div id="divChatWindow"></div>
-	  
-	   <input type="text" id="txtMessage" placeholder="|">  <button id = "btnMessage">Send</button>
-				
+		<div class="textarea-wrapper">	  
+	   <textarea id="txtMessage" placeholder="|"></textarea>  <button id = "btnMessage">Send</button>
+		</div>		
 		 <div id="game-keyboard">
 		 	   ${generateKeyboard({live: false, layout: "qwerty"})}	
 			   ${generateKeyboard({live: true, 	layout: "qwerty"})}

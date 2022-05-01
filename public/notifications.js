@@ -7,6 +7,11 @@ function notification()
 	this.timeout = null;
 }
 
+function n(m)
+{
+	generateNotification({message: m})
+}
+
 function closeNote(newIndex)
 {
 	$('#notification_' + current.notifications[newIndex].id).fadeOut("200",function(){

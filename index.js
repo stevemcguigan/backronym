@@ -236,8 +236,8 @@ function startRound(game)
 					  cullAnswers(game) 			  	
 				}, 5000);			  	
 			}, 10000);	 		  
-		}, 15000);	  
-	}, 1000);
+		}, 5000);	  
+	}, 10000);
 }
 
 function cullAnswers(game)
@@ -478,7 +478,15 @@ function endRound(game)
 function endGame(game, winner)
 {
 
-	chat(game, null, "", `The winner is ${clients[winner.clientId].currentGameInfo.nick} with ${winner.score} points!`)
+	let payload = {
+		"method":   "endGame",
+		"hostId":   game.hostId,
+		"clientId": winner.clientId,
+		"nick"  :   clients[winner.clientId].currentGameInfo.nick,
+		"score" :   winner.score
+	}
+
+	sendAll(game, payload);	
 
 	game.clients.forEach (c => {
 			clients[c.clientId].currentGameInfo.scoreTotal = 0;
