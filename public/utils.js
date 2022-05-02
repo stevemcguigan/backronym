@@ -21,6 +21,23 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function openMenu()
+{
+
+	   let actionsArray = [];       
+	   actionsArray.push(new actionItem({
+	      label:`ok`,
+	      action:`clear_modal_by_id('settingsMenu');`
+	    }));
+      create_new_modal({
+        modal_id:"settingsMenu",
+        modal_type: "generic_confirm",
+        prompt: `settings`,
+        detail_text: ``,
+        actionsArray: actionsArray
+  	  });
+
+}
 
 function b(x, min, max) {
 
@@ -65,7 +82,7 @@ function handleInput(kid)
 			$(key).addClass("pressed");
 			$("#btnMessage").click();
 			txtMessage.style.height = "27px"
-			divChatWindow.style.height = "198px"
+			divChatWindow.style.height = "178px"
 		break;
 
 		case "symbols":

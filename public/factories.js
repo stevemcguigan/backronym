@@ -1,13 +1,21 @@
+function generateTitleScreen()
+{
+	let markup = `<div>`
+}
+
+function generateTitleBar()
+{
+	let markup = `<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span></div>`
+	return markup;
+}
+
 function generateLobby()
 {
 	let markup = `
-	  <h1>ACRONYM</h1>
-	  	<div id="notifications">
-	
-		</div>
+
 	  <div id="gameList">
 	  </div>
-	  <button id = "btnCreate">New Game</button>
+	  <button class="confirmation_button" id = "btnCreate">New Game</button>
 	  <button id = "btnJoin">Join Game</button>
 	  <input type = "text" id = "txtGameId"><br>`;
 	return markup;

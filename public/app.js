@@ -1,13 +1,13 @@
 $( document ).ready(function() {
     
-
-    //console.log( "ready!" );
-
-
     loadUser();
 
     FastClick.attach(document.body);
-    populate ("main", generateLobby(), wireLobbyEvents);
+    setTimeout(function(){
+      $("#titleScreen").addClass("animate__animated animate__zoomOut hidden")
+      populate ("main", generateLobby(), wireLobbyEvents);
+    }, 1)
+
     //Navigator.vibrate(2000)
 });
 
@@ -27,8 +27,13 @@ function loadUser()
 function saveNewUser()
 {
 	let newNick = $('#name').val();
+  let now = Date.now();
 	user = {
-		"nick": newNick
+		"nick": newNick,
+    "clientId": clientId,
+    "theme": "light",
+    "wins" : 0,
+    "created" : now
 	}
 
 	window.localStorage.setItem('user', JSON.stringify(user));
