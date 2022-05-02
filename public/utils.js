@@ -5,7 +5,14 @@ function id (id)
 
 function clear(eid)
 {
-	id(eid).innerHTML = "";
+	try
+	{
+		id(eid).innerHTML = "";
+	}
+	catch
+	{
+		console.log(`a dom element with id ${eid} does not exist or no longer exists`);
+	}	
 }
 
 function randomInt(min, max) {

@@ -395,7 +395,10 @@ function clear_modal_by_id(modal_id, callback_on_close)
 
 		setTimeout(() => {
 			$("#"+modal_id).remove();
-			callback_on_close();
+			if (typeof callback_on_close == "function")
+			{
+				callback_on_close();				
+			}
 	    }, 425);	
 
 	}

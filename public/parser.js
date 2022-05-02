@@ -17,7 +17,9 @@ ws.onmessage = message => {
   			{
   				clientId = response.clientId;
   				console.log(`client id is ${clientId}`);
-          getGames();
+            setTimeout(() => {
+                getGames();                
+            }, 2500); 
   			}	
 
         if (response.method === "getGames")
@@ -26,10 +28,12 @@ ws.onmessage = message => {
           console.log(response);
           if (loc == "lobby")
           {
-            updateGameList(response.games);
-            setTimeout(function(){
-              getGames();
-            }, 5000)
+            setTimeout(() => {
+                getGames();                
+            }, 5000); 
+           setTimeout(() => {
+               updateGameList(response.games);              
+            },  1000);               
           }  
         }         
         
@@ -213,10 +217,21 @@ ws.onmessage = message => {
               caveat = result.votesReceived > 0 ? "but" : "and";
               caveat += " they <span id='caveat'>didn't vote</span> (<b>-6pts</b>)"
             }
-            
+
+            if (result.acronym == "null" || result.acronym == null)
+            {
+            markup += `<div>
+                            <span id="nickScore">${result.nick}</span> did not submit this round ${ caveat ? caveat : ""}
+                      </div>`  
+            } 
+            else
+            {
             markup += `<div>
                             <span id="nickScore">${result.nick}&lsquo;s</span> <span id="acronymReport">${result.acronym}</span> got <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"} (<b>${result.votesReceived * 5}pts</b>) ${ caveat ? caveat : ""}
-                      </div>`
+                      </div>`              
+            } 
+            
+
           }  
 
            let actionsArray = [];       
@@ -278,10 +293,17 @@ ws.onmessage = message => {
           for (let x = 0; x < answers.length; x++)
           {  
             var answer = answers[x];
-               actionsArray.push(new actionItem({
+              if (answer.acronym == null || answer.acronym == "null")
+              {
+                  // skip it, left logic in case I wanna do something later
+              } 
+              else
+              {
+                actionsArray.push(new actionItem({
                   label: answer.acronym,
                   action:`castVote('${answer.owner}')`
                  }));
+              } 
           } 
            console.log("full actions array")
            console.log(actionsArray) 

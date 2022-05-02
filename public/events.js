@@ -102,9 +102,7 @@ function wireGameEvents()
     btnStart.addEventListener("click", e => {
         start(gameId); 
         txtMessage  = id("txtMessage");
-        element.classList.add('animate__zoomOut');
-        element.addEventListener('animationend', () => {
-        });      
+        btnStart.classList.add('animate__zoomOut');     
     })
 
 
