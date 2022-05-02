@@ -1,6 +1,6 @@
 // incoming responses from the server are parsed here
 
-let ws = new WebSocket("wss://localhost:9090")
+let ws = new WebSocket("ws://172.26.13.41:9090")
 // 
 // 192.168.99.41
 //10.54.127.171
