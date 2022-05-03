@@ -211,7 +211,7 @@ function randomInt(min, max) {
 
 function setup(game)
 {
-	for (let x = 0; x < 3; x++)
+	for (let x = 0; x < 5; x++)
 	{
 		game.acronyms.push(makeAcronym(randomInt(3, 5)));	
 	}		
@@ -238,8 +238,8 @@ function startRound(game)
 					  cullAnswers(game) 			  	
 				}, 5000);			  	
 			}, 10000);	 		  
-		}, 5000);	  
-	}, 10000);
+		}, 15000);	  
+	}, 30000);
 }
 
 function cullAnswers(game)

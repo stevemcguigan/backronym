@@ -369,9 +369,10 @@ function updateGameList(games)
   	let players = 0;
  // let gamesObj = games.games;
  	clear("gameList");
+ 	
 	Object.keys(games).forEach (c => {
 		players = games[c].clients.length;
-		$(`<div onclick="join('${c}')" id="${c}" class="gamePuck">${games[c].hostname}     ${players}/10</div>`, {}).appendTo('#gameList');	
+		$(`<div onclick="join('${c}')" id="${c}" class="gamePuck">${games[c].hostname}</div><div>${players}/10</div>`, {}).appendTo('#gameList');	
 	})
 
   let markup = `

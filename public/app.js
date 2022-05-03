@@ -6,7 +6,7 @@ $( document ).ready(function() {
     setTimeout(function(){
       $("#titleScreen").addClass("animate__animated animate__zoomOut hidden")
       populate ("main", generateLobby(), wireLobbyEvents);
-    }, 1)
+    }, 2500)
 
     //Navigator.vibrate(2000)
 });
