@@ -25,7 +25,10 @@ wsServer.on("request", request => {
 	// this is the connect!
 	const connection = request.accept(null, request.origin);
 	// connected, cool, make an id
-	connection.on("open", () => console.log("connection opened"));
+	connection.on("open", () => function () {
+		console.log("connection opened")
+	
+	});
 	connection.on("close", () => console.log("connection closed"));
 	connection.on("message", message => {
 	// could fail if client sends bad JSON
@@ -40,6 +43,11 @@ wsServer.on("request", request => {
 
 			const con = clients[clientId].connection;
 			con.send(JSON.stringify(payload));	
+		}	
+
+		if(result.method === "pong")
+		{
+			console.log("got a pong back");
 		}	
 
 		if(result.method === "create")
@@ -173,6 +181,8 @@ wsServer.on("request", request => {
 		}
 	})
 
+
+
 	//generate new clientid
 	const clientId = guid();
 	clients[clientId] = {
@@ -188,8 +198,23 @@ wsServer.on("request", request => {
 	}
 	// send back to client
 	connection.send(JSON.stringify(payload));
+
+
+	setInterval(() => {
+		ping(clientId)
+	}, 10000)
 	
 })
+
+function ping(clientId)
+{
+	const payload = {
+		"method": "ping",
+	}
+
+	const con = clients[clientId].connection;
+	con.send(JSON.stringify(payload));	
+}
 
 function makeAcronym(length) {
     var result           = '';

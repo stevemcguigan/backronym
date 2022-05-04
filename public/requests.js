@@ -9,6 +9,15 @@ function getGames()
     send(payload);
 }
 
+function pong()
+{
+	const payload = {
+		"method": "pong",
+		"clientId": clientId
+	}
+    send(payload);		
+}
+
 function start(gameId)
 {
 	const payload = {
