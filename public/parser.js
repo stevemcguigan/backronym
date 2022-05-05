@@ -333,6 +333,7 @@ ws.onmessage = message => {
           gameId = response.game.id; 
   				const game = response.game;
           loc = "game";
+          $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
   				/*while(divPlayers.firstChild)
   						divPlayers.removeChild(divPlayers.firstChild);

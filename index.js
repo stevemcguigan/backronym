@@ -162,7 +162,7 @@ wsServer.on("request", request => {
 				}
 				const payload = {
 					"method" : "join",
-					"game" : gameId
+					"game" : game
 				}
 				console.log("trying to seamlessly re-insert player into game, cross your fingers")
 				clients[clientId].connection.send(JSON.stringify(payload));
