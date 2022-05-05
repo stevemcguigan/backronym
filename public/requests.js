@@ -9,6 +9,16 @@ function getGames()
     send(payload);
 }
 
+function sendLocalId()
+{
+	const payload = {
+		"method": "localId",
+		"clientId": clientId,
+		"localId": user.localId
+	}
+    send(payload);		
+}
+
 function pong()
 {
 	const payload = {

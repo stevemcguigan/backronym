@@ -6,6 +6,7 @@ let	  loc	 		 = "lobby";
 let   nick 			 = "Player" + randomInt(100,999);
 let	  host			 = false;
 let   acronym		 = false;
+let   soundtrack	 = null;
 let observer = null;
 let callback = null;
 

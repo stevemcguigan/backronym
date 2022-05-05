@@ -19,6 +19,7 @@ const wsServer = new websocketServer({
  
 
 const clients = {};
+const clientLocals = {};
 const games = {};
 
 wsServer.on("request", request => {
@@ -130,6 +131,51 @@ wsServer.on("request", request => {
 			//chat(game, clientId, nick, result.message)
 		}		
 
+		if(result.method === "localId")
+		{
+			// this is in case the socket is dropped, which is likely because people will background the 
+			// browser to answer texts etc. 
+			// the server issues a clientId but the client generates it's own guid as well. As soon as 
+			// a connection is made, server will store a relationship so that on reconnect it can find
+			// which game you were playing before and reconnect you to it seamlessly
+			const clientId = result.clientId; 
+			const localId = result.localId;
+			
+			if (clientLocals[localId]) { // move this (And everything else tbh) into function when it works
+				console.log(`looks like your connection was probably interupted!`)
+				console.log(`old client id: ${clientLocals[localId]}`)
+				console.log(`new client id: ${clientId}`)
+				let oldClient = clients[clientLocals[localId]];
+				let newClient = clients[clientId];
+				newClient.currentGameInfo = JSON.parse(JSON.stringify(oldClient.currentGameInfo));
+				let gameId = newClient.currentGameInfo.gameId;
+				let game = games[gameId];
+				// now lets go pluck out that old dead client outta the game and add this new one
+				delete game.clients[clientLocals[localId]];
+				game.clients.push({
+					"clientId" : clientId,		
+				});	
+				for (let x = 0; x < game.answers.length; x++)
+				{
+					if (game.amswers[x].owner == clientLocals[localId])
+						game.amswers[x].owner = clientId;
+				}
+				const payload = {
+					"method" : "join",
+					"game" : gameId
+				}
+				console.log("trying to seamlessly re-insert player into game, cross your fingers")
+				clients[clientId].connection.send(JSON.stringify(payload));
+			} else {
+				console.log(`looks like a fresh connection`);
+				clientLocals[localId] = clientId;
+
+			}
+
+			//clientLocals[localId] = clientId;
+			//checkForReconnect(localId); 
+		}
+   
 		if(result.method === "start")
 		{
 			const clientId = result.clientId;
@@ -173,7 +219,7 @@ wsServer.on("request", request => {
 
 			//console.log(typeof game.clients)
 			//console.log(game.clients.length);
-			game.clients.forEach (c => {
+			game.clients.forEach (c => { // i think this is where the multiple pops happen when anyone joins, look later
 				//console.log("c")
 				console.log(JSON.stringify(c));
 				clients[c.clientId].connection.send(JSON.stringify(payload));
@@ -190,7 +236,7 @@ wsServer.on("request", request => {
 	}
 
 	//console.log("CLIENTS")
-	//console.log(clients);
+	console.log(clients);
 
 	const payload = {
 		"method" : "connect",
@@ -205,6 +251,7 @@ wsServer.on("request", request => {
 	}, 10000)
 	
 })
+
 
 function ping(clientId)
 {
@@ -314,16 +361,17 @@ function cullVotes(game)
 
 	console.log(`*****
 
+    `)
 
-
-		`)
-	//console.log("here's all the votes after");
-	//console.log(game);
-	//console.log(clients);
 	calculateRoundResult(game);
 	reportRoundResult(game); 
 	endRound(game);
 	reportScore(game);
+}
+
+function checkForReconnect(localId)
+{
+
 }
 
 function calculateRoundResult(game)
@@ -355,91 +403,9 @@ function reportRoundResult(game)
 		})
 	});	
 
-	/*game.clients.forEach (c => {
-		let player = clients[c.clientId];
-		if (result.length == 0) // this is dumb af, refactor by pushing linearly and then sorting
-		{
-			result.push({
-				"nick":             player.currentGameInfo.nick,
-				"acronym": 			player.currentGameInfo.play,
-				"votesReceived" : 	player.currentGameInfo.votesReceived,
-				"didNotVote" : 		player.currentGameInfo.didNotVote,
-				"selfVoted" : 		player.currentGameInfo.selfVoted,
-				"roundScore" : 		player.currentGameInfo.roundScore
-			})
-		}
-		else
-		{ 
-			if (player.currentGameInfo.votesReceived > result[0].votesReceived)
-			{
-				result.unshift({
-					"acronym": 			player.currentGameInfo.play,
-					"votesReceived" : 	player.currentGameInfo.votesReceived,
-					"didNotVote" : 		player.currentGameInfo.didNotVote,
-					"selfVoted" : 		player.currentGameInfo.selfVoted,
-					"roundScore" : 		player.currentGameInfo.roundScore
-				})
-			} else
-			{
-				result.push({
-					"acronym": 			player.currentGameInfo.play,
-					"votesReceived" : 	player.currentGameInfo.votesReceived,
-					"didNotVote" : 		player.currentGameInfo.didNotVote,
-					"selfVoted" : 		player.currentGameInfo.selfVoted,
-					"roundScore" : 		player.currentGameInfo.roundScore
-				})
-			}	
-		}	
-	});*/
 	const payload = {
 		"method" : "reportRoundResult",
 		"roundResult": result
-	}	
-	sendAll(game, payload);	
-}
-
-function reportRoundResult_old(game)
-{
-	let result = [];
-	game.clients.forEach (c => {
-		let player = clients[c.clientId];
-		if (result.length == 0) // this is dumb af, refactor by pushing linearly and then sorting
-		{
-			result.push({
-				"nick":             player.currentGameInfo.nick,
-				"acronym": 			player.currentGameInfo.play,
-				"votesReceived" : 	player.currentGameInfo.votesReceived,
-				"didNotVote" : 		player.currentGameInfo.didNotVote,
-				"selfVoted" : 		player.currentGameInfo.selfVoted,
-				"roundScore" : 		player.currentGameInfo.roundScore
-			})
-		}
-		else
-		{
-			if (player.currentGameInfo.votesReceived > result[0].votesReceived)
-			{
-				result.unshift({
-					"acronym": 			player.currentGameInfo.play,
-					"votesReceived" : 	player.currentGameInfo.votesReceived,
-					"didNotVote" : 		player.currentGameInfo.didNotVote,
-					"selfVoted" : 		player.currentGameInfo.selfVoted,
-					"roundScore" : 		player.currentGameInfo.roundScore
-				})
-			} else
-			{
-				result.push({
-					"acronym": 			player.currentGameInfo.play,
-					"votesReceived" : 	player.currentGameInfo.votesReceived,
-					"didNotVote" : 		player.currentGameInfo.didNotVote,
-					"selfVoted" : 		player.currentGameInfo.selfVoted,
-					"roundScore" : 		player.currentGameInfo.roundScore
-				})
-			}	
-		}	
-	});
-	const payload = {
-		"method" : "reportRoundResult",
-		"roundResult": JSON.stringify(result)
 	}	
 	sendAll(game, payload);	
 }
