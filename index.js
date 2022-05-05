@@ -552,6 +552,7 @@ function dm(clientId, msg)
 
 function sendAll(game, payload)
 {
+	console.log(game);
 	game.clients.forEach (c => {
 		clients[c.clientId].connection.send(JSON.stringify(payload));
 	})
