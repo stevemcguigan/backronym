@@ -151,6 +151,10 @@ wsServer.on("request", request => {
 				let gameId = newClient.currentGameInfo.gameId;
 				let game = games[gameId];
 				// now lets go pluck out that old dead client outta the game and add this new one
+				console.log("")
+				console.log(`Trying to find and delete ${clientLocals[localId]} from game.clients using key ${localId}`)
+				console.log(`it should be this: ${game.clients[clientLocals[localId]]}`)
+				console.log("")
 				delete game.clients[clientLocals[localId]];
 				game.clients.push({
 					"clientId" : clientId,		
