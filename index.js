@@ -153,16 +153,23 @@ wsServer.on("request", request => {
 				// now lets go pluck out that old dead client outta the game and add this new one
 				console.log("")
 				console.log(`Trying to find and delete ${clientLocals[localId]} from game.clients using key ${localId}`)
-				console.log(`it should be this: ${game.clients[clientLocals[localId]]}`)
-				console.log("")
-				delete game.clients[clientLocals[localId]];
+				console.log(`before:`)
+				console.log(game.clients);
+				for (let x = 0; x < game.clients.length; x++)
+				{
+					if (game.clients[x].clientId == clientLocals[localId])
+						game.clients.splice(x, 1);
+				}
+				console.log(`after:`)
+				console.log(game.clients);				
+				//delete game.clients[clientLocals[localId]];
 				game.clients.push({
 					"clientId" : clientId,		
 				});	
 				for (let x = 0; x < game.answers.length; x++)
 				{
-					if (game.amswers[x].owner == clientLocals[localId])
-						game.amswers[x].owner = clientId;
+					if (game.answers[x].owner == clientLocals[localId])
+						game.answers[x].owner = clientId;
 				}
 				const payload = {
 					"method" : "join",
