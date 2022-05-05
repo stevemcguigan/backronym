@@ -166,6 +166,11 @@ wsServer.on("request", request => {
 				game.clients.push({
 					"clientId" : clientId,		
 				});	
+				if (game.hostId == clientLocals[localId])
+				{	
+					game.hostId == clientId;
+					game.hostNick = clients[clientId].currentGameInfo.nicl
+				}	
 				for (let x = 0; x < game.answers.length; x++)
 				{
 					if (game.answers[x].owner == clientLocals[localId])

@@ -332,6 +332,7 @@ ws.onmessage = message => {
           // server accepted your request to join the game
           gameId = response.game.id; 
   				const game = response.game;
+          console.log(game);
           loc = "game";
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
