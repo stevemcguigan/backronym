@@ -338,7 +338,8 @@ ws.onmessage = message => {
           loc = "game";
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
-          if (response.game.inProgress)
+          var game = response.game;
+          if (game.inProgress)
           {
 
                   console.log("**** REJOINING GAME")
