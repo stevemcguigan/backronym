@@ -108,7 +108,8 @@ function wireGameEvents()
         start(gameId); 
         txtMessage  = id("txtMessage");
         btnStart.classList.add('animate__zoomOut'); 
-        $('#txtMessage').focus();    
+        if (!isMobile)
+            $('#txtMessage').focus();    
     })
 
 
@@ -147,8 +148,8 @@ function wireGameEvents()
     });*/
 
     cursorInterval = window.setInterval(() => toggleCursor(), 530);
-    
-    $("#txtMessage").focus();
+    if (!isMobile)    
+        $("#txtMessage").focus();
 
 }
 

@@ -25,6 +25,7 @@ let heldKeyInterval = null;
 let lastKeyPress = null;
 let counter = 0;
 let counterInterval = null;
+let isMobile = true;
 let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll:
 current.notifications = []; 
 current.modal_queue = [];
