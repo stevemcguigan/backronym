@@ -88,7 +88,8 @@ function wireGameEvents()
             }    
             var tmsg =id("txtMessage");
             tmsg.value = "";
-            tmsg.setSelectionRange(0,0);          
+            if (!isMobile)
+                tmsg.setSelectionRange(0,0);          
         }  
         else if (id("txtMessage").value == "")
         {
@@ -98,8 +99,8 @@ function wireGameEvents()
             chat(id("txtMessage").value);
             var tmsg =id("txtMessage");
             tmsg.value = "";
-            tmsg.setSelectionRange(0,0);
-
+            if (!isMobile)
+                tmsg.setSelectionRange(0,0);
         }  
  
     })
