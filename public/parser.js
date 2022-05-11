@@ -346,7 +346,7 @@ ws.onmessage = message => {
                   console.log(game);
                   console.log("****")
                   $('.acronymContainer').remove();
-                  const round = game.round;
+                  const round = game.currentRound;
                   acronym = game.acronyms[round];
                   let acronymMarkup = generateAcronymContainer(acronym);
                   generateNotification({message: `rejoining game in progress`})
