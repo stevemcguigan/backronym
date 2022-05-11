@@ -87,6 +87,7 @@ window.addEventListener("keydown", (evt) => {//when this happens
 	switch (evt.keyCode)
 	{
 		case 13:
+			evt.preventDefault();	
 			$("#btnMessage").click();
 		break;
 		default:

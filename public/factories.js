@@ -12,8 +12,8 @@ function generateTitleBar()
 function generateLobby()
 {
 	let markup = `
-
-	  <div id="gameList">
+		<!--<div>public games (click to join):</div>-->
+	  <div style="margin-top:15px" id="gameList">
 	  </div>
 	  <button class="confirmation_button" id = "btnCreate">New Game</button>
 	  <button id = "btnJoin">Join Game</button>
@@ -21,101 +21,6 @@ function generateLobby()
 	return markup;
 }
 
-
-function generateClock()
-{
-	let markup = `<div id="clockContainer" class="animate__animated animate__rubberBand">
-	<svg version="1.1" class="iconic-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="384px" height="384px" viewBox="0 0 384 384" enable-background="new 0 0 384 384" xml:space="preserve">
- 
- <line x1="200" y1="25" x2="200" y2="35" stroke-width="6" stroke="#777"></line> 
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(30, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(60, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(90, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(120, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(150, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(180, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(210, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(240, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(270, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(300, 200, 200)"></line>
-<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(330, 200, 200)"></line>
-
-  <line class="iconic-clock-hour-hand" id="foo" fill="none" stroke="#777" stroke-width="10" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="87.5"/>
-  <line class="iconic-clock-minute-hand" id="iconic-anim-clock-minute-hand" fill="none" stroke="#777" stroke-width="4" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="54"/>
-  <circle class="iconic-clock-axis" cx="192" cy="192" r="9"/>
-  <g class="iconic-clock-second-hand" id="iconic-anim-clock-second-hand">
-      <line class="iconic-clock-second-hand-arm" fill="none" stroke="olivedrab" stroke-width="2" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="28.5"/>
-      <circle class="iconic-clock-second-hand-axis" fill="#olivedrab" cx="192" cy="192" r="4.5"/>
-  </g>
-  <defs>
-    <animateTransform
-          type="rotate"
-          fill="remove"
-          restart="always"
-          calcMode="linear"
-          accumulate="none"
-          additive="sum"
-          xlink:href="#iconic-anim-clock-hour-hand"
-          repeatCount="indefinite"
-          dur="43200s"
-          to="360 192 192"
-          from="0 192 192"
-          attributeName="transform"
-          attributeType="xml">
-    </animateTransform>
-
-    <animateTransform
-          type="rotate"
-          fill="remove"
-          restart="always"
-          calcMode="linear"
-          accumulate="none"
-          additive="sum"
-          xlink:href="#iconic-anim-clock-minute-hand"
-          repeatCount="indefinite"
-          dur="3600s"
-          to="360 192 192"
-          from="0 192 192"
-          attributeName="transform"
-          attributeType="xml">
-    </animateTransform>
-
-    <animateTransform
-          type="rotate"
-          fill="remove"
-          restart="always"
-          calcMode="linear"
-          accumulate="none"
-          additive="sum"
-          xlink:href="#iconic-anim-clock-second-hand"
-          repeatCount="indefinite"
-          dur="60s"
-          to="360 192 192"
-          from="0 192 192"
-          attributeName="transform"
-          attributeType="xml">
-    </animateTransform>
-  </defs>
-  <script  type="text/javascript">
-  <![CDATA[
-      var date = new Date;
-      var seconds = date.getSeconds();
-      var minutes = date.getMinutes();
-      var hours = date.getHours();
-      hours = (hours > 12) ? hours - 12 : hours;
-
-      minutes = (minutes * 60) + seconds;
-      hours = (hours * 3600) + minutes;
-
-      document.querySelector('.iconic-clock-second-hand').setAttribute('transform', 'rotate('+360*(seconds/60)+',192,192)');
-      document.querySelector('.iconic-clock-minute-hand').setAttribute('transform', 'rotate('+360*(minutes/3600)+',192,192)');
-      document.querySelector('.iconic-clock-hour-hand').setAttribute('transform', 'rotate('+360*(hours/43200)+',192,192)');
-  ]]>
-  </script>
-</svg>
-				  </div>`
-return markup;
-}
 
 
 function removeAcronym()
@@ -342,7 +247,7 @@ function generateGame()
 {
 	let markup = `
 	<div class="acronymContainer">
-		<button id = "btnStart" class="animate__animated animate__zoomIn">Start</button>			  	
+		<button id = "${host ? 'btnStart' : 'btnWait'}" class="animate__animated animate__zoomIn">${host ? 'start' : 'waiting for host'}</button>			  	
 	</div>
 	<div id="notifications">
 
@@ -369,10 +274,11 @@ function updateGameList(games)
   	let players = 0;
  // let gamesObj = games.games;
  	clear("gameList");
- 	
+
+ 	$(`<div id="gameListHeading" class="gameWrapper"><div class="gamePuck">host</div><div class="playersPuck">players</div><div class="joinPuck"></div></div>`, {}).appendTo('#gameList');	
 	Object.keys(games).forEach (c => {
 		players = games[c].clients.length;
-		$(`<div onclick="join('${c}')" id="${c}" class="gamePuck">${games[c].hostname}</div><div>${players}/10</div>`, {}).appendTo('#gameList');	
+		$(`<div onclick="join('${c}')" class="gameWrapper"><div  id="${c}" class="gamePuck">${games[c].hostname}</div><div class="playersPuck">${players}/10</div><div class="joinPuck"><button>join</button></div></div>`, {}).appendTo('#gameList');	
 	})
 
   let markup = `
@@ -381,6 +287,104 @@ function updateGameList(games)
 
   //populate("gameList", )
 }
+
+
+
+function generateClock()
+{
+	let markup = `<div id="clockContainer" class="animate__animated animate__rubberBand">
+	<svg version="1.1" class="iconic-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="384px" height="384px" viewBox="0 0 384 384" enable-background="new 0 0 384 384" xml:space="preserve">
+ 
+ <line x1="200" y1="25" x2="200" y2="35" stroke-width="6" stroke="#777"></line> 
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(30, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(60, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(90, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(120, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(150, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(180, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(210, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(240, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(270, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(300, 200, 200)"></line>
+<line x1="200" y1="25" x2="200" y2="35" stroke-width="6"  stroke="#777" transform="rotate(330, 200, 200)"></line>
+
+  <line class="iconic-clock-hour-hand" id="foo" fill="none" stroke="#777" stroke-width="10" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="87.5"/>
+  <line class="iconic-clock-minute-hand" id="iconic-anim-clock-minute-hand" fill="none" stroke="#777" stroke-width="4" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="54"/>
+  <circle class="iconic-clock-axis" cx="192" cy="192" r="9"/>
+  <g class="iconic-clock-second-hand" id="iconic-anim-clock-second-hand">
+      <line class="iconic-clock-second-hand-arm" fill="none" stroke="olivedrab" stroke-width="2" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="28.5"/>
+      <circle class="iconic-clock-second-hand-axis" fill="#olivedrab" cx="192" cy="192" r="4.5"/>
+  </g>
+  <defs>
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-hour-hand"
+          repeatCount="indefinite"
+          dur="43200s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-minute-hand"
+          repeatCount="indefinite"
+          dur="3600s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+
+    <animateTransform
+          type="rotate"
+          fill="remove"
+          restart="always"
+          calcMode="linear"
+          accumulate="none"
+          additive="sum"
+          xlink:href="#iconic-anim-clock-second-hand"
+          repeatCount="indefinite"
+          dur="60s"
+          to="360 192 192"
+          from="0 192 192"
+          attributeName="transform"
+          attributeType="xml">
+    </animateTransform>
+  </defs>
+  <script  type="text/javascript">
+  <![CDATA[
+      var date = new Date;
+      var seconds = date.getSeconds();
+      var minutes = date.getMinutes();
+      var hours = date.getHours();
+      hours = (hours > 12) ? hours - 12 : hours;
+
+      minutes = (minutes * 60) + seconds;
+      hours = (hours * 3600) + minutes;
+
+      document.querySelector('.iconic-clock-second-hand').setAttribute('transform', 'rotate('+360*(seconds/60)+',192,192)');
+      document.querySelector('.iconic-clock-minute-hand').setAttribute('transform', 'rotate('+360*(minutes/3600)+',192,192)');
+      document.querySelector('.iconic-clock-hour-hand').setAttribute('transform', 'rotate('+360*(hours/43200)+',192,192)');
+  ]]>
+  </script>
+</svg>
+				  </div>`
+return markup;
+}
+
 
 function populate (id, markup, callback)
 {

@@ -9,8 +9,9 @@ $( document ).ready(function() {
     btnPlay.addEventListener("click", e => {
         $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
         btnPlay.style.display = "none";
-        soundtrack.play();
+        //soundtrack.play();
         populate ("main", generateLobby(), wireLobbyEvents);
+
     })
     soundtrack = id("soundtrack");
 

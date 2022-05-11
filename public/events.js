@@ -86,7 +86,9 @@ function wireGameEvents()
                 $('.acronymContainer span').removeClass("highlightedTile");
                 chat(id("txtMessage").value);
             }    
-            id("txtMessage").value = "";               
+            var tmsg =id("txtMessage");
+            tmsg.value = "";
+            tmsg.setSelectionRange(0,0);          
         }  
         else if (id("txtMessage").value == "")
         {
@@ -94,7 +96,10 @@ function wireGameEvents()
         } 
         else {
             chat(id("txtMessage").value);
-            id("txtMessage").value = "";
+            var tmsg =id("txtMessage");
+            tmsg.value = "";
+            tmsg.setSelectionRange(0,0);
+
         }  
  
     })
@@ -102,7 +107,8 @@ function wireGameEvents()
     btnStart.addEventListener("click", e => {
         start(gameId); 
         txtMessage  = id("txtMessage");
-        btnStart.classList.add('animate__zoomOut');     
+        btnStart.classList.add('animate__zoomOut'); 
+        $('#txtMessage').focus();    
     })
 
 
@@ -142,6 +148,7 @@ function wireGameEvents()
 
     cursorInterval = window.setInterval(() => toggleCursor(), 530);
     
+    $("#txtMessage").focus();
 
 }
 

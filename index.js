@@ -26,11 +26,12 @@ wsServer.on("request", request => {
 	// this is the connect!
 	const connection = request.accept(null, request.origin);
 	// connected, cool, make an id
-	connection.on("open", () => function () {
-		console.log("connection opened")
-	
+	connection.on("open", () => {
+		console.log("connection opened");
 	});
-	connection.on("close", () => console.log("connection closed"));
+	connection.on("close", () => {
+		console.log("connection closed");
+	});
 	connection.on("message", message => {
 	// could fail if client sends bad JSON
 	const result = JSON.parse(message.utf8Data);
@@ -61,6 +62,7 @@ wsServer.on("request", request => {
 				"id": gameId,
 				"hostId": clientId,
 				"hostname": host,
+				"inProgress" : false,
 				"clients": [],
 				"acronyms": [],
 				"currentRound": 1,
@@ -194,6 +196,7 @@ wsServer.on("request", request => {
    
 		if(result.method === "start")
 		{
+
 			const clientId = result.clientId;
 			const gameId = result.gameId;
 			setup(games[gameId]);
@@ -264,7 +267,7 @@ wsServer.on("request", request => {
 
 	setInterval(() => {
 		ping(clientId)
-	}, 10000)
+	}, 60000)
 	
 })
 
@@ -281,11 +284,21 @@ function ping(clientId)
 
 function makeAcronym(length) {
     var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWY';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWYZ';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
+      a = characters.charAt(Math.floor(Math.random() * 
  		charactersLength));
+      if (a == "Q" || a == "Z")
+      {
+      	 if (coinFlip())
+      	 {	
+	      a = characters.charAt(Math.floor(Math.random() * 
+	 		charactersLength));  
+	 	 }	    	
+      }	
+      result += a; //characters.charAt(Math.floor(Math.random() * 
+ 		//charactersLength));
    }
    return result;
 }
@@ -299,6 +312,7 @@ function randomInt(min, max) {
 
 function setup(game)
 {
+	game.inProgress = true;
 	for (let x = 0; x < 5; x++)
 	{
 		game.acronyms.push(makeAcronym(randomInt(3, 5)));	
@@ -586,6 +600,10 @@ function compare( a, b ) {
     return 1;
   }
   return 0;
+}
+
+function coinFlip() {
+    return (Math.floor(Math.random() * 2) == 0);
 }
 
 function guid() { // Public Domain/MIT

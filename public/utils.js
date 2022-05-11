@@ -15,6 +15,11 @@ function clear(eid)
 	}	
 }
 
+function startRound(m)
+{
+
+}
+
 function randomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -82,7 +87,7 @@ function handleInput(kid)
 			$(key).addClass("pressed");
 			$("#btnMessage").click();
 			txtMessage.style.height = "27px"
-			divChatWindow.style.height = "178px"
+			divChatWindow.style.height = "155px"
 		break;
 
 		case "symbols":
@@ -106,7 +111,7 @@ function handleInput(kid)
 		break;
 
 		case "shift":
-			generateNotification({message: lastKeyPress})
+			//generateNotification({message: lastKeyPress})
 			if (lastKeyPress == "shift")
 			{
 				$("#game-keyboard button").removeClass("upper")
@@ -124,8 +129,7 @@ function handleInput(kid)
 			
 	        if ($('#keyboard').hasClass("hidden"))
 	        {
-				$(`#keyboard_2 button`).not(key).addClass("ghost");//addClass("hide");
-				$('#keyboard_2_ghost').removeClass("ghost hidden")  
+				handleInput("key_2_symbols");
 	        }
 	        else
 	        {
@@ -159,14 +163,18 @@ function handleInput(kid)
 	{
 		lastKeyPress = "";
 	}
+	else if (lastKeyPress == "symbols")
+	{
+		lastKeyPress = "";
+        //$(`#keyboard_2 button`).removeClass("ghost");//addClass("hide");
+        //$('#keyboard_2_ghost').addClass("ghost hidden")  
+		
+		//handleInput("key_2_symbols")
+	}	
 	else
 	{
 		lastKeyPress = keypress;
 	}	
-
-	
-
-	
 }
 
 

@@ -1,7 +1,7 @@
 // incoming responses from the server are parsed here
 
-let ws = new WebSocket("ws://3.95.234.47:9090")
-//let ws = new WebSocket("ws://192.168.99.41:9090")
+//let ws = new WebSocket("ws://3.95.234.47:9090")
+let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41
 //10.54.127.171
@@ -336,6 +336,19 @@ ws.onmessage = message => {
           loc = "game";
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
+          if (game.inProgress)
+          {
+                  console.log("**** REJOINING GAME")
+                  console,log(game);
+                  console.log("****")
+                  $('.acronymContainer').remove();
+                  const round = game.round;
+                  acronym = game.acronyms[round];
+                  let acronymMarkup = generateAcronymContainer(acronym);
+                  generateNotification({message: `rejoining game in progress`})
+                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+                  animateAcronym();  
+          }  
   				/*while(divPlayers.firstChild)
   						divPlayers.removeChild(divPlayers.firstChild);
   				game.clients.forEach(c => {
