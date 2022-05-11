@@ -105,13 +105,16 @@ function wireGameEvents()
  
     })
 
-    btnStart.addEventListener("click", e => {
-        start(gameId); 
-        txtMessage  = id("txtMessage");
-        btnStart.classList.add('animate__zoomOut'); 
-        if (!isMobile)
-            $('#txtMessage').focus();    
-    })
+    if (host)
+    {    
+        btnStart.addEventListener("click", e => {
+            start(gameId); 
+            txtMessage  = id("txtMessage");
+            btnStart.classList.add('animate__zoomOut'); 
+            if (!isMobile)
+                $('#txtMessage').focus();    
+        })
+    }
 
 
 // Select the node that will be observed for mutations

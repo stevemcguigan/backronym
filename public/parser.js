@@ -340,8 +340,9 @@ ws.onmessage = message => {
           populate ("main", generateGame(), wireGameEvents);
           if (game.inProgress)
           {
+
                   console.log("**** REJOINING GAME")
-                  console,log(game);
+                  console.log(game);
                   console.log("****")
                   $('.acronymContainer').remove();
                   const round = game.round;
