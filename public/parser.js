@@ -329,10 +329,12 @@ ws.onmessage = message => {
 
   			if (response.method === "join")
   			{				
+
+          console.log("RECEIVED JOIN RESPONSE...HOPE YOU JUST JOINED A GAME")  
           // server accepted your request to join the game
           gameId = response.game.id; 
-  				const game = response.game;
-          console.log(game);
+  				//const game = response.game;
+          //console.log(game);
           loc = "game";
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);

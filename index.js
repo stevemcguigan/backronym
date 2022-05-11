@@ -238,11 +238,11 @@ wsServer.on("request", request => {
 
 			//console.log(typeof game.clients)
 			//console.log(game.clients.length);
-			game.clients.forEach (c => { // i think this is where the multiple pops happen when anyone joins, look later
+			//game.clients.forEach (c => { // i think this is where the multiple pops happen when anyone joins, look later
 				//console.log("c")
-				console.log(JSON.stringify(c));
-				clients[c.clientId].connection.send(JSON.stringify(payload));
-			})
+			//	console.log(JSON.stringify(c));
+				clients[clientId].connection.send(JSON.stringify(payload));
+			//})
 		}
 	})
 
