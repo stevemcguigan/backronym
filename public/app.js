@@ -58,21 +58,29 @@ function saveUser()
 function saveNewUser()
 {
 	let newNick = $('#name').val();
-  let now = Date.now();
-	user = {
-    "localId": guid(), 
-		"nick": newNick,
-    "clientId": clientId,
-    "theme": "light",
-    "wins" : 0,
-    "created" : now
-	}
+  if (newNick == "")
+  {
+    clear_modal_by_id("createNewUser");
+    createNewUser()
+  }  
+  else
+  {  
+    let now = Date.now();
+  	user = {
+      "localId": guid(), 
+  		"nick": newNick,
+      "clientId": clientId,
+      "theme": "light",
+      "wins" : 0,
+      "created" : now
+  	}
 
-	saveUser();
-	clear_modal_by_id("createNewUser");
-  setTimeout(function() {
-    location.reload();
-  }, 100);
+  	saveUser();
+  	clear_modal_by_id("createNewUser");
+    setTimeout(function() {
+      location.reload();
+    }, 100);
+  }
 }
 
 function createNewUser()
