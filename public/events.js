@@ -13,12 +13,9 @@ function wireLobbyEvents()
     })
 
 
-
-
     btnCreate.addEventListener("click", e => {
         create();
     }) 
-
 
 }
 

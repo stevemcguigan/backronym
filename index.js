@@ -249,6 +249,7 @@ wsServer.on("request", request => {
 				//console.log("c")
 			//	console.log(JSON.stringify(c));
 				clients[clientId].connection.send(JSON.stringify(payload));
+				broadcast(game, `${result.nick} joined. say hi!`);
 			//})
 		}
 	})
