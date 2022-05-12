@@ -70,6 +70,9 @@ function saveNewUser()
 
 	saveUser();
 	clear_modal_by_id("createNewUser");
+  setTimeout(function() {
+    location.reload();
+  }, 100);
 }
 
 function createNewUser()
