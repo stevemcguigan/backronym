@@ -50,6 +50,8 @@ wsServer.on("request", request => {
 		if(result.method === "pong")
 		{
 			console.log("got a pong back");
+			console.log(result)
+			ping(result.clientId, result.pongid);
 		}	
 
 		if(result.method === "create")
@@ -116,9 +118,11 @@ wsServer.on("request", request => {
 				console.log(clients[clientId].currentGameInfo.play)
 
 				if (clients[clientId].currentGameInfo.play == null) {
-					broadcast(game, clients[clientId].currentGameInfo.nick + " answered.")
+					//broadcast(game, clients[clientId].currentGameInfo.nick + " answered.")
+					broadcast(game, "someone answered.")
 				} else {
-					broadcast(game, clients[clientId].currentGameInfo.nick + " changed their answer.")
+					broadcast(game, "someone changed their answer.")
+					//broadcast(game, clients[clientId].currentGameInfo.nick + " changed their answer.")
 				}
 
 				clients[clientId].currentGameInfo.play = play;
@@ -144,7 +148,7 @@ wsServer.on("request", request => {
 			const localId = result.localId;
 			
 			if (clientLocals[localId]) { // move this (And everything else tbh) into function when it works
-				console.log(`looks like your connection was probably interupted!`)
+				console.log(`looks like the connection was probably interupted!`)
 				console.log(`old client id: ${clientLocals[localId]}`)
 				console.log(`new client id: ${clientId}`)
 				let oldClient = clients[clientLocals[localId]];
@@ -155,7 +159,7 @@ wsServer.on("request", request => {
 				// now lets go pluck out that old dead client outta the game and add this new one
 				console.log("")
 				console.log(`Trying to find and delete ${clientLocals[localId]} from game.clients using key ${localId}`)
-				console.log(`before:`)
+				console.log(`before culling old:`)
 				console.log(game.clients);
 				for (let x = 0; x < game.clients.length; x++)
 				{
@@ -182,8 +186,11 @@ wsServer.on("request", request => {
 					"method" : "join",
 					"game" : game
 				}
-				console.log("trying to seamlessly re-insert player into game, cross your fingers")
-				clients[clientId].connection.send(JSON.stringify(payload));
+				console.log("trying to seamlessly re-insert player into game, cross your fingers")	
+				console.log(`after reinsert:`)
+				console.log(game.clients);							
+				clients[clientId].connection.send(JSON.stringify(payload));	
+				clientLocals[localId] = clientId;
 			} else {
 				console.log(`looks like a fresh connection`);
 				clientLocals[localId] = clientId;
@@ -265,17 +272,18 @@ wsServer.on("request", request => {
 	connection.send(JSON.stringify(payload));
 
 
-	setInterval(() => {
+	/*setInterval(() => {
 		ping(clientId)
-	}, 60000)
+	}, 60000)*/
 	
 })
 
 
-function ping(clientId)
+function ping(clientId, pongid)
 {
 	const payload = {
 		"method": "ping",
+		"pongid": pongid
 	}
 
 	const con = clients[clientId].connection;
@@ -333,7 +341,7 @@ function startRound(game)
 	setTimeout(() => {
 	  broadcast(game, "30 seconds left.")
 		setTimeout(() => {
-		  broadcast(game, "15 seconds. better hurry.")
+		  broadcast(game, "15 seconds. it's more than it sounds.")
 			setTimeout(() => {
 			  warning(game, "<span id='counter'>5</span>") 
 			  	setTimeout(() => {
@@ -469,7 +477,7 @@ function reportScore(game)
 	}	
 	else
 	{
-		broadcast(game, "Next round starts in 30 seconds")
+		broadcast(game, "next round starts in 30 seconds")
 		setTimeout(() => {
 			startRound(game);			  			  	
 		}, 30000);			

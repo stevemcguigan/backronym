@@ -7,6 +7,8 @@ let   nick 			 = "Player" + randomInt(100,999);
 let	  host			 = false;
 let   acronym		 = false;
 let   soundtrack	 = null;
+let idToExpect = null;
+let idWeGot = null;
 let observer = null;
 let callback = null;
 

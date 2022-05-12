@@ -21,11 +21,25 @@ function sendLocalId()
 
 function pong()
 {
+	let newid = guid();
 	const payload = {
 		"method": "pong",
-		"clientId": clientId
+		"clientId": clientId,
+		"pongid" : newid
 	}
-    send(payload);		
+    send(payload);	
+    idToExpect = newid;
+}
+
+function checkPingResponse()
+{
+	if (idWeGot == idToExpect)
+	{
+		console.log("round tripped a guid, heart is beating")
+	} else {
+		console.log("lost socket, browser was prob backgrounded. Refreshing.")
+		location.reload();
+	}	
 }
 
 function start(gameId)

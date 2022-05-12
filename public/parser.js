@@ -50,8 +50,10 @@ ws.onmessage = message => {
         if (response.method === "ping")
         {
           console.log(`got a ping`);
-          pong();
-          soundtrack.play();
+
+          idWeGot = response.pongid;
+          //pong();
+          //soundtrack.play();
         }         
 
         if (response.method === "startRound")
