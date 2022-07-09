@@ -538,7 +538,7 @@ function endGame(game, winner)
 
 function getVotes(game)
 {
-	chat(game, null, "", "30 seconds to vote");
+	broadcast(game, null, "", "30 seconds to vote");
 	game.acceptingAnswers = false;								 
 	const payload = {
 		"method" : "getVotes",
