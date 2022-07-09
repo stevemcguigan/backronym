@@ -303,13 +303,21 @@ font-size: 13px;
   --animate-duration: 250ms;
 }
 
+#main
+{
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+
 #divChatWindow {
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
 box-sizing: border-box;
 width: 100%;
 overflow: scroll;
-height: 155px; /* */
+flex: 1;
 font-family: courier;
 font-size: 14px;
 background-color: white;
@@ -333,11 +341,10 @@ transition: all 200ms ease-in-out;
 
 #keyboard_ghost, #keyboard_2_ghost 
 {
-	position: absolute;
+	  position: absolute;
     user-select: none;
     pointer-events: none;
     opacity: .75;
-    bottom: 0;
     width: 100%;
 }
 
@@ -348,9 +355,7 @@ transition: all 200ms ease-in-out;
 #game-keyboard
 {
 	width: 100% !important;
-	position: fixed;
-	bottom: 0px;
-  left: 0px;
+
 }
 
 #keyboard .row, #keyboard_ghost .row, #keyboard_2 .row, #keyboard_2_ghost .row
@@ -425,10 +430,10 @@ textarea:focus::-webkit-input-placeholder{
 
 .shifted
 {
-
-	transform: scale(1.75);
-  margin-bottom: 45px !important;
+bottom: 50px !important;
+transform: scale(1.5);
 }
+
 
 .hidden
 {

@@ -1,3 +1,5 @@
+// functions that return blocks of markup
+
 function generateTitleScreen()
 {
 	let markup = `<div>`
@@ -140,7 +142,7 @@ function generateKeyboard(m)
 		 layout1 = "qwertyuiop"
 		 layout2 = "asdfghjkl"
 		 layout3 = "↑zxcvbnm←"
-		 layout4 = "%_.✓"	
+		 layout4 = "%_✓"	
 	}
 	else
 	{
@@ -215,6 +217,9 @@ function generateKeyboard(m)
 
 function generateAcronymContainer(acronym)
 {
+	if (!acronym)
+		return;
+
 	let letters = ""
 
 	for (let x = 0; x < acronym.length; x++)

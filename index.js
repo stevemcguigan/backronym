@@ -1,3 +1,5 @@
+// this is where the server manages requests and sends responses
+
 const http = require("http");
 const express = require("express")
 const app = express();
@@ -420,6 +422,10 @@ function calculateRoundResult(game)
 		let player = clients[c.clientId];
 		let adjuster = player.currentGameInfo.selfVoted || player.currentGameInfo.didNotVote ? 6 : 0;
 		player.currentGameInfo.roundScore = (player.currentGameInfo.votesReceived * 5) - adjuster;
+		if (player.currentGameInfo.roundScore < 0)
+		{
+			player.currentGameInfo.roundScore = 0;	
+		}	
 		console.log(player.currentGameInfo)
 	});
 
@@ -544,7 +550,7 @@ function getVotes(game)
 		setTimeout(() => {
 			cullVotes(game);	  			  		  			  	 			  		  			  	
 		}, 5500);			  			  	
-	}, 5000);	
+	}, 15000);	
 }
 
 

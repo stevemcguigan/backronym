@@ -1,3 +1,5 @@
+// ui events only
+
 function wireLobbyEvents()
 {
     btnCreate      = id("btnCreate");
@@ -157,7 +159,8 @@ function wireGameEvents()
 function toggleCursor()
 {
     let cursor = $('#txtMessage');
-    let placeholder = cursor
+    let tval = cursor.val();
+    let placeholder = cursor;
     cursor.attr('placeholder',  cursor.attr('placeholder') == "|" ? "" : "|");
 }
 
