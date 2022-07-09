@@ -538,7 +538,7 @@ function endGame(game, winner)
 
 function getVotes(game)
 {
-	//chat(game, null, "", "ROUND FINISHED. YOU HAVE 30 seconds to vote for the best one")
+	chat(game, null, "", "30 seconds to vote");
 	game.acceptingAnswers = false;								 
 	const payload = {
 		"method" : "getVotes",
@@ -550,7 +550,7 @@ function getVotes(game)
 		setTimeout(() => {
 			cullVotes(game);	  			  		  			  	 			  		  			  	
 		}, 5500);			  			  	
-	}, 15000);	
+	}, 24500);	
 }
 
 

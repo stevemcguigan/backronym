@@ -146,7 +146,7 @@ ws.onmessage = message => {
            {
              actionsArray.push(new actionItem({
                 label:`play again`,
-                action:`clear_modal_by_id('winner');n("new game started!");start("${gameId}")`
+                action:`clear_modal_by_id('winner');n('new game started!');start('${gameId}');`
               }));
               actionsArray.push(new actionItem({
                 label:`no thanks`,
