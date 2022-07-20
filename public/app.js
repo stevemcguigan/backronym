@@ -33,7 +33,7 @@ window.mobileCheck = function() {
 
 function loadUser()
 {
-	user = JSON.parse(window.localStorage.getItem('user'));
+	user = JSON.parse(localStorage.getItem('user'));
 	if (user == null)
 	{
 		console.log("no user found")
@@ -52,7 +52,7 @@ function loadUser()
 
 function saveUser()
 {
-  window.localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('user', JSON.stringify(user));
 }
 
 function saveNewUser()
