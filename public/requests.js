@@ -99,21 +99,23 @@ function joinPrivate()
 	const txtKey = id("secretkey");
 	let key = txtKey.value;
 
-	let modal_content = gen_win_icon_markup({prompt: "good job"});
+	/*let modal_content = gen_win_icon_markup({prompt: "good job"});
 
 	modal_replace_content({
 		modal_id: "joinPrivateGame",
 		new_markup: modal_content,
 		callback: null
-	});
-	/*const payload = {
+	});*/
+
+	clear_modal_by_id("joinPrivateGame"); // have to handle this a little more elegantly but ok for now
+
+	const payload = {
 		"method": "joinPrivate",
 		"clientId": clientId,
 		"nick": nick,
 		"key": key
 	}
-    send(payload);*/
-
+    send(payload);
 }
 
 

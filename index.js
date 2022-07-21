@@ -23,6 +23,7 @@ const wsServer = new websocketServer({
 const clients = {};
 const clientLocals = {};
 const games = {};
+const keys = {};
 
 wsServer.on("request", request => {
 	// this is the connect!
@@ -63,18 +64,20 @@ wsServer.on("request", request => {
 			const host = result.host;
 			const isPrivate = result.isPrivate;
 			let key = "";
+			const gameId = guid();
 			if (isPrivate)
 			{	
 				for (let x = 0; x < 3; x++)
 				{
 					x ? key += "-" + getRandomWord() : key = getRandomWord();
 				}	
+				keys[key] = gameId; 
 
 			} else {
 				key = false
 			}	
 			console.log(`the game is private? ${isPrivate}. the KEY is ${key}`);
-			const gameId = guid();
+
 			games[gameId] = {
 				"id": gameId,
 				"hostId": clientId,
@@ -225,14 +228,27 @@ wsServer.on("request", request => {
 			setup(games[gameId]);
 		}
    
+
+		if(result.method === "joinPrivate")
+		{
+			//console.log("received a request to join a private game with key " + result.key);
+			try {
+				let gameId = keys[result.key];
+				console.log(`${result.key} found with id ${gameId}`);
+			} catch {
+				console.log("no game found with key " + result.key)
+			}
+			
+		}	
+
 		if(result.method === "join")
 		{
-			console.log("RESULT")
-			console.log(result)
+			//console.log("RESULT")
+			//console.log(result)
 			const clientId = result.clientId;
 			const gameId = result.gameId;
 			const game = games[gameId];
-			console.log("GAME")
+			//console.log("GAME")
 			//console.log(game);
 			game.clients.push({
 				"clientId" : clientId,		
@@ -252,7 +268,7 @@ wsServer.on("request", request => {
 				"vote" : null
 			}
 
-			console.log(game)
+			//console.log(game)
 
 			const payload = {
 				"method" : "join",
@@ -295,6 +311,10 @@ wsServer.on("request", request => {
 	
 })
 
+function findGameByKey(key)
+{
+
+}
 
 function ping(clientId, pongid)
 {
