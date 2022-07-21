@@ -3577,6 +3577,7 @@ function gen_win_icon_markup(m)
 	var markup;
 
 	var prompt_markup = "";
+	
 	if (m.prompt != undefined) 
 		{
 			prompt_markup = `

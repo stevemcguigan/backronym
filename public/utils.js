@@ -5,6 +5,11 @@ function id (id)
 	return document.getElementById(id);
 }
 
+function unblockInput()
+{
+	return;
+}
+
 function clear(eid)
 {
 	try
