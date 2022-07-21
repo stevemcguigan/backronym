@@ -65,7 +65,7 @@ wsServer.on("request", request => {
 			let key = "";
 			if (isPrivate)
 			{	
-				for (let x = 0; x < 2; x++)
+				for (let x = 0; x < 3; x++)
 				{
 					x ? key += "-" + getRandomWord() : key = getRandomWord();
 				}	
