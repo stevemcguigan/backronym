@@ -4,14 +4,19 @@ function wireLobbyEvents()
 {
     btnCreate      = id("btnCreate");
     btnJoin        = id("btnJoin");
+    btnJoinPrivate = id("btnJoinPrivate");
     txtGameId      = id("txtGameId");
     txtNick        = id("txtNick");
     txtMessage     = id("txtMessage");
     divPlayers     = id("divPlayers");
     divChatWindow  = id("divChatWindow");
 
+    /*btnJoin.addEventListener("click", e => {
+        join(); //old generic join before lobby
+    })*/
+
     btnJoin.addEventListener("click", e => {
-        join();
+        joinPrivate();
     })
 
 

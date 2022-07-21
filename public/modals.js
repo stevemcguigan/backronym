@@ -74,6 +74,11 @@ function create_new_modal(m)   //creates a new alert modal
 			modal_content = generate_opcode_markup(m);
 		break;	
 
+		
+		case "join_private_server":
+			modal_content = generate_private_server_markup(m);
+		break;	
+
 		case "device_tags":
 			modal_content = generate_device_tags_markup(m);
 		break;			
