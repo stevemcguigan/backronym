@@ -240,7 +240,7 @@ wsServer.on("request", request => {
 				privategameId = false;
 			}
 			
-			privateJoinWinFail(result.clientId, newgameId)
+			privateJoinWinFail(result.clientId, privategameId)
 
 		}	
 
