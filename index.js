@@ -900,6 +900,10 @@ const words = [
   "your","yourself","youth","zero","zebra","zipper","zoo","zulu"
 ];
 
+function randomNumber(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
 function getRandomWord() {
     return words[randomNumber(0, words.length - 1)];
 }
