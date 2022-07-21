@@ -151,8 +151,14 @@ function wireGameEvents()
     });*/
 
     cursorInterval = window.setInterval(() => toggleCursor(), 530);
-    if (!isMobile)    
+    if (!isMobile)
+    {
+        console.log("NOT MOBILE, AUTOFOCUSING")
         $("#txtMessage").focus();
+    } else {
+        console.log("mobile detected");
+    }   
+        
 
 }
 
