@@ -78,14 +78,13 @@ function joinPrivatePrompt()
 
     actionsArray.push(new actionItem({
       label:`cancel`,
-      action: `clear_modal_by_id("joinPrivateGame");`
+      action: `clear_modal_by_id('joinPrivateGame');`
     }));    
 
 	create_new_modal({
 		modal_id: 'joinPrivateGame',
 		modal_type: 'generic_confirm',
-		prompt: "game key",
-		detail_text: "enter the three word key for the private game you're trying to join",
+		prompt: "enter game key",
 		textbox: "secretkey",
 		actionsArray: actionsArray,
 		placeholder: "secret-key-example"
