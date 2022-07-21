@@ -85,7 +85,7 @@ function joinPrivatePrompt()
 		modal_id: 'joinPrivateGame',
 		modal_type: 'generic_confirm',
 		prompt: "game key",
-		detail_text: "enter the three word key for the private game you're trying to join"
+		detail_text: "enter the three word key for the private game you're trying to join",
 		textbox: "secretkey",
 		actionsArray: actionsArray,
 		placeholder: "secret-key-example"
