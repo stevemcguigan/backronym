@@ -70,9 +70,8 @@ wsServer.on("request", request => {
 					x ? key += "-" + getRandomWord() : key = getRandomWord();
 				}	
 
-			} else
-			{
-				key = false
+			} else {
+				let key = false
 			}	
 			console.log(`the game is private? ${isPrivate}. the KEY is ${key}`);
 			const gameId = guid();
