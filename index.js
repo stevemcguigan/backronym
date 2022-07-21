@@ -233,12 +233,15 @@ wsServer.on("request", request => {
 		{
 			//console.log("received a request to join a private game with key " + result.key);
 			if (keys[result.key] !== undefined) {
-				newgameId = keys[result.key];
-				console.log(`${result.key} found with id ${newgameId}`);
+				privategameId = keys[result.key];
+				console.log(`${result.key} found with id ${privategameId}`);
 			} else {
 				console.log("no game found with key " + result.key)
+				privategameId = false;
 			}
 			
+			privateJoinWinFail(result.clientId, newgameId)
+
 		}	
 
 		if(result.method === "join")
@@ -587,6 +590,17 @@ function getVotes(game)
 
 
 // **** COMMS
+
+function privateJoinWinFail(clientId, privategameId)
+{
+
+	const payload = {
+		"method" : "privateJoinWinFail",
+		"privategameId": privategameId
+	}
+	clients[clientId].connection.send(JSON.stringify(payload));
+}
+
 
 function chat(game, clientId, nick, message)
 {

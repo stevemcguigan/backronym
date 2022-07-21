@@ -133,11 +133,15 @@ ws.onmessage = message => {
             });*/
         } 
    
-
-
-
-
-
+        if (response.method === "privateJoinWinFail")
+        {
+          if (result.privateGameId !== false)
+          {
+            join(result.privateGameId)
+          } else {
+            alert("no game with that key found")
+          }
+        }
 
         if (response.method === "endGame")
         {
