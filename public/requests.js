@@ -35,7 +35,7 @@ function checkPingResponse()
 {
 	if (idWeGot == idToExpect)
 	{
-		console.log("round tripped a guid, heart is beating")
+		console.log("Ping? Pong!")
 	} else {
 		console.log("lost socket, browser was prob backgrounded. Refreshing.")
 		location.reload();

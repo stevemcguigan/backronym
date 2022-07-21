@@ -7,7 +7,16 @@ let ws = new WebSocket("ws://3.95.234.47:9090")
 //10.54.127.171
 function send(payload)
 {
-  ws.send(JSON.stringify(payload));
+  try
+  {
+    ws.send(JSON.stringify(payload));  
+  }
+  catch 
+  {
+    console.log("connection error. reloading.")
+    location.reload();
+  }
+  
 }
 
 ws.onmessage = message => {
@@ -17,7 +26,7 @@ ws.onmessage = message => {
         if (response.method === "connect")
   			{
   				clientId = response.clientId;
-  				console.log(`client id is ${clientId}`);
+  				//console.log(`client id is ${clientId}`);
             setTimeout(() => {
                 getGames();                
             }, 2500); 
@@ -49,7 +58,7 @@ ws.onmessage = message => {
 
         if (response.method === "ping")
         {
-          console.log(`got a ping`);
+//          console.log(`got a ping`);
 
           idWeGot = response.pongid;
           //pong();

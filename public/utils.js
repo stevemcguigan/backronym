@@ -13,7 +13,7 @@ function clear(eid)
 	}
 	catch
 	{
-		console.log(`a dom element with id ${eid} does not exist or no longer exists`);
+//		console.log(`a dom element with id ${eid} does not exist or no longer exists`);
 	}	
 }
 
