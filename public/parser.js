@@ -315,15 +315,30 @@ ws.onmessage = message => {
                  }));
               } 
           } 
-           console.log("full actions array")
-           console.log(actionsArray) 
-            create_new_modal({
+           //console.log("full actions array")
+           //console.log(actionsArray) 
+
+           if (actionsArray.length)
+           {
+              prompt = mobileCheck() ? 'tap your favorite acronym' : 'click your favorite acronym';  
+              create_new_modal({
                 modal_id:"vote",
                 modal_type:"vote",
-                prompt: `tap on your favorite`,
+                prompt: prompt,
                 actionsArray: actionsArray,
                 force:true
               });
+           }
+           else 
+           {
+               create_new_modal({
+                  modal_id:"emptyround_total",
+                  modal_type: "generic_confirm",
+                  prompt: `no submissions this round`,
+              });    
+           } 
+
+
 
 
           //divChatWindow.insertAdjacentHTML("beforeend", markup);
@@ -354,6 +369,7 @@ ws.onmessage = message => {
                   generateNotification({message: `rejoining game in progress`})
                   id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
                   animateAcronym();  
+
           }  
   				/*while(divPlayers.firstChild)
   						divPlayers.removeChild(divPlayers.firstChild);
