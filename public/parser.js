@@ -21,9 +21,7 @@ ws.onmessage = message => {
             setTimeout(() => {
                 getGames();                
             }, 2500); 
-          setTimeout(() => {  
           sendLocalId();  
-        }, 1000);
   			}	
 
         if (response.method === "getGames")
