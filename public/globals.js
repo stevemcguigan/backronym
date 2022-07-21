@@ -80,6 +80,14 @@ var actionItem = function(a) {
 
 
 
+
+window.addEventListener("focus", function(event) 
+{ 
+	focusText();
+}, false);
+
+
+
 document.addEventListener('touchmove', function (event) {
   if (event.scale !== 1) { event.preventDefault(); }
 }, { passive: false });

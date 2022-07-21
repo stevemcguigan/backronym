@@ -164,7 +164,16 @@ function wireGameEvents()
 
 function focusText()
 {
-    $("#txtMessage").focus();
+    console.log("autofocusing textbox");
+    try
+    {
+     $("#txtMessage").focus();        
+    }
+    catch
+    {
+    console.log("error autofocusing textbox, you're probably not in a game.")
+    }
+
 }
 
 function toggleCursor()
