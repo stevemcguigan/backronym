@@ -331,6 +331,10 @@ ws.onmessage = message => {
            }
            else 
            {
+                 actionsArray.push(new actionItem({
+                  label: "ok",
+                  action:`clear_modal_by_id("emptyround_total")`
+                 }));
                create_new_modal({
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
