@@ -155,6 +155,7 @@ body {
   margin: 0;
   overflow: hidden;
   background: #546E7A;
+      width: 50%;
 }
 
 .x {
@@ -909,7 +910,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+
     margin: 0 auto;
 }
 
