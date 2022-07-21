@@ -40,7 +40,7 @@ function openMenu()
         modal_id:"settingsMenu",
         modal_type: "generic_confirm",
         prompt: `settings`,
-        detail_text: ``,
+        detail_text: `there aren't really any`,
         actionsArray: actionsArray
   	  });
 
