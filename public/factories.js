@@ -17,8 +17,10 @@ function generateLobby()
 		<div class="">public games (click to join):</div>
 	  <div style="margin-top:15px" id="gameList">
 	  </div>
-	  <button style="width:200px" class="confirmation_button" id = "btnCreate">create new game</button>
-	  <button style="margin-top:15px; width:200px" class="confirmation_button" id = "btnJoinPrivate">join private game</button>
+	  <div class="lobbyButtons">
+		  <button style="width:200px" class="confirmation_button" id = "btnCreate">create new game</button>
+		  <button style="margin-top:15px; width:200px" class="confirmation_button" id = "btnJoinPrivate">join private game</button>
+		</div>
 	  <!--<button id = "btnJoin">Join Game</button>-->
 	  <input type = "text" id = "txtGameId"><br>`;
 	return markup;

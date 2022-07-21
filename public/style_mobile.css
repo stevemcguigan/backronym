@@ -466,7 +466,16 @@ transform: scale(1.5);
   box-shadow: 1px 1px 0px 0px #aaa;
 }
 
+.lobbyButtons
+{
+  margin 0 auto;
+}
 
+.lobbyButtons button
+{
+  width: 200px;
+  margin-bottom: 15px;
+}
 
 #keyboard button:after, #keyboard2 button:after
 {
