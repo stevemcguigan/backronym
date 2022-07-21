@@ -232,10 +232,10 @@ wsServer.on("request", request => {
 		if(result.method === "joinPrivate")
 		{
 			//console.log("received a request to join a private game with key " + result.key);
-			try {
+			if (keys[result.key] !== undefined)
 				let gameId = keys[result.key];
 				console.log(`${result.key} found with id ${gameId}`);
-			} catch {
+			} else {
 				console.log("no game found with key " + result.key)
 			}
 			
@@ -285,8 +285,6 @@ wsServer.on("request", request => {
 			//})
 		}
 	})
-
-
 
 	//generate new clientid
 	const clientId = guid();
