@@ -16,7 +16,7 @@ function wireLobbyEvents()
     })*/
 
     btnJoin.addEventListener("click", e => {
-        joinPrivate();
+        joinPrivatePrompt();
     })
 
 
