@@ -739,7 +739,7 @@ function generate_generic_confirm_markup(m)
 
 		textbox_markup = `
 			<div style="display:flex;text-align:center; align-items:center;padding:10px 10px 0; width:80%">
-				<input class="textInput" id="${m.textbox}" maxlength="15" placeholder="${placeholder}" value="${defaultTextboxValue}"></input><i id="${m.textbox}_clear"  class="icon linear-cross textboxClear"></i>
+				<input class="textInput" id="${m.textbox}" placeholder="${placeholder}" value="${defaultTextboxValue}"></input><i id="${m.textbox}_clear"  class="icon linear-cross textboxClear"></i>
 			</div>`
 
 
@@ -3577,7 +3577,7 @@ function gen_win_icon_markup(m)
 	var markup;
 
 	var prompt_markup = "";
-	
+
 	if (m.prompt != undefined) 
 		{
 			prompt_markup = `
