@@ -70,7 +70,7 @@ function joinPrivatePrompt()
 {
 
 
-
+	let actionsArray = [];
     actionsArray.push(new actionItem({
       label:`ok`,
       action: `joinPrivate();`
