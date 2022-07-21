@@ -150,12 +150,13 @@ function wireGameEvents()
         divChatWindow.scrollIntoView({ behavior: "smooth", block: "end" });
     });*/
 
-    cursorInterval = window.setInterval(() => toggleCursor(), 530);
+    
     if (!isMobile)
     {
         console.log("NOT MOBILE, AUTOFOCUSING")
         $("#txtMessage").focus();
     } else {
+        cursorInterval = window.setInterval(() => toggleCursor(), 530);
         console.log("mobile detected");
     }   
         

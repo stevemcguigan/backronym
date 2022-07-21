@@ -61,6 +61,7 @@ wsServer.on("request", request => {
 			// user requests new game
 			const clientId = result.clientId;
 			const host = result.host;
+			const isPrivate = result.isPrivate
 			const gameId = guid();
 			games[gameId] = {
 				"id": gameId,
