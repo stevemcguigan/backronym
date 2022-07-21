@@ -62,16 +62,16 @@ wsServer.on("request", request => {
 			const clientId = result.clientId;
 			const host = result.host;
 			const isPrivate = result.isPrivate;
+			let key = "";
 			if (isPrivate)
-			{
-				let key = "";
+			{	
 				for (let x = 0; x < 2; x++)
 				{
 					x ? key += "-" + getRandomWord() : key = getRandomWord();
 				}	
 
 			} else {
-				let key = false
+				key = false
 			}	
 			console.log(`the game is private? ${isPrivate}. the KEY is ${key}`);
 			const gameId = guid();
