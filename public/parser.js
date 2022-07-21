@@ -135,9 +135,9 @@ ws.onmessage = message => {
    
         if (response.method === "privateJoinWinFail")
         {
-          if (result.privategameId !== false)
+          if (response.privategameId !== false)
           {
-            join(result.privategameId)
+            join(response.privategameId)
           } else {
             alert("no game with that key found")
           }
