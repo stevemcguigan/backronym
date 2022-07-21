@@ -35,8 +35,8 @@ ws.onmessage = message => {
 
         if (response.method === "getGames")
         {
-          console.log("received list of games from server;")
-          console.log(response);
+          //console.log("received list of games from server;")
+          //console.log(response);
           if (loc == "lobby")
           {
             setTimeout(() => {

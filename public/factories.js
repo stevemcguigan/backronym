@@ -14,7 +14,7 @@ function generateTitleBar()
 function generateLobby()
 {
 	let markup = `
-		<!--<div>public games (click to join):</div>-->
+		<div class="">public games (click to join):</div>
 	  <div style="margin-top:15px" id="gameList">
 	  </div>
 	  <button class="confirmation_button" id = "btnCreate">New Game</button>

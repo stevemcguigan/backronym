@@ -83,7 +83,7 @@ var actionItem = function(a) {
 
 window.addEventListener("focus", function(event) 
 { 
-	console.log("window has focus again, trying to autofocus textbox");
+//	console.log("window has focus again, trying to autofocus textbox");
 	focusText();
 }, false);
 

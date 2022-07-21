@@ -94,8 +94,31 @@ function castVote(ownerId)
 }
 
 
-function create()
+function createGame()
 {
+	   let actionsArray = [];       
+	   
+	   actionsArray.push(new actionItem({
+	      label:`public`,
+	      action:`clear_modal_by_id('createNewGame');create(false)`
+	    }));
+
+	   actionsArray.push(new actionItem({
+	      label:`private`,
+	      action:`clear_modal_by_id('createNewGame');create(true)`
+	    }));	
+
+      create_new_modal({
+        modal_id:"createNewGame",
+        modal_type: "generic_confirm",
+        prompt: `create new game`,
+        actionsArray: actionsArray
+  	  });
+}
+
+function create(isPrivate)
+{
+
 	//let nick = id("txtNick").value;
 	//if (!nick) 
 		//nick = "Default Host";
@@ -103,10 +126,12 @@ function create()
 	const payload = {
 		"method": "create",
 		"host" : nick,
-		"clientId": clientId
+		"clientId": clientId,
+		"isPrivate": isPrivate
 	}
 	send(payload);	
 }
+
 
 function chat(message)
 {
