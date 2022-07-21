@@ -162,6 +162,11 @@ function wireGameEvents()
 
 }
 
+function focusText()
+{
+    $("#txtMessage").focus();
+}
+
 function toggleCursor()
 {
     let cursor = $('#txtMessage');

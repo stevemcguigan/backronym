@@ -397,9 +397,14 @@ function clear_modal_by_id(modal_id, callback_on_close)
 			$("#"+modal_id).remove();
 			if (typeof callback_on_close == "function")
 			{
-				callback_on_close();				
+				callback_on_close();	
+				$("#txtMessage").focus();			
 			}
-	    }, 425);	
+			else
+			{
+				$("#txtMessage").focus();
+			}
+	  }, 425);	
 
 	}
 	else
