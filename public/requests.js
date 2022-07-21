@@ -69,8 +69,8 @@ function play(play)
 function joinPrivatePrompt()
 {
 
-
 	let actionsArray = [];
+
     actionsArray.push(new actionItem({
       label:`ok`,
       action: `joinPrivate();`
@@ -81,16 +81,15 @@ function joinPrivatePrompt()
       action: `clear_modal_by_id("joinPrivateGame");`
     }));    
 
-      create_new_modal({
-        modal_id: 'joinPrivateGame',
-        modal_type: 'generic_confirm',
-        prompt: "what's the three word key for the game you'd like to join?",
-        textbox: "secretkey",
-        actionsArray: actionsArray,
-        placeholder: "secret-key-example"
-      });
-
-
+	create_new_modal({
+		modal_id: 'joinPrivateGame',
+		modal_type: 'generic_confirm',
+		prompt: "game key",
+		detail_text: "enter the three word key for the private game you're trying to join"
+		textbox: "secretkey",
+		actionsArray: actionsArray,
+		placeholder: "secret-key-example"
+	});
 
 }
 
@@ -100,7 +99,7 @@ function joinPrivate()
 	const txtKey = id("secretkey");
 	let key = txtKey.value;
 
-	let modal_content = gen_win_icon_markup();
+	let modal_content = gen_win_icon_markup({prompt: "good job"});
 
 	modal_replace_content({
 		modal_id: "joinPrivateGame",
