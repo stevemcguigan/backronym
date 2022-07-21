@@ -15,7 +15,7 @@ function wireLobbyEvents()
         join(); //old generic join before lobby
     })*/
 
-    btnJoin.addEventListener("click", e => {
+    btnJoinPrivate.addEventListener("click", e => {
         joinPrivatePrompt();
     })
 
