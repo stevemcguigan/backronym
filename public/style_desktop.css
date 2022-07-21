@@ -102,6 +102,7 @@
 
 
 
+
 #menu
 {
   width: 25px;
@@ -109,6 +110,10 @@
   font-size: 20px;
   line-height: 14px;
   justify-content: flex-start;
+}
+
+.container {
+  display: flex;
 }
 
 #titleBar 
@@ -308,6 +313,7 @@ font-size: 13px;
   display: flex;
   flex-direction: column;
   min-height: 80vh;
+  width: 60%;
 }
 
 
