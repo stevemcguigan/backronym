@@ -24,7 +24,7 @@ function generateLobby()
 		</div>
 		<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
 		<div id="lobbyInstructionsContainer">
-			${generateInstructions}
+			${generateInstructions()}
 		</div>
 	  <!--<button id = "btnJoin">Join Game</button>-->
 	  <input type = "text" id = "txtGameId"><br>`;
