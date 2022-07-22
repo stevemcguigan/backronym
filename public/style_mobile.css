@@ -617,7 +617,7 @@ font-weight: bold;
 
 .gamePuck {
 	flex-basis:40%;
-	font-size: 16px;
+	font-size: 14px;
 }
 .playersPuck {
   flex-basis:35%;
@@ -814,7 +814,8 @@ font-size: 13px;
     font-family: courier new;
     box-shadow: 2px 2px 1px 0px #888;
     height: 35px;
-    font-size: 15px;
+    font-size: 14px;
+    color: #666;
 }
 
 .confirmationActions
@@ -921,7 +922,7 @@ textarea:focus::-webkit-input-placeholder{
 body {
     background: white;
     color: #666;
-    font-family: courier !important;
+    font-family: courier new !important;
     overflow: hidden;
     /* font-size: 26px; */
     display: flex !important;
