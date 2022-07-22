@@ -478,7 +478,7 @@ transform: scale(1.5);
     flex-basis: 45%;
     /* margin-bottom: 15px; */
     padding: 5px;
-    margin-top: 15px;
+
 }
 
 .gameListContainer
@@ -570,7 +570,7 @@ cursor: pointer;
 color: #777;
 user-select: none;
 background-color: white;
-flex: 1;
+flex-basis: 50%;
 display: flex;
 box-shadow: 1px 1px 1px 0px rgba(0,0,0,.4);
 justify-content: center;

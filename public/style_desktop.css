@@ -541,7 +541,7 @@ transition: all 200ms ease-in-out;
 }
 
 #btnCreate{
-  margin-top: 15px;
+
 }
 
 #btnStart, #btnWait
@@ -797,7 +797,7 @@ font-size: 13px;
 
 .confirmation_button
 {
-    width: 80px;
+    width: 175px;
     background-color: white;
     border: 1px dotted #666;
     border-radius: 2px;
