@@ -481,6 +481,12 @@ transform: scale(1.5);
     margin-top: 15px;
 }
 
+.gameListContainer
+{
+  display: flex;
+  justify-content: center;
+}
+
 #keyboard button:after, #keyboard2 button:after
 {
 content: "";

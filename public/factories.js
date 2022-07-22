@@ -15,7 +15,7 @@ function generateLobby()
 {
 	let markup = `
 		<div class="">public games (click to join):</div>
-	  <div style="margin-top:15px" id="gameList">
+	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
 	  <div class="lobbyButtons">
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
