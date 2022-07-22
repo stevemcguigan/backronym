@@ -14,7 +14,7 @@ $( document ).ready(function() {
         btnPlay.style.display = "none";
         //soundtrack.play();
         populate ("main", generateLobby(), wireLobbyEvents);
-        setTimeout(function() { animateAcronym() }, 1000)
+        startInstructionsLoop();
 
     })
     soundtrack = id("soundtrack");
@@ -30,6 +30,24 @@ window.mobileCheck = function() {
 
   return check;
 };
+
+function startInstructionsLoop()
+{
+  if (loc = "lobby")
+  {
+      setTimeout(function() { animateAcronym() }, 1000);
+      setTimeout(function() { 
+         $( "#sampleAcronym" ).animate({
+            width: 100%
+          }, 2500, function() {
+            setTimeout(function() {
+                    id("lobbyInstructionsContainer").innerHTML = generateInstructions();
+                    startInstructionsLoop();
+            }, 5000);
+          });
+      }, 1100);      
+  } 
+}
 
 function loadUser()
 {

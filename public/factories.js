@@ -23,8 +23,17 @@ function generateLobby()
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
 		<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
-		<hr>
-		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);">
+		<div id="lobbyInstructionsContainer">
+			${generateInstructions}
+		</div>
+	  <!--<button id = "btnJoin">Join Game</button>-->
+	  <input type = "text" id = "txtGameId"><br>`;
+	return markup;
+}
+
+function generateInstructions()
+{
+	return `<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);">
 			<div class="acronymContainer">
 							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">L</div>
@@ -39,15 +48,10 @@ function generateLobby()
 								<div class="letterTileLetter">U</div>
 							</span>																					
 			</div>
-			<div style="width:0px;overflow:hidden;" id="sampleAcronym"><b>L</b>et's <b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nuderpants </div>
 		</div>
-		
-	  <!--<button id = "btnJoin">Join Game</button>-->
-	  <input type = "text" id = "txtGameId"><br>`;
-	return markup;
+		<div style="width:0px;overflow:hidden;white-space:nowrap;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nuderpants </div>	
+	  `
 }
-
-
 
 function removeAcronym()
 {
