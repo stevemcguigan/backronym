@@ -22,6 +22,7 @@ function generateLobby()
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
+		<div style="flex: 1"></div>
 		<div id="lobbyInstructionsContainer">
 			${generateInstructions()}
 		</div>
