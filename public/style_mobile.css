@@ -468,13 +468,17 @@ transform: scale(1.5);
 
 .lobbyButtons
 {
-  margin 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .lobbyButtons button
 {
-  width: 200px;
-  margin-bottom: 15px;
+    flex-basis: 45%;
+    /* margin-bottom: 15px; */
+    padding: 5px;
+    margin-top: 15px;
 }
 
 #keyboard button:after, #keyboard2 button:after
@@ -541,7 +545,7 @@ transition: all 200ms ease-in-out;
 }
 
 #btnCreate{
-  margin-top: 15px;
+ /* margin-top: 15px;*/
 }
 
 #btnStart, #btnWait
