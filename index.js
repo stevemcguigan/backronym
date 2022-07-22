@@ -200,7 +200,7 @@ wsServer.on("request", request => {
 				else 
 				{
 					console.log("this client wasn't the host?")
-					console.log(game)
+					console.log(oldClient)
 
 				}	
 				for (let x = 0; x < game.answers.length; x++)
