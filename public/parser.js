@@ -379,12 +379,14 @@ ws.onmessage = message => {
                   console.log("**** REJOINING GAME")
                   console.log(game);
                   console.log("****")
-                  if (game.hostId == clientId && host == false)
+                  if (game.hostId == clientId)
                   {
                     console.log("You were the host, making you the host again");
                     host = true;
                   }
                   else {
+                    console.log(clientId)
+                    console.log(game.hostId)
                     console.log("you weren't the host");
                   }  
                   $('.acronymContainer').remove();
