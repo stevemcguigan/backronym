@@ -379,6 +379,14 @@ ws.onmessage = message => {
                   console.log("**** REJOINING GAME")
                   console.log(game);
                   console.log("****")
+                  if (game.hostId == clientId && host == false)
+                  {
+                    console.log("You were the host, making you the host again");
+                    host = true;
+                  }
+                  else {
+                    console.log("you weren't the host");
+                  }  
                   $('.acronymContainer').remove();
                   const round = game.currentRound;
                   acronym = game.acronyms[round - 1];

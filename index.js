@@ -194,7 +194,7 @@ wsServer.on("request", request => {
 				if (game.hostId == clientLocals[localId])
 				{	
 					game.hostId == clientId;
-					game.hostNick = clients[clientId].currentGameInfo.nicl
+					game.hostNick = clients[clientId].currentGameInfo.nick
 				}	
 				for (let x = 0; x < game.answers.length; x++)
 				{

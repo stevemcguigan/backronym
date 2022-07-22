@@ -22,7 +22,7 @@ function generateLobby()
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
-		<div id="lobbyInstructions" class="instructions">
+		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);">
 			<div class="acronymContainer">
 							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">L</div>
