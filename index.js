@@ -167,6 +167,8 @@ wsServer.on("request", request => {
 			const localId = result.localId;
 			
 			if (clientLocals[localId]) { // move this (And everything else tbh) into function when it works
+				console.log(`*******************`)
+				console.log("");
 				console.log(`looks like the connection was probably interupted!`)
 				console.log(`old client id: ${clientLocals[localId]}`)
 				console.log(`new client id: ${clientId}`)
@@ -198,6 +200,7 @@ wsServer.on("request", request => {
 					game.hostId = clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
 					oldClient.currentGameInfo.clientId = clientId;
+					//clients[clientLocals[localId]] = clientId;
 				}
 				else 
 				{
