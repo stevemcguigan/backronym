@@ -14,9 +14,10 @@ function generateTitleBar()
 function generateLobby()
 {
 	let markup = `
-		<div class="">public games (click to join):</div>
+		<div class="gameListContainer"><div class="">join a public game</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
+	  <div class="gameListContainer" style="margin:25px 0px;"><div class="">-or-</div></div>
 	  <div class="lobbyButtons">
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
