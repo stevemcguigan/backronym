@@ -52,8 +52,8 @@ wsServer.on("request", request => {
 
 		if(result.method === "pong")
 		{
-			console.log("got a pong back");
-			console.log(result)
+			//console.log("got a pong back");
+			//console.log(result)
 			ping(result.clientId, result.pongid);
 		}	
 
@@ -194,7 +194,7 @@ wsServer.on("request", request => {
 				if (game.hostId == oldClient.currentGameInfo.clientId)
 				{	
 					console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
-					game.hostId == clientId;
+					game.hostId = clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
 				}
 				else 
