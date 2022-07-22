@@ -37,7 +37,7 @@ function startInstructionsLoop()
   {
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() { 
-     $( "#sampleAcronym" ).animate({
+     $( "#sampleAcronymContainer" ).animate({
         width: "100%"
       }, 3500, function() {
         setTimeout(function() {
