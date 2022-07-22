@@ -37,14 +37,18 @@ function startInstructionsLoop()
   {
       setTimeout(function() { animateAcronym() }, 1000);
       setTimeout(function() { 
+         
+
+
          $( "#sampleAcronym" ).animate({
-            width: 100%
+            width: "100%"
           }, 2500, function() {
             setTimeout(function() {
                     id("lobbyInstructionsContainer").innerHTML = generateInstructions();
                     startInstructionsLoop();
             }, 5000);
           });
+
       }, 1100);      
   } 
 }
