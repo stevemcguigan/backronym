@@ -373,22 +373,23 @@ ws.onmessage = message => {
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
           var game = response.game;
+          if (game.hostId == clientId && !host)
+          {
+            console.log("You're the host of this game but weren't marked as such -- probably a reconnect. fixing.");
+            host = true;
+          }
+          else {
+            console.log(clientId)
+            console.log(game.hostId)
+            console.log("you weren't the host");
+          }            
           if (game.inProgress)
           {
 
                   console.log("**** REJOINING GAME")
                   console.log(game);
                   console.log("****")
-                  if (game.hostId == clientId)
-                  {
-                    console.log("You were the host, making you the host again");
-                    host = true;
-                  }
-                  else {
-                    console.log(clientId)
-                    console.log(game.hostId)
-                    console.log("you weren't the host");
-                  }  
+
                   $('.acronymContainer').remove();
                   const round = game.currentRound;
                   acronym = game.acronyms[round - 1];
