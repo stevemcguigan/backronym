@@ -199,9 +199,9 @@ wsServer.on("request", request => {
 					console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
 					game.hostId = clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
-					console.log("oldclient game cid: "+ oldClient.currentGameInfo.clientId)
-					oldClient.currentGameInfo.clientId = clientId;
-					console.log("oldclient game cid after update: "+ oldClient.currentGameInfo.clientId)
+					console.log("oldclient game cid: "+ clients[clientLocals[localId]].currentGameInfo.clientId)
+					clients[clientLocals[localId]].currentGameInfo.clientId = clientId;
+					console.log("oldclient game cid after update: "+ clients[clientLocals[localId]].currentGameInfo.clientId)
 					//clients[clientLocals[localId]] = clientId;
 				}
 				else 
