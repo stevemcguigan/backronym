@@ -35,21 +35,17 @@ function startInstructionsLoop()
 {
   if (loc = "lobby")
   {
-      setTimeout(function() { animateAcronym() }, 1000);
-      setTimeout(function() { 
-         
-
-
-         $( "#sampleAcronym" ).animate({
-            width: "100%"
-          }, 2500, function() {
-            setTimeout(function() {
-                    id("lobbyInstructionsContainer").innerHTML = generateInstructions();
-                    startInstructionsLoop();
-            }, 5000);
-          });
-
-      }, 1100);      
+    setTimeout(function() { animateAcronym() }, 1000);
+    setTimeout(function() { 
+     $( "#sampleAcronym" ).animate({
+        width: "100%"
+      }, 3500, function() {
+        setTimeout(function() {
+          id("lobbyInstructionsContainer").innerHTML = generateInstructions();
+          startInstructionsLoop();
+        }, 1510000);
+      });
+    }, 2000);      
   } 
 }
 

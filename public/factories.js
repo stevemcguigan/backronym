@@ -49,7 +49,7 @@ function generateInstructions()
 							</span>																					
 			</div>
 		</div>
-		<div style="width:0px;overflow:hidden;white-space:nowrap;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nuderpants </div>	
+		<div style="width:0px;overflow:hidden;white-space:nowrap;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nderpants </div>	
 	  `
 }
 
