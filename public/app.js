@@ -2,10 +2,6 @@ $( document ).ready(function() {
     isMobile = window.mobileCheck();
     loadUser();
     FastClick.attach(document.body);
-    /*setTimeout(function(){
-      $("#titleScreen").addClass("animate__animated animate__zoomOut hidden")
-      populate ("main", generateLobby(), wireLobbyEvents);
-    }, 2500)*/
     let btnPlay = id("playbutton"); 
     setInterval(function(){
       pong();
@@ -18,6 +14,7 @@ $( document ).ready(function() {
         btnPlay.style.display = "none";
         //soundtrack.play();
         populate ("main", generateLobby(), wireLobbyEvents);
+        setTimeout(function() { animateAcronym() }, 1000)
 
     })
     soundtrack = id("soundtrack");

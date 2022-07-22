@@ -24,16 +24,16 @@ function generateLobby()
 		</div>
 		<div id="lobbyInstructions" class="instructions">
 			<div class="acronymContainer">
-							<span id="" class="letterTile animate__animated animate__rubberBand hidden">
+							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">L</div>
 							</span>
-							<span id="" class="letterTile animate__animated animate__rubberBand hidden">
+							<span id="1" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">A</div>
 							</span>
-							<span id="" class="letterTile animate__animated animate__rubberBand hidden">
+							<span id="2" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">T</div>
 							</span>
-							<span id="" class="letterTile animate__animated animate__rubberBand hidden">
+							<span id="3" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">U</div>
 							</span>																					
 			</div>
