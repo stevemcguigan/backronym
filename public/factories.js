@@ -22,7 +22,6 @@ function generateLobby()
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
-		<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
 		<div id="lobbyInstructionsContainer">
 			${generateInstructions()}
 		</div>
@@ -33,7 +32,10 @@ function generateLobby()
 
 function generateInstructions()
 {
-	return `<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);">
+	return `
+		<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
+	<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);    margin-top: -30px;
+    margin-bottom: -30px;">
 			<div class="acronymContainer">
 							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
 								<div class="letterTileLetter">L</div>
@@ -49,7 +51,7 @@ function generateInstructions()
 							</span>																					
 			</div>
 		</div>
-		<div style="width:0px;overflow:hidden;white-space:nowrap;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nderpants </div>	
+		<div style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>nderpants </div>	
 	  `
 }
 
