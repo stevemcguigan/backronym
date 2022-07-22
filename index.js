@@ -193,7 +193,7 @@ wsServer.on("request", request => {
 				});	
 				if (game.hostId == oldClient.currentGameInfo.clientId)
 				{	
-					console.log("This client was the host! fixing.")
+					console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
 					game.hostId == clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
 				}
