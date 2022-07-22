@@ -76,6 +76,34 @@
    --modal_bar_height: env(safe-area-inset-top) !important;;
 }
 
+
+
+@-webkit-keyframes borderBlink {    
+    from, to {    
+        border-color: transparent    
+    }    
+    50% {    
+        border-color: black    
+    }    
+}    
+@keyframes borderBlink {    
+    from, to {    
+        border-color: transparent    
+    }    
+    50% {    
+        border-color: black    
+    }    
+}    
+.borderBlink{    
+    border-right:1px solid black;
+    -webkit-animation: borderBlink 1s step-end infinite;    
+    animation: borderBlink 1s step-end infinite;        
+    /* add 'border-color: transparent' if you wish no border to show initially */  
+}
+
+
+
+
 @font-face {
   font-family: 'angelina';
   src: url('angelina.ttf');

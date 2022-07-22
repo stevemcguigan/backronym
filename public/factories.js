@@ -54,7 +54,7 @@ function generateInstructions()
 		<div id="sampleAcronymContainer" style="display:flex;">
 			<div style="flex-basis:25%"></div>
 			<div style="display:flex;justify-content:flex-start;">	
-				<div style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>nderpants </div>
+				<div class="borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" id="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>nderpants </div>
 			</div>
 			<div style="flex-basis:25%"></div>
 		</div>	
