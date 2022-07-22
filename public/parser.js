@@ -367,22 +367,23 @@ ws.onmessage = message => {
           console.log("RECEIVED JOIN RESPONSE...HOPE YOU JUST JOINED A GAME")  
           // server accepted your request to join the game
           gameId = response.game.id; 
-  				//const game = response.game;
-          //console.log(game);
           loc = "game";
-          $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
-          populate ("main", generateGame(), wireGameEvents);
           var game = response.game;
           if (game.hostId == clientId && !host)
           {
             console.log("You're the host of this game but weren't marked as such -- probably a reconnect. fixing.");
             host = true;
+            
           }
           else {
             console.log(clientId)
             console.log(game.hostId)
             console.log("you weren't the host");
-          }            
+          }    
+
+          $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
+          populate ("main", generateGame(), wireGameEvents);
+
           if (game.inProgress)
           {
 
