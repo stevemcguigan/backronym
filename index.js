@@ -171,6 +171,7 @@ wsServer.on("request", request => {
 				console.log(`old client id: ${clientLocals[localId]}`)
 				console.log(`new client id: ${clientId}`)
 				let oldClient = clients[clientLocals[localId]];
+				clientLocals[localId] = clientId;
 				let newClient = clients[clientId];
 				newClient.currentGameInfo = JSON.parse(JSON.stringify(oldClient.currentGameInfo));
 				let gameId = newClient.currentGameInfo.gameId;
@@ -191,14 +192,12 @@ wsServer.on("request", request => {
 				game.clients.push({
 					"clientId" : clientId,		
 				});	
-				clientLocals[localId] = clientId;
+
 				if (game.hostId == oldClient.currentGameInfo.clientId)
 				{	
 					console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
 					game.hostId = clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
-					oldClient.currentGameInfo.clientId = clientId;
-
 				}
 				else 
 				{
