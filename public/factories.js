@@ -17,11 +17,28 @@ function generateLobby()
 		<div class="gameListContainer"><div class="">join a public game</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
-	  <div class="gameListContainer" style="margin:25px 0px 15px 0px;"><div class="">-or-</div></div>
+	  <div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-or-</div></div>
 	  <div class="lobbyButtons">
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
+		<div id="lobbyInstructions" class="instructions">
+			<div class="acronymContainer>
+							<span id=" class="letterTile animate__animated animate__rubberBand hidden">
+								<div class="letterTileLetter">L</div>
+							</span>
+							<span id=" class="letterTile animate__animated animate__rubberBand hidden">
+								<div class="letterTileLetter">A</div>
+							</span>
+							<span id=" class="letterTile animate__animated animate__rubberBand hidden">
+								<div class="letterTileLetter">T</div>
+							</span>
+							<span id=" class="letterTile animate__animated animate__rubberBand hidden">
+								<div class="letterTileLetter">U</div>
+							</span>																					
+			</div>
+		</div>
+
 	  <!--<button id = "btnJoin">Join Game</button>-->
 	  <input type = "text" id = "txtGameId"><br>`;
 	return markup;
