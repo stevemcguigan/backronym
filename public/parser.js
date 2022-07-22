@@ -369,7 +369,7 @@ ws.onmessage = message => {
           gameId = response.game.id; 
           loc = "game";
           var game = response.game;
-          if (game.hostId == clientId && !host)
+          if (game.hostId == clientId)
           {
             console.log("You're the host of this game but weren't marked as such -- probably a reconnect. fixing.");
             host = true;
