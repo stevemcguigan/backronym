@@ -14,7 +14,7 @@ function generateTitleBar()
 function generateLobby()
 {
 	let markup = `
-		<div class="gameListContainer"><div class="">join a public game</div></div>
+		<div class="gameListContainer"><div class="">-join a public game-</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
 	  <div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-or-</div></div>
@@ -22,6 +22,8 @@ function generateLobby()
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
 		</div>
+		<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
+		<hr>
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);">
 			<div class="acronymContainer">
 							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
@@ -37,8 +39,9 @@ function generateLobby()
 								<div class="letterTileLetter">U</div>
 							</span>																					
 			</div>
+			<div style="width:0px;overflow:hidden;" id="sampleAcronym"><b>L</b>et's <b>L</b>et's <b>A</b>ll <b>E</b>xchange <b>U</b>nuderpants </div>
 		</div>
-
+		
 	  <!--<button id = "btnJoin">Join Game</button>-->
 	  <input type = "text" id = "txtGameId"><br>`;
 	return markup;
