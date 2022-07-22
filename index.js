@@ -191,8 +191,9 @@ wsServer.on("request", request => {
 				game.clients.push({
 					"clientId" : clientId,		
 				});	
-				if (game.hostId == clientLocals[localId])
+				if (game.hostId == oldClient)
 				{	
+					console.log("This client was the host! fixing.")
 					game.hostId == clientId;
 					game.hostNick = clients[clientId].currentGameInfo.nick
 				}	
