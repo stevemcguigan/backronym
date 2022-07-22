@@ -191,6 +191,7 @@ wsServer.on("request", request => {
 				game.clients.push({
 					"clientId" : clientId,		
 				});	
+				clientLocals[localId] = clientId;
 				if (game.hostId == oldClient.currentGameInfo.clientId)
 				{	
 					console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
@@ -212,11 +213,11 @@ wsServer.on("request", request => {
 					"method" : "join",
 					"game" : game
 				}
-				console.log("trying to seamlessly re-insert player into game, cross your fingers")	
+				/*console.log("trying to seamlessly re-insert player into game, cross your fingers")	
 				console.log(`after reinsert:`)
-				console.log(game.clients);							
+				console.log(game.clients);*/							
 				clients[clientId].connection.send(JSON.stringify(payload));	
-				clientLocals[localId] = clientId;
+				
 			} else {
 				console.log(`looks like a fresh connection`);
 				clientLocals[localId] = clientId;
@@ -303,7 +304,7 @@ wsServer.on("request", request => {
 	}
 
 	//console.log("CLIENTS")
-	console.log(clients);
+	//console.log(clients);
 
 	const payload = {
 		"method" : "connect",
