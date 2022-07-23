@@ -36,7 +36,7 @@ function generateInstructions()
 {
 	return `
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;font-size:12px;"><div class="">-how to play-</div></div>
-	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center;font-style: italics; font-size:12px; max-width:75%">chat with friends while reverse engineering acronyms</div></div>
+	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italics; font-size:12px; width:75%; max-width:75%">chat with friends while reverse engineering acronyms</div></div>
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);    margin-top: -30px;
     	margin-bottom: -30px; font-size:12px;">
