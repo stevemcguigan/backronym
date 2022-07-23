@@ -60,6 +60,29 @@ function generateInstructions()
 		</div>`
 }
 
+
+
+function randomLATU_new()
+{
+
+	// not important but i'll get to it
+
+	let acro = [
+			"Louis Armstrong's Trumpet-themed Underpants",
+			"Let's all trade uncles",
+			"Lunchables® are thoroughly unappealing",
+			"Lemons are tangy, uhhhhhhh",
+			"Little awkward, there, Ursula...",
+			"Lumps are totally unusual",
+			"Leave after throwing up",
+			"Lester's All Time Ugliness",
+			"Let animals take Uber®",			
+	];
+
+
+}
+
+
 function randomLATU()
 {
 	let i = randomInt(1,5)
