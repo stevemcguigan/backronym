@@ -283,6 +283,13 @@ border-radius: 50px;
 }
 
 
+.lobbyInstructionsContainer
+{
+  
+  background: #dedede;
+  padding-bottom: 20px;
+}
+
 .kbcontainer
 {
 	position:fixed;
@@ -313,7 +320,7 @@ font-size: 13px;
 {
   display: flex;
   flex-direction: column;
-  min-height: 60vh;
+  min-height: 70vh;
   width: 60%;
   max-width: 615px;
 }
