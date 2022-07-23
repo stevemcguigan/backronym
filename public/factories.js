@@ -36,7 +36,7 @@ function generateInstructions()
 {
 	return `
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-how to play-</div></div>
-	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">chat with friends while reverse engineering acronyms</div></div>
+	<div class="gameListContainer"> <div class="">chat with friends while reverse engineering acronyms</div></div>
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);    margin-top: -30px;
     	margin-bottom: -30px;">
@@ -55,26 +55,28 @@ function generateInstructions()
 							</span>																					
 			</div>
 		</div>
-		<div class="sampleAcronymContainer" style="display:flex;">
-			<div style="flex-basis:25%"></div>
-			<div style="display:flex;justify-content:flex-start;">	
-				<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym"><b>L</b>aws <b>A</b>gainst <b>T</b>rampolines? <b>U</b>nacceptable. </div>
+		<div style="transform: scale(.75)">
+			<div class="sampleAcronymContainer" style="display:flex;">
+				<div style="flex-basis:25%"></div>
+				<div style="display:flex;justify-content:flex-start;">	
+					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym"><b>L</b>aws <b>A</b>gainst <b>T</b>rampolines? <b>U</b>gh. </div>
+				</div>
+				<div style="flex-basis:25%"></div>
+			</div>			
+			<div class="sampleAcronymContainer" style="display:flex;">
+				<div style="flex-basis:25%"></div>
+				<div style="display:flex;justify-content:flex-start;">	
+					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>ncles </div>
+				</div>
+				<div style="flex-basis:25%"></div>
+			</div>					
+			<div class="sampleAcronymContainer" style="display:flex;">
+				<div style="flex-basis:25%"></div>
+				<div style="display:flex;justify-content:flex-start;">	
+					<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ouis <b>A</b>armstrong's <b>T</b>rumpet-themed <b>U</b>nderpants</div>
+				</div>
+				<div style="flex-basis:25%"></div>
 			</div>
-			<div style="flex-basis:25%"></div>
-		</div>			
-		<div class="sampleAcronymContainer" style="display:flex;">
-			<div style="flex-basis:25%"></div>
-			<div style="display:flex;justify-content:flex-start;">	
-				<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>ncles </div>
-			</div>
-			<div style="flex-basis:25%"></div>
-		</div>					
-		<div class="sampleAcronymContainer" style="display:flex;">
-			<div style="flex-basis:25%"></div>
-			<div style="display:flex;justify-content:flex-start;">	
-				<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ouis <b>A</b>armstrong's <b>T</b>rumpet-themed <b>U</b>nderpants</div>
-			</div>
-			<div style="flex-basis:25%"></div>
 		</div>`
 }
 
