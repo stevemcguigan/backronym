@@ -18,7 +18,7 @@ function generateLobby()
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
 	  <div style="flex: 1"></div>
-	  <div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div class="">-or-</div></div>
+	  <div class="gameListContainer" style="margin:0px 0px 0px 0px;"><div class="">-or-</div></div>
 	  <div class="lobbyButtons">
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
 		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
