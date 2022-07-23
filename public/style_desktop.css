@@ -790,6 +790,12 @@ font-size: 13px;
 
 }
 
+.gameListContainer
+{
+  display: flex;
+  justify-content: center;
+}
+
 #clockContainer svg
 {
   max-height: 104px;
