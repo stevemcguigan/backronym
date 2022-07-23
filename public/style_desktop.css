@@ -210,6 +210,13 @@ body
 }
 
 
+.lobbyInstructionsContainer
+{
+  background: #dedede;
+  padding-bottom: 20px;
+}
+
+
 
 .disable-select {
     user-select: none; /* supported by Chrome and Opera */
@@ -283,12 +290,6 @@ border-radius: 50px;
 }
 
 
-.lobbyInstructionsContainer
-{
-  
-  background: #dedede;
-  padding-bottom: 20px;
-}
 
 .kbcontainer
 {
