@@ -59,11 +59,11 @@ function generateInstructions()
 			<div class="sampleAcronymContainer" style="display:flex;">
 				<div style="flex-basis:25%"></div>
 				<div style="display:flex;justify-content:flex-start;">	
-					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym"><b>L</b>aws <b>A</b>gainst <b>T</b>rampolines? <b>U</b>gh. </div>
+					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym"><b>L</b>ets <b>A</b>ll <b>T</b>rade <b>U</b>nderpants. </div>
 				</div>
 				<div style="flex-basis:25%"></div>
 			</div>			
-			<div class="sampleAcronymContainer" style="display:flex;">
+			<!--<div class="sampleAcronymContainer" style="display:flex;">
 				<div style="flex-basis:25%"></div>
 				<div style="display:flex;justify-content:flex-start;">	
 					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>et's <b>A</b>ll <b>T</b>rade <b>U</b>ncles </div>
@@ -73,10 +73,10 @@ function generateInstructions()
 			<div class="sampleAcronymContainer" style="display:flex;">
 				<div style="flex-basis:25%"></div>
 				<div style="display:flex;justify-content:flex-start;">	
-					<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ouis <b>A</b>armstrong's <b>T</b>rumpet-themed <b>U</b>nderpants</div>
+					<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ouis <b>A</b>rmstrong's <b>T</b>rumpet-themed <b>U</b>nderpants</div>
 				</div>
 				<div style="flex-basis:25%"></div>
-			</div>
+			</div>-->
 		</div>`
 }
 
