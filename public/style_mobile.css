@@ -518,6 +518,7 @@ transform: scale(1.5);
 {
   display: flex;
   justify-content: center;
+  margin:0px 0px 10px 0px;
 }
 
 #keyboard button:after, #keyboard2 button:after
