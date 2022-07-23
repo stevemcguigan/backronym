@@ -107,6 +107,7 @@ function randomLATU()
 		break;
 	}
 
+return latu;
 
 }
 
