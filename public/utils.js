@@ -36,6 +36,11 @@ function randomInt(min, max) {
 function openMenu()
 {
 
+let detail = `<label class="switch">
+			   <input type="checkbox">
+			   <span class="slider round"></span>
+			 </label> night mode`
+
 	   let actionsArray = [];       
 	   actionsArray.push(new actionItem({
 	      label:`ok`,
@@ -45,7 +50,7 @@ function openMenu()
         modal_id:"settingsMenu",
         modal_type: "generic_confirm",
         prompt: `settings`,
-        detail_text: `<div c>none for now!</div>`,
+        detail_text: detail,
         actionsArray: actionsArray
   	  });
 

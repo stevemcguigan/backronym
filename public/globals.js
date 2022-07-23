@@ -11,6 +11,7 @@ let idToExpect = null;
 let idWeGot = null;
 let observer = null;
 let callback = null;
+let nightmode = false;
 
 let btnCreate      = null; //id("btnCreate");
 let btnJoin        = null; //id("btnJoin");

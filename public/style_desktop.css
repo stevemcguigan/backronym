@@ -81,6 +81,14 @@
   src: url('angelina.ttf');
 }
 
+.invert
+{  -webkit-filter: invert(100%);
+  -moz-filter: invert(100%);
+  -o-filter: invert(100%);
+  -ms-filter: invert(100%);
+}
+
+
 #titleScreen
 {
   position: absolute;
@@ -647,7 +655,7 @@ padding: 0;
 margin: 4px;
 font-size: 9px;
 height: 21px;
-border-radius: 13px;
+border-radius: 3px;
 max-width: 40px;
 width: 40px;
 cursor: pointer;
