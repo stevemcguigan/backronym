@@ -83,7 +83,7 @@
         border-color: transparent    
     }    
     50% {    
-        border-color: black    
+        border-color: #666    
     }    
 }    
 @keyframes borderBlink {    
@@ -91,7 +91,7 @@
         border-color: transparent    
     }    
     50% {    
-        border-color: black    
+        border-color: #666    
     }    
 }    
 .borderBlink{    
@@ -852,6 +852,7 @@ font-size: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .modal_box {

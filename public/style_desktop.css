@@ -313,7 +313,7 @@ font-size: 13px;
 {
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 60vh;
   width: 60%;
 }
 
@@ -807,11 +807,12 @@ font-size: 13px;
     font-size: 13px;
     line-height:  12px;
     color: #777;
+      margin-top: 20px;
 }
 
 .confirmationActions
 {
-  width: 60%;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
