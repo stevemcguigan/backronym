@@ -62,7 +62,7 @@ function generateInstructions()
 
 function randomLATU()
 {
-	let i = randomInt(1,3)
+	let i = randomInt(1,5)
 	let latu = ""
 	switch (i)
 	{
@@ -85,7 +85,7 @@ function randomLATU()
 			</div>`
 
 		break;
-		case 3:
+		case 3:d
 		latu = `<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
 					<div style="flex-basis:25%"></div>
 					<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
