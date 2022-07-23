@@ -322,6 +322,7 @@ font-size: 13px;
   display: flex;
   flex-direction: column;
   min-height: 70vh;
+  max-height: 70vh;  
   width: 60%;
   max-width: 615px;
 }
@@ -831,7 +832,7 @@ font-size: 13px;
 
 .confirmationActions
 {
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
