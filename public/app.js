@@ -43,7 +43,7 @@ function startInstructionsLoop()
         setTimeout(function() {
           id("lobbyInstructionsContainer").innerHTML = generateInstructions();
           startInstructionsLoop();
-        }, 100000);
+        }, 5000);
       });
     }, 2000);      
   } 
