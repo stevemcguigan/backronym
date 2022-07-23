@@ -315,6 +315,7 @@ font-size: 13px;
   flex-direction: column;
   min-height: 60vh;
   width: 60%;
+  max-width: 615px;
 }
 
 
@@ -789,7 +790,11 @@ font-size: 13px;
 {
 
 }
-
+.lobbyButtons
+{
+  display: flex;
+  justify-content: space-evenly;
+}
 .gameListContainer
 {
   display: flex;
