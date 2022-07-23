@@ -94,15 +94,24 @@ function randomLATU()
 					<div style="flex-basis:25%"></div>
 				</div>`		
 		break;
-		case 3:
+		case 4:
 		latu = `<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
 					<div style="flex-basis:25%"></div>
 					<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
-						<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ittle <b>A</b>wkward, <b>t</b>here, <b>U</b>rsula...</div>
+						<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>ittle <b>a</b>wkward, <b>t</b>here, <b>U</b>rsula...</div>
 					</div>
 					<div style="flex-basis:25%"></div>
 				</div>`		
 		break;		
+		case 5:
+		latu = `<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
+					<div style="flex-basis:25%"></div>
+					<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
+						<div class=sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;margin-top:8px;" class="sampleAcronym"><b>L</b>unchables® <b>A</b>re <b>T</b>horoughly <b>U</b>nappealing...</div>
+					</div>
+					<div style="flex-basis:25%"></div>
+				</div>`		
+		break;				
 		default:
 		break;
 	}
