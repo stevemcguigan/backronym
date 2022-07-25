@@ -638,9 +638,21 @@ button
 	display: none;
 }
 
+
+
+#lobbyInstructionsContainer
+{
+  background: #dedede;
+  padding-bottom: 20px;
+  border-radius: 3px;
+}
+
+
+
 #gameList {
 	width:90%;
-	border: 1px solid #666;
+	border: 1px solid #aaa;
+  border-radius: 3px;  
 	height:200px;
   padding:5px;
 }

@@ -40,7 +40,7 @@ wsServer.on("request", request => {
 	const result = JSON.parse(message.utf8Data);
 
 		if(result.method === "getGames")
-		{
+		{			
 			const payload = {
 				"method": "getGames",
 				"games" : games

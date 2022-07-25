@@ -42,7 +42,7 @@ ws.onmessage = message => {
             setTimeout(() => {
                 getGames();                
             }, 5000); 
-           setTimeout(() => {
+            setTimeout(() => {
                updateGameList(response.games);              
             },  1000);               
           }  
