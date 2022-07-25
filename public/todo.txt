@@ -1,0 +1,14 @@
+- Filter game list to exclude private and in-progress public games
+- autojoin from url
+	- url should just be root?p=bool&c=secret-key-code-or-guid
+	- checks if game is public
+- Finish implementing private games
+	- apprise host and players of secret key
+	- figure out an easy share button (simple click to copy icon? share directly to social?)
+- Figure out some social function a la wordle that helps spread buzz
+- get better punctuation stuff
+	- hyphens and quotation marks should be stripped before checking, hyphen = space, quotation = nothing 
+- ip banning?
+- accounts?
+- buy me a coffee?
+		 
