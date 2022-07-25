@@ -614,7 +614,7 @@ border: 1;
 border: 1px dotted #666;
 }
 
-#bt
+
 
 #btnStart
 {
@@ -650,11 +650,11 @@ button
 
 
 #gameList {
-	width:90%;
-	border: 1px solid #aaa;
-  border-radius: 3px;  
-	height:200px;
-  padding:5px;
+    width: 100%;
+    border: 1px dotted #666;
+    border-radius: 3px;
+    height: 200px;
+    padding: 10px;
 }
 
 #gameListHeading div {
