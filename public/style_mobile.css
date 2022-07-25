@@ -661,13 +661,18 @@ button
 font-weight: bold;
 }
 
+
 .gamePuck {
-	flex-basis:40%;
-	font-size: 14px;
+  flex-basis:40%;
+  font-size: 13px;
+  color: #999;
 }
 .playersPuck {
   flex-basis:35%;
+  font-size: 13px;
+  color: #999;
 }
+
 .joinPuck {
   flex-basis:25%;
 
