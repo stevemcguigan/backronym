@@ -624,11 +624,12 @@ button
 
 #gameListHeading div {
 font-weight: bold;
+color: #999;
 }
 
 .gamePuck {
 	flex-basis:40%;
-	font-size: 14px;
+	font-size: 13px;
 }
 .playersPuck {
   flex-basis:35%;
