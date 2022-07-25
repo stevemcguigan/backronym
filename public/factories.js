@@ -21,7 +21,7 @@ function generateLobby()
 	  <div class="gameListContainer" style=""><div style="font-size:12px;" class="">-or-</div></div>
 	  <div class="lobbyButtons">
 		  <button class="confirmation_button" id = "btnCreate">create new game</button>
-		  <button class="confirmation_button" id = "btnJoinPrivate">join private game</button>
+		  <button class="confirmation_button" id = "btnJoinPrivate" style="pointer-events:none;opacity:.5;">join private game</button>
 		</div>
 		<div style="flex: 1"></div>
 		<div id="lobbyInstructionsContainer">
