@@ -28,7 +28,7 @@ function generateLobby()
 			${generateInstructions()}
 		</div>
 	  <!--<button id = "btnJoin">Join Game</button>-->
-	  <input type = "text" id = "txtGameId"><br>`;
+	  <input type = "text" id = "txtGameId">`;
 	return markup;
 }
 
