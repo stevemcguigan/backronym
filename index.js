@@ -352,7 +352,7 @@ function ping(clientId, pongid)
 
 function makeAcronym(length) {
     var result           = '';
-    var characters       = 'AAAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
+    var characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
       a = characters.charAt(Math.floor(Math.random() * 
