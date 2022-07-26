@@ -396,9 +396,19 @@ function randomInt(min, max) {
 function setup(game)
 {
 	game.inProgress = true;
-	for (let x = 0; x < 5; x++)
+	for (let x = 0; x < 10; x++)
 	{
-		game.acronyms.push(makeAcronym(randomInt(3, 5)));	
+		var min;
+		var max;
+		let outlier = randomInt(1,100);
+		if (outlier < 33) {
+			min = 2;
+			max = 5;
+		} else {
+			min = 3;
+			max = 4;
+		}
+		game.acronyms.push(makeAcronym(randomInt(min, max)));	
 	}		
 	startRound(game)
 }
