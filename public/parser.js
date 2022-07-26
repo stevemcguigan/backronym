@@ -333,7 +333,8 @@ ws.onmessage = message => {
 
            if (actionsArray.length)
            {
-              prompt = mobileCheck() ? 'tap your favorite backronym' : 'click your favorite backronym';  
+              //prompt = mobileCheck() ? "which one's your favorite?" : 'click your favorite backronym';  
+              prompt = "which one's your favorite?"
               create_new_modal({
                 modal_id:"vote",
                 modal_type:"vote",
