@@ -1,0 +1,88 @@
+
+:root {
+
+  --width: 300px;
+  --x-speed: 1s;
+  --y-speed: 2s;
+  --transition-speed: 0.2s;
+
+   --dropshadowblack: rgba(13,13,17, 0.3);
+   --offblack_alpha: rgba(9,10,12,0.8);
+/*   --trueblack_alpha: rgba(0,0,0,0.75);*/
+    --trueblack_alpha: rgba(0,0,0,0.6);
+   /*--offblack: rgb(9,10,12);*/
+   --offblack: rgb(2,3,4);
+   --trueblack: rgb(0,0,0);
+ 
+ /*  --zero_sub: rgb(11,17,23);
+   --zero: rgb(24,34,44);*/
+   --zero_alpha: rgba(24,34,44,0.7);
+ 
+   --one: rgb(31,47,62);
+   --one_sub: rgb(27,42,54);
+
+   /*--zero_sub: rgb(27,42,54);
+   --zero: rgb(31,47,62);
+*/
+   --zero_sub: rgb(20,24,36);
+   --zero: rgb(24,31,44);
+  /*
+   --zero_alpha: rgba(24,31,44,0.7);
+   --one: rgb(36,47,71); 
+   --one_sub: rgb(29,37,53);
+   */
+ 
+/* matching 1*/
+   --two: rgb(24,34,44);
+   /*
+   --two_70: rgba(24,34,44,0.7);
+   */
+   
+  /* --two: rgb(49,55,76);*/
+   --two_70: rgba(49,55,76,0.7);
+     
+   --three: rgb(59,64,84);
+   --four: rgb(68,73,92);   
+   --dimtext: rgb(35,35,35);
+
+   --blue_text_100: rgb(200,200,250);
+   --blue_text_60: rgb(100,100,120);
+
+   --dim_outline: rgb(130,130,130);
+   --fadetext: rgb(170,170,170);
+   --neutraltext: rgb(220,220,220);
+   --white: rgb(255,255,255);
+    --white_40: rgba(255,255,255,0.8);
+   --offwhite: rgb(235,235,235);
+   --selectedIcon: #ffd300;
+   /*--highlight: #ffbd00;*/
+   /*--highlight: rgb(255, 223, 5);*/
+   --highlight: rgb(255, 232, 74);
+   --highlight_complement: rgb(15, 172, 4);
+   --one_old: #28282b;
+   --bordercolor_old: #555;
+   --pinline: #111;
+   --buttonHighlight: yellow;
+
+   --puck_radius: 8px;
+   --modal_radius: 18px;
+   --button_radius: 8px;
+   --box-shadow_modal: 2px 2px 13px 11px var(--offblack);
+  --zero_grad: linear-gradient(138deg, var(--zero), var(--zero) 62%, var(--zero_sub));
+  --one_grad: linear-gradient(138deg, var(--one), var(--one) 62%, var(--one_sub));
+ /*  --list_grad: linear-gradient(20deg, var(--zero), var(--zero) 60%, var(--one));*/
+
+   --bar_height: calc(44px + env(safe-area-inset-top)) !important;
+   --modal_bar_height: env(safe-area-inset-top) !important;;
+}
+
+
+
+
+#main
+{
+
+  height: 100vh;
+
+}
+
