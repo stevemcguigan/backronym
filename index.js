@@ -348,7 +348,24 @@ function ping(clientId, pongid)
 	con.send(JSON.stringify(payload));	
 }
 
+
+
 function makeAcronym(length) {
+    var result           = '';
+    var characters       = 'AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUVVWWXYYZ';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      a = characters.charAt(Math.floor(Math.random() * 
+ 		charactersLength));
+      result += a; //characters.charAt(Math.floor(Math.random() * 
+ 		//charactersLength));
+   }
+   return result;
+}
+
+
+
+function makeAcronym_old(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWYZ';
     var charactersLength = characters.length;
