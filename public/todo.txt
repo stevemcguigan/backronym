@@ -9,6 +9,7 @@
 	- apprise host and players of secret key
 	- figure out an easy share button (simple click to copy icon? share directly to social?)
 - Figure out some social function a la wordle that helps spread buzz
+- night mode
 - get better punctuation stuff
 	- hyphens and quotation marks should be stripped before checking, hyphen = space, quotation = nothing 
 - ip banning?
