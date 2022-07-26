@@ -94,6 +94,12 @@
         border-color: #666    
     }    
 }    
+
+
+html {
+  height: -webkit-fill-available;
+}
+
 .borderBlink{    
     border-right:1px solid black;
     -webkit-animation: borderBlink 1s step-end infinite;    
@@ -340,7 +346,9 @@ font-size: 13px;
 {
   display: flex;
   flex-direction: column;
-  height:  100vh;
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 }
 
 
