@@ -352,7 +352,7 @@ function ping(clientId, pongid)
 
 function makeAcronym(length) {
     var result           = '';
-    var characters       = 'AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUVVWWXYYZ';
+    var characters       = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUVVWWXYYZ';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
       a = characters.charAt(Math.floor(Math.random() * 
@@ -396,7 +396,7 @@ function randomInt(min, max) {
 function setup(game)
 {
 	game.inProgress = true;
-	for (let x = 0; x < 10; x++)
+	for (let x = 0; x < 7; x++)
 	{
 		var min;
 		var max;

@@ -1,7 +1,10 @@
+- 
 - Filter game list to exclude private and in-progress public games
 - autojoin from url
 	- url should just be root?p=bool&c=secret-key-code-or-guid
 	- checks if game is public
+- exit games (old clients reconnect into old dead games)
+- pass host off if host dies	
 - Finish implementing private games
 	- apprise host and players of secret key
 	- figure out an easy share button (simple click to copy icon? share directly to social?)
@@ -11,4 +14,3 @@
 - ip banning?
 - accounts?
 - buy me a coffee?
-		 
