@@ -14,7 +14,7 @@ function generateTitleBar()
 function generateLobby()
 {
 	let markup = `
-	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span>
+	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span></div>
 		<div class="gameListContainer"><div class="" style="font-size:12px;">-join a public game-</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
