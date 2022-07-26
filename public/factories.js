@@ -353,7 +353,9 @@ function generateAcronymContainer(acronym)
 		letters += tile(acronym.charAt(x), x)
 	}	
 
-	let markup = `<div class="acronymContainer">
+	let markup = `
+	${generateTitleBar()}
+	<div class="acronymContainer">
 				  	${letters}
 				  </div>`
 	return markup;			  

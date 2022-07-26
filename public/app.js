@@ -45,8 +45,12 @@ function startInstructionsLoop()
         width: "100%"
       }, 3500, function() {
         setTimeout(function() {
-          id("lobbyInstructionsContainer").innerHTML = generateInstructions();
-          startInstructionsLoop();
+          try {
+            id("lobbyInstructionsContainer").innerHTML = generateInstructions();
+            startInstructionsLoop();
+          } catch {
+            console.log("tried updating instructions loop but you're not in that area anymore.")
+          }
         }, 5000);
       });
     }, 2000);      

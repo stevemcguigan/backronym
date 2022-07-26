@@ -71,6 +71,7 @@ ws.onmessage = message => {
           const element = document.querySelector('.acronymContainer');
           element.classList.add('animate__animated', 'animate__zoomOut');
           element.addEventListener('animationend', () => {
+                  $('#titleBar').remove();
                   $('.acronymContainer').remove();
                   const round = response.round;
                   acronym = response.acronym;
@@ -392,6 +393,7 @@ ws.onmessage = message => {
                   console.log(game);
                   console.log("****")
 
+                  $('#titleBar').remove();                  
                   $('.acronymContainer').remove();
                   const round = game.currentRound;
                   acronym = game.acronyms[round - 1];
