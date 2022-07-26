@@ -347,7 +347,7 @@ font-size: 13px;
 {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /*height: 100vh;*/
   /* mobile viewport bug fix */
   min-height: -webkit-fill-available;
 }
