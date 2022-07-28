@@ -721,7 +721,8 @@ console.log("games after delete: " + games);
 
 function checkIfGameIsDead(game)
 {
-	if (game.clients.length < 0)
+	//console.log("is game dead? ")
+	if (game.clients.length < 1)
 		killGame(game);			
 }
 
