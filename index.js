@@ -38,7 +38,8 @@ wsServer.on("request", request => {
 		clients[connection.clientId].connected = false;
 
 		setTimeout(() => {
-			console.log(clients[connection.clientId]);
+			console.log(clients[connection.clientId].currentGameInfo);
+
 			//var gameId = clients[connection.clientId].currentGameInfo.gameId
 			//var clientGame = games[];
 			//cullDeadClientsFromGame(clientGame, connection.clientId);			
