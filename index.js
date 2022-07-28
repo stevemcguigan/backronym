@@ -713,6 +713,7 @@ function sendAll(game, payload)
 
 function killGame(game)
 {
+console.log("Trying to kill " + game.gameId)	
 console.log("games before delete: " + JSON.stringify(games));	
 	delete games[game.gameId];
 console.log("games after delete: " + JSON.stringify(games));		
