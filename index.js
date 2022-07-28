@@ -719,6 +719,7 @@ function cullDeadClientsFromGame(game, clientId)
 			console.log("found a dead client in the game, culling");	
 			game.clients.splice(x, 1);
 			console.log("after cull: " + game.clients);
+		}	
 	}
 }	
 
