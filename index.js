@@ -38,11 +38,12 @@ wsServer.on("request", request => {
 		clients[connection.clientId].connected = false;
 
 		setTimeout(() => {
-			console.log(clients[connection.clientId].currentGameInfo);
-
-			//var gameId = clients[connection.clientId].currentGameInfo.gameId
-			//var clientGame = games[];
-			//cullDeadClientsFromGame(clientGame, connection.clientId);			
+			try {
+				var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
+				cullDeadClientsFromGame(clientGame, connection.clientId);
+			} catch {
+				console.log("dead client was not in a game. clean break.")
+			}			
 		}, 10000);		
 	});
 	connection.on("message", message => {
