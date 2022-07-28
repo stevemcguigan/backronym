@@ -713,9 +713,9 @@ function sendAll(game, payload)
 
 function killGame(game)
 {
-console.log("games before delete: " + games);	
+console.log("games before delete: " + JSON.stringify(games));	
 	delete games[game.gameId];
-console.log("games after delete: " + games);		
+console.log("games after delete: " + JSON.stringify(games));		
 }
 
 
