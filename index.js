@@ -34,6 +34,7 @@ wsServer.on("request", request => {
 	});
 	connection.on("close", () => {
 		console.log("connection closed");
+		console.log(this);
 	});
 	connection.on("message", message => {
 	// could fail if client sends bad JSON
