@@ -34,7 +34,13 @@ wsServer.on("request", request => {
 	});
 	connection.on("close", () => {
 		console.log("connection closed");
-		console.log(connection);
+		//console.log(connection);
+		clients[connection.clientId].connected = false;
+
+		setTimeout(() => {
+			var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
+			cullDeadClientsFromGame(clientGame, connection.clientId);			
+		}, 10000);		
 	});
 	connection.on("message", message => {
 	// could fail if client sends bad JSON
@@ -313,7 +319,7 @@ wsServer.on("request", request => {
 	//generate new clientid
 	const clientId = guid();
 	connection.clientId = clientId;
-	clients[clientId] = {
+	clients[clientId] = { "connected" : true,
 		"connection": connection
 	}
 
@@ -700,6 +706,21 @@ function sendAll(game, payload)
 
 
 //****** UTILS
+
+
+function cullDeadClientsFromGame(game, clientId)
+{
+	for (let x = 0; x < game.clients.length; x++)
+	{
+		if (game.clients[x].clientId == clientId)
+		{
+			console.log("******")
+			console.log(game.clients);
+			console.log("found a dead client in the game, culling");	
+			game.clients.splice(x, 1);
+			console.log("after cull: " + game.clients);
+	}
+}	
 
 
 function compare( a, b ) {
