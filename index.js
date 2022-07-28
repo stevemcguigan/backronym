@@ -38,8 +38,10 @@ wsServer.on("request", request => {
 		clients[connection.clientId].connected = false;
 
 		setTimeout(() => {
-			var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
-			cullDeadClientsFromGame(clientGame, connection.clientId);			
+			console.log(clients[connection.clientId]);
+			//var gameId = clients[connection.clientId].currentGameInfo.gameId
+			//var clientGame = games[];
+			//cullDeadClientsFromGame(clientGame, connection.clientId);			
 		}, 10000);		
 	});
 	connection.on("message", message => {
