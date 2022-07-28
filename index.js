@@ -711,6 +711,20 @@ function sendAll(game, payload)
 
 //****** UTILS
 
+function killGame(game)
+{
+console.log("games before delete: " + games);	
+	delete game[game.gameId];
+console.log("games after delete: " + games);		
+}
+
+
+function checkIfGameIsDead(game)
+{
+	if (game.clients.length < 0)
+		killGame(game);			
+}
+
 
 function cullDeadClientsFromGame(game, clientId)
 {
@@ -723,6 +737,7 @@ function cullDeadClientsFromGame(game, clientId)
 			console.log("found a dead client in the game, culling");	
 			game.clients.splice(x, 1);
 			console.log("after cull: " + game.clients);
+			checkIfGameIsDead(game);
 		}	
 	}
 }	
