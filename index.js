@@ -312,6 +312,7 @@ wsServer.on("request", request => {
 
 	//generate new clientid
 	const clientId = guid();
+	connection.clientId = clientId;
 	clients[clientId] = {
 		"connection": connection
 	}
