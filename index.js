@@ -497,9 +497,8 @@ function cullAnswers(game)
 	}
 }
 
-function skipVoting()
+function skipVoting(game)
 {
-
 
 	//broadcast(game, null, "", "30 seconds to vote");
 	game.acceptingAnswers = false;								 
