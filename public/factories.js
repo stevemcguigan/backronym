@@ -376,7 +376,7 @@ inputs.forEach(input => {
 }
 
 
-function generateGame()
+function generateGame() 
 {
 	let markup = `
 	<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()">&lt;&lt;</span><span id="menu" onclick="openMenu()">☰</span></div>

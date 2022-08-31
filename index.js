@@ -52,7 +52,7 @@ wsServer.on("request", request => {
 
 		if(result.method === "getGames")
 		{			
-			
+
 			const payload = {
 				"method": "getGames",
 				"games" : games
@@ -154,7 +154,7 @@ wsServer.on("request", request => {
 			{
 				game.joinable = false;
 				console.log("host exited, aborting game");	
-				broadcast(game, "host left. exiting in 3 seconds!")						
+				broadcast(game, "host left. exiting in 10 seconds!")						
 				setTimeout(() => {
 					for (let x = 0; x < game.clients.length; x++)
 					{
@@ -162,7 +162,7 @@ wsServer.on("request", request => {
 					}					
 					sendAll(game, payload);
 					killGame(game);		
-				}, 3000);	
+				}, 10000);	
 			}	
 		}	
 
