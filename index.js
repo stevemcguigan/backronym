@@ -141,6 +141,10 @@ wsServer.on("request", request => {
 			const gameId = result.gameId;
 			const game = games[gameId];
 			cullDeadClientsFromGame(game, clientId);
+			const payload = {
+				"method" : "exitSuccess"
+			}
+			clients[clientId].connection.send(JSON.stringify(payload));			
 		}	
 
 		if(result.method === "play")

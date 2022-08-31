@@ -55,6 +55,8 @@ function exitGameConfirm()
 
 function exitGame()
 {
+
+   // this wrapper probably doesn't need to exist 
    requestExit();
 }
 

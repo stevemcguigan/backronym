@@ -56,6 +56,13 @@ ws.onmessage = message => {
           join(gameId);
   			}	
 
+        if (response.method === "exitSuccess")
+        {
+          
+          populate ("main", generateLobby(), wireLobbyEvents);
+          startInstructionsLoop();
+        }         
+
         if (response.method === "ping")
         {
 //          console.log(`got a ping`);
