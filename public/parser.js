@@ -308,6 +308,10 @@ ws.onmessage = message => {
 
          // divChatWindow.insertAdjacentHTML("beforeend", markup);
         }
+
+
+
+
            
         if (response.method === "getVotes")
         {
@@ -333,14 +337,15 @@ ws.onmessage = message => {
               {
                 actionsArray.push(new actionItem({
                   label: answer.acronym,
-                  action:`castVote('${answer.owner}')`
+                  action:`castVote('${answer.owner}')`,
+                  owner: answer.owner
                  }));
               } 
           } 
            //console.log("full actions array")
            //console.log(actionsArray) 
 
-           if (actionsArray.length)
+           if (actionsArray.length > 1)
            {
               //prompt = mobileCheck() ? "which one's your favorite?" : 'click your favorite backronym';  
               prompt = "which one's your favorite?"
@@ -352,8 +357,18 @@ ws.onmessage = message => {
                 force:true
               });
            }
-           else 
+           else if (actionsArray.length == 1)
            {
+              actionsArray.push(new actionItem({
+                  label: "ok",
+                  action:`clear_modal_by_id("emptyround_total")`
+                 }));
+               create_new_modal({
+                  modal_id:"emptyround_total",
+                  modal_type: "generic_confirm",
+                  prompt: `Not enough submissions this round. <br> ${actionsArray[0].owner}${actionsArray[0].label}`,
+              });                
+           } else {
                  actionsArray.push(new actionItem({
                   label: "ok",
                   action:`clear_modal_by_id("emptyround_total")`
@@ -370,6 +385,61 @@ ws.onmessage = message => {
 
           //divChatWindow.insertAdjacentHTML("beforeend", markup);
         }        
+
+        if (response.method === "skipVoting")
+        {
+            acronym = false;
+            /*generateNotification({message: "Round complete.",
+                                type: "dm",
+                                color: "green"})*/       
+
+
+          var actionsArray = [];
+          var answers = JSON.parse(response.answers); 
+
+          for (let x = 0; x < answers.length; x++)
+          {  
+            var answer = answers[x];
+              if (answer.acronym == null || answer.acronym == "null")
+              {
+                  // skip it, left logic in case I wanna do something later
+              } 
+              else
+              {
+                actionsArray.push(new actionItem({
+                  label: answer.acronym,
+                  action:`castVote('${answer.owner}')`,
+                  owner: answer.owner
+                 }));
+              } 
+          } 
+           if (actionsArray.length == 1)
+           {
+              actionsArray.push(new actionItem({
+                  label: "ok",
+                  action:`clear_modal_by_id("emptyround_total")`
+                 }));
+               create_new_modal({
+                  modal_id:"emptyround_total",
+                  modal_type: "generic_confirm",
+                  prompt: `too few submissions!`,
+                  detail_text: `${actionsArray[0].owner}: ${actionsArray[0].label}`
+              });                
+           } else {
+                 actionsArray.push(new actionItem({
+                  label: "ok",
+                  action:`clear_modal_by_id("emptyround_total")`
+                 }));
+               create_new_modal({
+                  modal_id:"emptyround_total",
+                  modal_type: "generic_confirm",
+                  prompt: `no submissions this round`,
+              });    
+           } 
+
+
+        }
+
 
   			if (response.method === "join")
   			{				

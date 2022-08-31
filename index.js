@@ -488,7 +488,44 @@ function cullAnswers(game)
 		
 	});
 	console.log(game.answers)
-	getVotes(game);
+
+	if (game.answers.length > 1)
+	{
+			getVotes(game);
+	}	else {
+			skipVoting(game)
+	}
+}
+
+function skipVoting()
+{
+
+
+	//broadcast(game, null, "", "30 seconds to vote");
+	game.acceptingAnswers = false;								 
+	const payload = {
+		"method" : "skipVoting",
+		"answers": JSON.stringify(game.answers)
+	}
+	sendAll(game, payload);
+	endRound(game);
+	if (game.currentRound >= game.acronyms.length)
+	{
+		endGame(game, score[0]);
+	}	
+	else
+	{
+		broadcast(game, "next round starts in 30 seconds")
+		setTimeout(() => {
+			startRound(game);			  			  	
+		}, 30000);				
+	}	
+	/*setTimeout(() => {
+		warning(game, "<span id='counter'>5</span>") 
+		setTimeout(() => {
+			cullVotes(game);	  			  		  			  	 			  		  			  	
+		}, 5500);			  			  	
+	}, 24500);	*/
 }
 
 function cullVotes(game)
@@ -608,8 +645,7 @@ function reportScore(game)
 		broadcast(game, "next round starts in 30 seconds")
 		setTimeout(() => {
 			startRound(game);			  			  	
-		}, 30000);			
-			
+		}, 30000);				
 	}	
 
 
@@ -745,7 +781,7 @@ function dm(clientId, msg)
 
 function sendAll(game, payload)
 {
-	console.log(game);
+	//console.log(game);
 	game.clients.forEach (c => {
 		clients[c.clientId].connection.send(JSON.stringify(payload));
 	})
