@@ -73,7 +73,8 @@ function wireGameEvents()
     btnMessage.addEventListener("click", e => {
         if (acronym)
         {
-            candidate = phrase2acronym(id("txtMessage").value).toUpperCase();
+            let candidate = strip(id("txtMessage").value)
+            candidate = phrase2acronym(candidate).toUpperCase();
             if (candidate === acronym)
             {
                 play(id("txtMessage").value);
@@ -196,7 +197,7 @@ function strip(stringToStrip)
     return stringToStrip.replace('-', ' ');
 }
 
-function checker ()
+function checker()
 {
     if (!acronym)
         return;
