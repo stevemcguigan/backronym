@@ -58,9 +58,10 @@ ws.onmessage = message => {
 
         if (response.method === "exitSuccess")
         {
-          
+
           populate ("main", generateLobby(), wireLobbyEvents);
           startInstructionsLoop();
+          getGames();   
         }         
 
         if (response.method === "ping")
