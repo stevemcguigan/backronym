@@ -380,9 +380,6 @@ ws.onmessage = message => {
               });    
            } 
 
-
-
-
           //divChatWindow.insertAdjacentHTML("beforeend", markup);
         }        
 
@@ -396,7 +393,7 @@ ws.onmessage = message => {
 
           var actionsArray = [];
           var answers = JSON.parse(response.answers); 
-
+          console.log(answers);
           for (let x = 0; x < answers.length; x++)
           {  
             var answer = answers[x];
@@ -423,7 +420,7 @@ ws.onmessage = message => {
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
                   prompt: `too few submissions!`,
-                  detail_text: `${actionsArray[0].owner}: ${actionsArray[0].label}`
+                  detail_text: `<div style="padding: 15px 0px;">${actionsArray[0].owner}: ${actionsArray[0].label}</div>`
               });                
            } else {
                  actionsArray.push(new actionItem({
