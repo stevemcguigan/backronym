@@ -7,7 +7,7 @@ function generateTitleScreen()
 
 function generateTitleBar()
 {
-	let markup = `<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span></div>`
+	let markup = `<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">«</span><span id="menu" onclick="openMenu()">☰</span></div>`
 	return markup;
 }
 
