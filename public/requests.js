@@ -59,7 +59,7 @@ function requestExit()
 		"clientId": clientId,
 		"gameId": gameId
 	}
-  send(payload);	
+    send(payload);	
 }
 
 function play(play)

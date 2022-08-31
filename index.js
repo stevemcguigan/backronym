@@ -52,6 +52,7 @@ wsServer.on("request", request => {
 
 		if(result.method === "getGames")
 		{			
+			
 			const payload = {
 				"method": "getGames",
 				"games" : games
@@ -100,7 +101,8 @@ wsServer.on("request", request => {
 				"currentRound": 1,
 				"roundTimer" : null,
 				"acceptingAnswers" : false,
-				"answers": []
+				"answers": [],
+				"joinable": true
 			}
 
 			const payload = {
@@ -146,12 +148,12 @@ wsServer.on("request", request => {
 
 			cullDeadClientsFromGame(game, clientId);
 			resetPlayer(clients[clientId])
-			clients[clientId].connection.send(JSON.stringify(payload));					
+			clients[clientId].connection.send(JSON.stringify(payload));
 
 			if (game.hostId == clientId)
 			{
+				game.joinable = false;
 				console.log("host exited, aborting game");	
-
 				broadcast(game, "host left. exiting in 3 seconds!")						
 				setTimeout(() => {
 					for (let x = 0; x < game.clients.length; x++)
