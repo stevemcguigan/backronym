@@ -194,10 +194,8 @@ function scrollChat()
 
 function strip(stringToStrip)
 {
-    stringToStrip.replace('-', ' ');
-    stringToStrip.replace('"', '');
-    stringToStrip.replace('(', '');
-    stringToStrip.replace(')', '');
+    stringToStrip.replace(/-/g, ' ');
+    stringToStrip.replace(/"()/g, '');
     return stringToStrip;
 }
 
