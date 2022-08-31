@@ -140,11 +140,27 @@ wsServer.on("request", request => {
 			const clientId = result.clientId;
 			const gameId = result.gameId;
 			const game = games[gameId];
-			cullDeadClientsFromGame(game, clientId);
 			const payload = {
 				"method" : "exitSuccess"
 			}
-			clients[clientId].connection.send(JSON.stringify(payload));			
+			if (game.hostId == clientId)
+			{
+				console.log("host exited, aborting game");			
+				broadcast(game, "host left. exiting in 10 seconds!")						
+				setTimeout(() => {
+					for (let x = 0; x < game.clients.length; x++)
+					{
+							resetPlayer(clients[game.clients[x]]);
+					}					
+					sendAll(game, payload);
+					killGame(game);		
+				}, 10000);	
+			}	else {
+				console.log("non-host exited, all is well")
+				cullDeadClientsFromGame(game, clientId);
+				resetPlayer(clients[clientId])
+				clients[clientId].connection.send(JSON.stringify(payload));							
+			}
 		}	
 
 		if(result.method === "play")
@@ -637,6 +653,22 @@ function endGame(game, winner)
 
 }
 
+function resetPlayer(client)
+{
+	client.currentGameInfo = {
+			"gameId" : null,
+			"roundScore" : 0,
+			"scoreTotal" : 0,
+			"votesReceived" : 0,
+			"won": false,
+			"selfVoted" : false,
+			"didNotVote" : false,
+			"play" : null,
+			"vote" : null
+	}
+}
+
+
 
 function getVotes(game)
 {
@@ -733,6 +765,14 @@ function checkIfGameIsDead(game)
 	//console.log("is game dead? ")
 	if (game.clients.length < 1)
 		killGame(game);			
+}
+
+
+
+function cullAllClients(game)
+{
+
+	game.clients.length = 0;
 }
 
 
