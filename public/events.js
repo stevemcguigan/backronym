@@ -191,12 +191,18 @@ function scrollChat()
 }
 
 
+function strip()
+{
+    string.replace('-', ' ');
+}
+
 function checker ()
 {
     if (!acronym)
         return;
 
         let candidate = txtMessage.value;
+        candidate = strip(candidate);
         const checker = candidate.split(" ");
 
         if (checker.length)
