@@ -152,15 +152,15 @@ wsServer.on("request", request => {
 			{
 				console.log("host exited, aborting game");	
 
-				broadcast(game, "host left. exiting in 10 seconds!")						
+				broadcast(game, "host left. exiting in 3 seconds!")						
 				setTimeout(() => {
 					for (let x = 0; x < game.clients.length; x++)
 					{
-							resetPlayer(clients[game.clients[x]]);
+						resetPlayer(clients[game.clients[x].clientId]);
 					}					
 					sendAll(game, payload);
 					killGame(game);		
-				}, 10000);	
+				}, 3000);	
 			}	
 		}	
 
