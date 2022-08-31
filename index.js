@@ -143,9 +143,15 @@ wsServer.on("request", request => {
 			const payload = {
 				"method" : "exitSuccess"
 			}
+
+			cullDeadClientsFromGame(game, clientId);
+			resetPlayer(clients[clientId])
+			clients[clientId].connection.send(JSON.stringify(payload));					
+
 			if (game.hostId == clientId)
 			{
-				console.log("host exited, aborting game");			
+				console.log("host exited, aborting game");	
+
 				broadcast(game, "host left. exiting in 10 seconds!")						
 				setTimeout(() => {
 					for (let x = 0; x < game.clients.length; x++)
@@ -155,12 +161,7 @@ wsServer.on("request", request => {
 					sendAll(game, payload);
 					killGame(game);		
 				}, 10000);	
-			}	else {
-				console.log("non-host exited, all is well")
-				cullDeadClientsFromGame(game, clientId);
-				resetPlayer(clients[clientId])
-				clients[clientId].connection.send(JSON.stringify(payload));							
-			}
+			}	
 		}	
 
 		if(result.method === "play")
