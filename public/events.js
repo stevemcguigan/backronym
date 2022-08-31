@@ -191,9 +191,9 @@ function scrollChat()
 }
 
 
-function strip()
+function strip(stringToStrip)
 {
-    string.replace('-', ' ');
+    return stringToStrip.replace('-', ' ');
 }
 
 function checker ()
