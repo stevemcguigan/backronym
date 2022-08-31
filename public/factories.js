@@ -379,7 +379,7 @@ inputs.forEach(input => {
 function generateGame()
 {
 	let markup = `
-	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span></div>
+	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">&lt;&lt;</span><span id="menu" onclick="openMenu()">☰</span></div>
 	<div class="acronymContainer">
 		<button id = "${host ? 'btnStart' : 'btnWait'}" class="animate__animated animate__zoomIn">${host ? 'start' : 'waiting...'}</button>			  	
 	</div>
