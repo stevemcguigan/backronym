@@ -135,6 +135,14 @@ wsServer.on("request", request => {
 			//console.log(clients[clientId]);
 		}		
 
+		if(result.method === "exit")
+		{
+			const clientId = result.clientId;
+			const gameId = result.gameId;
+			const game = games[gameId];
+			cullDeadClientsFromGame(game, clientId);
+		}	
+
 		if(result.method === "play")
 		{
 			const clientId = result.clientId;
@@ -360,8 +368,6 @@ function ping(clientId, pongid)
 	con.send(JSON.stringify(payload));	
 }
 
-
-
 function makeAcronym(length) {
     var result           = '';
     var characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
@@ -374,8 +380,6 @@ function makeAcronym(length) {
    }
    return result;
 }
-
-
 
 function makeAcronym_old(length) {
     var result           = '';

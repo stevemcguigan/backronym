@@ -25,13 +25,39 @@ function clear(eid)
 function startRound(m)
 {
 
-}
+} 
 
 function randomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function exitGameConfirm()
+{
+	let actionsArray = [];       
+	actionsArray.push(new actionItem({
+	  label:`ok`,
+	  action:`clear_modal_by_id('settingsMenu');exitGame();`
+	}));
+	actionsArray.push(new actionItem({
+	  label:`cancel`,
+	  action:`clear_modal_by_id('settingsMenu');`
+	}));	   
+  create_new_modal({
+    modal_id:"settingsMenu",
+    modal_type: "generic_confirm",
+    prompt: `exit game?`,
+    detail_text: 'are you sure you want to exit?',
+    actionsArray: actionsArray
+  });
+}
+
+function exitGame()
+{
+   requestExit();
+}
+
 
 function openMenu()
 {

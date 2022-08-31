@@ -52,6 +52,16 @@ function start(gameId)
     send(payload);	
 }
 
+function requestExit()
+{
+	const payload = {
+		"method": "exit",
+		"clientId": clientId,
+		"gameId": gameId
+	}
+  send(payload);	
+}
+
 function play(play)
 {
 	const payload = {
