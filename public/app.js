@@ -27,7 +27,9 @@ $( document ).ready(function() {
     const pkey = urlParams.get('pkey')
     if (typeof autojoinId !== undefined)
     {
-        joinPrivate(pkey)
+          setTimeout(() => {
+            joinPrivate(pkey)
+          }, 1000);  
     }  
 
     //Navigator.vibrate(2000)
