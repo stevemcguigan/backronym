@@ -25,7 +25,7 @@ $( document ).ready(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const pkey = urlParams.get('pkey')
-    if (typeof pkey !== undefined)
+    if (pkey !== null)
     {
         setTimeout(() => {
           joinPrivate(pkey)
