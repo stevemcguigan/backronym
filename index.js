@@ -11,7 +11,7 @@ app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 app.get('/p', function(req, res) {
   //res.send("gameId is set to " + req.query.gameId);
-  console.log(req.query.gameId)
+  console.log(req.params.gameId)
 });
 
 const websocketServer = require("websocket").server
