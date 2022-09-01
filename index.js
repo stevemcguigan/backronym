@@ -7,28 +7,20 @@ const app = express();
 // vvv this one goes in ngrok & browser
 
 
+app.get('/', async function(req, res) {
 
+    // Access the provided 'page' and 'limt' query parameters 
+    let autojoin = req.query.gameId;
+   console.log(autojoin);
+
+   //if(typeof autojoin === 'undefined')
+   	//	autojoin = false;
+});
 
 
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-
-	app.get('/', async function(req, res) {
-
-	    // Access the provided 'page' and 'limt' query parameters 
-	    let autojoin = req.query.gameId;
-	   //console.log(autojoin);
-
-	   if(typeof autojoin === 'undefined')
-	   {	
-	   		autojoin = false;
-	   } 	
-
-	 	console.log(autojoin);
-	});
-
-
 
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
@@ -46,14 +38,10 @@ const clientLocals = {};
 const games = {};
 const keys = {};
 
-
-
 wsServer.on("request", request => {
-
 	// this is the connect!
 	const connection = request.accept(null, request.origin);
 	// connected, cool, make an id
-
 	connection.on("open", () => {
 		console.log("connection opened");
 	});
@@ -301,7 +289,6 @@ wsServer.on("request", request => {
 			} else {
 				console.log(`looks like a fresh connection`);
 				clientLocals[localId] = clientId;
-				console.log(`we have a pending autojoin on ${clients[clientId].autojoin}`)
 
 			}
 
@@ -769,8 +756,9 @@ function privateJoin(result)
 			} else {
 				console.log("no game found with key " + result.key)
 				privategameId = false;
-	}		
-	privateJoinWinFail(result.clientId, privategameId)
+			}
+			
+			privateJoinWinFail(result.clientId, privategameId)
 }
 
 function privateJoinWinFail(clientId, privategameId)
