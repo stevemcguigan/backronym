@@ -158,9 +158,9 @@ wsServer.on("request", request => {
 			}
 
 			cullDeadClientsFromGame(game, clientId);
-			resetPlayer(clients[clientId])
 			clients[clientId].connection.send(JSON.stringify(payload));
 			broadcast(game, `${clients[clientId].currentGameInfo.nick} left.`)  
+			resetPlayer(clients[clientId]);
 
 			if (game.hostId == clientId)
 			{
@@ -710,7 +710,16 @@ function endGame(game, winner)
 
 function resetPlayer(client)
 {
-	client.currentGameInfo = {
+		client.currentGameInfo.gameId = null;
+		client.currentGameInfo.roundScore = 0;
+		client.currentGameInfo.scoreTotal = 0;
+		client.currentGameInfo.votesReceived = 0;
+		client.currentGameInfo.won = false;
+		client.currentGameInfo.selfVoted = false;
+		client.currentGameInfo.didNotVote = false;
+		client.currentGameInfo.play = null;
+		client.currentGameInfo.vote = null;
+	/* = {
 			"gameId" : null,
 			"roundScore" : 0,
 			"scoreTotal" : 0,
@@ -720,7 +729,7 @@ function resetPlayer(client)
 			"didNotVote" : false,
 			"play" : null,
 			"vote" : null
-	}
+	}*/
 }
 
 
