@@ -9,10 +9,9 @@ app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
-app.get('/p', function(req, res) {
-  //res.send("gameId is set to " + req.query.gameId);
-  console.log(req.params.gameId)
-});
+var tagId = req.params.tagid;
+console.log(tagId); // outputs: 1234
+console.log(req.params.tagid); // outputs: 1234
 
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
