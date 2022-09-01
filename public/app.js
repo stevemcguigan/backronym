@@ -24,7 +24,7 @@ $( document ).ready(function() {
     soundtrack = id("soundtrack");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const product = urlParams.get('gameId')
+    const gameId = urlParams.get('gameId')
     alert(gameId);
 
     //Navigator.vibrate(2000)
