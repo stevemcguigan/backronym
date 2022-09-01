@@ -483,7 +483,7 @@ ws.onmessage = message => {
                   modal_id:"key_teller",
                   modal_type: "generic_confirm",
                   prompt: `secret key`,
-                  detail_text: `<div style="display:flex;flex-direction:column;"><div>the secret key for this game is</div><div style="font-size:32px;"> ${game.key}</div><div>(tell your friends!)</div<</div>`;
+                  detail_text: `<div style="display:flex;flex-direction:column;"><div>the secret key for this game is</div><div style="font-size:32px;"> ${game.key}</div><div>(tell your friends!)</div<</div>`
             });
           }  
   			}	  			
