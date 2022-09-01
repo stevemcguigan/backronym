@@ -25,11 +25,11 @@ $( document ).ready(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const pkey = urlParams.get('pkey')
-    if (typeof autojoinId !== undefined)
+    if (typeof pkey !== undefined)
     {
-          setTimeout(() => {
-            joinPrivate(pkey)
-          }, 100);  
+        setTimeout(() => {
+          joinPrivate(pkey)
+        }, 100);  
     }  
 
     //Navigator.vibrate(2000)
