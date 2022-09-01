@@ -53,6 +53,11 @@ ws.onmessage = message => {
   				console.log(`game succesfully created with id  ${response.game.id}`);
   				gameId = response.game.id;
           host = true;
+          if (response.game.key)
+          {
+            window.history.pushState('', '', '/?pkey=' + response.game.key);  
+          }  
+          
           join(gameId);
   			}	
 
