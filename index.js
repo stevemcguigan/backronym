@@ -55,6 +55,7 @@ wsServer.on("request", request => {
 	   } 	
 
 	   clients[connection.clientId].autojoin = autojoin;
+	   console.log(clients[connection.clientId])
 	});
 
 
