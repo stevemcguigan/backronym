@@ -100,12 +100,15 @@ function joinPrivatePrompt()
 
 }
 
-function joinPrivate()
+function joinPrivate(key)
 {
-
-	const txtKey = id("secretkey");
-	let key = txtKey.value;
-
+   
+	if (typeof key === undefined)
+	{	
+		const txtKey = id("secretkey");
+		key = txtKey.value;
+	}
+	
 	/*let modal_content = gen_win_icon_markup({prompt: "good job"});
 
 	modal_replace_content({

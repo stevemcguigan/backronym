@@ -24,8 +24,11 @@ $( document ).ready(function() {
     soundtrack = id("soundtrack");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const gameId = urlParams.get('gameId')
-    alert(gameId);
+    const autojoinId = urlParams.get('pkey')
+    if (typeof autojoinId !== undefined)
+    {
+        joinPrivate(pkey)
+    }  
 
     //Navigator.vibrate(2000)
 });
