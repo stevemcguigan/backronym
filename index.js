@@ -7,17 +7,7 @@ const app = express();
 // vvv this one goes in ngrok & browser
 
 
-app.get('/', async function(req, res) {
 
-    // Access the provided 'page' and 'limt' query parameters 
-    let autojoin = req.query.gameId;
-   //console.log(autojoin);
-
-   if(typeof autojoin === 'undefined')
-   {	
-   		autojoin = false;
-   } 	
-});
 
 
 app.listen(8000, () => console.log("listening on 8000"));
@@ -40,16 +30,35 @@ const clientLocals = {};
 const games = {};
 const keys = {};
 
-if (autojoin)
-{
 
-}
+
+
+
 
 
 wsServer.on("request", request => {
+
 	// this is the connect!
 	const connection = request.accept(null, request.origin);
 	// connected, cool, make an id
+
+
+	app.get('/', async function(req, res) {
+
+	    // Access the provided 'page' and 'limt' query parameters 
+	    let autojoin = req.query.gameId;
+	   //console.log(autojoin);
+
+	   if(typeof autojoin === 'undefined')
+	   {	
+	   		autojoin = false;
+	   } 	
+
+	   clients[connection.clientId] = autojoin;
+	});
+
+
+
 	connection.on("open", () => {
 		console.log("connection opened");
 	});
@@ -297,7 +306,7 @@ wsServer.on("request", request => {
 			} else {
 				console.log(`looks like a fresh connection`);
 				clientLocals[localId] = clientId;
-				console.log(`we have a pending autojoin on ${autojoin}`)
+				console.log(`we have a pending autojoin on ${clients[clientId].autojoin}`)
 
 			}
 
