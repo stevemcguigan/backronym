@@ -202,8 +202,7 @@ function strip(stringToStrip)
 function checker()
 {
     if (!acronym)
-        return;
-
+    return;
         let candidate = txtMessage.value;
         candidate = strip(candidate);
         const checker = candidate.split(" ");

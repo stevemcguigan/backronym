@@ -58,7 +58,8 @@ ws.onmessage = message => {
 
         if (response.method === "exitSuccess")
         {
-
+          loc = "lobby";
+          acronym = false;
           populate ("main", generateLobby(), wireLobbyEvents);
           startInstructionsLoop();
           getGames();   
