@@ -394,6 +394,7 @@ ws.onmessage = message => {
           var actionsArray = [];
           var answers = JSON.parse(response.answers); 
           console.log(answers);
+
           for (let x = 0; x < answers.length; x++)
           {  
             var answer = answers[x];
@@ -463,29 +464,27 @@ ws.onmessage = message => {
 
           if (game.inProgress)
           {
+            console.log("**** REJOINING GAME")
+            console.log(game);
+            console.log("****")
 
-                  console.log("**** REJOINING GAME")
-                  console.log(game);
-                  console.log("****")
-
-                  $('#titleBar').remove();                  
-                  $('.acronymContainer').remove();
-                  const round = game.currentRound;
-                  acronym = game.acronyms[round - 1];
-                  let acronymMarkup = generateAcronymContainer(acronym);
-                  generateNotification({message: `rejoining game in progress`})
-                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
-                  animateAcronym();  
-
+            $('#titleBar').remove();                  
+            $('.acronymContainer').remove();
+            const round = game.currentRound;
+            acronym = game.acronyms[round - 1];
+            let acronymMarkup = generateAcronymContainer(acronym);
+            generateNotification({message: `rejoining game in progress`})
+            id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
+            animateAcronym();  
           }  
-  				/*while(divPlayers.firstChild)
-  						divPlayers.removeChild(divPlayers.firstChild);
-  				game.clients.forEach(c => {
-  					const d = document.createElement("div");
-  					d.style.width = "200px";
-  					d.style.background = c.color;
-  					d.textContent = c.clientId;
-  					divPlayers.appendChild(d);
-  				})*/
+          if (game.key)
+          {
+            create_new_modal({
+                  modal_id:"key_teller",
+                  modal_type: "generic_confirm",
+                  prompt: `secret key`,
+                  detail_text: `<div style="display:flex;flex-direction:column;"><div>the secret key for this game is</div><div style="font-size:32px;"> ${game.key}</div><div>(tell your friends!)</div<</div>`;
+            });
+          }  
   			}	  			
 }

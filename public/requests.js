@@ -142,7 +142,7 @@ function join(gameId)
 		"nick": nick,
 		"gameId": gameId
 	}
-    send(payload);
+  send(payload);
 }
 
 function castVote(ownerId)
