@@ -65,6 +65,7 @@ ws.onmessage = message => {
         {
           loc = "lobby";
           acronym = false;
+          window.history.pushState('', '', '');
           populate ("main", generateLobby(), wireLobbyEvents);
           startInstructionsLoop();
           getGames();   
