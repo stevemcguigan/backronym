@@ -6,27 +6,17 @@ const app = express();
 
 // vvv this one goes in ngrok & browser
 
+
 app.get('/', async function(req, res) {
 
     // Access the provided 'page' and 'limt' query parameters
-    let page = req.query.page;
-    let limit = req.query.limit;
-
-    let articles = await Article.findAll().paginate({page: page, limit: limit}).exec();
-
-    // Return the articles to the rendering engine
-    res.render('index', {
-        articles: articles
-    });
+    let page = req.query.gameId;
 });
 
 
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-
-// http://localhost:8080/api/tags/98
-app.get('/games/:gameId', function(req, res) {
 
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
