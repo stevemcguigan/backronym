@@ -7,6 +7,9 @@ const app = express();
 // vvv this one goes in ngrok & browser
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
+app.get('/p', function(req, res) {
+  res.send("gameId is set to " + req.query.gameId);
+});
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 const websocketServer = require("websocket").server
@@ -149,6 +152,7 @@ wsServer.on("request", request => {
 			cullDeadClientsFromGame(game, clientId);
 			resetPlayer(clients[clientId])
 			clients[clientId].connection.send(JSON.stringify(payload));
+			broadcast(`${clients[clientId].currentGameInfo.nick} left.`)  
 
 			if (game.hostId == clientId)
 			{
