@@ -63,22 +63,28 @@ function exitGame()
 
 function openMenu()
 {
+	let detail = null;
+	if (game && game.key)
+	{
+		detail = `secret key: ${game.key}`
+	}	
+	else
+	{
+		detail = `none yet, thanks for asking`
+	}	
 
-let detail = `none yet, thanks for asking`
-
-	   let actionsArray = [];       
-	   actionsArray.push(new actionItem({
-	      label:`ok`,
-	      action:`clear_modal_by_id('settingsMenu');`
-	    }));
-      create_new_modal({
-        modal_id:"settingsMenu",
-        modal_type: "generic_confirm",
-        prompt: `settings`,
-        detail_text: detail,
-        actionsArray: actionsArray
-  	  });
-
+	let actionsArray = [];       
+	actionsArray.push(new actionItem({
+    label:`ok`,
+    action:`clear_modal_by_id('settingsMenu');`
+	}));
+	create_new_modal({
+    modal_id:"settingsMenu",
+    modal_type: "generic_confirm",
+    prompt: `settings`,
+    detail_text: detail,
+    actionsArray: actionsArray
+	});
 }
 
 function b(x, min, max) {
