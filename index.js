@@ -9,9 +9,14 @@ const app = express();
 
 app.get('/', async function(req, res) {
 
-    // Access the provided 'page' and 'limt' query parameters
-    let gameId = req.query.gameId;
-    console.log(gameId);
+    // Access the provided 'page' and 'limt' query parameters 
+    let autojoin = req.query.gameId;
+   //console.log(autojoin);
+
+   if(typeof autojoin === 'undefined')
+   {	
+   		autojoin = false;
+   } 	
 });
 
 
@@ -34,6 +39,12 @@ const clients = {};
 const clientLocals = {};
 const games = {};
 const keys = {};
+
+if (autojoin)
+{
+
+}
+
 
 wsServer.on("request", request => {
 	// this is the connect!
@@ -286,6 +297,7 @@ wsServer.on("request", request => {
 			} else {
 				console.log(`looks like a fresh connection`);
 				clientLocals[localId] = clientId;
+				console.log(`we have a pending autojoin on ${autojoin}`)
 
 			}
 
@@ -305,7 +317,7 @@ wsServer.on("request", request => {
 		if(result.method === "joinPrivate")
 		{
 			//console.log("received a request to join a private game with key " + result.key);
-			if (keys[result.key] !== undefined) {
+			/*if (keys[result.key] !== undefined) {
 				privategameId = keys[result.key];
 				console.log(`${result.key} found with id ${privategameId}`);
 			} else {
@@ -313,8 +325,8 @@ wsServer.on("request", request => {
 				privategameId = false;
 			}
 			
-			privateJoinWinFail(result.clientId, privategameId)
-
+			privateJoinWinFail(result.clientId, privategameId)*/
+			privateJoin(result)
 		}	
 
 		if(result.method === "join")
@@ -324,7 +336,7 @@ wsServer.on("request", request => {
 			const clientId = result.clientId;
 			const gameId = result.gameId;
 			const game = games[gameId];
-			//console.log("GAME")
+			//console.log("GAMEf")
 			//console.log(game);
 			game.clients.push({
 				"clientId" : clientId,		
@@ -743,6 +755,19 @@ function getVotes(game)
 
 
 // **** COMMS
+
+
+function privateJoin(result)
+{
+	if (keys[result.key] !== undefined) {
+				privategameId = keys[result.key];
+				console.log(`${result.key} found with id ${privategameId}`);
+			} else {
+				console.log("no game found with key " + result.key)
+				privategameId = false;
+	}		
+	privateJoinWinFail(result.clientId, privategameId)
+}
 
 function privateJoinWinFail(clientId, privategameId)
 {
