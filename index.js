@@ -454,7 +454,12 @@ function setup(game)
 
 function startRound(game)
 {
-	console.log(game);
+	//console.log(game);
+	if (game.clients.length == 0)
+	{
+		delete game;
+		return;
+	}		
 	game.acceptingAnswers = true;
 	const payload = {
 		"method" : "startRound",
