@@ -9,11 +9,16 @@ const app = express();
 app.get('/', async function(req, res) {
 
     // Access the provided 'page' and 'limt' query parameters
-    let gameId = req.query.gameId;
-    console.log(gameId);
+    let page = req.query.page;
+    let limit = req.query.limit;
 
+    let articles = await Article.findAll().paginate({page: page, limit: limit}).exec();
+
+    // Return the articles to the rendering engine
+    res.render('index', {
+        articles: articles
+    });
 });
-
 
 
 app.listen(8000, () => console.log("listening on 8000"));
