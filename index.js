@@ -14,23 +14,6 @@ app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
-const websocketServer = require("websocket").server
-const httpServer = http.createServer();
-
-
-// vvv this one goes in parser.js
-httpServer.listen(9090, () => console.log("Listening on port 9090"));
-const wsServer = new websocketServer({
-	"httpServer": httpServer
-});
- 
-
-const clients = {};
-const clientLocals = {};
-const games = {};
-const keys = {};
-
-
 	app.get('/', async function(req, res) {
 
 	    // Access the provided 'page' and 'limt' query parameters 
@@ -46,6 +29,22 @@ const keys = {};
 	});
 
 
+
+const websocketServer = require("websocket").server
+const httpServer = http.createServer();
+
+
+// vvv this one goes in parser.js
+httpServer.listen(9090, () => console.log("Listening on port 9090"));
+const wsServer = new websocketServer({
+	"httpServer": httpServer
+});
+ 
+
+const clients = {};
+const clientLocals = {};
+const games = {};
+const keys = {};
 
 
 
