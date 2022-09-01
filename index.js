@@ -833,6 +833,10 @@ function killGame(game)
 {
 console.log("Trying to kill " + game.id)	
 console.log("games before delete: " + JSON.stringify(games));	
+
+	if (game.key)
+		delete keys[game.key];
+	
 	delete games[game.id];
 console.log("games after delete: " + JSON.stringify(games));		 
 }
