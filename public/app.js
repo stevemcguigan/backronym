@@ -24,7 +24,7 @@ $( document ).ready(function() {
     soundtrack = id("soundtrack");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const autojoinId = urlParams.get('pkey')
+    const pkey = urlParams.get('pkey')
     if (typeof autojoinId !== undefined)
     {
         joinPrivate(pkey)
