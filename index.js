@@ -5,13 +5,23 @@ const express = require("express")
 const app = express();
 
 // vvv this one goes in ngrok & browser
+
+app.get('/', async function(req, res) {
+
+    // Access the provided 'page' and 'limt' query parameters
+    let gameId = req.query.gameId;
+    console.log(gameId);
+
+});
+
+
+
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
-var tagId = req.params.tagid;
-console.log(tagId); // outputs: 1234
-console.log(req.params.tagid); // outputs: 1234
+// http://localhost:8080/api/tags/98
+app.get('/games/:gameId', function(req, res) {
 
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
