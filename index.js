@@ -7,10 +7,12 @@ const app = express();
 // vvv this one goes in ngrok & browser
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
-app.get('/p', function(req, res) {
-  res.send("gameId is set to " + req.query.gameId);
-});
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
+
+app.get('/p', function(req, res) {
+  //res.send("gameId is set to " + req.query.gameId);
+  console.log(req.query.gameId)
+});
 
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
