@@ -11,9 +11,8 @@ app.get('/', async function(req, res) {
 
     // Access the provided 'page' and 'limt' query parameters 
     let autojoin = req.query.gameId;
-
    console.log(autojoin);
-   console.log(clientId);
+   console.log(connection.clientId);
 });
 
 
