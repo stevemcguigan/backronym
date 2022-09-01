@@ -2,6 +2,7 @@ let	  user			 = null;
 let   clientId       = null;
 let   gameId         = null;
 let	  game 			 = null;
+let   gameKey    = false;
 let	  loc	 		 = "lobby";
 let   nick 			 = "Player" + randomInt(100,999);
 let	  host			 = false;

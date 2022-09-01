@@ -64,9 +64,9 @@ function exitGame()
 function openMenu()
 {
 	let detail = null;
-	if (game && game.key)
+	if (gameId && gameKey)
 	{
-		detail = `secret key: ${game.key}`
+		detail = `secret key: ${gameKey}`
 	}	
 	else
 	{

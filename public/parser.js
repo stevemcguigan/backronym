@@ -447,6 +447,7 @@ ws.onmessage = message => {
           gameId = response.game.id; 
           loc = "game";
           var game = response.game;
+
           if (game.hostId == clientId)
           {
             console.log("You're the host of this game but weren't marked as such -- probably a reconnect. fixing.");
@@ -479,12 +480,15 @@ ws.onmessage = message => {
           }  
           if (game.key)
           {
+            gameKey = game.key;
             create_new_modal({
                   modal_id:"key_teller",
                   modal_type: "generic_confirm",
                   prompt: `secret key`,
                   detail_text: `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">the secret key for this game is</div><div style="font-size:24px;margin:8px;color:olivedrab;"> ${game.key}</div><div style="margin:8px;"> (open the settings menu ☰ to see it again)</div<</div>`
             });
+          } else {
+            gameKey = false;
           }  
   			}	  			
 }
