@@ -31,18 +31,6 @@ const games = {};
 const keys = {};
 
 
-
-
-
-
-
-wsServer.on("request", request => {
-
-	// this is the connect!
-	const connection = request.accept(null, request.origin);
-	// connected, cool, make an id
-
-
 	app.get('/', async function(req, res) {
 
 	    // Access the provided 'page' and 'limt' query parameters 
@@ -54,11 +42,18 @@ wsServer.on("request", request => {
 	   		autojoin = false;
 	   } 	
 
-	   clients[connection.clientId].autojoin = autojoin;
-	   console.log(clients[connection.clientId])
+	 	console.log(autojoin);
 	});
 
 
+
+
+
+wsServer.on("request", request => {
+
+	// this is the connect!
+	const connection = request.accept(null, request.origin);
+	// connected, cool, make an id
 
 	connection.on("open", () => {
 		console.log("connection opened");
