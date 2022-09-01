@@ -10,7 +10,8 @@ const app = express();
 app.get('/', async function(req, res) {
 
     // Access the provided 'page' and 'limt' query parameters
-    let page = req.query.gameId;
+    let gameId = req.query.gameId;
+    console.log(gameId);
 });
 
 
