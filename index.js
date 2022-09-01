@@ -160,7 +160,7 @@ wsServer.on("request", request => {
 			cullDeadClientsFromGame(game, clientId);
 			resetPlayer(clients[clientId])
 			clients[clientId].connection.send(JSON.stringify(payload));
-			broadcast(`${clients[clientId].currentGameInfo.nick} left.`)  
+			broadcast(game, null, `${clients[clientId].currentGameInfo.nick} left.`)  
 
 			if (game.hostId == clientId)
 			{
