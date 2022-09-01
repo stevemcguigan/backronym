@@ -23,6 +23,9 @@ $( document ).ready(function() {
     })
     soundtrack = id("soundtrack");
 
+    const product = urlParams.get('gameId')
+    alert(gameId);
+
     //Navigator.vibrate(2000)
 });
 

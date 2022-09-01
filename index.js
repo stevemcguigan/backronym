@@ -7,13 +7,13 @@ const app = express();
 // vvv this one goes in ngrok & browser
 
 
-app.get('/', async function(req, res) {
+/*app.get('/', async function(req, res) {
 
     // Access the provided 'page' and 'limt' query parameters 
     let autojoin = req.query.gameId;
    console.log(autojoin);
    console.log(connection.clientId);
-});
+});*/
 
 
 app.listen(8000, () => console.log("listening on 8000"));
