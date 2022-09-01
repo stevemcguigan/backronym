@@ -454,7 +454,7 @@ function setup(game)
 
 function startRound(game)
 {
-
+	console.log(game);
 	game.acceptingAnswers = true;
 	const payload = {
 		"method" : "startRound",
