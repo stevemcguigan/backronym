@@ -100,15 +100,17 @@ function joinPrivatePrompt()
 
 }
 
-function joinPrivate(key)
+function joinPrivate(pkey)
 {
    
-	if (typeof key === undefined)
+	if (typeof pkey === undefined)
 	{	
 		const txtKey = id("secretkey");
-		key = txtKey.value;
+		pkey = txtKey.value;
 	}
-	
+
+console.log("JOINING PRIVATE: " + pkey);
+
 	/*let modal_content = gen_win_icon_markup({prompt: "good job"});
 
 	modal_replace_content({
@@ -123,7 +125,7 @@ function joinPrivate(key)
 		"method": "joinPrivate",
 		"clientId": clientId,
 		"nick": nick,
-		"key": key
+		"key": pkey
 	}
     send(payload);
 }

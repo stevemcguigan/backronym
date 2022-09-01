@@ -29,7 +29,7 @@ $( document ).ready(function() {
     {
           setTimeout(() => {
             joinPrivate(pkey)
-          }, 1000);  
+          }, 100);  
     }  
 
     //Navigator.vibrate(2000)
