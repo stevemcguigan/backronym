@@ -413,8 +413,9 @@ ws.onmessage = message => {
               {
                 actionsArray.push(new actionItem({
                   label: answer.acronym,
-                  action:`castVote('${answer.owner}')`,
-                  owner: answer.owner
+                  action:`clear_modal_by_id("emptyround_total")`,
+                  owner: answer.owner,
+                  nick: answer.nick
                  }));
               } 
           } 
