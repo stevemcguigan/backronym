@@ -3,6 +3,8 @@
 const http = require("http");
 const express = require("express")
 const app = express();
+require('moduletest')
+
 
 // vvv this one goes in ngrok & browser
 
@@ -529,8 +531,6 @@ function skipVoting(game)
   				acronym: game.answers[x].acronym
   	});
   }	
-
-
 	const payload = {
 		"method" : "skipVoting",
 		"answers": JSON.stringify(answers)
@@ -539,6 +539,15 @@ function skipVoting(game)
 	endRound(game);
 	if (game.currentRound >= game.acronyms.length)
 	{
+			let score = []
+			game.clients.forEach (c => {
+				let player = clients[c.clientId];
+				score.push({
+					"clientId": c.clientId,
+					"nick" : clients[c.clientId].currentGameInfo.nick,
+					"score": clients[c.clientId].currentGameInfo.scoreTotal
+				})
+			});	
 		endGame(game, score[0]);
 	}	
 	else

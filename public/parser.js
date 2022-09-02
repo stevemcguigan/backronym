@@ -428,7 +428,7 @@ ws.onmessage = message => {
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
                   prompt: `too few submissions!`,
-                  detail_text: `<div style="padding: 15px 0px;">${JSON.stringify(actionsArray[0].label.nick)}: ${actionsArray[0].label.acronym}</div>`
+                  detail_text: `<div style="padding: 15px 0px;">${actionsArray[0].label.nick}: ${actionsArray[0].label.acronym}</div>`
               });                
            } else {
                  actionsArray.push(new actionItem({
