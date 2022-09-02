@@ -412,10 +412,9 @@ ws.onmessage = message => {
               else
               {
                 actionsArray.push(new actionItem({
-                  label: answer.acronym,
+                  label: {"acronym" : answer.acronym, "nick" : answer.nick},
                   action:`clear_modal_by_id("emptyround_total")`,
                   owner: answer.owner,
-                  nick: answer.nick
                  }));
               } 
           } 
@@ -429,7 +428,7 @@ ws.onmessage = message => {
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
                   prompt: `too few submissions!`,
-                  detail_text: `<div style="padding: 15px 0px;">${JSON.stringify(actionsArray[0])}: ${actionsArray[0].label}</div>`
+                  detail_text: `<div style="padding: 15px 0px;">${JSON.stringify(actionsArray[0].label.nick)}: ${actionsArray[0].label.acronym}</div>`
               });                
            } else {
                  actionsArray.push(new actionItem({
