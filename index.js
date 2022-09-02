@@ -525,6 +525,7 @@ function skipVoting(game)
   {
   	answers.push({
   				nick: clients[game.answers[x].owner].currentGameInfo.nick,
+  				owner: game.answers[x].owner,
   				acronym: game.answers[x].acronym
   	});
   }	
