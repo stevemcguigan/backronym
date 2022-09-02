@@ -518,10 +518,21 @@ function skipVoting(game)
 {
 
 	//broadcast(game, null, "", "30 seconds to vote");
-	game.acceptingAnswers = false;								 
+	game.acceptingAnswers = false;	
+  
+  var answers = [];
+  for (var x = 0; x < game.answers.length; x++)
+  {
+  	answers.push({
+  				nick: clients[game.answers[x].owner].currentGameInfo.nick,
+  				acronym: game.answers[x].acronym
+  	});
+  }	
+
+
 	const payload = {
 		"method" : "skipVoting",
-		"answers": JSON.stringify(game.answers)
+		"answers": JSON.stringify(answers)
 	}
 	sendAll(game, payload);
 	endRound(game);

@@ -392,7 +392,7 @@ ws.onmessage = message => {
 
         if (response.method === "skipVoting")
         {
-            acronym = false;
+          acronym = false;
             /*generateNotification({message: "Round complete.",
                                 type: "dm",
                                 color: "green"})*/       
