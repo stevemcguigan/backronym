@@ -5,6 +5,7 @@ const express = require("express")
 const app = express();
 const dictionary = require('dictionary')
 const utils = require('utils')
+const parser = require('parser')
 
 // vvv this one goes in ngrok & browser
 
@@ -82,11 +83,14 @@ wsServer.on("request", request => {
 		if(result.method === "create")
 		{
 			// user requests new game
-			const clientId = result.clientId;
+			
+			parser.create(result)
+
+			/*const clientId = result.clientId;
 			const host = result.host;
 			const isPrivate = result.isPrivate;
 			let key = "";
-			const gameId = guid();
+			const gameId = utils.guid();
 			if (isPrivate)
 			{	
 				for (let x = 0; x < 3; x++)
@@ -121,7 +125,7 @@ wsServer.on("request", request => {
 			}
 
 			const con = clients[clientId].connection;
-			con.send(JSON.stringify(payload));
+			con.send(JSON.stringify(payload));*/
 
 		}
 
@@ -351,11 +355,6 @@ wsServer.on("request", request => {
 				"game" : game
 			}
 
-			//console.log(typeof game.clients)
-			//console.log(game.clients.length);
-			//game.clients.forEach (c => { // i think this is where the multiple pops happen when anyone joins, look later
-				//console.log("c")
-			//	console.log(JSON.stringify(c));
 				clients[clientId].connection.send(JSON.stringify(payload));
 				broadcast(game, `${result.nick} joined. say hi!`);
 			//})
@@ -363,14 +362,11 @@ wsServer.on("request", request => {
 	})
 
 	//generate new clientid
-	const clientId = guid();
+	const clientId = utils.guid();
 	connection.clientId = clientId;
 	clients[clientId] = { "connected" : true,
 		"connection": connection
 	}
-
-	//console.log("CLIENTS")
-	//console.log(clients);
 
 	const payload = {
 		"method" : "connect",
@@ -379,17 +375,9 @@ wsServer.on("request", request => {
 	// send back to client
 	connection.send(JSON.stringify(payload));
 
-
-	/*setInterval(() => {
-		ping(clientId)
-	}, 60000)*/
 	
 })
 
-function findGameByKey(key)
-{
-
-}
 
 function ping(clientId, pongid)
 {
@@ -415,32 +403,8 @@ function makeAcronym(length) {
    return result;
 }
 
-function makeAcronym_old(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWYZ';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      a = characters.charAt(Math.floor(Math.random() * 
- 		charactersLength));
-      if (a == "Q" || a == "Z")
-      {
-      	 if (coinFlip())
-      	 {	
-	      a = characters.charAt(Math.floor(Math.random() * 
-	 		charactersLength));  
-	 	 }	    	
-      }	
-      result += a; //characters.charAt(Math.floor(Math.random() * 
- 		//charactersLength));
-   }
-   return result;
-}
 
-function randomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+
 
 
 function setup(game)
@@ -450,7 +414,7 @@ function setup(game)
 	{
 		var min;
 		var max;
-		let outlier = randomInt(1,100);
+		let outlier = utils.randomInt(1,100);
 		if (outlier < 33) {
 			min = 2;
 			max = 5;
@@ -458,7 +422,7 @@ function setup(game)
 			min = 3;
 			max = 4;
 		}
-		game.acronyms.push(makeAcronym(randomInt(min, max)));	
+		game.acronyms.push(makeAcronym(utils.randomInt(min, max)));	
 	}		
 	startRound(game)
 }
@@ -896,35 +860,8 @@ function cullDeadClientsFromGame(game, clientId)
 }	
 
 
-function compare( a, b ) {
-  if ( a.score< b.score ){
-    return -1;
-  }
-  if ( a.score > b.score ){
-    return 1;
-  }
-  return 0;
-}
 
-function coinFlip() {
-    return (Math.floor(Math.random() * 2) == 0);
-}
 
-function guid() { // Public Domain/MIT
-    var d = new Date().getTime();//Timestamp
-    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16;//random number between 0 and 16
-        if(d > 0){//Use timestamp until depleted
-            r = (d + r)%16 | 0;
-            d = Math.floor(d/16);
-        } else {//Use microseconds since page-load if supported
-            r = (d2 + r)%16 | 0;
-            d2 = Math.floor(d2/16);
-        }
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-}
 
 
 
