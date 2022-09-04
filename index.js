@@ -82,59 +82,14 @@ wsServer.on("request", request => {
 
 		if(result.method === "create")
 		{
-			// user requests new game
-			
+			// user requests new game		
 			gameId = parser.create(games, result)
-
 			const payload = {
 				"method": "create",
 				"game" : games[gameId]
 			}
-
 			const con = clients[clientId].connection;
 			con.send(JSON.stringify(payload));
-
-			/*const clientId = result.clientId;
-			const host = result.host;
-			const isPrivate = result.isPrivate;
-			let key = "";
-			const gameId = utils.guid();
-			if (isPrivate)
-			{	
-				for (let x = 0; x < 3; x++)
-				{
-					x ? key += "-" + dictionary.getRandomWord() : key = dictionary.getRandomWord();
-				}	
-				keys[key] = gameId; 
-
-			} else {
-				key = false
-			}	
-			console.log(`the game is private? ${isPrivate}. the KEY is ${key}`);
-
-			games[gameId] = {
-				"id": gameId,
-				"hostId": clientId,
-				"hostname": host,
-				"key": key,
-				"inProgress" : false,
-				"clients": [],
-				"acronyms": [],
-				"currentRound": 1,
-				"roundTimer" : null,
-				"acceptingAnswers" : false,
-				"answers": [],
-				"joinable": true
-			}
-
-			const payload = {
-				"method": "create",
-				"game" : games[gameId]
-			}
-
-			const con = clients[clientId].connection;
-			con.send(JSON.stringify(payload));*/
-
 		}
 
 		if(result.method === "chatmsg")
@@ -143,7 +98,7 @@ wsServer.on("request", request => {
 			const gameId = result.gameId;
 			const game = games[gameId];
 			const nick = result.nick;
-			chat(game, clientId, nick, result.message)
+			communication.chat(game, clientId, nick, result.message)
 		}
 
 		if(result.method === "castVote")
@@ -769,16 +724,7 @@ function privateJoinWinFail(clientId, privategameId)
 }
 
 
-function chat(game, clientId, nick, message)
-{
-	const payload = {
-		"method" : "chatmsg",
-		"clientId": clientId, 
-		"nick": nick,
-		"message": message
-	}
-	sendAll(game, payload)
-}
+
 
 function broadcast(game, message)
 {
@@ -806,14 +752,6 @@ function dm(clientId, msg)
 	}
 	console.log("sending " + msg + " to " + clientId);
 	clients[clientId].connection.send(JSON.stringify(payload));
-}
-
-function sendAll(game, payload)
-{
-	//console.log(game);
-	game.clients.forEach (c => {
-		clients[c.clientId].connection.send(JSON.stringify(payload));
-	})
 }
 
 
