@@ -732,7 +732,7 @@ function broadcast(game, message)
 		"method" : "broadcast",
 		"message": message
 	}
-	sendAll(game, payload)
+	communication.sendAll(game, payload)
 }
 
 function warning(game, message)
