@@ -84,7 +84,7 @@ wsServer.on("request", request => {
 		{
 			// user requests new game
 			
-			parser.create(games[gameId], result)
+			gameId = parser.create(games, result)
 
 			const payload = {
 				"method": "create",
