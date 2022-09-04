@@ -4,7 +4,7 @@ const http = require("http");
 const express = require("express")
 const app = express();
 const dictionary = require('dictionary')
-
+const utils = require('utils')
 
 // vvv this one goes in ngrok & browser
 
@@ -927,7 +927,5 @@ function guid() { // Public Domain/MIT
 }
 
 
-function randomNumber(min, max) {
-    return Math.round(Math.random() * (max - min) + min);
-}
+
 
