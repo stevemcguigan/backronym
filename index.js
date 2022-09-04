@@ -6,6 +6,7 @@ const app = express();
 const dictionary = require('dictionary')
 const utils = require('utils')
 const parser = require('parser')
+const communication = require('communication')
 
 // vvv this one goes in ngrok & browser
 
