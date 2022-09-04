@@ -86,6 +86,14 @@ wsServer.on("request", request => {
 			
 			parser.create(result)
 
+			const payload = {
+				"method": "create",
+				"game" : games[gameId]
+			}
+
+			const con = clients[clientId].connection;
+			con.send(JSON.stringify(payload));
+
 			/*const clientId = result.clientId;
 			const host = result.host;
 			const isPrivate = result.isPrivate;
