@@ -3,7 +3,7 @@
 const http = require("http");
 const express = require("express")
 const app = express();
-require('dictionary')
+const dictionary = require('dictionary')
 
 
 // vvv this one goes in ngrok & browser
@@ -91,7 +91,7 @@ wsServer.on("request", request => {
 			{	
 				for (let x = 0; x < 3; x++)
 				{
-					x ? key += "-" + getRandomWord() : key = getRandomWord();
+					x ? key += "-" + dictionary.getRandomWord() : key = dictionary.getRandomWord();
 				}	
 				keys[key] = gameId; 
 
