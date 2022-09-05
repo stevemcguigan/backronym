@@ -5,8 +5,10 @@ const express = require("express")
 const app = express();
 const dictionary = require('dictionary')
 const utils = require('utils')
-const parser = require('parser')
+const game = require('game')
 const communication = require('communication')
+const server = require('server')
+
 
 // vvv this one goes in ngrok & browser
 
@@ -64,27 +66,19 @@ wsServer.on("request", request => {
 	// could fail if client sends bad JSON
 	const result = JSON.parse(message.utf8Data);
 
+		
+
 		if(result.method === "getGames")
-		{			
-			const payload = {
-				"method": "getGames",
-				"games" : games
-			}
-			const con = clients[clientId].connection;
-			con.send(JSON.stringify(payload));	
+		{	
+			server.getGames(clients[clientId], games)
 		}	
 
 
 		if(result.method === "create")
 		{
 			// user requests new game		
-			gameId = parser.create(games, result)
-			const payload = {
-				"method": "create",
-				"game" : games[gameId]
-			}
-			const con = clients[clientId].connection;
-			con.send(JSON.stringify(payload));
+			game.create(clients, games, result)
+
 		}
 
 		if(result.method === "chatmsg")
