@@ -74,12 +74,6 @@ wsServer.on("request", request => {
 			con.send(JSON.stringify(payload));	
 		}	
 
-		if(result.method === "pong")
-		{
-			//console.log("got a pong back");
-			//console.log(result)
-			ping(result.clientId, result.pongid);
-		}	
 
 		if(result.method === "create")
 		{
@@ -95,11 +89,7 @@ wsServer.on("request", request => {
 
 		if(result.method === "chatmsg")
 		{
-			const clientId = result.clientId;
-			const gameId = result.gameId;
-			const game = games[gameId];
-			const nick = result.nick;
-			communication.chat(clients, game, clientId, nick, result.message)
+ 			communication.chat(clients, games[result.gameId], result)
 		}
 
 		if(result.method === "castVote")
@@ -110,7 +100,7 @@ wsServer.on("request", request => {
 			const game = games[gameId];
 			console.log("**** cast vote");
 			console.log(result);
-			dm(clientId, "vote received.");
+			communication.dm(clients, clientId, "vote received.");
 			clients[clientId].currentGameInfo.vote = ownerId;
 			//console.log(clients[clientId]);
 		}		
@@ -126,14 +116,14 @@ wsServer.on("request", request => {
 
 			cullDeadClientsFromGame(game, clientId);
 			clients[clientId].connection.send(JSON.stringify(payload));
-			broadcast(game, `${clients[clientId].currentGameInfo.nick} left.`)  
+			communication.broadcast(clients, game, `${clients[clientId].currentGameInfo.nick} left.`)  
 			resetPlayer(clients[clientId]);
 
 			if (game.hostId == clientId)
 			{
 				game.joinable = false;
 				console.log("host exited, aborting game");	
-				broadcast(game, "host left. exiting in 10 seconds!")						
+				communication.broadcast(clients, game, "host left. exiting in 10 seconds!")						
 				setTimeout(() => {
 					for (let x = 0; x < game.clients.length; x++)
 					{
@@ -159,9 +149,9 @@ wsServer.on("request", request => {
 
 				if (clients[clientId].currentGameInfo.play == null) {
 					//broadcast(game, clients[clientId].currentGameInfo.nick + " answered.")
-					broadcast(game, "someone answered.")
+					communication.broadcast(clients, game, "someone answered.")
 				} else {
-					broadcast(game, "someone changed their answer.")
+					communication.broadcast(clients, game, "someone changed their answer.")
 					//broadcast(game, clients[clientId].currentGameInfo.nick + " changed their answer.")
 				}
 
@@ -343,16 +333,6 @@ wsServer.on("request", request => {
 })
 
 
-function ping(clientId, pongid)
-{
-	const payload = {
-		"method": "ping",
-		"pongid": pongid
-	}
-
-	const con = clients[clientId].connection;
-	con.send(JSON.stringify(payload));	
-}
 
 function makeAcronym(length) {
     var result           = '';
@@ -407,9 +387,9 @@ function startRound(game)
 	}
 	sendAll(game, payload);
 	setTimeout(() => {
-	  broadcast(game, "30 seconds left.")
+	  communication.broadcast(clients, game, "30 seconds left.")
 		setTimeout(() => {
-		  broadcast(game, "15 seconds. it's more than it sounds.")
+		  communication.broadcast(clients, game, "15 seconds. it's more than it sounds.")
 			setTimeout(() => {
 			  warning(game, "<span id='counter'>5</span>") 
 			  	setTimeout(() => {
@@ -477,7 +457,7 @@ function skipVoting(game)
 	}	
 	else
 	{
-		broadcast(game, "next round starts in 30 seconds")
+		communication.broadcast(clients, game, "next round starts in 30 seconds")
 		setTimeout(() => {
 			startRound(game);			  			  	
 		}, 30000);				
@@ -604,7 +584,7 @@ function reportScore(game)
 	}	
 	else
 	{
-		broadcast(game, "next round starts in 30 seconds")
+		communication.broadcast(clients, game, "next round starts in 30 seconds")
 		setTimeout(() => {
 			startRound(game);			  			  	
 		}, 30000);				
@@ -682,7 +662,7 @@ function resetPlayer(client)
 
 function getVotes(game)
 {
-	broadcast(game, "30 seconds to vote");
+	communication.broadcast(clients, game, "30 seconds to vote");
 	game.acceptingAnswers = false;								 
 	const payload = {
 		"method" : "getVotes",
@@ -735,15 +715,6 @@ function warning(game, message)
 	sendAll(game, payload)
 }
 
-function dm(clientId, msg)
-{
-	const payload = {
-		"method" : "dm",
-		"message": msg
-	}
-	console.log("sending " + msg + " to " + clientId);
-	clients[clientId].connection.send(JSON.stringify(payload));
-}
 
 
 //****** UTILS

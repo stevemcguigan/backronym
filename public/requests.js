@@ -202,14 +202,7 @@ function create(isPrivate)
 
 function chat(message)
 {
-    	/*if (gameId === null)
-    	{
-    		alert("no game joined, can't send chat")
-    		return;
-    	}*/
-
-    	//const nick = id("txtNick").value;
-    	
+ 	
 
     	const payload = {
     		"method": "chatmsg",

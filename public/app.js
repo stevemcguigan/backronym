@@ -4,14 +4,6 @@ $( document ).ready(function() {
     FastClick.attach(document.body);
     let btnPlay = id("playbutton"); 
 
-/*
-    setInterval(function(){
-      pong();
-      setTimeout(function(){
-          checkPingResponse();
-      }, 5000);
-    }, 20000)
-*/
 
     btnPlay.addEventListener("click", e => {
         $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
