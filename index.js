@@ -78,12 +78,10 @@ wsServer.on("request", request => {
 			server.localId(clients, clientLocals, games, result)
 		}
 
-
 		if(result.method === "create")
 		{
 			// user requests new game		
 			game.create(clients, games, result)
-
 		}
 
 		if(result.method === "chatmsg")
@@ -248,7 +246,7 @@ wsServer.on("request", request => {
 })
 
 
-
+/*
 function makeAcronym(length) {
     var result           = '';
     var characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
@@ -259,11 +257,9 @@ function makeAcronym(length) {
       result += a; //characters.charAt(Math.floor(Math.random() * 
  		//charactersLength));
    }
-   return result;
+   return result;  
 }
-
-
-
+*/
 
 
 function setup(game)
@@ -281,7 +277,7 @@ function setup(game)
 			min = 3;
 			max = 4;
 		}
-		game.acronyms.push(makeAcronym(utils.randomInt(min, max)));	
+		game.acronyms.push(game.makeAcronym(utils.randomInt(min, max)));	
 	}		
 	startRound(game)
 }
