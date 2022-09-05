@@ -5,7 +5,7 @@ const express = require("express")
 const app = express();
 const dictionary = require('dictionary')
 const utils = require('utils')
-const gameFunctions = require('game')
+const gameFunctions = require('gameFunctions')
 const communication = require('communication')
 const server = require('server')
 
