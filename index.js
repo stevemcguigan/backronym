@@ -8,7 +8,7 @@ const utils = require('utils')
 const gameFunctions = require('gameFunctions')
 const communication = require('communication')
 const server = require('server')
-
+const sendAll = communication.sendAll;
 
 // vvv this one goes in ngrok & browser
 
@@ -296,7 +296,7 @@ function startRound(game)
 		"round" : game.currentRound,
 		"acronym" : game.acronyms[game.currentRound - 1]
 	}
-	sendAll(game, payload);
+	communications.sendAll(game, payload);
 	setTimeout(() => {
 	  communication.broadcast(clients, game, "30 seconds left.")
 		setTimeout(() => {
