@@ -73,6 +73,11 @@ wsServer.on("request", request => {
 			server.getGames(clients[clientId], games)
 		}	
 
+		if(result.method === "localId")
+		{
+			server.localId(clients, clientLocals, games, result)
+		}
+
 
 		if(result.method === "create")
 		{
@@ -160,90 +165,6 @@ wsServer.on("request", request => {
 			}	
 			//chat(game, clientId, nick, result.message)
 		}		
-
-		if(result.method === "localId")
-		{
-			// this is in case the socket is dropped, which is likely because people will background the 
-			// browser to answer texts etc. 
-			// the server issues a clientId but the client generates it's own guid as well. As soon as 
-			// a connection is made, server will store a relationship so that on reconnect it can find
-			// which game you were playing before and reconnect you to it seamlessly
-			const clientId = result.clientId; 
-			const localId = result.localId;
-			
-			if (clientLocals[localId]) { // move this (And everything else tbh) into function when it works
-				console.log(`*******************`)
-				console.log("");
-				console.log(`looks like the connection was probably interupted!`)
-				console.log(`old client id: ${clientLocals[localId]}`)
-				console.log(`new client id: ${clientId}`)
-				let oldClient = clients[clientLocals[localId]];
-				let newClient = clients[clientId];
-				try {
-					newClient.currentGameInfo = JSON.parse(JSON.stringify(oldClient.currentGameInfo));
-					let gameId = newClient.currentGameInfo.gameId;
-					let game = games[gameId];
-					// now lets go pluck out that old dead client outta the game and add this new one
-					console.log("")
-					console.log(`Trying to find and delete ${clientLocals[localId]} from game.clients using key ${localId}`)
-					console.log(`before culling old:`)
-					console.log(game.clients);
-					for (let x = 0; x < game.clients.length; x++)
-					{
-						if (game.clients[x].clientId == clientLocals[localId])
-							game.clients.splice(x, 1);
-					}
-					console.log(`after:`)
-					console.log(game.clients);				
-					//delete game.clients[clientLocals[localId]];
-					game.clients.push({
-						"clientId" : clientId,		
-					});	
-					clientLocals[localId] = clientId;
-					if (game.hostId == oldClient.currentGameInfo.clientId)
-					{	
-						console.log("This client was the host! fixing by changing game.hostId from " + game.hostId + " to " + clientId);
-						game.hostId = clientId;
-						game.hostNick = clients[clientId].currentGameInfo.nick
-						console.log("oldclient game cid: "+ clients[clientLocals[localId]].currentGameInfo.clientId)
-						clients[clientLocals[localId]].currentGameInfo.clientId = clientId;
-						console.log("oldclient game cid after update: "+ clients[clientLocals[localId]].currentGameInfo.clientId)
-						//clients[clientLocals[localId]] = clientId;
-					}
-					else 
-					{
-						console.log("this client wasn't the host?")
-						console.log(game.hostId);
-						console.log(oldClient.currentGameInfo.clientId);
-					}	
-					for (let x = 0; x < game.answers.length; x++)
-					{
-						if (game.answers[x].owner == clientLocals[localId])
-							game.answers[x].owner = clientId;
-					}
-					const payload = {
-						"method" : "join",
-						"game" : game
-					}
-					/*console.log("trying to seamlessly re-insert player into game, cross your fingers")	
-					console.log(`after reinsert:`)
-					console.log(game.clients);*/							
-					clients[clientId].connection.send(JSON.stringify(payload));						
-				} catch {
-					console.log("something went really wrong on a reconnect attempt, trying to recover gracefully")
-					clientLocals[localId] = clientId;
-				}
-				
-				
-			} else {
-				console.log(`looks like a fresh connection`);
-				clientLocals[localId] = clientId;
-
-			}
-
-			//clientLocals[localId] = clientId;
-			//checkForReconnect(localId); 
-		}
    
 		if(result.method === "start")
 		{
