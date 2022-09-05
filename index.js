@@ -320,7 +320,7 @@ wsServer.on("request", request => {
 			}
 
 				clients[clientId].connection.send(JSON.stringify(payload));
-				communication.broadcast(game, `${result.nick} joined. say hi!`);
+				communication.broadcast(clients, game, `${result.nick} joined. say hi!`);
 			//})
 		}
 	})
