@@ -99,7 +99,7 @@ wsServer.on("request", request => {
 			const gameId = result.gameId;
 			const game = games[gameId];
 			const nick = result.nick;
-			communication.chat(game, clientId, nick, result.message)
+			communication.chat(clients, game, clientId, nick, result.message)
 		}
 
 		if(result.method === "castVote")
@@ -320,7 +320,7 @@ wsServer.on("request", request => {
 			}
 
 				clients[clientId].connection.send(JSON.stringify(payload));
-				broadcast(game, `${result.nick} joined. say hi!`);
+				communication.broadcast(game, `${result.nick} joined. say hi!`);
 			//})
 		}
 	})
@@ -725,16 +725,6 @@ function privateJoinWinFail(clientId, privategameId)
 }
 
 
-
-
-function broadcast(game, message)
-{
-	const payload = {
-		"method" : "broadcast",
-		"message": message
-	}
-	communication.sendAll(game, payload)
-}
 
 function warning(game, message)
 {
