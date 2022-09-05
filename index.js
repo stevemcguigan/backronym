@@ -5,7 +5,7 @@ const express = require("express")
 const app = express();
 const dictionary = require('dictionary')
 const utils = require('utils')
-const game = require('game')
+const gameFunctions = require('game')
 const communication = require('communication')
 const server = require('server')
 
@@ -81,7 +81,7 @@ wsServer.on("request", request => {
 		if(result.method === "create")
 		{
 			// user requests new game		
-			game.create(clients, games, result)
+			gameFunctions.create(clients, games, result)
 		}
 
 		if(result.method === "chatmsg")
@@ -277,7 +277,7 @@ function setup(game)
 			min = 3;
 			max = 4;
 		}
-		game.acronyms.push(game.makeAcronym(utils.randomInt(min, max)));	
+		game.acronyms.push(gameFunctions.makeAcronym(utils.randomInt(min, max)));	
 	}		
 	startRound(game)
 }
