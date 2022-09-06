@@ -28,32 +28,19 @@ const games 				= {};
 const keys 					= {};
 
 wsServer.on("request", request => {
-	// this is the connect!
 	const connection = request.accept(null, request.origin);
-	// connected, cool, make an id
 	connection.on("open", () => {
-		console.log("connection opened");
 	});
 	connection.on("close", () => {
-		console.log("connection closed");
-		//console.log(connection);
-		clients[connection.clientId].connected = false;
-		setTimeout(() => {
-			try {
-				var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
-				gameFunctions.cullDeadClientsFromGame(clientGame, connection.clientId);
-			} catch {
-				console.log("dead client was not in a game. clean break.")
-			}			
-		}, 10000);		
+		server.closeConnection(clients, games, connection)	
 	});
 	connection.on("message", message => {
-	// could fail if client sends bad JSON
-	const result = JSON.parse(message.utf8Data);
+		const result = JSON.parse(message.utf8Data);
 		if(result.method === "getGames")
 		{	
 			server.getGames(clients[clientId], games)
 		}	
+	
 		if(result.method === "localId")
 		{
 			server.localId(clients, clientLocals, games, result)
