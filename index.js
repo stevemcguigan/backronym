@@ -41,7 +41,7 @@ wsServer.on("request", request => {
 		setTimeout(() => {
 			try {
 				var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
-				cullDeadClientsFromGame(clientGame, connection.clientId);
+				gameFunctions.cullDeadClientsFromGame(clientGame, connection.clientId);
 			} catch {
 				console.log("dead client was not in a game. clean break.")
 			}			
@@ -66,7 +66,7 @@ wsServer.on("request", request => {
 		if(result.method === "create")
 		{
 			// user requests new game		
-			gameFunctions.create(clients, games, result)
+			gameFunctions.create(clients, keys, games, result)
 		}
 
 		if(result.method === "chatmsg")
@@ -77,46 +77,11 @@ wsServer.on("request", request => {
 		if(result.method === "castVote")
 		{
 			gameFunctions.castVote(clients, games[result.gameId], result)
-			/*
-			const clientId = result.clientId;
-			const ownerId = result.ownerId;
-			const gameId = result.gameId;
-			const game = games[gameId];
-			console.log("**** cast vote");
-			console.log(result);
-			communication.dm(clients, clientId, "vote received.");
-			clients[clientId].currentGameInfo.vote = ownerId;
-			//console.log(clients[clientId]);*/
 		}		
 
 		if(result.method === "exit")
 		{
-			const clientId = result.clientId;
-			const gameId = result.gameId;
-			const game = games[gameId];
-			const payload = {
-				"method" : "exitSuccess"
-			}
-
-			cullDeadClientsFromGame(game, clientId);
-			clients[clientId].connection.send(JSON.stringify(payload));
-			communication.broadcast(clients, game, `${clients[clientId].currentGameInfo.nick} left.`)  
-			resetPlayer(clients[clientId]);
-
-			if (game.hostId == clientId)
-			{
-				game.joinable = false;
-				console.log("host exited, aborting game");	
-				communication.broadcast(clients, game, "host left. exiting in 10 seconds!")						
-				setTimeout(() => {
-					for (let x = 0; x < game.clients.length; x++)
-					{
-						resetPlayer(clients[game.clients[x].clientId]);
-					}					
-					communication.sendAll(clients, game, payload);
-					killGame(game);		
-				}, 10000);	
-			}	
+			gameFunctions.exit(clients, result.clientId, games[result.gameId])
 		}	
 
 		if(result.method === "play")
@@ -203,21 +168,6 @@ wsServer.on("request", request => {
 })
 
 
-/*
-function makeAcronym(length) {
-    var result           = '';
-    var characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      a = characters.charAt(Math.floor(Math.random() * 
- 		charactersLength));
-      result += a; //characters.charAt(Math.floor(Math.random() * 
- 		//charactersLength));
-   }
-   return result;  
-}
-*/
-
 
 function setup_old(game)
 {
@@ -261,7 +211,7 @@ function startRound_old(game)
 		setTimeout(() => {
 		  communication.broadcast(clients, game, "15 seconds. it's more than it sounds.")
 			setTimeout(() => {
-			  warning(game, "<span id='counter'>5</span>") 
+			  communication.warning(clients, game, "<span id='counter'>5</span>") 
 			  	setTimeout(() => {
 					  cullAnswers(game) 			  	
 				}, 5000);			  	
@@ -270,8 +220,9 @@ function startRound_old(game)
 	}, 30000);
 }
 
-function cullAnswers(game)
+function cullAnswers_old(game)
 {
+	// moved to gamefunctions module
 	console.log("here's all the answers");
 	game.clients.forEach (c => {
 		var answer = {
@@ -291,9 +242,9 @@ function cullAnswers(game)
 	}
 }
 
-function skipVoting(game)
+function skipVoting_old(game)
 {
-
+  //moved to gameFunctions module
 	//broadcast(game, null, "", "30 seconds to vote");
 	game.acceptingAnswers = false;	
   
@@ -340,8 +291,9 @@ function skipVoting(game)
 	}, 24500);	*/
 }
 
-function cullVotes(game)
+function cullVotes_old(game)
 {
+	// moved to gamefunctions module
 	//console.log("here's all the votes before");
 	//console.log(game);
 	//console.log(clients);
@@ -380,13 +332,10 @@ function cullVotes(game)
 	reportScore(game);
 }
 
-function checkForReconnect(localId)
-{
 
-}
-
-function calculateRoundResult(game)
+function calculateRoundResult_old(game)
 {
+	//moved to gamefunctions module
 	console.log("calculating round result")
 	game.clients.forEach (c => {
 		let player = clients[c.clientId];
@@ -401,7 +350,7 @@ function calculateRoundResult(game)
 
 }
 
-function reportRoundResult(game)
+function reportRoundResult_old(game)
 {
 	let result = [];
 
@@ -426,9 +375,10 @@ function reportRoundResult(game)
 }
 
 
-function reportScore(game)
+function reportScore_old(game)
 {
 
+	// moved to gamefunctions modile
 	let score = []
 
 	game.clients.forEach (c => {
@@ -463,9 +413,9 @@ function reportScore(game)
 
 }
 
-function endRound(game)
+function endRound_old(game)
 {
-
+	// moved to gamefunctions module
 	game.clients.forEach (c => {
 		console.log("ENDING ROUND, ADDING SCORES")
 		clients[c.clientId].currentGameInfo.scoreTotal += clients[c.clientId].currentGameInfo.roundScore; 
@@ -482,8 +432,9 @@ function endRound(game)
 
 }
 
-function endGame(game, winner)
+function endGame_old(game, winner)
 {
+	// moved to gamefunctions moule
 
 	let payload = {
 		"method":   "endGame",
@@ -504,8 +455,9 @@ function endGame(game, winner)
 
 }
 
-function resetPlayer(client)
+function resetPlayer_old(client)
 {
+	// moved to gamefunctions module
 		client.currentGameInfo.gameId = null;
 		client.currentGameInfo.roundScore = 0;
 		client.currentGameInfo.scoreTotal = 0;
@@ -530,8 +482,9 @@ function resetPlayer(client)
 
 
 
-function getVotes(game)
+function getVotes_old(game)
 {
+	//  moved to gamefunctions module
 	communication.broadcast(clients, game, "30 seconds to vote");
 	game.acceptingAnswers = false;								 
 	const payload = {
@@ -540,7 +493,7 @@ function getVotes(game)
 	}
 	communication.sendAll(clients, game, payload);
 	setTimeout(() => {
-		warning(game, "<span id='counter'>5</span>") 
+		warning(clients, game, "<span id='counter'>5</span>") 
 		setTimeout(() => {
 			cullVotes(game);	  			  		  			  	 			  		  			  	
 		}, 5500);			  			  	
@@ -576,7 +529,7 @@ function privateJoinWinFail(clientId, privategameId)
 
 
 
-function warning(game, message)
+function warning_old(game, message)
 {
 	const payload = {
 		"method" : "warning",
@@ -589,7 +542,7 @@ function warning(game, message)
 
 //****** UTILS
 
-function killGame(game)
+function killGame_old(game)
 {
 console.log("Trying to kill " + game.id)	
 console.log("keys before delete: " + JSON.stringify(keys));	
@@ -605,23 +558,15 @@ console.log("games after delete: " + JSON.stringify(games));
 }
 
 
-function checkIfGameIsDead(game)
+function checkIfGameIsDead_old(game)
 {
 	//console.log("is game dead? ")
 	if (game.clients.length < 1)
-		killGame(game);			
+		gameFunctions.killGame(game);			
 }
 
 
-
-function cullAllClients(game)
-{
-
-	game.clients.length = 0;
-}
-
-
-function cullDeadClientsFromGame(game, clientId)
+function cullDeadClientsFromGame_old(game, clientId)
 {
 	for (let x = 0; x < game.clients.length; x++)
 	{
@@ -632,7 +577,7 @@ function cullDeadClientsFromGame(game, clientId)
 			console.log("found a dead client in the game, culling");	
 			game.clients.splice(x, 1);
 			console.log("after cull: " + game.clients);
-			checkIfGameIsDead(game);
+			gameFunctions.checkIfGameIsDead(game);
 		}	
 	}
 }	
