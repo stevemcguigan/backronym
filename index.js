@@ -1,46 +1,31 @@
 // this is where the server manages requests and sends responses
 
-const http = require("http");
-const express = require("express")
-const app = express();
-const dictionary = require('dictionary')
-const utils = require('utils')
+const http 					= require("http");
+const express 			= require("express")
+const app 					= express();
+const dictionary 		= require('dictionary')
+const utils 				= require('utils')
 const gameFunctions = require('gameFunctions')
 const communication = require('communication')
-const server = require('server')
-const sendAll = communication.sendAll;
-
-// vvv this one goes in ngrok & browser
-
-
-/*app.get('/', async function(req, res) {
-
-    // Access the provided 'page' and 'limt' query parameters 
-    let autojoin = req.query.gameId;
-   console.log(autojoin);
-   console.log(connection.clientId);
-});*/
-
+const server 				= require('server')
 
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 const websocketServer = require("websocket").server
-const httpServer = http.createServer();
-
+const httpServer 			= http.createServer();
 
 // vvv this one goes in parser.js
 httpServer.listen(9090, () => console.log("Listening on port 9090"));
 const wsServer = new websocketServer({
 	"httpServer": httpServer
 });
- 
 
-const clients = {};
-const clientLocals = {};
-const games = {};
-const keys = {};
+const clients 			= {};
+const clientLocals 	= {};
+const games 				= {};
+const keys 					= {};
 
 wsServer.on("request", request => {
 	// this is the connect!
@@ -91,6 +76,8 @@ wsServer.on("request", request => {
 
 		if(result.method === "castVote")
 		{
+			gameFunctions(clients, games[result.gameId], result)
+			/*
 			const clientId = result.clientId;
 			const ownerId = result.ownerId;
 			const gameId = result.gameId;
@@ -99,7 +86,7 @@ wsServer.on("request", request => {
 			console.log(result);
 			communication.dm(clients, clientId, "vote received.");
 			clients[clientId].currentGameInfo.vote = ownerId;
-			//console.log(clients[clientId]);
+			//console.log(clients[clientId]);*/
 		}		
 
 		if(result.method === "exit")
