@@ -81,7 +81,7 @@ wsServer.on("request", request => {
 
 		if(result.method === "exit")
 		{
-			gameFunctions.exit(clients, result.clientId, games[result.gameId])
+			gameFunctions.exit(clients, result.clientId, games[result.gameId], keys)
 		}	
 
 		if(result.method === "play")
