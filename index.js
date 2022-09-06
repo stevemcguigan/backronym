@@ -68,7 +68,7 @@ wsServer.on("request", request => {
 			case "join":
 				gameFunctions.join(games[result.gameId], result.gameId, clients, clients[result.clientId], result.clientId, result.nick);
 			break;
-			case default:
+			default case:
 				console.log("invalid method: " + result.method)
 			break;
 		}
