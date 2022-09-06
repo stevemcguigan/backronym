@@ -36,60 +36,49 @@ wsServer.on("request", request => {
 	});
 	connection.on("message", message => {
 		const result = JSON.parse(message.utf8Data);
-		if(result.method === "getGames")
-		{	
-			server.getGames(clients[clientId], games)
-		}	
-	
-		if(result.method === "localId")
+		switch (result.method)
 		{
-			server.localId(clients, clientLocals, games, result)
-		}
-
-		if(result.method === "create")
-		{
-			// user requests new game		
-			gameFunctions.create(clients, keys, games, result)
-		}
-
-		if(result.method === "chatmsg")
-		{
- 			communication.chat(clients, games[result.gameId], result)
-		}
-
-		if(result.method === "castVote")
-		{
-			gameFunctions.castVote(clients, games[result.gameId], result)
-		}		
-
-		if(result.method === "exit")
-		{
-			gameFunctions.exit(clients, result.clientId, games[result.gameId], keys)
-		}	
-
-		if(result.method === "play")
-		{
-			gameFunctions.play(clients, games[result.gameId], result)
-		}		
-   
-		if(result.method === "start")
-		{
-			gameFunctions.start(clients, games[result.gameId], result);
-		} 
-		if(result.method === "joinPrivate")
-		{
-			gameFunctions.privateJoin(clients, keys, result)
-		}	
-		if(result.method === "join")
-		{	
-			gameFunctions.join(games[result.gameId], result.gameId, clients, clients[result.clientId], result.clientId, result.nick);
+			case "getGames":
+				server.getGames(clients[clientId], games)
+			break;
+			case "localId":
+				server.localId(clients, clientLocals, games, result)
+			break;
+			case "chatmsg":
+				communication.chat(clients, games[result.gameId], result)
+			break;
+			case "castVote":
+				gameFunctions.castVote(clients, games[result.gameId], result)
+			break;
+			case "create":
+				gameFunctions.create(clients, keys, games, result)
+			break;
+			case "exit":
+				gameFunctions.exit(clients, result.clientId, games[result.gameId], keys)
+			break;
+			case "play":
+				gameFunctions.play(clients, games[result.gameId], result)
+			break;
+			case "start":
+				gameFunctions.start(clients, games[result.gameId], result);
+			break;
+			case "joinPrivate":
+				gameFunctions.privateJoin(clients, keys, result)
+			break;
+			case "join":
+				gameFunctions.join(games[result.gameId], result.gameId, clients, clients[result.clientId], result.clientId, result.nick);
+			break;
+			case default:
+				console.log("invalid method: " + result.method)
+			break;
 		}
 	})
 
 	//generate new clientid
 	const clientId = utils.guid();
 	connection.clientId = clientId;
-	clients[clientId] = { "connected" : true,
+	clients[clientId] = {
+		"connected" : true,
 		"connection": connection
 	}
 
@@ -97,10 +86,9 @@ wsServer.on("request", request => {
 		"method" : "connect",
 		"clientId" : clientId
 	}
+	communication.send(clients[clientId], payload);
 	// send back to client
-	connection.send(JSON.stringify(payload));
-
-	
+	//connection.send(JSON.stringify(payload));
 })
 
 
