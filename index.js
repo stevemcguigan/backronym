@@ -122,34 +122,11 @@ wsServer.on("request", request => {
 		if(result.method === "play")
 		{
 			gameFunctions.play(clients, games[result.gameId], result)
-			/*const clientId = result.clientId;
-			const gameId = result.gameId;
-			const game = games[gameId];
-			if (game.acceptingAnswers)
-			{	
-				const play = result.play;
-				if (clients[clientId].currentGameInfo.play == null) {
-					communication.broadcast(clients, game, "someone answered.")
-				} else {
-					communication.broadcast(clients, game, "someone changed their answer.")
-				}
-				clients[clientId].currentGameInfo.play = play;
-			}
-			else
-			{
-				dm(clientId, "too late.");
-				//console.log("tried to submit an answer outside of time")
-			}	
-			//chat(game, clientId, nick, result.message)
-			*/
 		}		
    
 		if(result.method === "start")
 		{
-
-			const clientId = result.clientId;
-			const gameId = result.gameId;
-			setup(games[gameId]);
+			gameFunctions.start(games[result.gameId]);
 		}
    
 
@@ -242,8 +219,9 @@ function makeAcronym(length) {
 */
 
 
-function setup(game)
+function setup_old(game)
 {
+	// moved to gameFunctions module.
 	game.inProgress = true;
 	for (let x = 0; x < 7; x++)
 	{
@@ -262,8 +240,9 @@ function setup(game)
 	startRound(game)
 }
 
-function startRound(game)
+function startRound_old(game)
 {
+	// moved to gameFunctions module.
 	//console.log(game);
 	if (game.clients.length == 0)
 	{
