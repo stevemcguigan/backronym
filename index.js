@@ -91,51 +91,11 @@ wsServer.on("request", request => {
 		} 
 		if(result.method === "joinPrivate")
 		{
-			privateJoin(result)
+			gameFunctions.privateJoin(clients, keys, result)
 		}	
-
 		if(result.method === "join")
-		{
-			//console.log("RESULT")
-			//console.log(result)
-			
+		{	
 			gameFunctions.join(games[result.gameId], result.gameId, clients, clients[result.clientId], result.clientId, result.nick);
-
-			/*
-
-			const clientId = result.clientId;
-			const gameId = result.gameId;
-			const game = games[gameId];
-			//console.log("GAMEf")
-			//console.log(game);
-			game.clients.push({
-				"clientId" : clientId,		
-			});
-			//game.clients[clientId]
-			clients[clientId].currentGameInfo = {
-				"gameId" : gameId,
-				"nick" : result.nick,
-				"clientId" : clientId,
-				"roundScore" : 0,
-				"scoreTotal" : 0,
-				"votesReceived" : 0,
-				"won": false,
-				"selfVoted" : false,
-				"didNotVote" : false,
-				"play" : null,
-				"vote" : null
-			}
-
-			//console.log(game)
-
-			const payload = {
-				"method" : "join",
-				"game" : game
-			}
-
-				clients[clientId].connection.send(JSON.stringify(payload));
-				communication.broadcast(clients, game, `${result.nick} joined. say hi!`);
-			*/
 		}
 	})
 
@@ -493,7 +453,7 @@ function getVotes_old(game)
 // **** COMMS
 
 
-function privateJoin(result)
+function privateJoin_old(result)
 {
 	if (keys[result.key] !== undefined) {
 				privategameId = keys[result.key];
@@ -506,7 +466,7 @@ function privateJoin(result)
 			privateJoinWinFail(result.clientId, privategameId)
 }
 
-function privateJoinWinFail(clientId, privategameId)
+function privateJoinWinFail_old(clientId, privategameId)
 {
 
 	const payload = {
