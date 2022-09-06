@@ -8,13 +8,16 @@ const utils 				= require('utils')
 const gameFunctions = require('gameFunctions')
 const communication = require('communication')
 const server 				= require('server')
+const clients 			= {};
+const clientLocals 	= {};
+const games 				= {};
+const keys 					= {};
+const websocketServer = require("websocket").server
+const httpServer 			= http.createServer();
 
 app.listen(8000, () => console.log("listening on 8000"));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-
-const websocketServer = require("websocket").server
-const httpServer 			= http.createServer();
 
 // vvv this one goes in parser.js
 httpServer.listen(9090, () => console.log("Listening on port 9090"));
@@ -22,10 +25,7 @@ const wsServer = new websocketServer({
 	"httpServer": httpServer
 });
 
-const clients 			= {};
-const clientLocals 	= {};
-const games 				= {};
-const keys 					= {};
+
 
 wsServer.on("request", request => {
 	const connection = request.accept(null, request.origin);
