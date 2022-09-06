@@ -121,27 +121,19 @@ wsServer.on("request", request => {
 
 		if(result.method === "play")
 		{
-			const clientId = result.clientId;
+			gameFunctions.play(clients, games[result.gameId], result)
+			/*const clientId = result.clientId;
 			const gameId = result.gameId;
 			const game = games[gameId];
 			if (game.acceptingAnswers)
 			{	
 				const play = result.play;
-	 			console.log("Play received from " + result.clientId); 
-				//console.log(game);
-				console.log(clients[clientId].currentGameInfo.play)
-
 				if (clients[clientId].currentGameInfo.play == null) {
-					//broadcast(game, clients[clientId].currentGameInfo.nick + " answered.")
 					communication.broadcast(clients, game, "someone answered.")
 				} else {
 					communication.broadcast(clients, game, "someone changed their answer.")
-					//broadcast(game, clients[clientId].currentGameInfo.nick + " changed their answer.")
 				}
-
 				clients[clientId].currentGameInfo.play = play;
-				console.log(clients[clientId].currentGameInfo.play)
-
 			}
 			else
 			{
@@ -149,6 +141,7 @@ wsServer.on("request", request => {
 				//console.log("tried to submit an answer outside of time")
 			}	
 			//chat(game, clientId, nick, result.message)
+			*/
 		}		
    
 		if(result.method === "start")
