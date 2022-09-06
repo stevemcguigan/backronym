@@ -87,7 +87,7 @@ wsServer.on("request", request => {
    
 		if(result.method === "start")
 		{
-			gameFunctions.start(games[result.gameId]);
+			gameFunctions.start(clients, games[result.gameId], result);
 		} 
 		if(result.method === "joinPrivate")
 		{
