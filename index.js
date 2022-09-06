@@ -99,7 +99,7 @@ wsServer.on("request", request => {
 			//console.log("RESULT")
 			//console.log(result)
 			
-			gameFunctions.join(games[result.gameId], clients[result.clientId], result.clientId);
+			gameFunctions.join(games[result.gameId], result.gameId, clients, clients[result.clientId], result.clientId);
 
 			/*
 
