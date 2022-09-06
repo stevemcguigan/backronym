@@ -126,7 +126,7 @@ wsServer.on("request", request => {
 					{
 						resetPlayer(clients[game.clients[x].clientId]);
 					}					
-					sendAll(game, payload);
+					communication.sendAll(clients, game, payload);
 					killGame(game);		
 				}, 10000);	
 			}	
@@ -296,7 +296,7 @@ function startRound(game)
 		"round" : game.currentRound,
 		"acronym" : game.acronyms[game.currentRound - 1]
 	}
-	communication.sendAll(game, payload);
+	communication.sendAll(clients, game, payload);
 	setTimeout(() => {
 	  communication.broadcast(clients, game, "30 seconds left.")
 		setTimeout(() => {
@@ -351,7 +351,7 @@ function skipVoting(game)
 		"method" : "skipVoting",
 		"answers": JSON.stringify(answers)
 	}
-	sendAll(game, payload);
+	communication.sendAll(clients, game, payload);
 	endRound(game);
 	if (game.currentRound >= game.acronyms.length)
 	{
@@ -463,7 +463,7 @@ function reportRoundResult(game)
 		"method" : "reportRoundResult",
 		"roundResult": result
 	}	
-	sendAll(game, payload);	
+	communication.sendAll(clients, game, payload);	
 }
 
 
@@ -487,7 +487,7 @@ function reportScore(game)
 		"score": JSON.stringify(score)
 	}
 
-	sendAll(game, payload);	
+	communication.sendAll(clients, game, payload);	
 
 	if (game.currentRound >= game.acronyms.length)
 	{
@@ -534,7 +534,7 @@ function endGame(game, winner)
 		"score" :   winner.score
 	}
 
-	sendAll(game, payload);	
+	communication.sendAll(clients, game, payload);	
 
 	game.clients.forEach (c => {
 			clients[c.clientId].currentGameInfo.scoreTotal = 0;
@@ -579,7 +579,7 @@ function getVotes(game)
 		"method" : "getVotes",
 		"answers": JSON.stringify(game.answers)
 	}
-	sendAll(game, payload);
+	communication.sendAll(clients, game, payload);
 	setTimeout(() => {
 		warning(game, "<span id='counter'>5</span>") 
 		setTimeout(() => {
@@ -623,7 +623,7 @@ function warning(game, message)
 		"method" : "warning",
 		"message": message
 	}
-	sendAll(game, payload)
+	communication.sendAll(clients, game, payload)
 }
 
 
