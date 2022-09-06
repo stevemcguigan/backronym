@@ -50,14 +50,10 @@ wsServer.on("request", request => {
 	connection.on("message", message => {
 	// could fail if client sends bad JSON
 	const result = JSON.parse(message.utf8Data);
-
-		
-
 		if(result.method === "getGames")
 		{	
 			server.getGames(clients[clientId], games)
 		}	
-
 		if(result.method === "localId")
 		{
 			server.localId(clients, clientLocals, games, result)
@@ -92,21 +88,9 @@ wsServer.on("request", request => {
 		if(result.method === "start")
 		{
 			gameFunctions.start(games[result.gameId]);
-		}
-   
-
+		} 
 		if(result.method === "joinPrivate")
 		{
-			//console.log("received a request to join a private game with key " + result.key);
-			/*if (keys[result.key] !== undefined) {
-				privategameId = keys[result.key];
-				console.log(`${result.key} found with id ${privategameId}`);
-			} else {
-				console.log("no game found with key " + result.key)
-				privategameId = false;
-			}
-			
-			privateJoinWinFail(result.clientId, privategameId)*/
 			privateJoin(result)
 		}	
 
@@ -114,6 +98,11 @@ wsServer.on("request", request => {
 		{
 			//console.log("RESULT")
 			//console.log(result)
+			
+			gameFunctions.join(games[result.gameId], clients[result.clientId], result.clientId);
+
+			/*
+
 			const clientId = result.clientId;
 			const gameId = result.gameId;
 			const game = games[gameId];
@@ -146,7 +135,7 @@ wsServer.on("request", request => {
 
 				clients[clientId].connection.send(JSON.stringify(payload));
 				communication.broadcast(clients, game, `${result.nick} joined. say hi!`);
-			//})
+			*/
 		}
 	})
 
