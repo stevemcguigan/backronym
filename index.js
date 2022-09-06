@@ -296,7 +296,7 @@ function startRound(game)
 		"round" : game.currentRound,
 		"acronym" : game.acronyms[game.currentRound - 1]
 	}
-	communications.sendAll(game, payload);
+	communication.sendAll(game, payload);
 	setTimeout(() => {
 	  communication.broadcast(clients, game, "30 seconds left.")
 		setTimeout(() => {
