@@ -76,7 +76,7 @@ wsServer.on("request", request => {
 
 		if(result.method === "castVote")
 		{
-			gameFunctions(clients, games[result.gameId], result)
+			gameFunctions.castVote(clients, games[result.gameId], result)
 			/*
 			const clientId = result.clientId;
 			const ownerId = result.ownerId;
