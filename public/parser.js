@@ -352,7 +352,7 @@ ws.onmessage = message => {
            //console.log("full actions array")
            //console.log(actionsArray) 
 
-           if (actionsArray.length > 1)
+           if (actionsArray.length > 0)
            {
               //prompt = mobileCheck() ? "which one's your favorite?" : 'click your favorite backronym';  
               prompt = "which one's your favorite?"
@@ -363,18 +363,6 @@ ws.onmessage = message => {
                 actionsArray: actionsArray,
                 force:true
               });
-           }
-           else if (actionsArray.length == 1)
-           {
-              actionsArray.push(new actionItem({
-                  label: "ok",
-                  action:`clear_modal_by_id("emptyround_total")`
-                 }));
-               create_new_modal({
-                  modal_id:"emptyround_total",
-                  modal_type: "generic_confirm",
-                  prompt: `Not enough submissions this round. <br> ${actionsArray[0].owner}${actionsArray[0].label}`,
-              });                
            } else {
                  actionsArray.push(new actionItem({
                   label: "ok",
@@ -412,7 +400,7 @@ ws.onmessage = message => {
               else
               {
                 actionsArray.push(new actionItem({
-                  label: {"acronym" : answer.acronym, "nick" : answer.label.nick},
+                  label: {"acronym" : answer.acronym, "nick" : answer.nick},
                   action:`clear_modal_by_id("emptyround_total")`,
                   owner: answer.owner,
                  }));
