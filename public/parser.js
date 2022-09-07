@@ -492,7 +492,7 @@ ws.onmessage = message => {
                   modal_id:"key_teller",
                   modal_type: "generic_confirm",
                   prompt: `secret key`,
-                  detail_text: `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">the secret key for this game is</div><div style="font-size:24px;margin:8px;color:olivedrab;"> ${game.key}</div><div style="margin:8px;"> (open the settings menu ☰ to see it again)</div></div>`
+                  detail_text: `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">the secret key for this game is</div><div style="font-size:24px;margin:8px;color:olivedrab;"> ${game.key}</div><div style="margin:8px;"> (tap <i class="fas fa-info-circle"></i> to see it again)</div></div>`
             });
           } else {
             gameKey = false;

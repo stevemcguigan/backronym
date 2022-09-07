@@ -7,14 +7,14 @@ function generateTitleScreen()
 
 function generateTitleBar()
 {
-	let markup = `<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"></span><span id="menu" onclick="openMenu()">☰</span></div>`
+	let markup = `<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></div>`
 	return markup;
 }
 
 function generateLobby()
 {
 	let markup = `
-	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()">☰</span></div>
+	<div id="titleBar" class=""><span id="logoBar">backronym</span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></div>
 		<div class="gameListContainer"><div class="" style="font-size:12px;">-join a public game-</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
@@ -379,7 +379,7 @@ inputs.forEach(input => {
 function generateGame() 
 {
 	let markup = `
-	<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()">☰</span></div>
+	<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span></div>
 	<div class="acronymContainer">
 		<button id = "${host ? 'btnStart' : 'btnWait'}" class="animate__animated animate__zoomIn">${host ? 'start' : 'waiting...'}</button>			  	
 	</div>
