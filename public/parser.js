@@ -412,7 +412,7 @@ ws.onmessage = message => {
               else
               {
                 actionsArray.push(new actionItem({
-                  label: {"acronym" : answer.acronym, "nick" : answer.nick},
+                  label: {"acronym" : answer.acronym, "nick" : answer.label.nick},
                   action:`clear_modal_by_id("emptyround_total")`,
                   owner: answer.owner,
                  }));
