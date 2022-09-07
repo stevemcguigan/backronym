@@ -420,6 +420,8 @@ ws.onmessage = message => {
           } 
            if (actionsArray.length == 1)
            {
+              console.log("too few")
+              console.log(actionsArray);
               actionsArray.push(new actionItem({
                   label: "ok",
                   action:`clear_modal_by_id("emptyround_total")`
