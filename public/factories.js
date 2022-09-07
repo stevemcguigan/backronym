@@ -7,7 +7,7 @@ function generateTitleScreen()
 
 function generateTitleBar()
 {
-	let markup = `<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></div>`
+	let markup = `<div id="titleBar" class=""><span style="flex-basis:100%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></div>`
 	return markup;
 }
 
@@ -379,7 +379,7 @@ inputs.forEach(input => {
 function generateGame() 
 {
 	let markup = `
-	<div id="titleBar" class=""><span style="flex-basis:88%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span></div>
+	<div id="titleBar" class=""><span style="flex-basis:100%" id="logoBar">backronym</span><span id="menu" onclick="exitGameConfirm()"><i class="fas fa-door-open"></i></span><span id="menu" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span></div>
 	<div class="acronymContainer">
 		<button id = "${host ? 'btnStart' : 'btnWait'}" class="animate__animated animate__zoomIn">${host ? 'start' : 'waiting...'}</button>			  	
 	</div>
