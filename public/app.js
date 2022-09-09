@@ -40,6 +40,7 @@ function startInstructionsLoop()
 {
   if (loc = "lobby")
   {
+    console.log("trying instructions loop again")
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() { 
      $( ".sampleAcronym" ).animate({
@@ -47,6 +48,7 @@ function startInstructionsLoop()
       }, 3500, function() {
         setTimeout(function() {
           try {
+
             id("lobbyInstructionsContainer").innerHTML = generateInstructions();
             startInstructionsLoop();
           } catch {
