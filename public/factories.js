@@ -35,14 +35,14 @@ function generateLobby()
 
 function generateInstructions()
 {
-
+  console.log("generating new acro for instructions")
 	let acro = randomAcronym();
 	let lettersMarkup = "";
 
 	for (var x = 0; x < acro.letters.length; x++)
 	{
 		lettersMarkup += `<span id="${x}" class="letterTile animate__animated animate__rubberBand hidden">
-													<div class="letterTileLetter">${acro.letters.charAt(x)}</div>
+													<div class="letterTileLetter">${acro.letters.charAt(x);}</div>
 											</span>`
 	}	
 
