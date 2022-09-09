@@ -42,7 +42,7 @@ function generateInstructions()
 	for (var x = 0; x < acro.letters.length; x++)
 	{
 		lettersMarkup += `<span id="${x}" class="letterTile animate__animated animate__rubberBand hidden">
-													<div class="letterTileLetter">${acro.letters.charAt(x);}</div>
+													<div class="letterTileLetter">${acro.letters.charAt(x)}</div>
 											</span>`
 	}	
 
