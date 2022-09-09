@@ -52,7 +52,7 @@ function generateInstructions()
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5); margin-top: -30px;
     	margin-bottom: -30px; font-size:12px;">
-			<div class="acronymContainer">
+			<div class="acronymContainer sampleAcro">
 							${lettersMarkup}																		
 			</div>
 		</div>
@@ -393,7 +393,7 @@ function generateAcronymContainer(acronym)
 
 	let markup = `
 	${generateTitleBar()}
-	<div class="acronymContainer sampleAcro">
+	<div class="acronymContainer">
 				  	${letters}
 				  </div>`
 	return markup;			  
