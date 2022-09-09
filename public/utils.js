@@ -61,12 +61,14 @@ function exitGame()
 }
 
 
+
+
 function openMenu()
 {
 	let detail = null;
 	if (gameId && gameKey)
 	{
-		detail = `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">the secret key for this game is</div><div style="font-size:24px;margin:8px;color:olivedrab;"> ${gameKey}</div><div style="margin:8px;"> (tell your friends!)</div></div>`
+		detail = `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">secret key for this game is ${gameKey}</div>`
 	}	
 	else
 	{

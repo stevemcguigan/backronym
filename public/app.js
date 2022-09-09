@@ -47,6 +47,7 @@ function startInstructionsLoop()
 
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() {
+      console.log("ope!")
         $(`#0`).addClass("highlightedTile");
     }, 2000);
     setTimeout(function() {
