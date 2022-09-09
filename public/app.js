@@ -46,9 +46,22 @@ function startInstructionsLoop()
     //element.classList.add('animate__animated', 'animate__zoomOut');
 
     setTimeout(function() { animateAcronym() }, 1000);
+    setTimeout(function() {
+        $(`#0`).addClass("highlightedTile");
+    }, 2000);
+    setTimeout(function() {
+        $(`#1`).addClass("highlightedTile");
+    }, 2750);
+    setTimeout(function() {
+        $(`#2`).addClass("highlightedTile");
+    }, 2750);
+    setTimeout(function() {
+        $(`#3`).addClass("highlightedTile");
+    }, 2750);        
+
     setTimeout(function() { 
      $( ".sampleAcronym" ).animate({
-        width: "100%"
+        width: "100%"      
       }, 3500, function() {
         
         setTimeout(function() {
