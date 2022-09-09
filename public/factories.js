@@ -37,7 +37,7 @@ function generateInstructions()
 {
 	return `
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;font-size:12px;"><div class="">-how to play-</div></div>
-	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:12px; width:75%; max-width:75%">chat with friends while reverse engineering acronyms (<b>backronyms</b>™), then vote for your favorite.</div></div>
+	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:10px; width:75%; max-width:80%">Each round, you'll be presented with a set of letters. Type in the funniest, most clever, or most interesting phrase those letters COULD be an acronym for. Examples:</div></div>
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);    margin-top: -30px;
     	margin-bottom: -30px; font-size:12px;">
