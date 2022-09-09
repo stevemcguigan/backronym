@@ -41,6 +41,10 @@ function startInstructionsLoop()
   if (loc = "lobby")
   {
     console.log("trying instructions loop again")
+    
+    var element = document.querySelector('.acronymContainer');
+    element.classList.add('animate__animated', 'animate__zoomOut');
+
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() { 
      $( ".sampleAcronym" ).animate({
