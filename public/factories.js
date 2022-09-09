@@ -35,33 +35,44 @@ function generateLobby()
 
 function generateInstructions()
 {
+
+	let acro = randomAcronym();
+	let lettersMarkup = "";
+
+	for (var x = 0; x < acro.letters.length; x++)
+	{
+		lettersMarkup += `<span id="${x}" class="letterTile animate__animated animate__rubberBand hidden">
+													<div class="letterTileLetter">${acro.letters.charAt(x);}</div>
+											</span>`
+	}	
+
 	return `
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;font-size:12px;"><div class="">-how to play-</div></div>
-	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:10px; width:75%; max-width:80%">Each round, you'll be presented with a set of letters. Type in the funniest, most clever, or most interesting phrase those letters COULD be an acronym for. Examples:</div></div>
+	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:10px; width:75%; max-width:80%">Each round, you'll be presented with a set of letters. Type in the funniest, most clever, or most interesting phrase those letters COULD be an acronym for. There's no right answer. Only what you think the people you're playing with will like.</div></div>
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5);    margin-top: -30px;
     	margin-bottom: -30px; font-size:12px;">
 			<div class="acronymContainer">
-							<span id="0" class="letterTile animate__animated animate__rubberBand hidden">
-								<div class="letterTileLetter">L</div>
-							</span>
-							<span id="1" class="letterTile animate__animated animate__rubberBand hidden">
-								<div class="letterTileLetter">A</div>
-							</span>
-							<span id="2" class="letterTile animate__animated animate__rubberBand hidden">
-								<div class="letterTileLetter">T</div>
-							</span>
-							<span id="3" class="letterTile animate__animated animate__rubberBand hidden">
-								<div class="letterTileLetter">U</div>
-							</span>																					
+							${lettersMarkup}																		
 			</div>
 		</div>
 		<div>
-			${randomLATU()}
+			${acro.phrase}
 		</div>`
 }
 
-
+function randomAcronym()
+{
+	let acro = [
+		{letters: "LATTU", phrase: "Louis Armstrong's Trumpet-themed Underpants"},
+		{letters: "DIET", phrase: "Did I Eat Today?"},
+		{letters: "CRST", phrase: "Can't Really Smell Taters"},
+		{letters: "PTCA", phrase: "Pass the cheese, Amigo!"},
+		{letters: "MOWCB", phrase: "Making out with Celebrity Butlers"},
+		{letters: "CITBOV", phrase: "Corn is the Beef of Vegetables"},
+	];
+	return acro[randomInt(0, acro.length - 1)];
+}
 
 function randomLATU_new()
 {
