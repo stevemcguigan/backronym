@@ -70,6 +70,13 @@ function randomAcronym()
 		{letters: "PTCA", phrase: "Pass the cheese, Amigo!"},
 		{letters: "MOWCB", phrase: "Making out with Celebrity Butlers"},
 		{letters: "CITBOV", phrase: "Corn is the Beef of Vegetables"},
+		{letters: "PAOWE", phrase: "Presbyterians Are Obsessed With Elvis"},
+		{letters: "UK", phrase: "Understanding Klingon"},		
+		{letters: "LEVP", phrase: "Limited Edition Vegetable Poptarts®"},	
+		{letters: "JMORT", phrase: "John Mayer Oughta Retire TBH"},		
+		{letters: "MTSD", phrase: "Margaret Thatcher: Still Dead."},
+		{letters: "CCFD", phrase: "Captain Crunch® for Dinner"},	
+		{letters: "ITHHAS", phrase: "IN THIS HOUSE, HOTDOGS ARE SANDWICHES."},											
 	];
 	return acro[randomInt(0, acro.length - 1)];
 }
