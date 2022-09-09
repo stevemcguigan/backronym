@@ -106,11 +106,11 @@ function randomPhraseContainer(phrase)
 {
 
 	var markup = `
-	<div class="sampleAcronymContainer sampleAcro" style="display:flex; font-size:12px;">
+	<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
 		<div style="flex-basis:25%"></div>
 			<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
 				<div>
-					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym">
+					<div class="sampleAcronym borderBlink sampleAcro" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym">
 							<b>${phrase}</b>
 					</div>
 				</div>
