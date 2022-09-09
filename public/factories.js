@@ -76,7 +76,12 @@ function randomAcronym()
 		{letters: "JMORT", phrase: "John Mayer Oughta Retire TBH"},		
 		{letters: "MTSD", phrase: "Margaret Thatcher: Still Dead."},
 		{letters: "CCFD", phrase: "Captain Crunch® for Dinner"},	
-		{letters: "ITHHAS", phrase: "IN THIS HOUSE, HOTDOGS ARE SANDWICHES."},											
+		{letters: "ITHHAS", phrase: "IN THIS HOUSE, HOTDOGS ARE SANDWICHES."},	
+		{letters: "PMSEB", phrase: "Paul McCartney secretly eats bacon"},		
+		{letters: "PWI", phrase: "Parasailing While Intoxicated"},	
+		{letters: "STHH", phrase: `Steve "The Hair" Harrington`},		
+		{letters: "AHW", phrase: `Anyway, here's Wonderwall.`},		
+		{letters: "PSFY", phrase: `Potato Salad fetish? Yikes.`},																					
 	];
 	return acro[randomInt(0, acro.length - 1)];
 }
