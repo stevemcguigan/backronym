@@ -99,18 +99,19 @@ function randomPhraseContainer(phrase)
 {
 
 	var markup = `
-<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
-	<div style="flex-basis:25%"></div>
-		<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
-			<div>
-				<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym">
-						${phrase}
+	<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
+		<div style="flex-basis:25%"></div>
+			<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
+				<div>
+					<div class="sampleAcronym borderBlink" style="width:0px;overflow:hidden;white-space:nowrap;text-align:center;" class="sampleAcronym">
+							${phrase}
+					</div>
 				</div>
 			</div>
+		<div style="flex-basis:25%">
 		</div>
-	<div style="flex-basis:25%">
-	</div>
-</div>`
+	</div>`
+	return markup;
 }
 
 
