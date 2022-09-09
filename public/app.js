@@ -54,11 +54,17 @@ function startInstructionsLoop()
         $(`#1`).addClass("highlightedTile");
     }, 2750);
     setTimeout(function() {
-        $(`#2`).addClass("highlightedTile");
-    }, 2750);
+        try {  $(`#2`).addClass("highlightedTile") } catch {}
+    }, 3500);
     setTimeout(function() {
-        $(`#3`).addClass("highlightedTile");
-    }, 2750);        
+       try {  $(`#3`).addClass("highlightedTile") } catch {}
+    }, 4250);  
+    setTimeout(function() {
+       try {  $(`#4`).addClass("highlightedTile") } catch {}
+    }, 5000);   
+    setTimeout(function() {
+       try {  $(`#5`).addClass("highlightedTile") } catch {}
+    }, 5750);                
 
     setTimeout(function() { 
      $( ".sampleAcronym" ).animate({
