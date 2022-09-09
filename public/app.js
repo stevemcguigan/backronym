@@ -56,7 +56,7 @@ function startInstructionsLoop()
          element.classList.add('animate__animated', 'animate__zoomOut');    
          element = document.querySelector('.sampleAcronym');
           element.classList.add('animate__animated', 'animate__zoomOut');    
-        }, 4000);
+        }, 5000);
         setTimeout(function() {
           try {
 
@@ -65,7 +65,7 @@ function startInstructionsLoop()
           } catch {
             console.log("tried updating instructions loop but you're not in that area anymore.")
           }
-        }, 5000);
+        }, 6000);
       
       });
     }, 2000);      

@@ -51,7 +51,7 @@ function generateInstructions()
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:10px; width:75%; max-width:80%">Each round, you'll be presented with a set of letters. Type in the funniest, most clever, or most interesting phrase those letters COULD be an acronym for. There's no right answer. Only what you think the people you're playing with will like.</div></div>
 
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5); margin-top: -30px;
-    	margin-bottom: -30px; font-size:12px;display:flex;">
+    	margin-bottom: -30px; font-size:12px;">
 			<div class="acronymContainer">
 							${lettersMarkup}																		
 			</div>

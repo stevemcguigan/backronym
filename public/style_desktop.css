@@ -223,7 +223,9 @@ body
   padding-bottom: 20px;
   border-radius: 3px;
 }
-
+#lobbyInstructions {
+  display:flex;
+}
 
 
 .disable-select {
