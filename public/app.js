@@ -53,7 +53,9 @@ function startInstructionsLoop()
         
         setTimeout(function() {
          var element = document.querySelector('.acronymContainer');
-        element.classList.add('animate__animated', 'animate__zoomOut');    
+         element.classList.add('animate__animated', 'animate__zoomOut');    
+         element = document.querySelector('.sampleAcronym');
+          element.classList.add('animate__animated', 'animate__zoomOut');    
         }, 4000);
         setTimeout(function() {
           try {
