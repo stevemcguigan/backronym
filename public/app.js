@@ -42,14 +42,19 @@ function startInstructionsLoop()
   {
     console.log("trying instructions loop again")
     
-    var element = document.querySelector('.acronymContainer');
-    element.classList.add('animate__animated', 'animate__zoomOut');
+    //var element = document.querySelector('.acronymContainer');
+    //element.classList.add('animate__animated', 'animate__zoomOut');
 
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() { 
      $( ".sampleAcronym" ).animate({
         width: "100%"
       }, 3500, function() {
+        
+        setTimeout(function() {
+         var element = document.querySelector('.acronymContainer');
+        element.classList.add('animate__animated', 'animate__zoomOut');    
+        }, 4000);
         setTimeout(function() {
           try {
 
@@ -59,6 +64,7 @@ function startInstructionsLoop()
             console.log("tried updating instructions loop but you're not in that area anymore.")
           }
         }, 5000);
+      
       });
     }, 2000);      
   } 
