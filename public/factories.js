@@ -106,7 +106,7 @@ function randomPhraseContainer(phrase)
 {
 
 	var markup = `
-	<div class="sampleAcronymContainer" style="display:flex; font-size:12px;">
+	<div class="sampleAcronymContainer sampleAcro" style="display:flex; font-size:12px;">
 		<div style="flex-basis:25%"></div>
 			<div style="display:flex;    flex-basis: 75%;justify-content:center;">	
 				<div>
@@ -393,7 +393,7 @@ function generateAcronymContainer(acronym)
 
 	let markup = `
 	${generateTitleBar()}
-	<div class="acronymContainer">
+	<div class="acronymContainer sampleAcro">
 				  	${letters}
 				  </div>`
 	return markup;			  

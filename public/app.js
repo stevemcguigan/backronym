@@ -52,10 +52,10 @@ function startInstructionsLoop()
       }, 3500, function() {
         
         setTimeout(function() {
-         var element = document.querySelector('.acronymContainer');
+         var element = document.querySelector('.sampleAcro');
          element.classList.add('animate__animated', 'animate__zoomOut');    
-         element = document.querySelector('.sampleAcronym');
-          element.classList.add('animate__animated', 'animate__zoomOut');    
+        // element = document.querySelector('.sampleAcronym');
+          //element.classList.add('animate__animated', 'animate__zoomOut');    
         }, 5000);
         setTimeout(function() {
           try {
