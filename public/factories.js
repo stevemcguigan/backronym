@@ -67,7 +67,7 @@ function randomAcronym()
 		{letters: "LATTU", phrase: "Louis Armstrong's Trumpet-themed Underpants"},
 		{letters: "DIET", phrase: "Did I Eat Today?"},
 		{letters: "CRST", phrase: "Can't Really Smell Taters"},
-		{letters: "PTCA", phrase: "Pass the cheese, Amigo!"},
+		{letters: "PTCA", phrase: "Pass the cheese, Amiga"},
 		{letters: "MOWCB", phrase: "Making out with Celebrity Butlers"},
 		{letters: "CITBOV", phrase: "Corn is the Beef of Vegetables"},
 		{letters: "PAOWE", phrase: "Presbyterians Are Obsessed With Elvis"},
@@ -81,7 +81,9 @@ function randomAcronym()
 		{letters: "PWI", phrase: "Parasailing While Intoxicated"},	
 		{letters: "STHH", phrase: `Steve "The Hair" Harrington`},		
 		{letters: "AHW", phrase: `Anyway, here's Wonderwall.`},		
-		{letters: "PSFY", phrase: `Potato Salad fetish? Yikes.`},																					
+		{letters: "PSFY", phrase: `Potato Salad fetish? Yikes.`},		
+		{letters: "IBF", phrase: `International Butterbean Fanclub`},			
+		{letters: "IBF", phrase: `International Butterbean Fanclub`},																									
 	];
 	return acro[randomInt(0, acro.length - 1)];
 }

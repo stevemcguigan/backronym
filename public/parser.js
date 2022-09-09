@@ -29,7 +29,7 @@ ws.onmessage = message => {
   				//console.log(`client id is ${clientId}`);
             setTimeout(() => {
                 getGames();                
-            }, 2500); 
+            }, 500); 
           sendLocalId();  
   			}	
 
@@ -44,7 +44,7 @@ ws.onmessage = message => {
             }, 5000); 
             setTimeout(() => {
                updateGameList(response.games);              
-            },  1000);               
+            },  500);               
           }  
         }         
         
