@@ -64,48 +64,28 @@ function generateInstructions()
 function randomAcronym()
 {
 	let acro = [
-		{letters: "LATTU", phrase: "Louis Armstrong's Trumpet-themed Underpants"},
-		{letters: "DIET", phrase: "Did I Eat Today?"},
-		{letters: "CRST", phrase: "Can't Really Smell Taters"},
-		{letters: "PTCA", phrase: "Pass the cheese, Amiga"},
-		{letters: "MOWCB", phrase: "Making out with Celebrity Butlers"},
+		{letters: "LATTU", 	phrase: "Louis Armstrong's Trumpet-themed Underpants"},
+		{letters: "CRST", 	phrase: "Can't Really Smell Taters"},
+		{letters: "PTCA", 	phrase: "Pass the cheese, Amiga"},
+		{letters: "MOWCB", 	phrase: "Making out with Celebrity Butlers"},
 		{letters: "CITBOV", phrase: "Corn is the Beef of Vegetables"},
-		{letters: "PAOWE", phrase: "Presbyterians Are Obsessed With Elvis"},
-		{letters: "UK", phrase: "Understanding Klingon"},		
-		{letters: "LEVP", phrase: "Limited Edition Vegetable Poptarts®"},	
-		{letters: "JMORT", phrase: "John Mayer Oughta Retire TBH"},		
-		{letters: "MTSD", phrase: "Margaret Thatcher: Still Dead."},
-		{letters: "CCFD", phrase: "Captain Crunch® for Dinner"},	
+		{letters: "PAOWE", 	phrase: "Presbyterians Are Obsessed With Elvis"},
+		{letters: "UK", 		phrase: "Understanding Klingon"},		
+		{letters: "LEVP", 	phrase: "Limited Edition Vegetable Poptarts®"},	
+		{letters: "JMORT",	phrase: "John Mayer Oughta Retire TBH"},		
+		{letters: "MTSD", 	phrase: "Margaret Thatcher: Still Dead."},
+		{letters: "CCFD", 	phrase: "Captain Crunch® for Dinner"},	
 		{letters: "ITHHAS", phrase: "IN THIS HOUSE, HOTDOGS ARE SANDWICHES."},	
-		{letters: "PMSEB", phrase: "Paul McCartney secretly eats bacon"},		
-		{letters: "PWI", phrase: "Parasailing While Intoxicated"},	
-		{letters: "STHH", phrase: `Steve "The Hair" Harrington`},		
-		{letters: "AHW", phrase: `Anyway, here's Wonderwall.`},		
-		{letters: "PSFY", phrase: `Potato Salad fetish? Yikes.`},		
-		{letters: "IBF", phrase: `International Butterbean Fanclub`},			
-		{letters: "IBF", phrase: `International Butterbean Fanclub`},																									
+		{letters: "PMSEB", 	phrase: "Paul McCartney secretly eats bacon"},		
+		{letters: "PWI", 		phrase: "Parasailing While Intoxicated"},	
+		{letters: "STHHH", 	phrase: `Steve "The Hair" Harrington's Hairdresser`},		
+		{letters: "AHW", 		phrase: `Anyway, here's Wonderwall.`},		
+		{letters: "PSFY", 	phrase: `Potato Salad fetish? Yikes.`},		
+		{letters: "IBF", 		phrase: `International Butterbean Fanclub`},			
+		{letters: "LTFB", 	phrase: `Lizzo: The Fifth Beatle`},		
+		{letters: "DPFPOE", phrase: `Dolly Parton for President of Earth`}																														
 	];
 	return acro[randomInt(0, acro.length - 1)];
-}
-
-function randomLATU_new()
-{
-
-	// not important but i'll get to it
-
-	let acro = [
-			"Louis Armstrong's Trumpet-themed Underpants",
-			"Let's all trade uncles",
-			"Lunchables® are thoroughly unappealing",
-			"Lemons are tangy, uhhhhhhh",
-			"Little awkward, there, Ursula...",
-			"Lumps are totally unusual",
-			"Leave after throwing up",
-			"Lester's All Time Ugliness",
-			"Let animals take Uber®",			
-	];
-
-
 }
 
 

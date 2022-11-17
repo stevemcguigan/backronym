@@ -13,7 +13,7 @@ function send(payload)
   }
   catch 
   {
-    console.log("connection error. reloading.")
+    console.log("connection error.")
     //location.reload();
   }
   
