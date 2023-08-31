@@ -195,7 +195,7 @@ function scrollChat()
 function strip(stringToStrip)
 {
     stringToStrip = stringToStrip.replace(/-/g, ' ');
-    stringToStrip = stringToStrip.replace(/"()/g, '');
+    stringToStrip = stringToStrip.replace(/"/g, '');
     return stringToStrip;
 }
 
