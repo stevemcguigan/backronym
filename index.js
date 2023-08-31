@@ -1,11 +1,11 @@
 const http 						= require("http");
 const express 				= require("express")
 const app 						= express();
-const dictionary 			= require('dictionary')
-const utils 					= require('utils')
-const gameFunctions 	= require('gameFunctions')
-const communication 	= require('communication')
-const server 					= require('server')
+const dictionary 			= require('./dictionary.js')
+const butils 					= require('./butils.js')
+const gameFunctions 	= require('./gameFunctions.js')
+const communication 	= require('./communication.js')
+const server 					= require('./server.js')
 const websocketServer = require("websocket").server
 const httpServer 			= http.createServer();
 const clients 				= {};
@@ -72,7 +72,7 @@ wsServer.on("request", request => {
 	})
 
 	//generate new clientid
-	const clientId = utils.guid();
+	const clientId = butils.guid();
 	connection.clientId = clientId;
 	clients[clientId] = {
 		"connected" : true,
