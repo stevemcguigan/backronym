@@ -1,9 +1,61 @@
-// functions that return blocks of markup
 
-function generateTitleScreen()
+function shareString(str)
 {
-	let markup = `<div>`
+	let letterMap = {
+		"A":	"🅰",	
+		"B":	"🅱",	
+		"C":	"🅲",
+		"D":	"🅳",	
+		"E":	"🅴",	
+		"F":	"🅵",	
+		"G":	"🅶",	
+		"H":	"🅷",	
+		"I":	"🅸",	
+		"J":	"🅹",	
+		"K":	"🅺",	
+		"L":	"🅻",	
+		"M":	"🅼",	
+		"N":	"🅽",	
+		"O":	"🅾",	
+		"P":	"🅿",	
+		"Q":	"🆀",	
+		"R":	"🆁",	
+		"S":	"🆂",	
+		"T":	"🆃",
+		"U":	"🆄",	
+		"V":	"🆅",	
+		"W":	"🆆",	
+		"X":	"🆇",	
+		"Y":	"🆈",	
+		"Z":	"🆉",               
+	}
+
+	let newStr = ""
+	for (let i = 0; i < str.length; i++)
+	{
+		newStr += letterMap[str[i]]
+	}	
+
+	return newStr
 }
+
+
+
+function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
+function roundShare(el) {
+	let modal = document.getElementById(el)
+	copyToClipboard(modal.dataset.resultArray)
+
+}
+	
 
 function generateTitleBar()
 {
@@ -82,7 +134,7 @@ function randomAcronym()
 		{letters: "AHW", 		phrase: `Anyway, here's Wonderwall.`},		
 		{letters: "PSFY", 	phrase: `Potato Salad fetish? Yikes.`},		
 		{letters: "IBF", 		phrase: `International Butterbean Fanclub`},			
-		{letters: "LTFB", 	phrase: `Lizzo: The Fifth Beatle`},		
+		{letters: "TFBWY", 	phrase: `The Fifth Beatle was Yoko`},		
 		{letters: "DPFPOE", phrase: `Dolly Parton for President of Earth`}																														
 	];
 	return acro[randomInt(0, acro.length - 1)];

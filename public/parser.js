@@ -1,6 +1,6 @@
 // incoming responses from the server are parsed here
 
-let ws = new WebSocket("ws://3.232.57.43:9090")
+let ws = new WebSocket("ws://localhost:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41
@@ -272,18 +272,30 @@ ws.onmessage = message => {
             
 
           }  
-
            let actionsArray = [];       
-           actionsArray.push(new actionItem({
+           actionsArray.push(
+            new actionItem({
               label:`ok`,
               action:`clear_modal_by_id('scoreboard'); showScore();`
-            }));
+            }), 
+           new actionItem({
+              label:`<i class="fas fa-share"></i> share`,
+              action:`roundShare('scoreboard'); clear_modal_by_id('scoreboard'); showScore();`
+            })
+
+           );
            create_new_modal({
                 modal_id:"scoreboard",
                 modal_type: "generic_confirm",
+                attachedObject: resultArray,
                 prompt: `results`,
                 detail_text: markup,
                 actionsArray: actionsArray,
+                activate: function () { 
+                    const scoreboardElement = document.getElementById('scoreboard');
+                    scoreboardElement.dataset.resultArray = JSON.stringify(resultArray);
+
+                 },
                 deactivate: function () { showScore(); }
             });
 

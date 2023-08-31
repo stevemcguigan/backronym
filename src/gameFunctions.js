@@ -156,6 +156,7 @@ const gameFunctions = {
 	},
 	startRound: (clients, game) =>
 	{
+		let long = 20
 		if (game.clients.length == 0)
 		{
 			delete game;
@@ -176,10 +177,10 @@ const gameFunctions = {
 				  communication.warning(clients, game, "<span id='counter'>5</span>") 
 				  	setTimeout(() => {
 						  gameFunctions.cullAnswers(clients, game) 			  	
-					}, 5000);			  	
-				}, 10000);	 		  
-			}, 15000);	  
-		}, 30000);
+					}, 50 * long);			  	
+				}, 100 * long);	 		  
+			}, 150 * long);	  
+		}, 300 * long);
 	},
 	cullAnswers: (clients, game) =>
 	{
@@ -206,6 +207,7 @@ const gameFunctions = {
 	},
 	getVotes: (clients, game) =>
 	{
+		let long = 1
 		communication.broadcast(clients, game, "30 seconds to vote");
 		game.acceptingAnswers = false;								 
 		const payload = {
@@ -217,8 +219,8 @@ const gameFunctions = {
 			communication.warning(clients, game, "<span id='counter'>5</span>") 
 			setTimeout(() => {
 				gameFunctions.cullVotes(clients, game);	  			  		  			  	 			  		  			  	
-			}, 5500);			  			  	
-		}, 24500);	
+			}, 550 * long);			  			  	
+		}, 2450 * long);	
 	},
 	skipVoting: (clients, game) =>
 	{
