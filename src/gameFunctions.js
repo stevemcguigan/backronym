@@ -198,7 +198,7 @@ const gameFunctions = {
 		});
 		console.log(game.answers)
 
-		if (totalAnswers != 1)
+		if (totalAnswers > 1)
 		{
 			gameFunctions.getVotes(clients, game);
 		} else {

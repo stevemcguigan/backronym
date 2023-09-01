@@ -10,6 +10,17 @@ function unblockInput()
 	return;
 }
 
+function clearToClock() {
+   var element = document.querySelector('.letterTile');
+
+  $('.letterTile').addClass("animate__animated animate__zoomOut")
+  //element.classList.add('animate__animated', 'animate__zoomOut');
+  element.addEventListener('animationend', () => {
+          $('.acronymContainer').html(generateClock());
+  })   
+}
+
+
 function clear(eid)
 {
 	try

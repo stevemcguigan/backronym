@@ -1,17 +1,17 @@
-const http 						= require("http");
-const express 				= require("express")
-const app 						= express();
-const dictionary 			= require('./src/dictionary.js')
-const butils 					= require('./src/butils.js')
+const http 				= require("http");
+const express 			= require("express")
+const app 				= express();
+const dictionary 		= require('./src/dictionary.js')
+const butils 			= require('./src/butils.js')
 const gameFunctions 	= require('./src/gameFunctions.js')
 const communication 	= require('./src/communication.js')
-const server 					= require('./src/server.js')
-const websocketServer = require("websocket").server
-const httpServer 			= http.createServer();
-const clients 				= {};
+const server 			= require('./src/server.js')
+const websocketServer 	= require("websocket").server
+const httpServer 		= http.createServer();
+const clients 			= {};
 const clientLocals 		= {};
-const games 					= {};
-const keys 						= {};
+const games 			= {};
+const keys 				= {};
 
 
 app.listen(8000, () => console.log("listening on 8000"));

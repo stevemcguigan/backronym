@@ -300,36 +300,16 @@ ws.onmessage = message => {
             });
 
           
-
-          var element = document.querySelector('.letterTile');
+           clearToClock()
+         /* var element = document.querySelector('.letterTile');
 
           $('.letterTile').addClass("animate__animated animate__zoomOut")
           //element.classList.add('animate__animated', 'animate__zoomOut');
           element.addEventListener('animationend', () => {
                   $('.acronymContainer').html(generateClock());
-          })           
+          })    */       
 
-
-
-           //$('.letterTileLetter').addClass("animate__animated animate__zoomOut");
-
-          /*  
-          var element = document.querySelector('.acronymContainer');
-          element.classList.add('animate__animated', 'animate__zoomOut');
-          element.addEventListener('animationend', () => {
-                  $('.acronymContainer').remove();
-                  const round = response.round;
-                  acronym = response.acronym;
-                  let acronymMarkup = generateAcronymContainer(" ");
-                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
-                  animateAcronym();  
-          })         */
-
-         // divChatWindow.insertAdjacentHTML("beforeend", markup);
         }
-
-
-
 
            
         if (response.method === "getVotes")
@@ -364,10 +344,10 @@ ws.onmessage = message => {
            //console.log("full actions array")
            //console.log(actionsArray) 
 
-           if (actionsArray.length > 0)
-           {
+           //if (actionsArray.length > 0)
+           //{
               //prompt = mobileCheck() ? "which one's your favorite?" : 'click your favorite backronym';  
-              prompt = "which one's your favorite?"
+              prompt = "vote for your favorite!"
               create_new_modal({
                 modal_id:"vote",
                 modal_type:"vote",
@@ -375,17 +355,17 @@ ws.onmessage = message => {
                 actionsArray: actionsArray,
                 force:true
               });
-           } else {
+           /*} else {
                  actionsArray.push(new actionItem({
                   label: "ok",
-                  action:`clear_modal_by_id("emptyround_total")`
+                  action:`clear_modal_by_id('emptyround_total')`
                  }));
                create_new_modal({
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
                   prompt: `no submissions this round`,
               });    
-           } 
+           } */
 
           //divChatWindow.insertAdjacentHTML("beforeend", markup);
         }        
@@ -413,34 +393,45 @@ ws.onmessage = message => {
               {
                 actionsArray.push(new actionItem({
                   label: {"acronym" : answer.acronym, "nick" : answer.nick},
-                  action:`clear_modal_by_id("emptyround_total")`,
+                  action:`clear_modal_by_id('emptyround_total')`,
                   owner: answer.owner,
                  }));
               } 
           } 
            if (actionsArray.length == 1)
            {
-              console.log("too few")
-              console.log(actionsArray);
+              //console.log("too few")
+              //console.log(actionsArray);
+              let detail = actionsArray[0]
+              actionsArray = []
               actionsArray.push(new actionItem({
                   label: "ok",
-                  action:`clear_modal_by_id("emptyround_total")`
-                 }));
-               create_new_modal({
-                  modal_id:"emptyround_total",
-                  modal_type: "generic_confirm",
-                  prompt: `too few submissions!`,
-                  detail_text: `<div style="padding: 15px 0px;">${actionsArray[0].label.nick}: ${actionsArray[0].label.acronym}</div>`
-              });                
+                  action:`clear_modal_by_id('emptyround_total')`
+             }));
+
+
+           create_new_modal({
+                modal_id:"emptyround_total",
+                modal_type: "generic_confirm",
+                  prompt: `too few submissions.`,
+                  detail_text: detail,
+                actionsArray: actionsArray,
+                detail_text: `<div style="padding: 15px 0px;">${detail.label.nick}: ${detail.label.acronym}</div>`,
+                activate: function () {  clearToClock() }
+            });
+               
            } else {
+                actionsArray = []
                  actionsArray.push(new actionItem({
                   label: "ok",
-                  action:`clear_modal_by_id("emptyround_total")`
+                  action:`clear_modal_by_id('emptyround_total');`
                  }));
                create_new_modal({
                   modal_id:"emptyround_total",
                   modal_type: "generic_confirm",
                   prompt: `no submissions this round`,
+                  actionsArray: actionsArray,
+                  activate: function () {  clearToClock() }
               });    
            } 
 
