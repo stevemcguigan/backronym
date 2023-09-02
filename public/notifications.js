@@ -82,7 +82,7 @@ function generateNotification(m)
 	$('#notifications').append(newNote);	
 
 	setTimeout(() => {
-		console.log("forcing clear of" + note.id)
+	//	console.log("forcing clear of" + note.id)
 		let element = id(`notification_${note.id}`) 
 		try
 		{

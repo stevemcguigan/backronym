@@ -17,7 +17,7 @@ const server = {
 		// which game you were playing before and reconnect you to it seamlessly
 		const clientId = result.clientId; 
 		const localId = result.localId;	
-		if (clientLocals[localId]) { // move this (And everything else tbh) into function when it works
+		if (clientLocals[localId]) { 
 			let oldClient = clients[clientLocals[localId]];
 			let newClient = clients[clientId];
 			try {

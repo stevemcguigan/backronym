@@ -224,6 +224,7 @@ const gameFunctions = {
 	},
 	skipVoting: (clients, game) =>
 	{
+		let long = 5
 		game.acceptingAnswers = false;	
 	  
 		let answers = [];
@@ -259,7 +260,7 @@ const gameFunctions = {
 			communication.broadcast(clients, game, "next round starts in 30 seconds")
 			setTimeout(() => {
 				gameFunctions.startRound(clients, game);			  			  	
-			}, 30000);				
+			}, 3000 * long);				
 		}		
 	},
 	cullVotes: (clients, game) =>
@@ -316,7 +317,8 @@ const gameFunctions = {
 
 		const payload = {
 			"method" : "reportRoundResult",
-			"roundResult": result
+			"roundResult": result,
+			"letters" : game.acronyms[game.currentRound - 1]
 		}	
 		communication.sendAll(clients, game, payload);	
 	},	

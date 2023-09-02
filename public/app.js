@@ -14,6 +14,7 @@ $( document ).ready(function() {
         startInstructionsLoop();
 
     })
+    btnPlay.click();
     soundtrack = id("soundtrack");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

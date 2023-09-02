@@ -1,5 +1,5 @@
 
-function shareString(str)
+function string2emoji(str)
 {
 	let letterMap = {
 		"A":	"🅰",	
@@ -39,7 +39,34 @@ function shareString(str)
 	return newStr
 }
 
+function number2emoji(number)
+{
+	lettermap = [
+	"0️⃣",
+	"1️⃣",
+	"2️⃣",
+	"3️⃣",
+	"4️⃣",
+	"5️⃣",
+	"6️⃣",
+	"7️⃣",
+	"8️⃣",
+	"9️⃣" ]
 
+	number = number.toString()
+	let newStr = ""
+	for (let i=0; i < number.length; i++)
+	{
+			newStr+=lettermap[parseInt(number[i],10)]
+	}		
+	return newStr
+
+}
+
+
+function stripLeadingSpaces(inputString) {
+    return inputString.replace(/^\s+/, ''); // ^\s+ matches one or more whitespace characters at the beginning of the string
+}
 
 function copyToClipboard(text) {
     const textarea = document.createElement('textarea');
@@ -51,9 +78,52 @@ function copyToClipboard(text) {
 }
 
 function roundShare(el) {
-	let modal = document.getElementById(el)
-	copyToClipboard(modal.dataset.resultArray)
+	
+	$("#scoreboard .confirmation_button:eq(1)").html("<i class='fas fa-hourglass-1'></i>")
+	
+	setTimeout(function() {
+		$("#scoreboard .confirmation_button:eq(1)").html("<i class='fas fa-hourglass-2'></i>")
+	}, 300)
+	
+	setTimeout(function() {
+	$("#scoreboard .confirmation_button:eq(1)").html("<i class='fas fa-hourglass-3'></i>")
+	}, 600)
+	
+	setTimeout(function() {
+		$("#scoreboard .confirmation_button:eq(1)").html("<i class='fas fa-hourglass-1'></i>")
+	}, 900)
+	
+	setTimeout(function() {
+		$("#scoreboard .confirmation_button:eq(1)").html("copied to clipboard")
+	}, 1200)			
 
+	let awards = ["🏆", "🥈", "🥉"]
+	let modal = document.getElementById(el)
+	let round = JSON.parse(modal.dataset.resultArray)
+	let letters = string2emoji(modal.dataset.letters)
+	let result = "";
+
+	round.sort((a, b) => b.roundScore - a.roundScore);
+
+	for (let i = 0; i < round.length; i++) {
+		console.log(typeof round[i].acronym)
+		console.log(round[i].acronym)
+		if (typeof round[i].acronym !== "object")
+			result += ` ${round[i].nick}: ${round[i].acronym}  ${round[i].roundScore}pts ${i < 1 ? awards[i] : ""}\n`	
+	}
+
+	result = `         ${letters}\n${result}`
+
+	result = stripLeadingSpaces(result)					
+
+
+	copyToClipboard(result)
+
+
+
+  //generateNotification({message: "Round copied to clipboard! Go share it!",
+                    //  type: "dm",
+                    //  color: "green"})   
 }
 	
 

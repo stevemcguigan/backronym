@@ -1,6 +1,6 @@
 // incoming responses from the server are parsed here
 
-let ws = new WebSocket("ws://localhost:9090")
+let ws = new WebSocket("ws://192.168.1.162:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41
@@ -127,7 +127,7 @@ ws.onmessage = message => {
   				//alert(); 
   				const divChatWindow = id("divChatWindow");
   				const d = document.createElement("div");
-				  d.textContent = `${response.nick ? response.nick + ":" : ""} ${response.message}`;
+				  d.innerHTML = `<b>${response.nick ? response.nick + ":" : ""}</b> ${response.message}`;
 				  //alert(d.textContent);
 				  divChatWindow.appendChild(d);
   			}	
@@ -227,13 +227,14 @@ ws.onmessage = message => {
 
         if (response.method === "reportRoundResult")
         {
-          console.log("***")
-          console.log("round result received");
-          console.log(response); 
+          //console.log("***")
+          //console.log("round result received");
+          //console.log(response); 
           const divChatWindow = id("divChatWindow");
 
           var resultArray = response.roundResult;
-          console.log(resultArray);
+          let letters = response.letters
+          //console.log(resultArray);
 
           //alert(JSON.stringify(result));
 
@@ -280,7 +281,7 @@ ws.onmessage = message => {
             }), 
            new actionItem({
               label:`<i class="fas fa-share"></i> share`,
-              action:`roundShare('scoreboard'); clear_modal_by_id('scoreboard'); showScore();`
+              action:`roundShare('scoreboard');`
             })
 
            );
@@ -293,6 +294,7 @@ ws.onmessage = message => {
                 actionsArray: actionsArray,
                 activate: function () { 
                     const scoreboardElement = document.getElementById('scoreboard');
+                    scoreboardElement.dataset.letters = letters;
                     scoreboardElement.dataset.resultArray = JSON.stringify(resultArray);
 
                  },
@@ -319,9 +321,6 @@ ws.onmessage = message => {
                                 type: "dm",
                                 color: "green"})          
 
-          //const divChatWindow = id("divChatWindow");
-          //var markup = "<div>Round complete! Tap your favorite. Voting will be open for 30 seconds.</div>";
-
           var actionsArray = [];
           var answers = JSON.parse(response.answers);    
           console.log(answers)      
@@ -341,33 +340,15 @@ ws.onmessage = message => {
                  }));
               } 
           } 
-           //console.log("full actions array")
-           //console.log(actionsArray) 
 
-           //if (actionsArray.length > 0)
-           //{
-              //prompt = mobileCheck() ? "which one's your favorite?" : 'click your favorite backronym';  
-              prompt = "vote for your favorite!"
-              create_new_modal({
-                modal_id:"vote",
-                modal_type:"vote",
-                prompt: prompt,
-                actionsArray: actionsArray,
-                force:true
-              });
-           /*} else {
-                 actionsArray.push(new actionItem({
-                  label: "ok",
-                  action:`clear_modal_by_id('emptyround_total')`
-                 }));
-               create_new_modal({
-                  modal_id:"emptyround_total",
-                  modal_type: "generic_confirm",
-                  prompt: `no submissions this round`,
-              });    
-           } */
+          create_new_modal({
+            modal_id:"vote",
+            modal_type:"vote",
+            prompt: "vote for your favorite!",
+            actionsArray: actionsArray,
+            force:true
+          });
 
-          //divChatWindow.insertAdjacentHTML("beforeend", markup);
         }        
 
         if (response.method === "skipVoting")
