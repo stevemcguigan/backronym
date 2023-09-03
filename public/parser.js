@@ -63,11 +63,12 @@ ws.onmessage = message => {
 
         if (response.method === "exitSuccess")
         {
+          let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
           loc = "lobby";
           acronym = false;
           window.history.pushState('', '', '');
           populate ("main", generateLobby(), wireLobbyEvents);
-          startInstructionsLoop();
+          startInstructionsLoop(highlight);
           getGames();   
         }         
 

@@ -71,6 +71,7 @@ function wireGameEvents()
     })
 
     btnMessage.addEventListener("click", e => {
+        let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
         if (acronym)
         {
             let candidate = strip(id("txtMessage").value)
@@ -80,7 +81,7 @@ function wireGameEvents()
                 play(id("txtMessage").value);
                 $('.acronymContainer').addClass("animate__animated animate__tada");
                 //$('.acronymContainer span').addClass("completed");
-                $('.acronymContainer span').removeClass("highlightedTile");
+                $('.acronymContainer span').removeClass(highlight);
                 setTimeout(function(){
                      $('.acronymContainer').removeClass("animate__animated animate__tada");   
                 }, 1000)
@@ -88,7 +89,7 @@ function wireGameEvents()
             }
             else 
             {
-                $('.acronymContainer span').removeClass("highlightedTile");
+                $('.acronymContainer span').removeClass(highlight);
                 chat(id("txtMessage").value);
             }    
             var tmsg =id("txtMessage");
@@ -201,6 +202,7 @@ function strip(stringToStrip)
 
 function checker()
 {
+    let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
     if (!acronym)
     return;
         let candidate = txtMessage.value;
@@ -215,12 +217,12 @@ function checker()
                 if ((checker[x].charAt(0)).toUpperCase() == acronym.charAt(x))
                 {
                     //$(`#${x}`).removeClass("completed");
-                    $(`#${x}`).addClass("highlightedTile");
+                    $(`#${x}`).addClass(highlight);
                 }    
                 else
                 {
 
-                    $(`#${x}`).removeClass("highlightedTile");
+                    $(`#${x}`).removeClass(highlight);
                 }    
             }   
         }
@@ -229,7 +231,7 @@ function checker()
             if (candidate.charAt(0).toUpperCase() == acronym.charAt(x))
             {
                  //$(`#0`).removeClass("completed");
-                $(`#0`).addClass("highlightedTile");
+                $(`#0`).addClass(highlight);
             }          
         } 
 

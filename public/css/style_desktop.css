@@ -81,11 +81,15 @@
   src: url('angelina.ttf');
 }
 
+html {
+ transition: filter 0.5s ease;
+}
+
 .invert
-{  -webkit-filter: invert(100%);
-  -moz-filter: invert(100%);
-  -o-filter: invert(100%);
-  -ms-filter: invert(100%);
+{  -webkit-filter: invert(90%);
+  -moz-filter: invert(90%);
+  -o-filter: invert(90%);
+  -ms-filter: invert(90%);
 }
 
 

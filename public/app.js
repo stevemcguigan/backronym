@@ -7,14 +7,15 @@ $( document ).ready(function() {
 
 
     btnPlay.addEventListener("click", e => {
+      let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
+      alert(highlight)
         $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
         btnPlay.style.display = "none";
         //soundtrack.play();
         populate ("main", generateLobby(), wireLobbyEvents);
-        startInstructionsLoop();
-
+        startInstructionsLoop(highlight);
     })
-    btnPlay.click();
+    //btnPlay.click();
     soundtrack = id("soundtrack");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -38,32 +39,33 @@ window.mobileCheck = function() {
   return check;
 };
 
-function startInstructionsLoop()
+function startInstructionsLoop(highlight)
 {
+
   if (loc = "lobby")
   {
     
     //var element = document.querySelector('.acronymContainer');
     //element.classList.add('animate__animated', 'animate__zoomOut');
-
+      let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
     setTimeout(function() { animateAcronym() }, 1000);
     setTimeout(function() {
-        $(`#0`).addClass("highlightedTile");
+        $(`#0`).addClass(highlight);
     }, 2000);
     setTimeout(function() {
-        $(`#1`).addClass("highlightedTile");
+        $(`#1`).addClass(highlight);
     }, 2750);
     setTimeout(function() {
-        try {  $(`#2`).addClass("highlightedTile") } catch {}
+        try {  $(`#2`).addClass(highlight) } catch {}
     }, 3500);
     setTimeout(function() {
-       try {  $(`#3`).addClass("highlightedTile") } catch {}
+       try {  $(`#3`).addClass(highlight) } catch {}
     }, 4250);  
     setTimeout(function() {
-       try {  $(`#4`).addClass("highlightedTile") } catch {}
+       try {  $(`#4`).addClass(highlight) } catch {}
     }, 5000);   
     setTimeout(function() {
-       try {  $(`#5`).addClass("highlightedTile") } catch {}
+       try {  $(`#5`).addClass(highlight) } catch {}
     }, 5750);                
 
     setTimeout(function() { 
@@ -82,9 +84,9 @@ function startInstructionsLoop()
           try {
 
             id("lobbyInstructionsContainer").innerHTML = generateInstructions();
-            startInstructionsLoop();
+            startInstructionsLoop(highlight);
           } catch {
-            console.log("tried updating instructions loop but you're not in that area anymore.")
+
           }
         }, 6000);
       
