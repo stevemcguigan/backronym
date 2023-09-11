@@ -22,6 +22,7 @@ function send(payload)
 ws.onmessage = message => {
   			
         const response = JSON.parse(message.data);
+        console.log(`PACKET RECEIVED: ${JSON.stringify(response)}`)
   			
         if (response.method === "connect")
   			{

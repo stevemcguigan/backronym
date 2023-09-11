@@ -68,8 +68,19 @@ const gameFunctions = {
 			"method" : "join",
 			"game" : game
 		}
+		let nicks = gameFunctions.nicksFromGame(game, clients)
 		communication.send(client, payload);
+		communication.sendNickList(nicks, game)
 		communication.broadcast(clients, game, `${nick} joined. say hi!`);
+	},
+	nicksFromGame: (game, clients) =>
+	{
+		console.log("********************")
+		console.log(game, clients)
+		console.log("********************")
+		const clientIDs = game.clients;
+		const nicks = clientIDs.map((clientID) => clients[clientID].currentGameInfo.nick);
+		return nicks
 	},
 	privateJoin: (clients, keys, result) =>
 	{

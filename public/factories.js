@@ -143,8 +143,8 @@ function roundShare(el) {
 function generateTitleBar(exit)
 {
 	let markup = `	<div id="titleBar" class="">
-			${exit ? "<span id=\"exitContainer\" onclick=\"exitGameConfirm()\"><i class=\"fas fa-caret-left\"></i></span>" : ""}
-		<span style="flex-basis:83%" id="logoBar">backronym</span>
+		<span ${exit ? 'class="reveal"' : '' } id="exitContainer" onclick="exitGameConfirm()"><i class="fas fa-caret-left"></i></span>
+		<span style="flex-basis:88%" id="logoBar">backronym</span>
 		<span style="flex-basis:10%; display:flex; justify-content:space-around;">
 			<span id="nightModeToggleContainer" onclick="nightModeToggle()"><i id="nightModeToggle" class="fas fa-moon"></i></span>
 			<span id="settingsContainer" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span>
@@ -602,6 +602,7 @@ function updateGameList(games)
 
 function generateClock()
 {
+	let color = $('html').hasClass("invert") ? "#9932CC" : "olivedrab"
 	let markup = `<div id="clockContainer" class="animate__animated animate__rubberBand">
 	<svg version="1.1" class="iconic-clock" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="384px" height="384px" viewBox="0 0 384 384" enable-background="new 0 0 384 384" xml:space="preserve">
  
@@ -622,7 +623,7 @@ function generateClock()
   <line class="iconic-clock-minute-hand" id="iconic-anim-clock-minute-hand" fill="none" stroke="#777" stroke-width="4" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="54"/>
   <circle class="iconic-clock-axis" cx="192" cy="192" r="9"/>
   <g class="iconic-clock-second-hand" id="iconic-anim-clock-second-hand">
-      <line class="iconic-clock-second-hand-arm" fill="none" stroke="olivedrab" stroke-width="2" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="28.5"/>
+      <line class="iconic-clock-second-hand-arm" fill="none" stroke="${color}" stroke-width="2" stroke-miterlimit="10" x1="192" y1="192" x2="192" y2="28.5"/>
       <circle class="iconic-clock-second-hand-axis" fill="#olivedrab" cx="192" cy="192" r="4.5"/>
   </g>
   <defs>

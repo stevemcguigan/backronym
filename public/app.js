@@ -8,7 +8,6 @@ $( document ).ready(function() {
 
     btnPlay.addEventListener("click", e => {
       let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
-      alert(highlight)
         $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
         btnPlay.style.display = "none";
         //soundtrack.play();
