@@ -33,11 +33,11 @@ const communication = {
 		}
 		communication.sendAll(clients, game, payload)
 	},
-	sendNickList: (clients, game) =>
+	sendNickList: (clients, game, nicks) =>
 	{
 		const payload = {
 			"method" : "sendNickList",
-			"nicks": JSON.stringify(game.clients)
+			"nicks": JSON.stringify(nicks)
 		}
 		communication.sendAll(clients, game, payload);	
 	},

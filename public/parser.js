@@ -62,6 +62,12 @@ ws.onmessage = message => {
           join(gameId);
   			}	
 
+        if (response.method === "sendNickList")
+        {
+          console.log(response)
+        }         
+
+
         if (response.method === "exitSuccess")
         {
           let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
