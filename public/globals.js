@@ -34,6 +34,7 @@ let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll
 current.notifications = []; 
 current.modal_queue = [];
 current.score = "";
+current.nickList = []
 
 let longpressKeySkips = {
 	 "key_shift" : true,

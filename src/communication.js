@@ -16,7 +16,7 @@ const communication = {
 	{
 		const clientId = result.clientId;
 		const nick = result.nick;
-		const message = result.message
+		const message = sanitize(result.message)
 		const payload = {
 			"method" : "chatmsg",
 			"clientId": clientId, 
@@ -37,7 +37,7 @@ const communication = {
 	{
 		const payload = {
 			"method" : "sendNickList",
-			"nicks": JSON.stringify(nicks)
+			"nicks": nicks
 		}
 		communication.sendAll(clients, game, payload);	
 	},

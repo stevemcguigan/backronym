@@ -2,9 +2,13 @@ const communication = require('./communication.js')
 const server = {
 	getGames: (client, games) =>
 	{
+		let publicGames =  Object.fromEntries(
+		  Object.entries(games).filter(([gameKey, game]) => !game.key  && game.joinable)
+		  		.map(([gameKey, game]) => [gameKey, { id: game.id, clients: game.clients, hostId: game.hostId, hostname: game.hostname }])
+		);
 		const payload = {
 			"method": "getGames",
-			"games" : games
+			"games" : publicGames
 		}
 		communication.send(client, payload);			
 	},

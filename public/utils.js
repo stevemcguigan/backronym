@@ -83,7 +83,7 @@ function openMenu()
 	}	
 	else
 	{
-		detail = `none yet, thanks for asking`
+		detail = `<div><div>Who's playing?</div>${generateNickList()}</div>`
 	}	
 
 	let actionsArray = [];       
@@ -94,7 +94,7 @@ function openMenu()
 	create_new_modal({
     modal_id:"settingsMenu",
     modal_type: "generic_confirm",
-    prompt: `settings`,
+    prompt: `info`,
     detail_text: detail,
     actionsArray: actionsArray
 	});

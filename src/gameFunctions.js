@@ -51,7 +51,8 @@ const gameFunctions = {
 		game.clients.push({
 			"clientId" : clientId,		
 		});
-		clients[clientId].currentGameInfo = {
+		try {
+		    clients[clientId].currentGameInfo = {
 			"gameId" : gameId,
 			"nick" : nick,
 			"clientId" : clientId,
@@ -63,7 +64,10 @@ const gameFunctions = {
 			"didNotVote" : false,
 			"play" : null,
 			"vote" : null
-		}
+			}
+		} catch {
+			console.log("Had that weird connection bug that you haven't fixed yet. Probably nothing will work now.")
+		}	
 		const payload = {
 			"method" : "join",
 			"game" : game
@@ -439,7 +443,9 @@ const gameFunctions = {
 		}
 		gameFunctions.cullDeadClientsFromGame(game, clientId, games, keys);
 		communication.send(client, payload);
-		communication.broadcast(clients, game, `${client.currentGameInfo.nick} left.`)  
+		communication.broadcast(clients, game, `${client.currentGameInfo.nick} left.`) 
+		let nicks = gameFunctions.nicksFromGame(game, clients, clientId)
+		communication.sendNickList(clients, game, nicks) 
 		gameFunctions.resetPlayer(clients[clientId]);
 
 		if (game.hostId == clientId)

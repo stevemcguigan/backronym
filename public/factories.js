@@ -586,11 +586,12 @@ function updateGameList(games)
  	$(`<div id="gameListHeading" class="gameWrapper"><div class="gamePuck">host</div><div class="playersPuck">players</div><div class="joinPuck"></div></div>`, {}).appendTo('#gameList');	
 	Object.keys(games).forEach (c => {
 		players = games[c].clients.length;	
-		if (games[c].joinable && !games[c].key) {
+		console.log("titties")
+		//if (games[c].joinable) {
 			// checking to see if the game is "joinable", usually only false during three seconds after host has exited but before server boots the rest
 			// also checking if "key" is false, which indicates that it's a public game. Private games have keys and do not appear in this list. eventually the server will filter these out before sending them over.
 			$(`<div onclick="join('${c}')" class="gameWrapper"><div  id="${c}" class="gamePuck">${games[c].hostname}</div><div class="playersPuck">${players}/10</div><div class="joinPuck"><button>join</button></div></div>`, {}).appendTo('#gameList');	
-		} 
+		//} 
 	})
 
   let markup = `
@@ -598,6 +599,14 @@ function updateGameList(games)
   `;
 }
 
+function generateNickList()
+{
+	let markup = ""
+	for (let i = 0; i < current.nickList.length; i++) {
+		markup+= `<div class="nickListNick">${current.nickList[i]}</div>`
+	}
+	return markup
+}
 
 
 function generateClock()

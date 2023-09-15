@@ -64,8 +64,8 @@ ws.onmessage = message => {
 
         if (response.method === "sendNickList")
         {
-          console.log(response)
-        }         
+          current.nickList = [...response.nicks]
+        }        
 
 
         if (response.method === "exitSuccess")
