@@ -149,6 +149,11 @@ const gameFunctions = {
 	play: (clients, game, result) =>
 	{
 		const clientId = result.clientId;
+		if (!communication.sanitize(result.play) && !game.key) {
+			communication.dm(clients, clientId, "This is a public game. Try again.");
+			return
+		}
+
 		if (game.acceptingAnswers)
 		{	
 			const play = result.play;
@@ -161,7 +166,7 @@ const gameFunctions = {
 		}
 		else
 		{
-			communication.dm(clientId, "sorry, round is over!");
+			communication.dm(clients, clientId, "sorry, round is over!");
 		}	
 	},
 	start: (clients, game, result) =>

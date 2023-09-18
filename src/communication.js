@@ -14,7 +14,8 @@ const communication = {
 	},
 	chat: (clients, game, result) =>
 	{
-		if (!communication.sanitize(result.message))
+
+		if (!communication.sanitize(result.message) && game.key === false)
 			return
 		const clientId = result.clientId;
 		const nick = result.nick;
@@ -28,9 +29,9 @@ const communication = {
 	},
 	sanitize: (message) =>
 	{
-	  // Define an array of disallowed words
-	  const disallowedWords = ["shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
+	 const disallowedWords = ["retard", "shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
 
+	  // Define an array of disallowed words
 	  // Create a regular expression pattern to match variations of disallowed words
 	  const pattern = new RegExp(
 	    disallowedWords.map((word) => {
