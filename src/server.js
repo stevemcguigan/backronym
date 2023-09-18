@@ -3,7 +3,7 @@ const server = {
 	getGames: (client, games) =>
 	{
 		let publicGames =  Object.fromEntries(
-		  Object.entries(games).filter(([gameKey, game]) => !game.key  && game.joinable)
+		  Object.entries(games).filter(([gameKey, game]) => !game.key  && game.joinable && !game.inProgress)
 		  		.map(([gameKey, game]) => [gameKey, { id: game.id, clients: game.clients, hostId: game.hostId, hostname: game.hostname }])
 		);
 		const payload = {

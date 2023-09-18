@@ -79,7 +79,10 @@ function openMenu()
 	let detail = null;
 	if (gameId && gameKey)
 	{
-		detail = `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;"><div style="margin:8px;">secret key for this game is ${gameKey}</div>`
+		detail = `<div style="margin:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+						<div style="margin:8px;">secret key for this game is ${gameKey}</div>
+						<div><div>Who's playing?</div>${generateNickList()}</div>
+						`
 	}	
 	else
 	{

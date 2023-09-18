@@ -14,16 +14,50 @@ const communication = {
 	},
 	chat: (clients, game, result) =>
 	{
+		if (!communication.sanitize(result.message))
+			return
 		const clientId = result.clientId;
 		const nick = result.nick;
-		const message = sanitize(result.message)
 		const payload = {
-			"method" : "chatmsg",
-			"clientId": clientId, 
-			"nick": nick,
-			"message": message
+				"method" : "chatmsg",
+				"clientId": clientId, 
+				"nick": nick,
+				"message": result.message
 		}
-		communication.sendAll(clients, game, payload)
+		communication.sendAll(clients, game, payload)			
+	},
+	sanitize: (message) =>
+	{
+	  // Define an array of disallowed words
+	  const disallowedWords = ["shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
+
+	  // Create a regular expression pattern to match variations of disallowed words
+	  const pattern = new RegExp(
+	    disallowedWords.map((word) => {
+	      // Create character substitution patterns for common workarounds
+	      const substitutions = {
+	        i: "[i1!*]",
+	        s: "[s$5*]",
+	        o: "[o0*]",
+	        a: "[a@*]",
+	        e: "[e3*]",
+	      };
+
+	      // Create a pattern that matches the word and its variations
+	      const wordPattern = word
+	        .split("")
+	        .map((char) => {
+	          return substitutions[char] || char;
+	        })
+	        .join(".*?");
+
+	      return `(${wordPattern})`;
+	    }).join("|"),
+	    "i" // "i" flag for case-insensitive matching
+	  );
+
+	  // Check if the inputString contains any disallowed words
+		return pattern.test(message) ? false : message;		
 	},
 	broadcast: (clients, game, message) =>
 	{

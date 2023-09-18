@@ -103,10 +103,11 @@ function joinPrivatePrompt()
 function joinPrivate(pkey)
 {
    
-	if (typeof pkey === undefined)
+	if (typeof pkey === 'undefined')
 	{	
 		const txtKey = id("secretkey");
 		pkey = txtKey.value;
+//		alert(pkey)
 	}
 
 console.log("JOINING PRIVATE: " + pkey);

@@ -114,6 +114,7 @@ overflow: hidden;
 }
 
 
+
 #titleScreen
 {
   position: absolute;
@@ -247,6 +248,7 @@ body
   background: #dedede;
   padding-bottom: 20px;
   border-radius: 3px;
+  margin-top: 20px;
 }
 #lobbyInstructions {
   display:flex;
@@ -489,6 +491,9 @@ bottom: 50px !important;
 transform: scale(1.5);
 }
 
+.invisible {
+  opacity: 0;
+}
 
 .hidden
 {

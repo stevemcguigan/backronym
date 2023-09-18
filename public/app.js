@@ -2,6 +2,10 @@ $( document ).ready(function() {
 
     isMobile = window.mobileCheck();
     loadUser();
+    setTimeout(function() {
+      $("html").removeClass("invisible")
+    }, 250);  
+
     FastClick.attach(document.body);
     let btnPlay = id("playbutton"); 
 
@@ -97,6 +101,7 @@ function startInstructionsLoop(highlight)
 function loadUser()
 {
 	user = JSON.parse(localStorage.getItem('user'));
+
 	if (user == null)
 	{
 		console.log("no user found")
@@ -111,10 +116,32 @@ function loadUser()
       saveUser();
     } 
 	}	
+
+  switch (user.theme)
+  {
+    // this is dumb to get old user objects up to date, can be streamlined later
+    case 0:
+
+    break;
+    case 1:
+
+      $("html").addClass("invert")
+    break;
+    default:
+      user.theme = 0;
+      saveUser();
+    break;  
+  } 
 }
 
 function saveUser()
 {
+  if($('html').hasClass('invert')) {
+    user.theme = 1
+  } else {
+    user.theme = 0
+  }
+
   localStorage.setItem('user', JSON.stringify(user));
 }
 
@@ -135,6 +162,7 @@ function saveNewUser()
       "clientId": clientId,
       "theme": "light",
       "wins" : 0,
+      "theme" : 0,
       "created" : now
   	}
 

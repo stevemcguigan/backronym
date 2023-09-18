@@ -9,7 +9,7 @@ function nightModeToggle()
 		nightMode.addClass('fa-moon').removeClass('fa-sun')
 		$('html').removeClass('invert')
 	}
-
+	saveUser();
 }
 
 function string2emoji(str)
@@ -146,7 +146,7 @@ function generateTitleBar(exit)
 		<span ${exit ? 'class="reveal"' : '' } id="exitContainer" onclick="exitGameConfirm()"><i class="fas fa-caret-left"></i></span>
 		<span style="flex-basis:88%" id="logoBar">backronym</span>
 		<span style="flex-basis:10%; display:flex; justify-content:space-around;">
-			<span id="nightModeToggleContainer" onclick="nightModeToggle()"><i id="nightModeToggle" class="fas fa-moon"></i></span>
+			<span id="nightModeToggleContainer" onclick="nightModeToggle()"><i id="nightModeToggle" class="fas ${user.theme == 1 ? "fa-sun" : "fa-moon"}"></i></span>
 			<span id="settingsContainer" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span>
 		</span>	
   </div>`
@@ -586,7 +586,6 @@ function updateGameList(games)
  	$(`<div id="gameListHeading" class="gameWrapper"><div class="gamePuck">host</div><div class="playersPuck">players</div><div class="joinPuck"></div></div>`, {}).appendTo('#gameList');	
 	Object.keys(games).forEach (c => {
 		players = games[c].clients.length;	
-		console.log("titties")
 		//if (games[c].joinable) {
 			// checking to see if the game is "joinable", usually only false during three seconds after host has exited but before server boots the rest
 			// also checking if "key" is false, which indicates that it's a public game. Private games have keys and do not appear in this list. eventually the server will filter these out before sending them over.
