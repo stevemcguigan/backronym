@@ -91,7 +91,7 @@ function copyToClipboard(text) {
 }
 
 function roundShare(el) {
-	
+	// this is quickly implemented trash, marked for refactor
 	$("#scoreboard .confirmation_button:eq(1)").html("<i class='fas fa-hourglass-1'></i>")
 	
 	setTimeout(function() {
@@ -107,7 +107,7 @@ function roundShare(el) {
 	}, 900)
 	
 	setTimeout(function() {
-		$("#scoreboard .confirmation_button:eq(1)").html("copied to clipboard")
+		$("#scoreboard .confirmation_button:eq(1)").html("copied!")
 	}, 1200)			
 
 	let awards = ["🏆", "🥈", "🥉"]

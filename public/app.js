@@ -165,7 +165,7 @@ function saveNewUser()
       "theme" : 0,
       "created" : now
   	}
-
+     console.log(user)
   	saveUser();
   	clear_modal_by_id("createNewUser");
     setTimeout(function() {
@@ -177,8 +177,19 @@ function saveNewUser()
 function createNewUser()
 {
 
-       var actionsArray = [];
+    var actionsArray = [];
+    
+    user = {
+      "localId": null, 
+      "nick": "default nick",
+      "clientId": "default client id",
+      "theme": 0,
+      "wins" : 0,
+      "theme" : 0,
+      "created" : 0
+    }
 
+    console.log(user)
 
     actionsArray.push(new actionItem({
       label:`ok`,
