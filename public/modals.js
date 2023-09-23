@@ -156,7 +156,7 @@ function create_new_modal(m)   //creates a new alert modal
 			break;
 
 		default:
-			console.log("no handler for " + m.modal_id + " context menu.");
+			clog("no handler for " + m.modal_id + " context menu.", 1);
 			m.modal_id = "generic";
 			m.prompt = m.modal_type;
 			modal_content = gen_alert_icon_markup(m);
@@ -232,7 +232,7 @@ function create_new_modal(m)   //creates a new alert modal
 	    if ($("#modals_stack_outer").children().length > 0)
 		{
 			var next_z = parseInt($("#modals_stack_outer").find(".modal_bg").first().css( "zIndex"))+2;
-			console.log("there are already modals, lets get a new z: "+next_z);
+			clog("there are already modals, lets get a new z: "+next_z, 5);
 		}
 
 		var modal_width_type = "modal_content";
@@ -393,8 +393,7 @@ function clear_modal_by_id(modal_id, callback_on_close)
 		}
 		catch
 		{
-			console.log("couldn't find or close modalid: " + modal_id);
-			systemLog("couldn't find or close modalid: " + modal_id);
+			clog("couldn't find or close modalid: " + modal_id, 3);
 		}
 
 
@@ -414,7 +413,7 @@ function clear_modal_by_id(modal_id, callback_on_close)
 	}
 	else
 	{
-		console.log("tried to clear a modal by ID not in the dom " + modal_id);
+		clog("tried to clear a modal by ID not in the dom " + modal_id, 3);
 	}
 
 }
@@ -444,7 +443,7 @@ function update_modal_or_die_by_id(modal_id, killActivate)
 	}
 	else
 	{
-		console.log("update_modal_or_die_by_id tried to update a modal by ID not in the dom " + modal_id);
+		clog("update_modal_or_die_by_id tried to update a modal by ID not in the dom " + modal_id, 3);
 	}
 
 
@@ -483,7 +482,7 @@ function modal_update_detail(m)
 	}
 	else
 	{
-		console.log("tried to update detail text of a modal by ID not in the dom");
+		clog("tried to update detail text of a modal by ID not in the dom", 3);
 	}
 }
 

@@ -7,8 +7,8 @@
 
 		let clientId = null;
 		let gameId = null;
-  		let ws = new WebSocket("ws://localhost:9090")
-
+  		//let ws = new WebSocket("ws://localhost:9090")
+let ws = new WebSocket("ws://192.168.1.162:9090")
     	const btnCreate = id("btnCreate");
     	const btnJoin = id("btnJoin");
     	const txtGameId = id("txtGameId");
@@ -36,7 +36,6 @@
     	btnMessage.addEventListener("click", e => {
     		if (gameId === null)
     		{
-    			alert("no game joined, can't send chat")
     			return;
     		}
 
@@ -81,7 +80,6 @@
 
   			if (response.method === "chatmsg")
   			{
-  				alert();
   				const divChatWindow = id("divChatWindow");
   				const d = document.createElement("div");
 				d.textContent = `<div>${response.nick}: ${response.message}</div>`;

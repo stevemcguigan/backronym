@@ -1,6 +1,7 @@
 // incoming responses from the server are parsed here
 
-let ws = new WebSocket("ws://poop.ovh:9090")
+//let ws = new WebSocket("ws://localhost:9090")
+let ws = new WebSocket("ws://192.168.1.162:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41
@@ -13,7 +14,7 @@ function send(payload)
   }
   catch 
   {
-    console.log("connection error.")
+    clog("connection error.", 0)
     //location.reload();
   }
   
@@ -22,7 +23,7 @@ function send(payload)
 ws.onmessage = message => {
   			
         const response = JSON.parse(message.data);
-        console.log(`PACKET RECEIVED: ${JSON.stringify(response)}`)
+        clog(`PACKET RECEIVED: ${JSON.stringify(response)}`, 5)
   			
         if (response.method === "connect")
   			{
@@ -51,7 +52,7 @@ ws.onmessage = message => {
         
         if (response.method === "create")
   			{
-  				console.log(`game succesfully created with id  ${response.game.id}`);
+  				clog(`game succesfully created with id  ${response.game.id}`, 3);
   				gameId = response.game.id;
           host = true;
           if (response.game.key)
@@ -65,8 +66,36 @@ ws.onmessage = message => {
         if (response.method === "sendNickList")
         {
           current.nickList = [...response.nicks]
+          if ($('#settingsMenu').length) {
+            openMenu()
+            //$('#settingsMenu .modal_detail_text').html(generateNickList())
+          } 
         }        
 
+        if (response.method === "forceChangeNick")
+        {
+            user.nick = response.nick
+            nick = response.nick
+            saveUser()
+            clog("server rejected nickname", 2)
+            if (loc == "lobby") {
+
+               let actionsArray = [];       
+               actionsArray.push(new actionItem({
+                  label:`ok`,
+                  action:`clear_modal_by_id('alert');editNick()`
+                }));
+                create_new_modal({
+                  modal_id:"alert",
+                  modal_type: "generic_confirm",
+                  prompt: `Unfortunate nickname`,
+                  detail_text: "Your nickname was rejected and has been changed to 'Default'. Change your nickname and then try creating a game again. <br> <br> Private games are not subject to the profanity filter in chat but nicknames always are since they're public facing.",
+                  actionsArray: actionsArray
+                });
+
+
+            }
+        }        
 
         if (response.method === "exitSuccess")
         {
@@ -77,6 +106,7 @@ ws.onmessage = message => {
           populate ("main", generateLobby(), wireLobbyEvents);
           startInstructionsLoop(highlight);
           getGames();   
+          $("#exitContainer").removeClass("reveal")
         }         
 
         if (response.method === "ping")
@@ -98,7 +128,7 @@ ws.onmessage = message => {
                   $('.acronymContainer').remove();
                   const round = response.round;
                   acronym = response.acronym;
-                  let acronymMarkup = generateAcronymContainer(acronym);
+                  let acronymMarkup = generateAcronymContainer(acronym, true);
                   generateNotification({message: `Round ${round} has begun! 60 seconds, go!`})
                   id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
                   animateAcronym();   
@@ -132,12 +162,8 @@ ws.onmessage = message => {
 
   			if (response.method === "chatmsg")
   			{
-  				//alert(); 
-  				const divChatWindow = id("divChatWindow");
-  				const d = document.createElement("div");
-				  d.innerHTML = `<b>${response.nick ? response.nick + ":" : ""}</b> ${response.message}`;
-				  //alert(d.textContent);
-				  divChatWindow.appendChild(d);
+				  let markup = `<b>${response.nick ? response.nick + ":" : ""}</b> ${response.message}`;
+				  injectChat(markup)
   			}	
 
         if (response.method === "reportScore")
@@ -163,7 +189,7 @@ ws.onmessage = message => {
           {
             join(response.privategameId)
           } else {
-            alert("no game with that key found")
+            modalAlert("no game with that key found")
           }
         }
 
@@ -210,30 +236,160 @@ ws.onmessage = message => {
 
            $('.letterTileLetter').addClass("animate__animated animate__zoomOut");
 
-          /*  
-          var element = document.querySelector('.acronymContainer');
-          element.classList.add('animate__animated', 'animate__zoomOut');
-          element.addEventListener('animationend', () => {
-                  $('.acronymContainer').remove();
-                  const round = response.round;
-                  acronym = response.acronym;
-                  let acronymMarkup = generateAcronymContainer(" ");
-                  id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
-                  animateAcronym();  
-          })         */
+        }
 
-         // divChatWindow.insertAdjacentHTML("beforeend", markup);
+  if (response.method === "reportRoundResult_tabular")
+  {
+
+          const divChatWindow = id("divChatWindow");
+
+          var resultArray = response.roundResult;
+          let letters = response.letters
+
+          clear_modal_by_id("vote")
+          generateNotification({message: "Voting complete"}) 
+         
+          let table = ""
+          let deadbeats = []
+          for (let x = 0; x < resultArray.length; x++)
+          {
+            let caveat = resultArray[x].selfVoted || resultArray[x].didNotVote ? "6" : "0"            
+            table+= `<tr>
+                      <td>${resultArray[x].acronym}</td>
+                      <td>${resultArray[x].nick}</td>
+                      <td>${resultArray[x].votesReceived}</td>
+                      <td>${resultArray[x].votesReceived * 5}</td>
+                      <td>${caveat}</td>
+                    </tr>`                
+
+
+          }
+
+          let markup = `<table>
+                            <tr>
+                              <td>Answer</td>
+                              <td>Nick</td>
+                              <td>Votes</td>
+                              <td>Points</td>
+                              <td>Penalty</td>
+                            </tr>
+                            ${table}
+                        </table>`
+
+           let actionsArray = [];       
+           actionsArray.push(
+            new actionItem({
+              label:`ok`,
+              action:`clear_modal_by_id('scoreboard'); showScore();`
+            }), 
+           new actionItem({
+              label:`<i class="fas fa-share"></i> share`,
+              action:`roundShare('scoreboard');`
+            })
+
+           );
+           create_new_modal({
+                modal_id:"scoreboard",
+                modal_type: "generic_confirm",
+                attachedObject: resultArray,
+                prompt: `results`,
+                detail_text: markup,
+                actionsArray: actionsArray,
+                activate: function () { 
+                    const scoreboardElement = document.getElementById('scoreboard');
+                    scoreboardElement.dataset.letters = letters;
+                    scoreboardElement.dataset.resultArray = JSON.stringify(resultArray);
+
+                 },
+                deactivate: function () { showScore(); }
+            });
+
+           clearToClock()
+
+  }
+
+// ******* WORKS, A LITTLE LESS WORDY:
+
+  if (response.method === "reportRoundResult")
+        {
+
+          const divChatWindow = id("divChatWindow");
+
+          var resultArray = response.roundResult;
+          let letters = response.letters
+          clear_modal_by_id("vote")
+          generateNotification({message: "Voting complete"}) 
+          var markup = ""; 
+          for (let x = 0; x < resultArray.length; x++)
+          {  
+            var result = resultArray[x];
+            result.votesReceived = parseInt(result.votesReceived, 10);
+            result.roundScore = parseInt(result.roundScore, 10);
+            var caveat = false;
+            if (result.selfVoted)
+            {
+              caveat = result.votesReceived > 0 ? "(but " : "(and ";
+              caveat += "<span class='caveat'>-6 points for self-voting)</span>"
+            } else if (result.didNotVote)
+            {
+              caveat = result.votesReceived > 0 ? "(but" : "(and";
+              caveat += "<span class='caveat'>-6 points for not voting)</span>"
+            }
+
+            if (result.acronym == "null" || result.acronym == null)
+            {
+            markup += `<div>
+                            <span id="nickScore">${result.nick}</span> did not submit this round ${ caveat ? caveat : ""}
+                      </div>`  
+            } 
+            else
+            {
+            markup += `<div>
+                            <span id="acronymReport">${result.acronym}</span>: <b>${result.votesReceived}</b> vote${result.votesReceived == 1 ? "" : "s"}
+                            <br>
+                            <b>+${result.votesReceived * 5}pts</b> to ${result.nick} ${ caveat ? caveat : ""}
+                      </div>`              
+            } 
+            
+
+          }  
+           let actionsArray = [];       
+           actionsArray.push(
+            new actionItem({
+              label:`ok`,
+              action:`showScore();`
+            }), 
+           new actionItem({
+              label:`<i class="fas fa-share"></i> share`,
+              action:`roundShare('scoreboard');`
+            })
+
+           );
+           create_new_modal({
+                modal_id:"scoreboard",
+                modal_type: "generic_confirm",
+                attachedObject: resultArray,
+                prompt: `results`,
+                detail_text: markup,
+                actionsArray: actionsArray,
+                activate: function () { 
+                    const scoreboardElement = document.getElementById('scoreboard');
+                    scoreboardElement.dataset.letters = letters;
+                    scoreboardElement.dataset.resultArray = JSON.stringify(resultArray);
+
+                 },
+                deactivate: function () { showScore(); }
+            });
+
+          
+           clearToClock()
+
+
         }
 
 
 
-
-
-
-
-
-
-        if (response.method === "reportRoundResult")
+        /*if (response.method === "reportRoundResult")
         {
           //console.log("***")
           //console.log("round result received");
@@ -311,15 +467,9 @@ ws.onmessage = message => {
 
           
            clearToClock()
-         /* var element = document.querySelector('.letterTile');
 
-          $('.letterTile').addClass("animate__animated animate__zoomOut")
-          //element.classList.add('animate__animated', 'animate__zoomOut');
-          element.addEventListener('animationend', () => {
-                  $('.acronymContainer').html(generateClock());
-          })    */       
 
-        }
+        }*/
 
            
         if (response.method === "getVotes")
@@ -331,7 +481,7 @@ ws.onmessage = message => {
 
           var actionsArray = [];
           var answers = JSON.parse(response.answers);    
-          console.log(answers)      
+          clog(answers, 5)      
           for (let x = 0; x < answers.length; x++)
           {  
             var answer = answers[x];
@@ -369,7 +519,7 @@ ws.onmessage = message => {
 
           var actionsArray = [];
           var answers = JSON.parse(response.answers); 
-          console.log(answers);
+          clog(answers, 5);
 
           for (let x = 0; x < answers.length; x++)
           {  
@@ -402,7 +552,7 @@ ws.onmessage = message => {
            create_new_modal({
                 modal_id:"emptyround_total",
                 modal_type: "generic_confirm",
-                  prompt: `too few submissions.`,
+                  prompt: `too few submissions`,
                   detail_text: detail,
                 actionsArray: actionsArray,
                 detail_text: `<div style="padding: 15px 0px;">${detail.label.nick}: ${detail.label.acronym}</div>`,
@@ -431,7 +581,7 @@ ws.onmessage = message => {
   			if (response.method === "join")
   			{				
 
-          console.log("RECEIVED JOIN RESPONSE...HOPE YOU JUST JOINED A GAME")  
+          clog("Server accepted your join", 4)  
           // server accepted your request to join the game
           gameId = response.game.id; 
           loc = "game";
@@ -439,33 +589,39 @@ ws.onmessage = message => {
 
           if (game.hostId == clientId)
           {
-            console.log("You're the host of this game but weren't marked as such -- probably a reconnect. fixing.");
+            clog("You're are the host.", 3);
             host = true;
             
           }
           else {
-            console.log(clientId)
-            console.log(game.hostId)
-            console.log("you weren't the host");
+            clog("you reconnected and weren't the host", 5);
           }    
 
           $("#titleScreen").addClass("animate__animated animate__zoomOut hidden");
           populate ("main", generateGame(), wireGameEvents);
-
+          
           if (game.inProgress)
           {
-            console.log("**** REJOINING GAME")
-            console.log(game);
-            console.log("****")
+            clog("**** REJOINING GAME", 4)
+            clog(game, 4);
+            clog("****", 4)
 
             $('#titleBar').remove();                  
             $('.acronymContainer').remove();
             const round = game.currentRound;
             acronym = game.acronyms[round - 1];
             let acronymMarkup = generateAcronymContainer(acronym);
-            generateNotification({message: `rejoining game in progress`})
+            
             id("main").insertAdjacentHTML("afterbegin", acronymMarkup);
-            animateAcronym();  
+            if (game.betweenRounds)
+            {
+               generateNotification({message: `rejoining. round ${game.currentRound} will start soon.`})
+              $('.acronymContainer').html(generateClock());
+            } else {
+              generateNotification({message: `rejoining round ${game.currentRound} in progress.`})
+              animateAcronym()   
+            } 
+             
           }  
           if (game.key)
           {
@@ -479,5 +635,15 @@ ws.onmessage = message => {
           } else {
             gameKey = false;
           }  
-  			}	  			
+
+
+            let markup = `<span style="font-style:italic;opacity:.4"> Welcome! This game is hosted by <b>${host ? "you." : game.hostname + "."}</b> <br><br>
+                              Below, type in an answers to the acronyms above. Anything else you type will appear here, in the group chat. Say hi!
+                            </span>`;
+
+            injectChat(markup)                
+
+            //alert(d.textContent);
+           
+  			}	 // end join 			
 }

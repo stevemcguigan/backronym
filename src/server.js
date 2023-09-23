@@ -1,4 +1,5 @@
 const communication = require('./communication.js')
+const gameFunctions = require('./gameFunctions.js')
 const server = {
 	getGames: (client, games) =>
 	{
@@ -42,7 +43,7 @@ const server = {
 					if (game.hostId == oldClient.currentGameInfo.clientId)
 					{	
 						game.hostId = clientId;
-						game.hostNick = clients[clientId].currentGameInfo.nick
+						game.hostname = clients[clientId].currentGameInfo.nick
 						clients[clientLocals[localId]].currentGameInfo.clientId = clientId;
 					}
 					for (let x = 0; x < game.answers.length; x++)
@@ -56,29 +57,36 @@ const server = {
 					}
 					communication.send(clients[clientId], payload)
 				} else {
-					console.log("looks like someone reconnected into a dead game. returning to lobby.")
+					clog("Lobby reconnect.", 4)
 					clientLocals[localId] = clientId;				
 				}						
 			} catch {
-				console.log("looks like someone lost connection and then reconnected while in the lobby.")
+				clog("Lobby reconnect.", 4)
 				clientLocals[localId] = clientId;
 			}		
 		} else {
 			clientLocals[localId] = clientId;
 		}		
 	},
-	closeConnection: (clients, games, connection) =>
+	closeConnection: (clients, games, connection, keys) =>
 	{
-		console.log("connection closed");
+		clog("Connection closed.", 4);
 		clients[connection.clientId].connected = false;
+		//console.log(clients, JSON.stringify(games), connection, keys)
 		setTimeout(() => {
+			//console.log("TRYING TO CLEAR OUT GAME")
+			//console.log("connection.clientid " + connection.clientId)
+			//console.log("clients[connection.clientId] " + JSON.stringify(clients[connection.clientId]))
+			//console.log("games[clients[connection.clientId].currentGameInfo.gameId] " + JSON.stringify(games[clients[connection.clientId].currentGameInfo.gameId]))
+			//gameFunctions.cullDeadClientsFromGame(clientGame, connection.clientId);
 			try {
 				var clientGame = games[clients[connection.clientId].currentGameInfo.gameId];
-				gameFunctions.cullDeadClientsFromGame(clientGame, connection.clientId);
+				gameFunctions.cullDeadClientsFromGame(clientGame, connection.clientId, games, keys);
+				clog("Dead client culled from game " + clients[connection.clientId].currentGameInfo.gameId, 3)
 			} catch {
-				console.log("dead client was not in a game. clean break.")
+				clog("dead client was not in a game. clean break. (Or try/catch saved from an error, which would be sloppy.)", 3)
 			}			
-		}, 10000);		
+		}, 5000);		
 	}
 }
 module.exports = server

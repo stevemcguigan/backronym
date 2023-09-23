@@ -11,6 +11,16 @@ function getGames()
 
 function sendLocalId()
 {
+	clog("send localID called", 4)
+	clog(user, 4)
+	if (user == null)
+	{
+		clog("User object didn't load yet, retrying", 5)
+		setTimeout(function(){
+			sendLocalId()
+		}, 500)
+		return
+	}
 	const payload = {
 		"method": "localId",
 		"clientId": clientId,
@@ -19,28 +29,7 @@ function sendLocalId()
     send(payload);		
 }
 
-function pong()
-{
-	let newid = guid();
-	const payload = {
-		"method": "pong",
-		"clientId": clientId,
-		"pongid" : newid
-	}
-    send(payload);	
-    idToExpect = newid;
-}
 
-function checkPingResponse()
-{
-	if (idWeGot == idToExpect)
-	{
-		console.log("Ping? Pong!")
-	} else {
-		console.log("lost socket, browser was prob backgrounded. Refreshing.")
-		location.reload();
-	}	
-}
 
 function start(gameId)
 {
@@ -71,6 +60,66 @@ function play(play)
 		"play": play
 	}
     send(payload);
+}
+
+function bypassNickModal(newNick)
+{
+		requestNickChange(newNick)
+		user.nick = newNick
+		nick = newNick
+		saveUser()
+}
+
+function requestNickChange(newNick)
+{
+		const payload = {
+		"method": "nickChange",
+		"gameId": gameId,
+		"clientId": clientId,
+		"newNick": newNick
+	}
+    send(payload);
+}
+
+
+function checkNick()
+{
+
+	let newNick = $('#name').val();
+	if (newNick.length > 0)
+	{
+		clear_modal_by_id('changeNick')
+		user.nick = newNick
+		nick = newNick
+		saveUser()
+		loc !== "lobby" ? requestNickChange(newNick) : clog("not in a game, not requesting nickchange yet", 4)
+	}
+}
+
+function editNick()
+{
+		let actionsArray = []
+
+		clear_modal_by_id("settingsMenu")
+    actionsArray.push(
+	    new actionItem({
+	      label:`ok`,
+	      action: `checkNick();`
+	    }),
+	    new actionItem({
+	      label:`cancel`,
+	      action: `clear_modal_by_id('changeNick');openMenu()`
+	    })
+    );
+
+    create_new_modal({
+      modal_id: 'changeNick',
+      modal_type: 'generic_confirm',
+      prompt: "new nickname",
+      textbox: "name",
+      actionsArray: actionsArray,
+      placeholder: "choose a nickname"
+    });
 }
 
 
@@ -110,7 +159,7 @@ function joinPrivate(pkey)
 //		alert(pkey)
 	}
 
-console.log("JOINING PRIVATE: " + pkey);
+	clog("Joining a private game with " + pkey, 3);
 
 	/*let modal_content = gen_win_icon_markup({prompt: "good job"});
 
@@ -179,7 +228,8 @@ function createGame()
       create_new_modal({
         modal_id:"createNewGame",
         modal_type: "generic_confirm",
-        prompt: `create new game`,
+        detail_text: "Which kind of game? <span class='bold olive'>Public games</span> are visible from the lobby and anyone can join them.  <span class='bold olive'>Private games</span> need a key or direct link to join and are usually for friends.",
+        prompt: `create a new game`,
         actionsArray: actionsArray
   	  });
 }

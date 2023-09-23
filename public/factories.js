@@ -119,8 +119,8 @@ function roundShare(el) {
 	round.sort((a, b) => b.roundScore - a.roundScore);
 
 	for (let i = 0; i < round.length; i++) {
-		console.log(typeof round[i].acronym)
-		console.log(round[i].acronym)
+		clog(typeof round[i].acronym, 4)
+		clog(round[i].acronym, 4)
 		if (typeof round[i].acronym !== "object")
 			result += ` ${round[i].nick}: ${round[i].acronym}  ${round[i].roundScore}pts ${i < 1 ? awards[i] : ""}\n`	
 	}
@@ -143,9 +143,9 @@ function roundShare(el) {
 function generateTitleBar(exit)
 {
 	let markup = `	<div id="titleBar" class="">
-		<span ${exit ? 'class="reveal"' : '' } id="exitContainer" onclick="exitGameConfirm()"><i class="fas fa-caret-left"></i></span>
-		<span style="flex-basis:88%" id="logoBar">backronym</span>
-		<span style="flex-basis:10%; display:flex; justify-content:space-around;">
+		<span ${exit ? 'class="reveal disable-animation"' : ""} id="exitContainer" onclick="exitGameConfirm()"><i class="fas fa-caret-left"></i></span>
+		<span id="logoBar">backronym</span>
+		<span id="toolBar">
 			<span id="nightModeToggleContainer" onclick="nightModeToggle()"><i id="nightModeToggle" class="fas ${user.theme == 1 ? "fa-sun" : "fa-moon"}"></i></span>
 			<span id="settingsContainer" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span>
 		</span>	
@@ -156,7 +156,7 @@ function generateTitleBar(exit)
 function generateLobby()
 {
 	let markup = `
-		${generateTitleBar()}
+		${generateTitleBar(false)}
 		<div class="gameListContainer"><div class="" style="font-size:12px;">-join a public game-</div></div>
 	  <div class="gameListContainer"><div style="margin-top:15px" id="gameList"></div>
 	  </div>
@@ -177,7 +177,7 @@ function generateLobby()
 
 function generateInstructions()
 {
-  console.log("generating new acro for instructions")
+  clog("generating new acro for instructions", 5)
 	let acro = randomAcronym();
 	let lettersMarkup = "";
 
@@ -191,9 +191,6 @@ function generateInstructions()
 	return `
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;font-size:12px;"><div class="">-how to play-</div></div>
 	<div class="gameListContainer" style="margin:20px 0px 20px 0px;"><div style="text-align:center; font-style: italic; font-size:10px; width:75%; max-width:80%">Objective: reverse-engineer an acronym.<br><br>
-
-	Each round, you'll be presented with a set of letters. Type in the funniest, most clever, or most interesting phrase for which those letters COULD be an acronym. There's no right answer. Only what you think the people you're playing with will like.</div></div>
-
 		<div id="lobbyInstructions" class="instructions" style="transform: scale(.5); margin-top: -30px;
     	margin-bottom: -30px; font-size:12px;">
 			<div class="acronymContainer sampleAcro">
@@ -202,7 +199,8 @@ function generateInstructions()
 		</div>
 		<div>
 			${randomPhraseContainer(acro.phrase)}
-		</div>`
+		</div>
+		<div style='margin-top:10px'>There's no right answer. Just try to come up with the funniest, cutest, or most clever thing he letters <span class='bold'>could</span> stand for. Have fun!</div>`
 }
 
 function randomAcronym()
@@ -510,7 +508,7 @@ function generateKeyboard(m)
 }
 
 
-function generateAcronymContainer(acronym)
+function generateAcronymContainer(acronym, reroll)
 {
 	if (!acronym)
 		return;
@@ -523,7 +521,7 @@ function generateAcronymContainer(acronym)
 	}	
 
 	let markup = `
-	${generateTitleBar(true)}
+	${generateTitleBar(reroll)}
 	<div class="acronymContainer">
 				  	${letters}
 				  </div>`
@@ -544,6 +542,14 @@ inputs.forEach(input => {
 
 }
 
+function injectChat(markup)
+{
+    const divChatWindow = id("divChatWindow");
+    const d = document.createElement("div");
+    d.innerHTML = markup
+    divChatWindow.appendChild(d);
+}
+
 
 function generateGame() 
 {
@@ -556,7 +562,7 @@ function generateGame()
 			<span id="settingsContainer" onclick="openMenu()"><i class="fas fa-info-circle"></i></span></span>
 		</span>	
   </div>-->
-  ${generateTitleBar(true)}
+  ${generateTitleBar(false)}
 	<div class="acronymContainer">
 		<button id = "${host ? 'btnStart' : 'btnWait'}" class="animate__animated animate__zoomIn">${host ? 'start' : 'waiting...'}</button>			  	
 	</div>
@@ -602,7 +608,7 @@ function generateNickList()
 {
 	let markup = ""
 	for (let i = 0; i < current.nickList.length; i++) {
-		markup+= `<div class="nickListNick">${current.nickList[i]}</div>`
+		markup+= `<div id="${current.nickList[i].id}" class="nickListNick">${current.nickList[i].nick}${current.nickList[i].id == clientId ? " (You) <span onclick='editNick()' class='nickEditIcon'><i class='fas fa-edit'></i></span>" : ""}</div>`
 	}
 	return markup
 }

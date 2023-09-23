@@ -5,6 +5,12 @@ const gameFunctions = {
 	create: (clients, keys, games, result) =>
 	{
 		const clientId = result.clientId;
+		if (!communication.sanitize(result.host))
+		{
+			communication.forceChangeNick(null, clients[clientId], clientId, "Default")
+			return
+		}
+		
 		const host = result.host;
 		const isPrivate = result.isPrivate;
 		let key = "";
@@ -20,7 +26,7 @@ const gameFunctions = {
 		} else {
 			key = false
 		}	
-		console.log(`the game is private? ${isPrivate}. the KEY is ${key}`);
+		clog(`${isPrivate ? "Private game created with key " + key : "Public game created."}`, 4);
 
 		games[gameId] = {
 			"id": gameId,
@@ -34,7 +40,8 @@ const gameFunctions = {
 			"roundTimer" : null,
 			"acceptingAnswers" : false,
 			"answers": [],
-			"joinable": true
+			"joinable": true,
+			"betweenRounds" : true
 		}
 
 		const payload = {
@@ -48,6 +55,7 @@ const gameFunctions = {
 	},
 	join: (game, gameId, clients, client, clientId, nick) =>
 	{
+		clog(`${nick} joined ${gameId}`, 4)
 		game.clients.push({
 			"clientId" : clientId,		
 		});
@@ -63,10 +71,10 @@ const gameFunctions = {
 			"selfVoted" : false,
 			"didNotVote" : false,
 			"play" : null,
-			"vote" : null
+			"vote" : null,
 			}
 		} catch {
-			console.log("Had that weird connection bug that you haven't fixed yet. Probably nothing will work now.")
+			clog("Hard to track connection bug happened. Probably nothing will work now.", 0)
 		}	
 		const payload = {
 			"method" : "join",
@@ -79,37 +87,27 @@ const gameFunctions = {
 	},
 	nicksFromGame: (game, clients, clientId) =>
 	{
-		/*console.log("********** GAME **********")
-		console.log(game)
-		console.log("********** GAME **********")
-		console.log("********** CLIENTS **********")
-		console.log(clients)
-		console.log("********** CLIENTS **********")*/
 		let clientsArray = []
 		let nicks = []
 		for (let y = 0; y < game.clients.length; y++)
 		{
 			clientsArray.push(game.clients[y].clientId)
 		}		
-		console.log(clientsArray)
 		for (let z = 0; z < clientsArray.length; z++)
 		{
-			let nick = clients[clientsArray[z]].currentGameInfo.nick
+			let nick = {nick: clients[clientsArray[z]].currentGameInfo.nick, id: clientsArray[z]} 
 			nicks.push(nick)
 			//console.log(clients[clientsArray[z]])
 		}				
-		console.log(nicks)
-		//const clientIDs = game.clients;
-		//const nicks = clientIDs.map((clientId) => clients[clientId].currentGameInfo.nick);
 		return nicks
 	},
 	privateJoin: (clients, keys, result) =>
 	{
 		if (keys[result.key] !== undefined) {
 			privategameId = keys[result.key];
-			console.log(`${result.key} found with id ${privategameId}`);
+			clog(`Found a private game keyed with ${result.key}. GameID: ${privategameId}`, 4);
 		} else {
-			console.log("no game found with key " + result.key)
+			clog("No private game found with key " + result.key, 4)
 			privategameId = false;
 		}
 			
@@ -126,7 +124,7 @@ const gameFunctions = {
 	makeAcronym: (length) =>
 	{
 	    let result           = '';
-	    let characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
+	    let characters       = 'AAAABBBCCCDDDDEEEEFFFFGGGGHHHIIIIIJKLLLLMMMMMNNNNNOOOOPPPPPQRRRRRRSSSSSSSTTTTTTUUVVWWWXYYYZ';
 	    let charactersLength = characters.length;
 		    for ( var i = 0; i < length; i++ ) {
 		      a = characters.charAt(Math.floor(Math.random() * 
@@ -141,8 +139,7 @@ const gameFunctions = {
 		const clientId = result.clientId;
 		const ownerId = result.ownerId;
 		const gameId = result.gameId;
-		console.log("**** cast vote");
-		console.log(result);
+		clog(`${clients[clientId].currentGameInfo.nick} voted for ${clients[ownerId].currentGameInfo.nick}`, 4);
 		communication.dm(clients, clientId, "vote received.");
 		clients[clientId].currentGameInfo.vote = ownerId;		
 	},
@@ -150,7 +147,7 @@ const gameFunctions = {
 	{
 		const clientId = result.clientId;
 		if (!communication.sanitize(result.play) && !game.key) {
-			communication.dm(clients, clientId, "This is a public game. Try again.");
+			communication.dm(clients, clientId, "Acronym rejected. This is a public game.");
 			return
 		}
 
@@ -179,21 +176,16 @@ const gameFunctions = {
 		game.inProgress = true;
 		for (let x = 0; x < 7; x++)
 		{
-			var min, max;
-			let outlier = butils.randomInt(1,100);
-			if (outlier < 33) {
-				min = 2;
-				max = 5;
-			} else {
-				min = 3;
-				max = 4;
-			}
+			let outlier = butils.randomInt(1, 100);
+			let min = outlier < 33 ? 2 : 3;
+			let max = outlier < 33 ? 5 : 4;
 			game.acronyms.push(gameFunctions.makeAcronym(butils.randomInt(min, max)));	
 		}				
 	},
 	startRound: (clients, game) =>
 	{
-		let long = 100
+		game.betweenRounds = false
+		let long = 23
 		if (game.clients.length == 0)
 		{
 			delete game;
@@ -221,7 +213,7 @@ const gameFunctions = {
 	},
 	cullAnswers: (clients, game) =>
 	{
-		console.log("here's all the answers");
+		clog("Culling answers. ", 3);
 		let totalAnswers = 0;
 		game.clients.forEach (c => {
 			if (clients[c.clientId].currentGameInfo.play)
@@ -233,7 +225,7 @@ const gameFunctions = {
 			game.answers.push(answer);
 			
 		});
-		console.log(game.answers)
+		clog(JSON.stringify(game.answers), 5)
 
 		if (totalAnswers > 1)
 		{
@@ -244,7 +236,7 @@ const gameFunctions = {
 	},
 	getVotes: (clients, game) =>
 	{
-		let long = 10
+		let long = 5
 		communication.broadcast(clients, game, "30 seconds to vote");
 		game.acceptingAnswers = false;								 
 		const payload = {
@@ -294,6 +286,7 @@ const gameFunctions = {
 		}	
 		else
 		{
+			game.betweenRounds = true
 			communication.broadcast(clients, game, "next round starts in 30 seconds")
 			setTimeout(() => {
 				gameFunctions.startRound(clients, game);			  			  	
@@ -334,7 +327,7 @@ const gameFunctions = {
 			{
 				player.currentGameInfo.roundScore = 0;	
 			}	
-			console.log(player.currentGameInfo)
+			clog("calculateRoundResult:  " + JSON.stringify(player.currentGameInfo), 5)
 		});
 	},
 	reportRoundResult: (clients, game) =>
@@ -362,7 +355,7 @@ const gameFunctions = {
 	endRound: (clients, game) =>
 	{
 		game.clients.forEach (c => {
-			console.log("ENDING ROUND, ADDING SCORES")
+			clog("Round is over, calculating scores.", 3)
 			clients[c.clientId].currentGameInfo.scoreTotal += clients[c.clientId].currentGameInfo.roundScore; 
 			clients[c.clientId].currentGameInfo.roundScore = 0;
 			clients[c.clientId].currentGameInfo.votesReceived = 0;
@@ -385,11 +378,11 @@ const gameFunctions = {
 				"score": clients[c.clientId].currentGameInfo.scoreTotal
 			})
 		});	
-		console.log("score before sort")
-		console.log(score);
+		//console.log("score before sort")
+		//console.log(score);
 		score.sort((a, b) => (parseInt(a.score,10) < parseInt(b.score, 10)) ? 1 : -1);
-		console.log("score after sort")
-		console.log(score);			
+		//console.log("score after sort")
+		//console.log(score);			
 		const payload = {
 			"method" : "reportScore",
 			"score": JSON.stringify(score)
@@ -413,6 +406,11 @@ const gameFunctions = {
 	},
 	endGame: (clients, game, winner) =>
 	{
+
+      if (typeof winner.clientId == "undefined") {
+      	winner = {clientId: "error", score: "error"}
+      }
+
 		let payload = {
 			"method":   "endGame",
 			"hostId":   game.hostId,
@@ -430,15 +428,21 @@ const gameFunctions = {
 	},
 	checkIfGameIsDead: (game, games, keys) =>
 	{
-		if (game.clients.length < 1)
+		if (game.clients.length < 1) {
+			clog("Game is dead.", 3)
 			gameFunctions.killGame(game, games, keys);			
+		}
 	},
-	killGame: (games, game, keys) =>
+	killGame: (game, games, keys) =>
 	{
-		if (game.key)
+		if (game.key) {
+			clog("Game with key " + game.key + " was found, killing.", 3)
 			delete keys[game.key];    // if the game is private, find its entry in the master list of private keys and kill it
+		}
 
-		delete games[game.id];       // then kill the game itself
+		delete games[game. id];       // then kill the game itself
+		clog("game should be gone:", 4)
+		clog(games, 4)
 	},
 	exit: (clients, clientId, game, games, keys) =>
 	{
@@ -448,7 +452,7 @@ const gameFunctions = {
 		}
 		gameFunctions.cullDeadClientsFromGame(game, clientId, games, keys);
 		communication.send(client, payload);
-		communication.broadcast(clients, game, `${client.currentGameInfo.nick} left.`) 
+		
 		let nicks = gameFunctions.nicksFromGame(game, clients, clientId)
 		communication.sendNickList(clients, game, nicks) 
 		gameFunctions.resetPlayer(clients[clientId]);
@@ -456,9 +460,11 @@ const gameFunctions = {
 		if (game.hostId == clientId)
 		{
 			game.joinable = false;
-			console.log("host exited, aborting game");	
-			communication.broadcast(clients, game, "host left. exiting in 5 seconds!")	
-			communication.warning(clients, game, "5")						
+			clog("host exited, aborting game", 3);	
+			communication.broadcast(clients, game, "host left. exiting in 10 seconds!")	
+			setTimeout(() => {
+				communication.warning(clients, game, `<span id='counter'>5</span>`)
+			}, 5000 );							
 			setTimeout(() => {
 				for (let x = 0; x < game.clients.length; x++)
 				{
@@ -466,7 +472,9 @@ const gameFunctions = {
 				}					
 				communication.sendAll(clients, game, payload);
 				gameFunctions.killGame(game, games, keys);		
-			}, 5000 );	
+			}, 10000 );	
+		} else {
+			communication.broadcast(clients, game, `${client.currentGameInfo.nick} left.`) 
 		}	
 	},
 	cullAllClients: (game) =>
@@ -475,11 +483,19 @@ const gameFunctions = {
 	},
 	cullDeadClientsFromGame: (game, clientId, games, keys) =>
 	{
+		clog("Game: " + game, 5)
+		clog("clientId: " + clientId, 5)
+		clog("games: " + JSON.stringify(games), 5)
+		clog("keys: " + JSON.stringify(keys), 5)
 		for (let x = 0; x < game.clients.length; x++)
 		{
+			clog("checking " + game.clients[x].clientId, 5)
 			if (game.clients[x].clientId == clientId)
-			{
+			{	
+				clog("found 1", 5)
 				game.clients.splice(x, 1); // found the client to cull
+				clog("new games array: ", 5)
+				clog(games, 5)
 				gameFunctions.checkIfGameIsDead(game, games, keys); // check to see if they were the only one left, and the game needs to die
 			}	
 		}

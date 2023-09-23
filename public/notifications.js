@@ -50,6 +50,12 @@ function generateNotification(m)
 
 	//current.notifications.push(note);	
 
+	 if (loc == "lobby") {
+	 	clog("tried to generate a notification while in lobby, defaulting to modal instead.", 3)
+	 	alert({message : m.message})
+	 	return
+	 }
+
 
 	const element = document.querySelector('.note'); 
 	if (element)
@@ -72,7 +78,7 @@ function generateNotification(m)
 	} 
 	else
     {
-    	
+
     }
 
 	var newNote = `<div class="note animate__animated animate__backInDown" id="notification_${note.id}">

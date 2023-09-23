@@ -86,7 +86,7 @@ function openMenu()
 	}	
 	else
 	{
-		detail = `<div><div>Who's playing?</div>${generateNickList()}</div>`
+		detail = `<div><div class="nickListHeading">Who's playing?</div>${generateNickList()}</div>`
 	}	
 
 	let actionsArray = [];       
@@ -109,6 +109,36 @@ function b(x, min, max) {
   return x >= min && x <= max;
 }
 
+function checkForCommand(msg)
+{
+    if (msg[0] == "/") {
+        const command = msg.trim().split(' ');
+        clog(command[0], 5)
+        switch (command[0])
+        {
+            case "/nick":
+                bypassNickModal(command[1]) 
+            break;
+            default:
+              generateNotification({message: `invalid command: ${command}`,
+                type: "dm",
+                color: "green"})      
+            break;
+        }
+        var tmsg =id("txtMessage");
+        tmsg.value = "";
+        if (!isMobile)
+        tmsg.setSelectionRange(0,0);   
+    } else {
+        chat(msg);
+        var tmsg =id("txtMessage");
+        tmsg.value = "";
+        if (!isMobile)
+            tmsg.setSelectionRange(0,0);                
+    } 
+}
+
+
 function handleInput(kid)
 {	
 	txtMessage  = id("txtMessage");
@@ -126,24 +156,24 @@ function handleInput(kid)
 	let shifted = $("#game-keyboard button").hasClass("upper");// ? function () {} : String.prototype.toUpperCase; 
 	if (shifted && !$('#key_shift').hasClass("pressed"))
 		$("#game-keyboard button").removeClass("upper");
-
 	switch (keypress)
 	{
 		case "backspace":
-			$(key).addClass("pressed");
+		case "←":
+			key.addClass("pressed");
 			txtMessage.value = shifted ? txtMessage.value.substr(0, txtMessage.value.length - 1).toUpperCase() : txtMessage.value.substr(0, txtMessage.value.length - 1);
 			checker();
 		break;
 
 		case "space":
-			$(key).addClass("pressed");	
+			key.addClass("pressed");	
 			txtMessage.value += " ";
 			//checker();
 		break;
 
 		case "return":
-			//generateNotification({message: "fixing"})
-			$(key).addClass("pressed");
+
+			key.addClass("pressed");
 			$("#btnMessage").click();
 			txtMessage.style.height = "27px"
 			divChatWindow.style.height = "155px"
@@ -151,19 +181,19 @@ function handleInput(kid)
 
 		case "symbols":
 
-			$(key).addClass("pressed");
+			key.addClass("pressed");
 			let kb = $("#keyboard");
 			let kb2 = $("#keyboard_2");
 
-			if ($("#keyboard").hasClass("hidden"))
+			if (kb.hasClass("hidden"))
 			{
-				$("#keyboard").removeClass("hidden");
-				$("#keyboard_2").addClass("hidden");		
+				kb.removeClass("hidden");
+				kb2.addClass("hidden");		
 			}
 			else
 			{
-				$("#keyboard").addClass("hidden");
-				$("#keyboard_2").removeClass("hidden");			
+				kb.addClass("hidden");
+				kb2.removeClass("hidden");			
 			}	
 			
 			//txtMessage.value += keypress
@@ -179,12 +209,12 @@ function handleInput(kid)
 			{
 				$("#game-keyboard button").addClass("upper")
 			}	
-			$(key).addClass("pressed");
+			key.addClass("pressed");
 		break;
 
 		default:
 			txtMessage.value += shifted ? keypress.toUpperCase() : keypress;
-			$(key).addClass("shifted");
+			key.addClass("shifted");
 			
 	        if ($('#keyboard').hasClass("hidden"))
 	        {
@@ -269,6 +299,25 @@ function guid() { // Public Domain/MIT
     });
 }
 
+function modalAlert(message, callbackOnClose)
+{
+
+	   let actionsArray = [];       
+	   actionsArray.push(new actionItem({
+	      label:`ok`,
+	      action:`clear_modal_by_id('alert');`
+	    }));
+      create_new_modal({
+        modal_id:"alert",
+        modal_type: "generic_confirm",
+        prompt: `Uh oh!`,
+        detail_text: message,
+        actionsArray: actionsArray,
+  	  });
+}
+
+
+
 function showScore()
 {
 
@@ -278,7 +327,7 @@ function showScore()
 	      action:`clear_modal_by_id('scoreboard_total');`
 	    }));
       create_new_modal({
-        modal_id:"scoreboard_total",
+        modal_id:"scoreboard",
         modal_type: "generic_confirm",
         prompt: `scoreboard`,
         detail_text: current.score,

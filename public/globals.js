@@ -1,3 +1,20 @@
+function clog(message, mlevel)
+{
+	if (mlevel > devlevel) {
+		return 
+	}
+	let log = typeof message == "object" ? console.table : console.log
+	if (typeof message == "object") {
+		console.log(`${mlevel}: Object log from ${clog.caller.name}()`)
+		console.table(message)
+	} else {
+		console.log(`${mlevel}: ${message} (${clog.caller.name})`)			
+	}
+	
+}
+
+let devlevel = 4
+let alert = modalAlert;
 let	  user			 = null;	
 let   clientId       = null;
 let   gameId         = null;
@@ -27,7 +44,7 @@ let wordsTyped = 0;
 let cursorIntervall = null;
 let heldKeyInterval = null;
 let lastKeyPress = null;
-let counter = 0;
+let counter = 0
 let counterInterval = null;
 let isMobile = true;
 let current = {} // stolen from colorspike, name kept to avoid refactor :eyeroll:
@@ -40,6 +57,7 @@ let longpressKeySkips = {
 	 "key_shift" : true,
 	 "key_symbols" : true,	 
 }
+
 
 
 	 
@@ -123,6 +141,6 @@ window.onfocus = function () {
 	}
 	catch
 	{
-		console.log("couldn't force scroll in chat")
+		clog("couldn't force scroll in chat", 5)
 	}
 }; 

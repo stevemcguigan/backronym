@@ -98,6 +98,7 @@
 
 html {
   height: -webkit-fill-available;
+  touch-action:  none;
 }
 
 .borderBlink{    
@@ -153,8 +154,8 @@ html {
 {
 
   width: 100%;
-  height: 15px;
-  font-size: 14px;
+  height: 19px;
+  font-size: 18px;
   color: #ccc;
   padding: 5px;
   background-color: black;
@@ -162,6 +163,83 @@ html {
   display:flex;
   justify-content: space-between;
 }
+
+.reveal {
+  margin-right: 3px;
+  width: 10px !important;
+}
+
+.reveal:after {
+  content: "";
+position: absolute;
+left: 3px;
+top: -1px;
+width: 100px;
+height: 25px;
+background: #e83474;
+border: 1px solid pink;
+opacity:0;
+}
+
+#logoBar {
+  width:88%
+}
+
+#toolBar {
+  width:28%;
+  display:flex;
+  justify-content:space-evenly;
+}
+
+#exitContainer {
+
+width: 0px;
+overflow: hidden;
+transition: width 600ms ease-out;
+}
+
+
+
+.invert
+{  -webkit-filter: invert(90%);
+  -moz-filter: invert(90%);
+  -o-filter: invert(90%);
+  -ms-filter: invert(90%);
+}
+
+
+#nightModeToggle {
+  position: relative;
+}
+
+#nightModeToggle::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -6px;
+  width: 21px;
+  height: 43px;
+  background: #e83474;
+  border: 1px solid pink;
+  opacity: 0;
+}
+
+#settingsContainer {
+  position: relative;
+}
+
+#settingsContainer::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -6px;
+  width: 21px;
+  height: 43px;
+  background: #e83474;
+  border: 1px solid pink;
+  opacity: 0;
+}
+
 
 #period
 {
@@ -529,18 +607,50 @@ transform: scale(1.5);
   margin:0px 0px 10px 0px;
 }
 
+
+
+
+#keyboard button:after, #keyboard2 button:after
+{
+content: "";
+position: absolute;
+left: 3px;
+top: -1px;
+width: 24px;
+height: 45px;
+background: #e83474;
+border: 1px solid pink;
+opacity: 0;
+} 
+
+
+#keyboard #key_space:after, #keyboard #key_2_space:after
+{
+content: "";
+position: absolute;
+left: -9px;
+top: -14px;
+width: 63px;
+height: 65px;
+background: #e83474;
+border: 1px solid pink;
+opacity:0;
+} 
+
+
+/*
 #keyboard button:after, #keyboard2 button:after
 {
 content: "";
 position: absolute;
 left: -3px;
 top: -3px;
-width: 37px;
+width: 36px;
 height: 55px;
 background: #e83474;
 border: 1px solid pink;
 opacity: 0;
-} 
+} */
 
 #key_shift:after, #key_backspace:after 
 {
@@ -558,7 +668,7 @@ opacity: 0;
 
 #key_space:after
 {
-  width: 200px !important;
+  width: 220px !important;
   border: 1px solid pink !important;
 
 }
@@ -609,17 +719,16 @@ font-size: 21px;
 height: 41px;
 border-radius: 13px;
 cursor: pointer;
-color: #777;
 user-select: none;
-background-color: white;
 flex-basis: 50%;
 display: flex;
-box-shadow: 1px 1px 1px 0px rgba(0,0,0,.4);
 justify-content: center;
 align-items: baseline;
 border: 1;
 -webkit-tap-highlight-color: rgba(0,0,0,0.3);
 border: 1px dotted #666;
+color: white;
+background-color: olivedrab;
 }
 
 
@@ -729,21 +838,20 @@ margin-left: 10px;
 }
 
 .blockingModalTitle {
-    color: #666;
+    color: white;
     font-size: 16px;
     /* font-weight: 500; */
     /* letter-spacing: 2px; */
     text-align: center;
     font-family: courier;
-    /* border-bottom: 1px dotted #666;
+    /* border-bottom: 1px dotted #666;*/
 }
 
 .modal_detail_text {
 color: #666;
-font-size: 14px;
-padding: 0px 0 25px;
+font-size: 13px;
 font-family: courier;
-width: 85%;
+padding: 0 25px;
 /* line-height: 20px; */
 }
 
@@ -777,11 +885,13 @@ font-size: 13px;
 
 .stackablePrompt {
     width: 100% !important;
+        margin-bottom: 15px;
     display: flex;
     justify-content: center;
     padding: 10px 0;
     /* background: #bbb; */
-    color: #666;
+    background: #333; 
+    color: white;
     border-bottom: 1px dotted #666;
 }
 
@@ -859,22 +969,34 @@ font-size: 13px;
 
 }
 
+.letterTileLetter {
+  font-style: normal !important;
+}
+
 #clockContainer svg
 {
   max-height: 104px;
 }
 
+.bold {
+  font-weight:  bold;
+}
+
+.olive {
+  color: olivedrab;
+}
+
 .confirmation_button
 {
     width: 80px;
-    background-color: white;
+    background-color: olivedrab;
     border: 1px dotted #666;
     border-radius: 2px;
     font-family: courier new;
-    box-shadow: 2px 2px 1px 0px #888;
+
     height: 35px;
     font-size: 14px;
-    color: #666;
+    color: white;
 }
 
 .confirmationActions
@@ -892,7 +1014,7 @@ transition: all .2s ease-in-out;
 -moz-box-shadow: 2px 2px 1px 0px #888;
 overflow: hidden;
 box-shadow: 2px 2px 1px 0px #888;
-border: 1px dotted #666;
+border-left: 1px dotted #666;
 z-index: 300;
 margin-bottom:70px;
 background-color: white;

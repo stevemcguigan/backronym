@@ -71,6 +71,7 @@ function wireGameEvents()
     })
 
     btnMessage.addEventListener("click", e => {
+
         let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
         if (acronym)
         {
@@ -90,7 +91,7 @@ function wireGameEvents()
             else 
             {
                 $('.acronymContainer span').removeClass(highlight);
-                chat(id("txtMessage").value);
+                checkForCommand(id("txtMessage").value)
             }    
             var tmsg =id("txtMessage");
             tmsg.value = "";
@@ -102,11 +103,11 @@ function wireGameEvents()
             // do nothing
         } 
         else {
-            chat(id("txtMessage").value);
-            var tmsg =id("txtMessage");
-            tmsg.value = "";
-            if (!isMobile)
-                tmsg.setSelectionRange(0,0);
+            let msg = id("txtMessage").value
+            checkForCommand(msg)
+            
+   
+
         }  
  
     })
@@ -138,7 +139,7 @@ function wireGameEvents()
                 divChatWindow.lastChild.scrollIntoView({ behavior: "smooth", block: "end" });
             }
             else if (mutation.type == 'attributes') {
-                console.log('The ' + mutation.attributeName + ' attribute was modified.');
+                clog('The ' + mutation.attributeName + ' attribute was modified.', 3);
             }
         }
     };
@@ -160,19 +161,23 @@ function wireGameEvents()
     
     if (!isMobile)
     {
-        console.log("NOT MOBILE, AUTOFOCUSING")
+        clog("not mobile, autofocusing", 4)
         $("#txtMessage").focus();
     } else {
         cursorInterval = window.setInterval(() => toggleCursor(), 530);
-        console.log("mobile detected");
+        clog("mobile detected", 4);
     }   
+
+    setTimeout(function() {
+        $("#exitContainer").addClass("reveal")
+    }, 10);    
         
 
 }
 
 function focusText()
 {
-    console.log("autofocusing textbox");
+    clog("autofocusing textbox", 5);
     $("#txtMessage").focus();        
 
 
@@ -193,6 +198,7 @@ function scrollChat()
 }
 
 
+
 function strip(stringToStrip)
 {
     stringToStrip = stringToStrip.replace(/-/g, ' ');
@@ -204,7 +210,8 @@ function checker()
 {
     let highlight = $('html').hasClass("invert") ? "highlightedTile invert" : "highlightedTile"
     if (!acronym)
-    return;
+        return;
+
         let candidate = txtMessage.value;
         candidate = strip(candidate);
         const checker = candidate.split(" ");
