@@ -119,6 +119,12 @@ function checkForCommand(msg)
             case "/nick":
                 bypassNickModal(command[1]) 
             break;
+
+            case "/exit":
+            case "/quit":
+                exitGameConfirm() 
+            break;
+
             default:
               generateNotification({message: `invalid command: ${command}`,
                 type: "dm",
