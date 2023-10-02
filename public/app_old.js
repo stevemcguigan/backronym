@@ -8,7 +8,7 @@
 		let clientId = null;
 		let gameId = null;
   		//let ws = new WebSocket("ws://localhost:9090")
-let ws = new WebSocket("ws://192.168.1.162:9090")
+let ws = new WebSocket("ws://backronym.app:9090")
     	const btnCreate = id("btnCreate");
     	const btnJoin = id("btnJoin");
     	const txtGameId = id("txtGameId");

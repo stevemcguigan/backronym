@@ -14,6 +14,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script>
+
+function isiPad() {
+  return (
+    'ontouchstart' in window ||
+    (navigator.maxTouchPoints > 0 && window.innerWidth >= 768 && window.innerHeight >= 1024)
+  );
+}
 if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
 	console.log("loading mobile stylesheet")
 		document.head.innerHTML += '<link rel="stylesheet" href="css/style_mobile.css">'
@@ -23,12 +30,17 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
 				console.log("also loading android fixes")
 			  document.head.innerHTML += '<link rel="stylesheet" href="css/style_android.css">'
 			}		
+
 		}
 		else
 		{
 			console.log("loading desktop css")
 			document.head.innerHTML += '<link rel="stylesheet" href="css/style_desktop.css">'
-
+			if (isiPad()) {
+				alert("tab")
+				console.log("also loading tablet fixes")
+			  document.head.innerHTML += '<link rel="stylesheet" href="css/style_ipad.css">'				
+			}
 		}
 </script>
 
@@ -39,7 +51,7 @@ if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigat
 			backrony<span style="padding-left:3px;">m</span><span id="period"></span>
 		</div>
 		<div id="credits">
-			© 2023 smack ltd
+			© 2023 steve mcguigan
 		</div>
 		<div style="">
 			<button style="width:100px;margin-top:25px;" class="confirmation_button" id="playbutton"> ▶ play</button>
