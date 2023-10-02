@@ -14,7 +14,7 @@ const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.pem';
 const httpServer = https.createServer({
   cert: fs.readFileSync(certPath), // Replace with the path to your SSL certificate
   key: fs.readFileSync(keyPath), // Replace with the path to your SSL private key
-});
+}, app);
 const clients 			= {};
 const clientLocals 		= {};
 const games 			= {};
@@ -97,8 +97,14 @@ app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 // parser.js
 //httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
-console.log(httpServer)
-const wsServer = new WebSocket.Server({ httpServer });
+
+const wsServer = new new WebSocket.Server({
+  // You need to specify WebSocket server options here
+  server: httpServer
+});
+httpServer.listen(9090, () => {
+  clog('Secure WebSocket server is running on port 9090', 0);
+});
 
 clog("log level is "+ devlevel)
 
