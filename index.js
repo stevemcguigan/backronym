@@ -96,7 +96,7 @@ app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 // parser.js
-httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
+//httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
 const wsServer = new WebSocket.Server({ httpServer });
 
 clog("log level is "+ devlevel)
