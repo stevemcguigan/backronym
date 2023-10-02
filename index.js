@@ -1,4 +1,5 @@
-const http 				= require("http");
+const https 			= require('https');
+const fs 				= require('fs');
 const express 			= require("express")
 const app 				= express();
 const dictionary 		= require('./src/dictionary.js')
@@ -6,8 +7,14 @@ const butils 			= require('./src/butils.js')
 const gameFunctions 	= require('./src/gameFunctions.js')
 const communication 	= require('./src/communication.js')
 const server 			= require('./src/server.js')
-const websocketServer 	= require("websocket").server
-const httpServer 		= http.createServer();
+const websocketServer 		= require('ws');
+//const websocketServer 	= require("websocket").server
+const certPath = '/etc/letsencrypt/live/backronym.app/fullchain.pem';
+const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.pem';
+const httpServer 		= https.createServer({
+  cert: fs.readFileSync(certPath), // Replace with the path to your SSL certificate
+  key: fs.readFileSync(keyPath), // Replace with the path to your SSL private key
+}, app);
 const clients 			= {};
 const clientLocals 		= {};
 const games 			= {};
@@ -90,9 +97,7 @@ app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 // parser.js
 httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
-const wsServer = new websocketServer({
-	"httpServer": httpServer
-});
+const wsServer = new WebSocket.Server({ httpServer });
 
 clog("log level is "+ devlevel)
 
