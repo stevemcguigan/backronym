@@ -95,13 +95,11 @@ app.listen(8000, () => clog("express listening on 8000", 0));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
-// parser.js
-//httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
-
-const wsServer = new new WebSocket.Server({
+const wsServer = new WebSocket.Server({
   // You need to specify WebSocket server options here
   server: httpServer
 });
+
 httpServer.listen(9090, () => {
   clog('Secure WebSocket server is running on port 9090', 0);
 });
