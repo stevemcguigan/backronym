@@ -9,8 +9,8 @@ const communication 	= require('./src/communication.js')
 const server 			= require('./src/server.js')
 const WebSocket 		= require('ws');
 //const websocketServer 	= require("websocket").server
-const certPath = '/etc/letsencrypt/live/backronym.app/fullchain.pem';
-const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.pem';
+const certPath = '/etc/letsencrypt/live/backronym.app/fullchain.perm';
+const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.perm';
 const httpServer = https.createServer({
   cert: fs.readFileSync(certPath), // Replace with the path to your SSL certificate
   key: fs.readFileSync(keyPath), // Replace with the path to your SSL private key
