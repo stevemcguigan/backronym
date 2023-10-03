@@ -1,7 +1,7 @@
 // incoming responses from the server are parsed here
 
 //let ws = new WebSocket("ws://localhost:9090")
-let ws = new WebSocket("ws://backronym.app:9090")
+let ws = new WebSocket("wss://backronym.app:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41 
