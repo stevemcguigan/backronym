@@ -657,6 +657,9 @@ var tagList = "";
 function return_actions_array(m)
 {
 
+
+
+
 	var actionsMarkup = "";
 	if (m.actionsArray != undefined)
 	{
@@ -673,7 +676,7 @@ function return_actions_array(m)
 									
 									onclick="${m.actionsArray[0].action}">
 									${m.actionsArray[0].label}
-									</button>
+									</button><h2>hi</h2>
 								</div>`;
 			} 
 			else 
@@ -855,6 +858,22 @@ function generate_generic_confirm_markup(m)
 	var actionsMarkup = "";
 	if (m.actionsArray != undefined)
 	{
+			console.log(`
+
+
+ACTIONS
+
+
+		`)
+	console.log(m)
+
+	console.log(`
+
+
+END ACTIONS
+
+
+		`)	
 		actionsMarkup  = `<div class="confirmationActions">`
 		if (m.actionsArray[0] != null)
 		{

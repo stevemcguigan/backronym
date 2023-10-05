@@ -330,7 +330,7 @@ function showScore()
 	  let actionsArray = [];       
 	   actionsArray.push(new actionItem({
 	      label:`ok`,
-	      action:`clear_modal_by_id('scoreboard_total');`
+	      action:`clear_modal_by_id('scoreboard');`
 	    }));
       create_new_modal({
         modal_id:"scoreboard",

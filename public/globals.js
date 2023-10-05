@@ -13,7 +13,7 @@ function clog(message, mlevel)
 	
 }
 
-let devlevel = 4
+let devlevel = 6
 let alert = modalAlert;
 let	  user			 = null;	
 let   clientId       = null;

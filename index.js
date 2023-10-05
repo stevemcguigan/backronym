@@ -1,4 +1,6 @@
+const local 			= true
 const https 			= require('https');
+const http  			= require('http');
 const fs 				= require('fs');
 const express 			= require("express")
 const app 				= express();
@@ -11,10 +13,30 @@ const WebSocket 		= require('ws');
 //const websocketServer 	= require("websocket").server
 const certPath = '/etc/letsencrypt/live/backronym.app/fullchain.pem';
 const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.pem';
-const httpServer = https.createServer({
-  cert: fs.readFileSync(certPath), // Replace with the path to your SSL certificate
-  key: fs.readFileSync(keyPath), // Replace with the path to your SSL private key
-}, app);
+let httpServer = null, wsServer = null
+
+if (local) {
+	websocketServer	= require("websocket").server
+	httpServer 		= http.createServer();
+	httpServer.listen(9090, () => clog("websocket listening on 9090", 0));
+	wsServer = new websocketServer({
+		"httpServer": httpServer
+	});
+} else {
+	httpServer = https.createServer({
+	  cert: fs.readFileSync(certPath), // Replace with the path to your SSL certificate
+	  key: fs.readFileSync(keyPath), // Replace with the path to your SSL private key
+	}, app);
+	wsServer = new WebSocket.Server({
+  // You need to specify WebSocket server options here
+	  server: httpServer
+	});
+
+	httpServer.listen(9090, () => {
+	  clog('Secure WebSocket server is running on port 9090', 0);
+	});
+}
+
 const clients 			= {};
 const clientLocals 		= {};
 const games 			= {};
@@ -95,14 +117,7 @@ app.listen(8000, () => clog("express listening on 8000", 0));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
-const wsServer = new WebSocket.Server({
-  // You need to specify WebSocket server options here
-  server: httpServer
-});
 
-httpServer.listen(9090, () => {
-  clog('Secure WebSocket server is running on port 9090', 0);
-});
 
 clog("log level is "+ devlevel)
 

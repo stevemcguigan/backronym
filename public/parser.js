@@ -1,7 +1,7 @@
 // incoming responses from the server are parsed here
 
-//let ws = new WebSocket("ws://localhost:9090")
-let ws = new WebSocket("wss://backronym.app:9090")
+let ws = new WebSocket("ws://localhost:9090")
+//let ws = new WebSocket("wss://backronym.app:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41 
@@ -28,7 +28,6 @@ ws.onmessage = message => {
         if (response.method === "connect")
   			{
   				clientId = response.clientId;
-  				//console.log(`client id is ${clientId}`);
             setTimeout(() => {
                 getGames();                
             }, 500); 
@@ -37,8 +36,6 @@ ws.onmessage = message => {
 
         if (response.method === "getGames")
         {
-          //console.log("received list of games from server;")
-          //console.log(response);
           if (loc == "lobby")
           {
             setTimeout(() => {
@@ -68,7 +65,6 @@ ws.onmessage = message => {
           current.nickList = [...response.nicks]
           if ($('#settingsMenu').length) {
             openMenu()
-            //$('#settingsMenu .modal_detail_text').html(generateNickList())
           } 
         }        
 
@@ -92,8 +88,6 @@ ws.onmessage = message => {
                   detail_text: "Your nickname was rejected and has been changed to 'Default'. Change your nickname and then try creating a game again. <br> <br> Private games are not subject to the profanity filter in chat but nicknames always are since they're public facing.",
                   actionsArray: actionsArray
                 });
-
-
             }
         }        
 
@@ -111,11 +105,7 @@ ws.onmessage = message => {
 
         if (response.method === "ping")
         {
-//          console.log(`got a ping`);
-
           idWeGot = response.pongid;
-          //pong();
-          //soundtrack.play();
         }         
 
         if (response.method === "startRound")
@@ -173,64 +163,46 @@ ws.onmessage = message => {
           score.forEach(s => {
             current.score += `<div>${s.nick}: ${s.score}</div>`
           });  
-
-            /*clear_modal_by_id("scoreboard")
-            create_new_modal({
-                  modal_id:"scoreboard_total",
-                  modal_type: "generic_confirm",
-                  prompt: `scoreboard`,
-                  detail_text: current.score
-            });*/
         } 
    
         if (response.method === "privateJoinWinFail")
         {
-          if (response.privategameId !== false)
-          {
-            join(response.privategameId)
-          } else {
-            modalAlert("no game with that key found")
-          }
+          response.privategameId !== false ? join(response.privategameId) : modalAlert("no game with that key found")
         }
 
         if (response.method === "endGame")
         {
-          let winnerNick = response.nick;
-          let score = response.score;
-          let winnerClientId = response.clientId;
-          let winner = winnerClientId == clientId ? "you" : winnerNick;
-          let host = response.hostId == clientId ? true : false;
+          const { nick: winnerNick, score, clientId: winnerClientId, hostId } = response;
+          const winner = winnerClientId === clientId ? "you" : winnerNick;
+          const host = hostId === clientId;
+          const actionsArray = [];
 
-          //n(winner + " won with " + score + " points!");
+          const playAgainAction = {
+            label: "play again",
+            action: "clear_modal_by_id('winner');n('new game started!');start('${gameId}');"
+          };
 
-           let actionsArray = [];     
+          const noThanksAction = {
+            label: "no thanks",
+            action: "clear_modal_by_id('winner');"
+          };
 
-           if (host)  
-           {
-             actionsArray.push(new actionItem({
-                label:`play again`,
-                action:`clear_modal_by_id('winner');n('new game started!');start('${gameId}');`
-              }));
-              actionsArray.push(new actionItem({
-                label:`no thanks`,
-                action:`clear_modal_by_id('winner');`
-              }));             
-           } 
-           else
-          {
-             actionsArray.push(new actionItem({
-                label:`ok`,
-                action:`clear_modal_by_id('winner');`
-              }));            
-          }
+          const okAction = {
+            label: "ok",
+            action: "clear_modal_by_id('winner');"
+          };
+
+          host
+            ? actionsArray.push(playAgainAction, noThanksAction)
+            : actionsArray.push(okAction);
 
            create_new_modal({
-                modal_id:"winner",
+                modal_id: "winner",
                 modal_type: "generic_confirm",
                 prompt: "it's over!",
                 detail_text: `${winner} won with ${score} points!`,
-                actionsArray: actionsArray,
-                deactivate: function () { }
+                actionsArray,
+                deactivate: () => {}
             });
 
 

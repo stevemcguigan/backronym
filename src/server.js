@@ -1,5 +1,6 @@
 const communication = require('./communication.js')
 const gameFunctions = require('./gameFunctions.js')
+
 const server = {
 	getGames: (client, games) =>
 	{
