@@ -1,5 +1,5 @@
 //let ws = new WebSocket("ws://localhost:9090")
-let ws = new WebSocket("wss://backronym.app:9090")
+let ws = new WebSocket("wss://45.33.65.11:9090")
 //let ws = new WebSocket("ws://192.168.99.41:9090")
 // 
 // 192.168.99.41 
