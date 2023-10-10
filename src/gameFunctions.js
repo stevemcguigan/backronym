@@ -185,7 +185,7 @@ const gameFunctions = {
 	startRound: (clients, game) =>
 	{
 		game.betweenRounds = false
-		let long = 23
+		let long = 100
 		if (game.clients.length == 0)
 		{
 			delete game;
@@ -236,7 +236,7 @@ const gameFunctions = {
 	},
 	getVotes: (clients, game) =>
 	{
-		let long = 5
+		let long = 10
 		communication.broadcast(clients, game, "30 seconds to vote");
 		game.acceptingAnswers = false;								 
 		const payload = {
@@ -253,7 +253,7 @@ const gameFunctions = {
 	},
 	skipVoting: (clients, game) =>
 	{
-		let long = 5
+		let long = 10
 		game.acceptingAnswers = false;	
 	  
 		let answers = [];
