@@ -31,44 +31,40 @@ const communication = {
 //  const disallowedWords = ["retard", "shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
 
 	},
+
 	sanitize: (message) => {
+		const disallowedWords = ["retard", "shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
+		const substitutions = {
+		    i: "[i1!*_íìîïīįÍÌÎÏĪĮ]",
+		    s: "[s$5*_]",
+		    o: "[o0*_óòôöōøõÓÒÔÖŌØÕ]",
+		    a: "[a@*_áàâäāåãÁÀÂÄĀÅÃ]",
+		    e: "[e3*_éèêëēėęÉÈÊËĒĖĘ]",
+		    u: "[uúùûüūųÚÙÛÜŪŲ]",
+		    c: "[c¢©Ↄ]"
+		};
+			  
+			  function createPattern(word) {
+			    const pattern = word
+			      .split("")
+			      .map((char) => {
+			        return substitutions[char.toLowerCase()] || char;
+			      })
+			      .join("");
+			    return new RegExp(`\\b${pattern}\\b`, "i");
+			  }
 
-
-
-	const disallowedWords = ["retard", "shit", "fuck", "bitch", "cunt", "nigger", "kike", "fag", "chink", "jigaboo", "faggot", "fagot", "faget", "nigga", "cock", "penis"]
-
-	  const substitutions = {
-	    i: "[i1!*_íìîïīįÍÌÎÏĪĮ]",
-	    s: "[s$5*_]",
-	    o: "[o0*_óòôöōøõÓÒÔÖŌØÕ]",
-	    a: "[a@*_áàâäāåãÁÀÂÄĀÅÃ]",
-	    e: "[e3*_éèêëēėęÉÈÊËĒĖĘ]",
-	    u: "[uúùûüūųÚÙÛÜŪŲ]",
-	    c: "[c¢©Ↄ]"
-	  };
-
-	  // Helper function to create a regex pattern for a word with substitutions
-	  function createPattern(word) {
-	    const pattern = word
-	      .split("")
-	      .map((char) => {
-	        return substitutions[char.toLowerCase()] || char;
-	      })
-	      .join("");
-	    return new RegExp(`\\b${pattern}\\b`, "i");
-	  }
-
-	  // Check if the message contains any disallowed words or substitutions
 	  for (const word of disallowedWords) {
 	    const pattern = createPattern(word);
 	    if (pattern.test(message)) {
 	   	  clog(`${message} failed sanitizing`, 5) 	
-	      return false; // Message contains a disallowed word or substitution
+	      return false; // re-re-re-reJECTED
 	    }
 	  }
 
-	  return message; // Message is clean
+	  return message; // Message is squeaky clean 
 	},
+
 	nickChange: (game, gameId, clients, client, clientId, newNick) =>
 	{
 		let oldNick = client.currentGameInfo.nick
@@ -104,16 +100,12 @@ const communication = {
 		{
 			clientsArray.push(game.clients[y].clientId)
 		}		
-		//clog(clientsArray, 4)
+
 		for (let z = 0; z < clientsArray.length; z++)
 		{
 			let nick = {nick: clients[clientsArray[z]].currentGameInfo.nick, id: clientsArray[z]} 
 			nicks.push(nick)
-			//clog(clients[clientsArray[z]], 4)
 		}				
-		//clog(nicks, 4)
-		//const clientIDs = game.clients;
-		//const nicks = clientIDs.map((clientId) => clients[clientId].currentGameInfo.nick);
 		return nicks
 	},	
 	broadcast: (clients, game, message) =>

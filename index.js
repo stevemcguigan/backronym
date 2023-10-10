@@ -1,4 +1,4 @@
-const local 			= false
+const local 			= true
 const https 			= require('https');
 const http  			= require('http');
 const fs 				= require('fs');
@@ -41,7 +41,7 @@ const clients 			= {};
 const clientLocals 		= {};
 const games 			= {};
 const keys 				= {};
-const devlevel			= 6;
+const loglevel			= 6;
 const TERMINALWIDTH		= 80;
 console.clear();
 
@@ -69,7 +69,7 @@ global.formatStringToLength = function (inputString, length) {
 
 global.clog = function(message, mlevel)
 {
-	if (mlevel > devlevel) {
+	if (mlevel > loglevel) {
 		return 
 	}
 	if (typeof mlevel == "undefined") mlevel = 0	
@@ -113,13 +113,14 @@ clog(" ")
 clog(" ")
 clog(" ")
 clog(" ")
+clog("log level is "+ loglevel)
 app.listen(8000, () => clog("express listening on 8000", 0));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 
 
 
-clog("log level is "+ devlevel)
+
 
 wsServer.on("request", request => {
 	const connection = request.accept(null, request.origin);
