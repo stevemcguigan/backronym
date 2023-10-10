@@ -11,8 +11,8 @@ const communication 	= require('./src/communication.js')
 const server 			= require('./src/server.js')
 const WebSocket 		= require('ws');
 //const websocketServer 	= require("websocket").server
-const certPath = '/etc/letsencrypt/live/backronym.app/fullchain.pem';
-const keyPath = '/etc/letsencrypt/live/backronym.app/privkey.pem';
+const certPath = '/etc/letsencrypt/live/api.backronym.app/fullchain.pem';
+const keyPath = '/etc/letsencrypt/live/api.backronym.app/privkey.pem';
 let httpServer = null, wsServer = null
 
 if (local) {
