@@ -1,4 +1,4 @@
-const local 			= false
+const local 			= true
 const https 			= require('https');
 const http  			= require('http');
 const fs 				= require('fs');
