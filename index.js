@@ -117,7 +117,7 @@ clog("log level is "+ loglevel)
 app.listen(8000, () => clog("express listening on 8000", 0));
 app.use(express.static('public'))
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.get("/ads.txt", (req, res) => res.sendFile(__dirname + "/ads.txt"));
+app.get("ads.txt", (req, res) => res.sendFile(__dirname + "/ads.txt"));
 
 
 
