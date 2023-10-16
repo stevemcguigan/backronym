@@ -114,6 +114,11 @@ transition: width 600ms ease-out;
   -ms-filter: invert(90%);
 }
 
+#playbutton {
+  background-color: white;
+  color: olivedrab;
+}
+
 
 
 #titleScreen
@@ -128,6 +133,7 @@ transition: width 600ms ease-out;
   height:100%;
   width:100vw;
   flex-direction:column;
+  background-color:olivedrab;
 }
 
 .fadeOut

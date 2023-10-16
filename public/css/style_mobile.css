@@ -121,6 +121,11 @@ html {
   src: url('angelina.ttf');
 }
 
+#playbutton {
+  background-color: white;
+  color: olivedrab;
+}
+
 #titleScreen
 {
   position: absolute;
@@ -133,6 +138,7 @@ html {
   height:100%;
   width:100vw;
   flex-direction:column;
+  background-color: olivedrab;
 }
 
 .fadeOut
@@ -253,13 +259,15 @@ transition: width 600ms ease-out;
     */
     font-size: 40px;
     font-family: courier new;
-    margin-bottom: 10px
-}
+    margin-bottom: 10px;
+    color:white;
+ }   
 
 #credits
 {
   font-size: 14px;
   opacity:.5;
+  color:white;
 }
 
 
