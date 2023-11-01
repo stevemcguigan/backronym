@@ -200,7 +200,7 @@ function generateInstructions()
 		<div>
 			${randomPhraseContainer(acro.phrase)}
 		</div>
-		<div style='margin-top:10px'>There's no right answer. Just try to come up with the funniest, cutest, or most clever thing he letters <span class='bold'>could</span> stand for. Have fun!</div>`
+		<div style='margin-top:10px'>There's no right answer. Just try to come up with the funniest, cutest, or most clever thing the letters <span class='bold'>could</span> stand for. Have fun!</div>`
 }
 
 function randomAcronym()

@@ -220,15 +220,7 @@ body {
   background: #546E7A;
 }
 
-.x {
-  animation: x var(--x-speed) linear infinite alternate;
-}
-.x2 {
-  animation: x2 var(--x-speed) linear infinite alternate;
-}
-.y {
-  animation: y var(--y-speed) linear infinite alternate;
-}
+
 
 @keyframes x {
   100% {
